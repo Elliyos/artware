@@ -2,6 +2,8 @@ import java.util.*;
 public class Person {
 	private String occupation, name, cultureID, gender, bio;
 	private int connectionCount;
+	private ArrayList<Connection> contacts;
+
 	
 	public Person(String occupation, String name, String cultureID, String gender, String bio){
 		this.occupation = occupation;
@@ -45,6 +47,7 @@ public class Person {
 	}
 	public void setContacts(ArrayList<Connection> contacts) {
 		this.contacts = contacts;
+		
 	}
 	public int getConnectionCount() {
 		return connectionCount;
@@ -52,8 +55,10 @@ public class Person {
 	public void setConnectionCount(int connectionCount) {
 		this.connectionCount = connectionCount;
 	}
-	private ArrayList<Connection> contacts;
-
+	
+	public void incrementContactCount(){
+		this.connectionCount ++;
+	}
 	}
 
 

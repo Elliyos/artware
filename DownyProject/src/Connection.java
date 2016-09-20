@@ -3,6 +3,18 @@ public class Connection {
 	private Date date;
 	private String notes, citation, location, interactionType;
 	private Person contact;
+	private int numOfPeople;
+	
+	
+	public Connection(Date date, String notes, String citation, String location, String interactionType,int people){
+		
+			this.date = date;
+			this.notes = notes;
+			this.citation = citation;
+			this.location = location;
+			this.interactionType = interactionType;
+	}
+	
 	public Date getDate() {
 		return date;
 	}
@@ -38,6 +50,12 @@ public class Connection {
 	}
 	public void setContact(Person contact) {
 		this.contact = contact;
+	}
+	public int getNumPeople(){
+		return numOfPeople;
+	}
+	public void setNumPeople(int numPeople){
+		this.numOfPeople = numPeople;
 	}
 
 }
