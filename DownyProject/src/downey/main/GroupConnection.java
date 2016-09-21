@@ -1,3 +1,4 @@
+package downey.main;
 import java.util.Date;
 
 public class GroupConnection extends Connection {

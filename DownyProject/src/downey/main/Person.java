@@ -1,3 +1,4 @@
+package downey.main;
 import java.util.*;
 public class Person {
 	private String occupation, name, cultureID, gender, bio;
@@ -59,6 +60,7 @@ public class Person {
 	public void incrementContactCount(){
 		this.connectionCount ++;
 	}
+	
 	}
 
 
