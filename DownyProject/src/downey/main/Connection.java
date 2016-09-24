@@ -3,7 +3,7 @@ import java.util.*;
 public class Connection {
 	private Date date;
 	private String notes, citation, location, interactionType;
-	private Person contact;
+	private ArrayList<Person> contact;
 	private int numOfPeople;
 	
 	
@@ -46,17 +46,12 @@ public class Connection {
 	public void setInteractionType(String interactionType) {
 		this.interactionType = interactionType;
 	}
-	public Person getContact() {
-		return contact;
-	}
-	public void setContact(Person contact) {
-		this.contact = contact;
-	}
 	public int getNumPeople(){
 		return numOfPeople;
 	}
 	public void setNumPeople(int numPeople){
 		this.numOfPeople = numPeople;
 	}
+
 
 }

@@ -13,6 +13,19 @@ public class Person {
 		this.gender =gender;
 		this.bio = bio;
 	}
+	/**
+	 * Returns a String of all the connections a Person has.
+	 * 
+	 * @param 
+	 * @return String
+	 */
+	public String getConnections(){
+		String result = null;
+		for (int i = 0; i < contacts.size(); i++){
+			result += contacts.get(i).toString() + "\n";
+		}
+		return result;
+	}
 	public String getOccupation() {
 		return occupation;
 	}

@@ -13,12 +13,28 @@ public ArrayList<Connection> connections;
 		connections.add(connect);
 	}
 
-	
-	public static void search(Person person){
+	/**
+	 * This method returns the index of a Person object
+	 * 
+	 * @param person
+	 * @return String
+	 */
+	public int search(Person person){
+		for (int i = 0; i < people.size(); i++){
+			Person current = people.get(i);
+			if (current.equals(person)){
+				return i;
+			}
+		}
+		return -1;
 		
 	}
+	public String getConnections(Person person){
+		int index = search(person);
+		return people.get(index).getConnections();
+	}
 	
-	public static void search(Connection connect){
+	public void search(Connection connect){
 		
 	}
 }
