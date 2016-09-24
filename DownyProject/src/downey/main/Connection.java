@@ -3,7 +3,7 @@ import java.util.*;
 public class Connection {
 	private Date date;
 	private String notes, citation, location, interactionType;
-	private ArrayList<Person> contact;
+	private ArrayList<Person> contacts;
 	private int numOfPeople;
 	
 	
@@ -14,6 +14,26 @@ public class Connection {
 			this.citation = citation;
 			this.location = location;
 			this.interactionType = interactionType;
+	}
+	/**
+	 * Returns true if the the connection is the same as the parameter.
+	 * 
+	 * @param Object
+	 * @return Boolean
+	 */
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() == obj.getClass()) {
+			Connection other = (Connection) obj;
+			return (date.equals(other.date) && contacts.equals(other.contacts)
+					&& interactionType.equals(other.interactionType));
+		}
+		return false;
 	}
 	
 	public Date getDate() {
