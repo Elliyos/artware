@@ -7,7 +7,7 @@ public class Connection {
 	private int numOfPeople;
 	
 	
-	public Connection(Date date, String notes, String citation, String location, String interactionType,int people){
+	public Connection(Date date, String notes, String citation, String location, String interactionType){
 		
 			this.date = date;
 			this.notes = notes;
@@ -35,8 +35,14 @@ public class Connection {
 		}
 		return false;
 	}
+	/**
+	 * Returns a Connection object as a String
+	 * 
+	 * @param 
+	 * @return String
+	 */
 	public String toString(){
-		return "People: " + contacts.toString() + ", Date: " + date + ", Notes: " + notes + ", Citation: " + citation + ", Location: " + location
+		return "Date: " + date + ", Notes: " + notes + ", Citation: " + citation + ", Location: " + location
 				+ ", Interaction Type: " + interactionType;
 	}
 	

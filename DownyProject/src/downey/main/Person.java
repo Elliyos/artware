@@ -13,6 +13,7 @@ public class Person {
 		this.cultureID = cultureID;
 		this.gender = gender;
 		this.bio = bio;
+		contacts = new ArrayList<Connection>();
 	}
 
 	/**
@@ -22,11 +23,10 @@ public class Person {
 	 * @return String
 	 */
 	public String getConnections() {
-		String result = null;
-		for (int i = 0; i < contacts.size(); i++) {
-			result += contacts.get(i).toString() + "\n";
+		if (contacts != null){
+			return contacts.toString();
 		}
-		return result;
+		return "None";
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class Person {
 	 * @return void
 	 */
 	public void addConnection(Connection c) {
-		getContacts().add(c);
+		contacts.add(c);
 	}
 
 	/**
@@ -59,10 +59,15 @@ public class Person {
 		}
 		return false;
 	}
-	
+	/**
+	 * Returns the Person object as a string
+	 * 
+	 * @param 
+	 * @return String
+	 */
 	public String toString(){
-		return "Name: " + name + ", Occupation: " + occupation + ", Culture: " + cultureID + ", Gender: " + gender
-				+ ", Bio: " + bio;
+		return "[Name: " + name + ", Occupation: " + occupation + ", Culture: " + cultureID + ", Gender: " + gender
+				+ ", Bio: " + bio +"]";
 	}
 
 	public String getOccupation() {
