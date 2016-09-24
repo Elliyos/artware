@@ -59,6 +59,11 @@ public class Person {
 		}
 		return false;
 	}
+	
+	public String toString(){
+		return "Name: " + name + ", Occupation: " + occupation + ", Culture: " + cultureID + ", Gender: " + gender
+				+ ", Bio: " + bio;
+	}
 
 	public String getOccupation() {
 		return occupation;

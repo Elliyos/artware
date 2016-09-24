@@ -35,6 +35,10 @@ public class Connection {
 		}
 		return false;
 	}
+	public String toString(){
+		return "People: " + contacts.toString() + ", Date: " + date + ", Notes: " + notes + ", Citation: " + citation + ", Location: " + location
+				+ ", Interaction Type: " + interactionType;
+	}
 	
 	public Date getDate() {
 		return date;
