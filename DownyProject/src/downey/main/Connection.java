@@ -1,19 +1,25 @@
 package downey.main;
 import java.util.*;
-public class Connection {
+public class Connection extends Collection{
 	private Date date;
 	private String notes, citation, location, interactionType;
 	private ArrayList<Person> contacts;
 	private int numOfPeople;
 	
 	
-	public Connection(Date date, String notes, String citation, String location, String interactionType){
+	public Connection(Date date, String notes, String citation, String location, String interactionType,ArrayList<String> names){
 		
 			this.date = date;
 			this.notes = notes;
 			this.citation = citation;
 			this.location = location;
 			this.interactionType = interactionType;
+			contacts = new ArrayList();
+			for(int i = 0; i <= names.size(); i++){
+				Person add = super.getAllPeople().get(super.search(names.get(i)));
+				contacts.add(add);
+			}
+			 
 	}
 	/**
 	 * Returns true if the the connection is the same as the parameter.

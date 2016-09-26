@@ -49,4 +49,8 @@ public ArrayList<Connection> connections;
 	public void search(Connection connect){
 		
 	}
+	
+	public ArrayList<Person> getAllPeople(){
+		return people;
+	}
 }

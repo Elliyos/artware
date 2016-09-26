@@ -12,7 +12,9 @@ public class TestProgress {
 		System.out.println(people.toString());
 		test.addPerson(p1);
 		test.addPerson(p2);
-		p1.addConnection(new Connection(new Date(1995, 20,7), "Interacted with another person", "Page 20", "Paris", "Letter"));
+		ArrayList<String>testConnect = new ArrayList();
+		testConnect.add(p2.getName());
+		p1.addConnection(new Connection(new Date(1995, 20,7), "Interacted with another person", "Page 20", "Paris", "Letter", testConnect));
 		System.out.println(test.getConnections("Degas"));
 	}
 
