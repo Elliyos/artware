@@ -3,17 +3,23 @@ package downey.main;
 import java.util.*;
 
 public class Person {
-	private String occupation, name, cultureID, gender, bio;
-	private int connectionCount;
-	private ArrayList<Connection> contacts;
+	private String occupation;
+	private String name;
+	private String culture;
+	private String gender;
+	private String bio;
+//	private int edgeID;
+//	private int connectionCount;
+	private ArrayList<Connections> contacts;
 
-	public Person(String occupation, String name, String cultureID, String gender, String bio) {
+	public Person(String name, String culture, String occupation, String gender, String bio) {
 		this.occupation = occupation;
 		this.name = name;
-		this.cultureID = cultureID;
+		this.culture = culture;
 		this.gender = gender;
 		this.bio = bio;
-		contacts = new ArrayList<Connection>();
+//		this.edgeID = edgeID;
+		contacts = new ArrayList<Connections>();
 	}
 
 	/**
@@ -35,7 +41,7 @@ public class Person {
 	 * @param Connection
 	 * @return void
 	 */
-	public void addConnection(Connection c) {
+	public void addConnection(Connections c) {
 		contacts.add(c);
 	}
 
@@ -66,8 +72,8 @@ public class Person {
 	 * @return String
 	 */
 	public String toString(){
-		return "[Name: " + name + ", Occupation: " + occupation + ", Culture: " + cultureID + ", Gender: " + gender
-				+ ", Bio: " + bio +"]";
+		return "Name: " + name + ", Occupation: " + occupation + ", Culture: " + culture + ", Gender: " + gender
+				+ ", Bio: " + bio +"";
 	}
 
 	public String getOccupation() {
@@ -87,11 +93,11 @@ public class Person {
 	}
 
 	public String getCultureID() {
-		return cultureID;
+		return culture;
 	}
 
 	public void setCultureID(String cultureID) {
-		this.cultureID = cultureID;
+		this.culture = cultureID;
 	}
 
 	public String getGender() {
@@ -110,25 +116,8 @@ public class Person {
 		this.bio = bio;
 	}
 
-	public ArrayList<Connection> getContacts() {
+	public ArrayList<Connections> getContacts() {
 		return contacts;
-	}
-
-	public void setContacts(ArrayList<Connection> contacts) {
-		this.contacts = contacts;
-
-	}
-
-	public int getConnectionCount() {
-		return connectionCount;
-	}
-
-	public void setConnectionCount(int connectionCount) {
-		this.connectionCount = connectionCount;
-	}
-
-	public void incrementContactCount() {
-		this.connectionCount++;
 	}
 
 }
