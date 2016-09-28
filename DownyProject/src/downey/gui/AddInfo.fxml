@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60">
+   <children>
+      <Text fontSmoothingType="LCD" layoutX="74.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sure. We just need some info first.">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <TextField layoutX="14.0" layoutY="115.0" prefHeight="25.0" prefWidth="223.0" />
+      <TextField layoutX="14.0" layoutY="175.0" prefHeight="25.0" prefWidth="223.0" />
+      <Text fontSmoothingType="LCD" layoutX="368.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culture:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="367.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <ChoiceBox layoutX="368.0" layoutY="175.0" prefHeight="25.0" prefWidth="223.0" />
+      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bio:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <TextArea layoutX="14.0" layoutY="235.0" prefHeight="123.0" prefWidth="570.0" />
+      <TextField layoutX="368.0" layoutY="115.0" prefHeight="25.0" prefWidth="223.0" />
+      <Text fontSmoothingType="LCD" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt; Go Back" />
+      <Text fontSmoothingType="LCD" layoutX="556.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
