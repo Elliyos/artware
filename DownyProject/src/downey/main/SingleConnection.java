@@ -1,5 +1,10 @@
 package downey.main;
 import java.util.*;
+/**
+ * 
+ * IGNORE THIS CLASS FOR NOW
+ *
+ */
 public class SingleConnection extends Connections{
 //	private String date;
 //	private String notes;

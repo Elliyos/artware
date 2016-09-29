@@ -3,35 +3,34 @@ import java.util.*;
 
 public class DataStorage {
 public ArrayList<Person> people;
-public ArrayList<Connections> connections;
+public ArrayList<Connection> connections;
 	public DataStorage(){
 		people = new ArrayList<Person>();
-		connections = new ArrayList<Connections>();
+		connections = new ArrayList<Connection>();
 	}
-//	public DataStorage(ArrayList<Person> people, ArrayList<Connection> connections){
-//		this.people = people;
-//		this.connections = connections;
-//	}
 
 	public void addPerson(String name, String culture, String occupation, String gender, String bio){
 		Person temp = new Person(name, culture, occupation, gender, bio);
 		people.add(temp);
 	}
-	
-	public void addSingleConnection(Person p1, Person p2, String date,
-				String source, String location, String citation, String notes){
-		p1.getContacts().add(new SingleConnection(date,source,location,citation, notes, p2));
-
-	}
-	public Person getPerson(String name){
-		for (Person p: people){
-			if (p.getName().equalsIgnoreCase(name)){
-				return p;
+	public ArrayList<Connection> getConnectionsForPerson(Person person){
+		ArrayList<Connection> hisConnections = new ArrayList<>();
+		for (Connection c : connections){
+			if (c.getSender().equals(person) || c.getReceivers().contains(person)){
+				hisConnections.add(c);
 			}
 		}
-		throw new IllegalArgumentException("Person not found");
+		return hisConnections;
 	}
-//	public void addMultiConnection(Person p1, )
+	
+
+	public void addConnection(Person sender, ArrayList<Person> people, String date, String type,
+							  String location, String citation, String notes){
+		connections.add(new Connection(sender, people, date, type,location,citation,notes));
+		
+	}
+	
+
 
 	/**
 	 * This method returns the index of a Person object
@@ -39,24 +38,24 @@ public ArrayList<Connections> connections;
 	 * @param person
 	 * @return String
 	 */
-	public int search(String name){
-		for (int i = 0; i < people.size(); i++){
-			Person current = people.get(i);
-			if (current.getName().equals(name)){
-				return i;
-			}
-		}
-		return -1;
-		
-	}
-	public String getConnections(String name){
-		int index = search(name);
-		String contacts = people.get(index).getConnections();
-		if (contacts != null) {
-			return contacts;
-		}
-		return "None";
-	}
+//	public int search(String name){
+//		for (int i = 0; i < people.size(); i++){
+//			Person current = people.get(i);
+//			if (current.getName().equals(name)){
+//				return i;
+//			}
+//		}
+//		return -1;
+//		
+//	}
+//	public String getConnections(String name){
+//		int index = search(name);
+//		String contacts = people.get(index).getConnections();
+//		if (contacts != null) {
+//			return contacts;
+//		}
+//		return "None";
+//	}
 	
 	public void search(Connection connect){
 		

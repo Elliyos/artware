@@ -1,25 +1,56 @@
 package downey.main;
 import java.util.*;
+/**
+ * 
+ * To store a group connection sender will be null (no direction), to store a one to many connection
+ * sender will store the one and receivers will store the many
+ *
+ */
 public class Connection{
 	private String date;
 	private String notes;
 	private String citation;
 	private String location;
 	private String source;
-	private ArrayList<Person> contacts;
-	private int numOfPeople;
+	private Person sender;
+	private ArrayList<Person> receivers;
 	
-	
-	public Connection(String date, String source, String location,
-					  String citation, String notes, ArrayList<Person> people){
+	/**
+	 * 
+	 * 
+	 * @param date
+	 * @param source
+	 * @param location
+	 * @param citation
+	 * @param notes
+	 * @param sender
+	 * @param people
+	 */
+	public Connection(Person sender, ArrayList<Person> people, String date, String type,
+			          String location, String citation, String notes){
 		
 			this.date = date;
 			this.notes = notes;
 			this.citation = citation;
 			this.location = location;
 			this.source = source;
-			contacts = people;
+			this.sender = sender;
+			receivers = people;
 			 
+	}
+	public Person getSender(){
+		return sender;
+	}
+	public ArrayList<Person> getReceivers(){
+		return receivers;
+	}
+	public boolean contains(Person person){
+		for (Person p: receivers){
+			if (p.equals(person)){
+				return true;
+			}
+		}
+		return false;
 	}
 //	/**
 //	 * Returns true if the the connection is the same as the parameter.
