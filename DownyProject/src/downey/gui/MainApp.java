@@ -65,6 +65,31 @@ public class MainApp extends Application {
     }
 
     /**
+     * Displays profile options page. Mapped to "People" button on MainMenu.FXML.
+     */
+    /**
+     * Shows the person overview inside the root layout.
+     */
+    public void showProfileOptions() {
+        try {
+            // Load profile options.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("ProfileOptions.fxml"));
+            AnchorPane profileOptions = (AnchorPane) loader.load();
+
+            // Set person overview into the center of root layout.
+            rootLayout.setCenter(profileOptions);
+
+            // Give the controller access to the main app.
+            MainMenuController controller = loader.getController();
+            controller.setMainApp(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /**
      * Returns the main stage.
      * @return
      */
