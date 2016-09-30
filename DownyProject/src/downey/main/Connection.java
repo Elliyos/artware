@@ -78,12 +78,15 @@ public class Connection{
 //	/**
 //	 * Returns a Connection object as a String
 //	 * 
+//	* Person sender, ArrayList<Person> people, String date, String type,
+//   * String location, String citation, String notes
+	
 //	 * @param 
 //	 * @return String
 //	 */
 	public String toString(){
-		return "Date: " + date + ", Notes: " + notes + ", Citation: " + citation + ", Location: " + location
-				+ ", Interaction Type: " + source +"\n";
+		return sender.getName() + ": Receivers: " + receivers + ", Date: " + date + ", Interaction Type: " + source
+				+ ",Location: " + location + ",Citation:" + citation + ",Notes: " + notes +  "\n";
 	}
 	
 
