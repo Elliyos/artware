@@ -1,29 +1,27 @@
 package downey.gui;
 
 import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
 
 public class MainMenuController {
 	    
 		@FXML
-	    private Rectangle mainPersonButton;
+	    private Button mainPersonButton;
 	    @FXML
-	    private Rectangle mainConnectionButton;
-
+	    private Button mainConnectionButton;
 	    private MainApp mainApp;
 
 	    /**
 	     * The constructor.
 	     * The constructor is called before the initialize() method.
 	     */
+	   
 	    public MainMenuController() {
 	    }
 
@@ -36,9 +34,6 @@ public class MainMenuController {
 	    private void initialize() {
 	    }
 	    
-	    /*
-	     * Currently having issues adding action to rectangles.
-	     */
 	    @FXML
 	    private void handleButtonAction(ActionEvent event) throws IOException{
 	        Stage stage; 
@@ -65,6 +60,7 @@ public class MainMenuController {
 	     * 
 	     * @param mainApp
 	     */
+	   @FXML
 	    public void setMainApp(MainApp mainApp) {
 	        this.mainApp = mainApp;
 	    }
