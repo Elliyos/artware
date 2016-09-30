@@ -87,4 +87,13 @@ public class DataStorage {
 	public ArrayList<Person> getAllPeople() {
 		return people;
 	}
+	
+	public Person convertToPerson(String name){
+		for (Person p: people){
+			if (p.getName().equalsIgnoreCase(name)){
+				return p;
+			}
+		}
+		return null;
+	}
 }
