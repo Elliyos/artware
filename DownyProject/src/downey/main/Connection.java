@@ -53,7 +53,7 @@ public class Connection{
 		return false;
 	}
 	public String[] toCSVRowArray() {
-		return new String[] { date,notes,citation,location, source,sender.toString(),receivers.toString() };
+		return new String[] { sender.getName(), getReceiverNames() , date, source,location,citation, notes };
 	}
 //	/**
 //	 * Returns true if the the connection is the same as the parameter.
@@ -78,9 +78,6 @@ public class Connection{
 //	/**
 //	 * Returns a Connection object as a String
 //	 * 
-//	* Person sender, ArrayList<Person> people, String date, String type,
-//   * String location, String citation, String notes
-	
 //	 * @param 
 //	 * @return String
 //	 */
@@ -89,6 +86,13 @@ public class Connection{
 				+ ",Location: " + location + ",Citation:" + citation + ",Notes: " + notes +  "\n";
 	}
 	
+	public String getReceiverNames(){
+		String temp = "";
+		for(Person p: receivers){
+			temp += p.getName() +", ";
+		}
+		return temp;
+	}
 
 
 }
