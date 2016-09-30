@@ -5,7 +5,7 @@ import java.util.*;
 public class Person {
 	private String occupation, name, cultureID, gender, bio;
 	private int connectionCount;
-	private ArrayList<Connection> contacts;
+
 
 	public Person(String occupation, String name, String cultureID, String gender, String bio) {
 		this.occupation = occupation;
@@ -13,7 +13,7 @@ public class Person {
 		this.cultureID = cultureID;
 		this.gender = gender;
 		this.bio = bio;
-		contacts = new ArrayList<Connection>();
+		
 	}
 
 	/**
@@ -22,23 +22,24 @@ public class Person {
 	 * @param
 	 * @return String
 	 */
-	public String getConnections() {
+/*	public String getConnections() {
 		if (contacts != null){
 			return contacts.toString();
 		}
 		return "None";
 	}
-
+*/
 	/**
 	 * Adds a connection to the a specific person's list of connections.
 	 * 
 	 * @param Connection
 	 * @return void
 	 */
-	public void addConnection(Connection c) {
-		contacts.add(c);
-	}
-
+//	public void addConnection(Connection c) {
+//	contacts.add(c);
+//	}
+	
+	
 	/**
 	 * Compares two Person objects and return true if they are the same, false
 	 * otherwise
@@ -110,14 +111,6 @@ public class Person {
 		this.bio = bio;
 	}
 
-	public ArrayList<Connection> getContacts() {
-		return contacts;
-	}
-
-	public void setContacts(ArrayList<Connection> contacts) {
-		this.contacts = contacts;
-
-	}
 
 	public int getConnectionCount() {
 		return connectionCount;

@@ -3,8 +3,7 @@ import java.util.*;
 public class Connection {
 	private Date date;
 	private String notes, citation, location, interactionType;
-	private ArrayList<Person> contacts;
-	private int numOfPeople;
+
 	
 	
 	public Connection(Date date, String notes, String citation, String location, String interactionType){
@@ -21,6 +20,9 @@ public class Connection {
 	 * @param Object
 	 * @return Boolean
 	 */
+	
+
+	
 	public boolean equals(Object obj) {
 		if (obj == this) {
 			return true;
@@ -30,7 +32,7 @@ public class Connection {
 		}
 		if (this.getClass() == obj.getClass()) {
 			Connection other = (Connection) obj;
-			return (date.equals(other.date) && contacts.equals(other.contacts)
+			return (date.equals(other.date) && location.equals(other.location)
 					&& interactionType.equals(other.interactionType));
 		}
 		return false;
@@ -76,12 +78,7 @@ public class Connection {
 	public void setInteractionType(String interactionType) {
 		this.interactionType = interactionType;
 	}
-	public int getNumPeople(){
-		return numOfPeople;
-	}
-	public void setNumPeople(int numPeople){
-		this.numOfPeople = numPeople;
-	}
+
 
 
 }

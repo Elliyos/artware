@@ -1,14 +1,15 @@
 package downey.main;
 import java.util.*;
 
-public class Collection {
+public class Network {
 public ArrayList<Person> people;
 public ArrayList<Connection> connections;
-	public Collection(){
+
+	public Network(){
 		people = new ArrayList<Person>();
 		connections = new ArrayList<Connection>();
 	}
-	public Collection(ArrayList<Person> people, ArrayList<Connection> connections){
+	public Network(ArrayList<Person> people, ArrayList<Connection> connections){
 		this.people = people;
 		this.connections = connections;
 	}
