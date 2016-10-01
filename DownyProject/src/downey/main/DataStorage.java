@@ -47,9 +47,6 @@ public class DataStorage {
 		}
 		return -1;
 	}
-	public Person getPersonObject(String name){
-		return people.get(searchPerson(name));
-	}
 
 
 	/**
@@ -59,8 +56,8 @@ public class DataStorage {
 		CSVReader reader = new CSVReader(new FileReader(fileName));
 		List<String[]> myRows = reader.readAll();
 		for (String[] row : myRows) {
-			Person sender = convertToPerson(row[0]);
-			ArrayList<Person> receivers = convertToPeople(row[1]);
+			Person sender = getPersonObject(row[0]);
+			ArrayList<Person> receivers = convertToPersonObject(row[1]);
 			String date = row[2];
 			String source = row[3];
 			String location = row[4];
@@ -100,10 +97,8 @@ public class DataStorage {
 	}
 
 	public void addConnection(Person sender, ArrayList<Person> people, String date, String type, String location,
-			String citation, String notes) {
-		Connection temp = new Connection(sender, people, date, type, location, citation, notes);
-		connections.add(temp);
-
+			String citation, String notes) {		
+		connections.add(new Connection(sender, people, date, type, location, citation, notes));
 	}
 
 	public String displayPeople() {
@@ -121,21 +116,15 @@ public class DataStorage {
 			}
 		}
 	}
-
-	public Person convertToPerson(String name) {
-		for (Person p : people) {
-			if (p.getName().equalsIgnoreCase(name)) {
-				return p;
-			}
-		}
-		return null;
+	public Person getPersonObject(String name){
+		return people.get(searchPerson(name));
 	}
 
-	public ArrayList<Person> convertToPeople(String people) throws IOException {
+	public ArrayList<Person> convertToPersonObject(String people) throws IOException {
 		ArrayList<Person> temp = new ArrayList<>();
 		List<String> thePeople = Arrays.asList(people.split(","));
 		for (String person : thePeople) {
-			temp.add(convertToPerson(person));
+			temp.add(getPersonObject(person));
 		}
 		return temp;
 
