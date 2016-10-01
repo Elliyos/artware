@@ -32,12 +32,26 @@ public class DataStorage {
 
 		return hisConnections;
 	}
+	public ArrayList<Connection> displayConnections(){
+		return connections;
+	}
 
 	/**
 	 * Load all current connections into csv file
 	 */
-	public void loadConnections(String fileName) throws IOException {
-
+	public void loadConnections(String fileName) throws IOException {	
+			CSVReader reader = new CSVReader(new FileReader(fileName));		
+			List<String[]> myRows = reader.readAll();
+			for (String[] row : myRows) {
+				Person sender = convertToPerson(row[0]);
+				ArrayList<Person> receivers = convertToPeople(row[1]);
+				String date = row[2];
+				String source = row[3];
+				String location = row[4];
+				String citation = row[5];
+				String notes = row[6];
+				connections.add(new Connection(sender,receivers,date,source,location,citation,notes));
+		}
 	}
 
 	public void saveConnections(String fileName) throws IOException {
@@ -47,6 +61,25 @@ public class DataStorage {
 		}
 		writer.close();
 	}
+	public void savePeople(String fileName) throws IOException {
+		CSVWriter writer = new CSVWriter(new FileWriter(fileName));
+		for (Person p : people) {
+			writer.writeNext(p.toCSVRowArray());
+		}
+		writer.close();
+	}
+	public void loadPeople(String fileName) throws IOException {
+		CSVReader reader = new CSVReader(new FileReader(fileName));		
+		List<String[]> myRows = reader.readAll();
+		for (String[] row : myRows) {
+			String name = row[0];
+			String occupation = row[1];
+			String culture = row[2];
+			String gender = row[3];
+			String bio = row[4];
+			people.add(new Person(name,occupation,culture,gender,bio));
+		}
+	}
 
 	public void addConnection(Person sender, ArrayList<Person> people, String date, String type, String location,
 			String citation, String notes) {
@@ -55,31 +88,6 @@ public class DataStorage {
 
 	}
 
-	/**
-	 * This method returns the index of a Person object
-	 * 
-	 * @param person
-	 * @return String
-	 */
-	// public int search(String name){
-	// for (int i = 0; i < people.size(); i++){
-	// Person current = people.get(i);
-	// if (current.getName().equals(name)){
-	// return i;
-	// }
-	// }
-	// return -1;
-	//
-	// }
-	// public String getConnections(String name){
-	// int index = search(name);
-	// String contacts = people.get(index).getConnections();
-	// if (contacts != null) {
-	// return contacts;
-	// }
-	// return "None";
-	// }
-
 	public void search(Connection connect) {
 
 	}
@@ -87,6 +95,14 @@ public class DataStorage {
 	public ArrayList<Person> getAllPeople() {
 		return people;
 	}
+	public void displayPerson(String name){
+		for (Person p : people){
+			if (p.getName().equalsIgnoreCase(name)){
+				System.out.println(p);
+			}
+		}
+	}
+	
 	
 	public Person convertToPerson(String name){
 		for (Person p: people){
@@ -95,5 +111,16 @@ public class DataStorage {
 			}
 		}
 		return null;
+	}
+	public ArrayList<Person> convertToPeople(String people) throws IOException{
+		ArrayList<Person> temp = new ArrayList<>();
+		CSVReader reader = new CSVReader(new StringReader(people));
+		String[] myRows = reader.readNext();
+		for (String person: myRows){
+			temp.add(convertToPerson(person));
+		}
+		return temp;
+			
+		
 	}
 }

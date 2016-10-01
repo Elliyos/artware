@@ -82,14 +82,17 @@ public class Connection{
 //	 * @return String
 //	 */
 	public String toString(){
-		return sender.getName() + ": Receivers: " + receivers + ", Date: " + date + ", Interaction Type: " + source
+		return sender.getName() + ": Receivers: " + getReceiverNames() + ", Date: " + date + ", Interaction Type: " + source
 				+ ",Location: " + location + ",Citation:" + citation + ",Notes: " + notes +  "\n";
 	}
 	
 	public String getReceiverNames(){
-		String temp = "";
-		for(Person p: receivers){
-			temp += p.getName() +", ";
+		if (receivers.isEmpty()){
+			return "No contacts";
+		}
+		String temp = receivers.get(0).getName();
+		for (int i = 1; i < receivers.size(); i++){
+			temp += receivers.get(i).getName() +", ";
 		}
 		return temp;
 	}
