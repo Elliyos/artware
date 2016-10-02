@@ -49,14 +49,6 @@ public class DataStorage {
 		return hisConnections;
 	}
 	/**
-	 * Display all connections in the system
-	 *
-	 * @return      String, the list of current connections
-	 */
-	public String displayConnections() {
-		return connections.toString();
-	}
-	/**
 	 * Removes a Person object from the ArrayList people
 	 *
 	 * @param  name, the person to be removed
@@ -111,6 +103,18 @@ public class DataStorage {
 		String result = "Current people in the system:\n";
 		for (Person p: people){
 			result += p.toString() + "\n";
+		}
+		return result;
+	}
+	/**
+	 * Display all connections in the system
+	 *
+	 * @return      String, the list of current connections
+	 */
+	public String displayConnections() {
+		String result = "Current connections in the system:\n";
+		for (Connection c: connections){
+			result += c.toString() + "\n";
 		}
 		return result;
 	}

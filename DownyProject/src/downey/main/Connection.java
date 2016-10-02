@@ -102,10 +102,11 @@ public class Connection{
 		if (receivers.isEmpty()){
 			return "No contacts";
 		}
-		String temp = receivers.get(0).getName();
-		for (int i = 1; i < receivers.size(); i++){
+		String temp = "";
+		for (int i = 0; i < receivers.size()-1; i++){
 			temp += receivers.get(i).getName() +", ";
 		}
+		temp += receivers.get(receivers.size()-1).getName();
 		return temp;
 	}
 
