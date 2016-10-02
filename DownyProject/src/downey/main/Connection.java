@@ -26,7 +26,7 @@ public class Connection{
 	 * @param sender
 	 * @param people
 	 */
-	public Connection(Person sender, ArrayList<Person> people, String date, String type,
+	public Connection(ArrayList<Person> people, String date, String type,
 			          String location, String citation, String notes){
 		
 			this.date = date;
@@ -34,12 +34,21 @@ public class Connection{
 			this.citation = citation;
 			this.location = location;
 			this.source = type;
-			this.sender = sender;
+			this.sender= null;
 			receivers = people;
 			 
 	}
+	public Connection(Person sender, ArrayList<Person> people, String date, String type,
+			          String location, String citation, String notes){
+		this(people,date,type,location,citation,notes);
+		this.sender = sender;
+	}
+	
 	public Person getSender(){
-		return sender;
+		if (sender != null){
+			return sender;
+		}
+		return receivers.get(0);
 	}
 	public ArrayList<Person> getReceivers(){
 		return receivers;
@@ -82,17 +91,43 @@ public class Connection{
 //	 * @return String
 //	 */
 	public String toString(){
-		return sender.getName() + ": Receivers: " + receivers + ", Date: " + date + ", Interaction Type: " + source
-				+ ",Location: " + location + ",Citation:" + citation + ",Notes: " + notes +  "\n";
+		if (sender != null){
+			return "\n" + sender.getName() + ": Receivers: " + getReceiverNames() + ", Date: " + date + ", Interaction Type: " + source
+				+ ", Location: " + location + ", Citation: " + citation + ", Notes: " + notes;
+		}
+		else {
+			return "\nReceivers: " + getReceiverNames() + ", Date: " + date + ", Interaction Type: " + source
+				+ ",Location: " + location + ", Citation: " + citation + ",Notes: " + notes +  "\n";
+		}
 	}
 	
 	public String getReceiverNames(){
-		String temp = "";
-		for(Person p: receivers){
-			temp += p.getName() +", ";
+		if (receivers.isEmpty()){
+			return "No contacts";
 		}
+		String temp = "";
+		for (int i = 0; i < receivers.size()-1; i++){
+			temp += receivers.get(i).getName() +", ";
+		}
+		temp += receivers.get(receivers.size()-1).getName();
 		return temp;
 	}
+	public String getPeopleInvolvedWith(String name){
+		String result;
+		if (sender!= null && !sender.getName().equalsIgnoreCase(name)){
+			result = sender.getName();
+		}
+		else {
+			result = receivers.get(0).getName() +"";
+		}
+		for (int i = 1; i < receivers.size(); i++){
+			if (!receivers.get(i).getName().equalsIgnoreCase(name))
+			result += ", " + receivers.get(i).getName();
+		}
+		return result + "\n";
+		
+	}
+
 
 
 }

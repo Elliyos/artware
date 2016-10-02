@@ -44,8 +44,11 @@ public class Person {
 	 * @return String
 	 */
 	public String toString(){
-		return "Name: " + name + ", Occupation: " + occupation + ", Culture: " + culture + ", Gender: " + gender
-				+ ", Bio: " + bio +"";
+		return "\nName: " + name + ", Occupation: " + occupation + ", Culture: " + culture + ", Gender: " + gender
+				+ ", Bio: " + bio;
+	}
+	public String[] toCSVRowArray() {
+		return new String[] { name, occupation ,culture, gender, bio};
 	}
 
 	public String getOccupation() {
@@ -64,12 +67,12 @@ public class Person {
 		this.name = name;
 	}
 
-	public String getCultureID() {
+	public String getCulture() {
 		return culture;
 	}
 
-	public void setCultureID(String cultureID) {
-		this.culture = cultureID;
+	public void setCulture(String culture) {
+		this.culture = culture;
 	}
 
 	public String getGender() {
@@ -86,6 +89,15 @@ public class Person {
 
 	public void setBio(String bio) {
 		this.bio = bio;
+	}
+	public void editPerson(String name, String culture, String occupation, String gender, String bio){
+		setName(name);
+		setCulture(culture);
+		setOccupation(occupation);
+		setGender(gender);
+		setBio(bio);
+		
+		
 	}
 
 }
