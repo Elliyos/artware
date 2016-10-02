@@ -26,7 +26,7 @@ public class Connection{
 	 * @param sender
 	 * @param people
 	 */
-	public Connection(Person sender, ArrayList<Person> people, String date, String type,
+	public Connection(ArrayList<Person> people, String date, String type,
 			          String location, String citation, String notes){
 		
 			this.date = date;
@@ -34,10 +34,16 @@ public class Connection{
 			this.citation = citation;
 			this.location = location;
 			this.source = type;
-			this.sender = sender;
+			this.sender= null;
 			receivers = people;
 			 
 	}
+	public Connection(Person sender, ArrayList<Person> people, String date, String type,
+			          String location, String citation, String notes){
+		this(people,date,type,location,citation,notes);
+		this.sender = sender;
+	}
+	
 	public Person getSender(){
 		return sender;
 	}
@@ -82,8 +88,14 @@ public class Connection{
 //	 * @return String
 //	 */
 	public String toString(){
-		return sender.getName() + ": Receivers: " + getReceiverNames() + ", Date: " + date + ", Interaction Type: " + source
+		if (sender != null){
+			return "\n" + sender.getName() + ": Receivers: " + getReceiverNames() + ", Date: " + date + ", Interaction Type: " + source
+				+ ",Location: " + location + ",Citation:" + citation + ",Notes: " + notes;
+		}
+		else {
+			return "\nReceivers: " + getReceiverNames() + ", Date: " + date + ", Interaction Type: " + source
 				+ ",Location: " + location + ",Citation:" + citation + ",Notes: " + notes +  "\n";
+		}
 	}
 	
 	public String getReceiverNames(){

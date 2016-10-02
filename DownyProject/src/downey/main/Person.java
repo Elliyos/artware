@@ -44,8 +44,8 @@ public class Person {
 	 * @return String
 	 */
 	public String toString(){
-		return "Name: " + name + ", Occupation: " + occupation + ", Culture: " + culture + ", Gender: " + gender
-				+ ", Bio: " + bio +"\n";
+		return "\nName: " + name + ", Occupation: " + occupation + ", Culture: " + culture + ", Gender: " + gender
+				+ ", Bio: " + bio;
 	}
 	public String[] toCSVRowArray() {
 		return new String[] { name, occupation ,culture, gender, bio};

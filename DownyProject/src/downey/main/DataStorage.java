@@ -98,13 +98,21 @@ public class DataStorage {
 			String citation, String notes) {		
 		connections.add(new Connection(sender, people, date, type, location, citation, notes));
 	}
+	public void addConnection(ArrayList<Person> people, String date, String type, String location,
+			String citation, String notes){
+		connections.add(new Connection(people,date,type,location,citation,notes));
+	}
 	/**
 	 * Returns a String containing all of the people stored in the system
 	 *
 	 * @return      String, all Person objects in the system
 	 */
 	public String displayPeople() {
-		return people.toString();
+		String result = "Current people in the system:\n";
+		for (Person p: people){
+			result += p.toString() + "\n";
+		}
+		return result;
 	}
 	
 	/**
