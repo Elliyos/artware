@@ -93,11 +93,11 @@ public class Connection{
 	public String toString(){
 		if (sender != null){
 			return "\n" + sender.getName() + ": Receivers: " + getReceiverNames() + ", Date: " + date + ", Interaction Type: " + source
-				+ ",Location: " + location + ",Citation:" + citation + ",Notes: " + notes;
+				+ ", Location: " + location + ", Citation: " + citation + ", Notes: " + notes;
 		}
 		else {
 			return "\nReceivers: " + getReceiverNames() + ", Date: " + date + ", Interaction Type: " + source
-				+ ",Location: " + location + ",Citation:" + citation + ",Notes: " + notes +  "\n";
+				+ ",Location: " + location + ", Citation: " + citation + ",Notes: " + notes +  "\n";
 		}
 	}
 	

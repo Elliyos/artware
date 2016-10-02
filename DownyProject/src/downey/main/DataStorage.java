@@ -39,11 +39,11 @@ public class DataStorage {
 	 * @return      void
 	 */
 	public String getConnectionsForPerson(String name) {
-		String result = "Connections for " + name + ":\n";
+		String result = "Connections " + name + " is involved with:\n";
 		Person person = getPersonObject(name);
 		for (Connection c : connections) {
 			if (c.getSender().equals(person) || c.getReceivers().contains(person)) {
-				result += c.getPeopleInvolvedWith(name);
+				result += c.toString();
 			}
 		}
 		return result;
