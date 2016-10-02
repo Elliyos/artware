@@ -14,16 +14,17 @@ public class TestProgress {
 		System.out.println(p);
 		
 		//THIS TESTS FOR EDITING/REMOVING/SAVING/LOADING PEOPLE
-//		test.addPerson("tyler", "american", "sgadgda", "M", "agagdsgds");
-//		test.addPerson("Avash", "american", "sgadgda", "M", "agagdsgds");
-//		System.out.print(test.displayPeople());
-//		test.addConnection(test.getPersonObject("kevin"), test.convertToPersonArray("keenan,kyle,kevin"),
-//							"10/2/2016", "Letter", "Rock Island", "Me", "No notes");
-//		test.addConnection(test.getPersonObject("kyle"), test.convertToPersonArray("keenan"),
-//				"10/2/2016", "Letter", "Rock Island", "Me", "No notes");
+		test.addPerson("tyler", "american", "sgadgda", "M", "agagdsgds");
+		test.addPerson("Avash", "american", "sgadgda", "M", "agagdsgds");
+		System.out.print(test.displayPeople());
+		test.addConnection(test.getPersonObject("kevin"), test.convertToPersonArray("keenan,kyle,kevin"),
+							"10/2/2016", "Letter", "Rock Island", "Me", "No notes");
+		test.addConnection(test.getPersonObject("kyle"), test.convertToPersonArray("keenan"),
+				"10/2/2016", "Letter", "Rock Island", "Me", "No notes");
 		test.addConnection(test.convertToPersonArray("keenan,kyle,kevin"),
 				"10/2/2016", "Letter", "Rock Island", "Me", "No notes");
 		System.out.println(test.displayConnections());
+		System.out.println(test.getConnectionsForPerson("kevin"));
 		
 		
 		

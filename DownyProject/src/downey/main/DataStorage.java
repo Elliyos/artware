@@ -38,15 +38,15 @@ public class DataStorage {
 	 * @param  fileName, the name of the file to store the saved people.
 	 * @return      void
 	 */
-	public ArrayList<Connection> getConnectionsForPerson(Person person) {
-		ArrayList<Connection> hisConnections = new ArrayList<>();
+	public String getConnectionsForPerson(String name) {
+		String result = "Connections for " + name + ":\n";
+		Person person = getPersonObject(name);
 		for (Connection c : connections) {
 			if (c.getSender().equals(person) || c.getReceivers().contains(person)) {
-				hisConnections.add(c);
+				result += c.getPeopleInvolvedWith(name);
 			}
 		}
-
-		return hisConnections;
+		return result;
 	}
 	/**
 	 * Removes a Person object from the ArrayList people
@@ -102,9 +102,9 @@ public class DataStorage {
 	public String displayPeople() {
 		String result = "Current people in the system:\n";
 		for (Person p: people){
-			result += p.toString() + "\n";
+			result += p.toString();
 		}
-		return result;
+		return result + "\n\n";
 	}
 	/**
 	 * Display all connections in the system
@@ -114,7 +114,7 @@ public class DataStorage {
 	public String displayConnections() {
 		String result = "Current connections in the system:\n";
 		for (Connection c: connections){
-			result += c.toString() + "\n";
+			result += c.toString();
 		}
 		return result;
 	}

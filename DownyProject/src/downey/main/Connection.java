@@ -45,7 +45,10 @@ public class Connection{
 	}
 	
 	public Person getSender(){
-		return sender;
+		if (sender != null){
+			return sender;
+		}
+		return receivers.get(0);
 	}
 	public ArrayList<Person> getReceivers(){
 		return receivers;
@@ -109,6 +112,22 @@ public class Connection{
 		temp += receivers.get(receivers.size()-1).getName();
 		return temp;
 	}
+	public String getPeopleInvolvedWith(String name){
+		String result;
+		if (sender!= null && !sender.getName().equalsIgnoreCase(name)){
+			result = sender.getName();
+		}
+		else {
+			result = receivers.get(0).getName() +"";
+		}
+		for (int i = 1; i < receivers.size(); i++){
+			if (!receivers.get(i).getName().equalsIgnoreCase(name))
+			result += ", " + receivers.get(i).getName();
+		}
+		return result + "\n";
+		
+	}
+
 
 
 }
