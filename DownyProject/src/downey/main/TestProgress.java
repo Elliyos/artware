@@ -11,6 +11,11 @@ public class TestProgress {
 		test.loadConnections("connections");
 		System.out.print(test.displayConnections());
 		System.out.print(test.displayPeople());
+		ArrayList<Person> temp = test.convertToPersonArray("tyler, kevin");
+		Connection c = test.getConnectionObject("keenan, kyle, kevin", "Rock Island", "10/2/2016");
+		c.editConnection(temp, "10/2/2016", "letter", "Rock Island", "sagaa", "asgag");
+		test.saveConnections("connections");
+		
 	}
 
 }

@@ -73,6 +73,18 @@ public class DataStorage {
 		}
 		return -1;
 	}
+	private int searchConnection(String names, String location, String date) throws IOException{
+		for (int i = 0; i < connections.size(); i++){
+			if (connections.get(i).getReceivers().equals(convertToPersonArray(names)) && connections.get(i).getLocation().equals(location)){
+				return i;
+			}
+		}
+		return -1;
+	}
+	public Connection getConnectionObject(String names, String location, String date) throws IOException{
+		int index = searchConnection(names,location,date);
+		return connections.get(index);
+	}
 	/**
 	 * Accepts all parameters required for a Connection object, then creates a new Connection 
 	 * and adds it to the ArrayList of connections
