@@ -100,7 +100,7 @@ public class DataStorage {
 	 * @return      String, all Person objects in the system
 	 */
 	public String displayPeople() {
-		String result = "Current people in the system:\n";
+		String result = "\n\nCurrent people in the system:\n";
 		for (Person p: people){
 			result += p.toString();
 		}
