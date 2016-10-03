@@ -39,7 +39,7 @@ public class DataStorage {
 	 * @return      void
 	 */
 	public String getConnectionsForPerson(String name) {
-		String result = "Connections " + name + " is involved with:\n";
+		String result = "Connections " + name + " is involved with:\n\n";
 		Person person = getPersonObject(name);
 		for (Connection c : connections) {
 			if (c.getSender().equals(person) || c.getReceivers().contains(person)) {
@@ -73,6 +73,18 @@ public class DataStorage {
 		}
 		return -1;
 	}
+	private int searchConnection(String names, String location, String date) throws IOException{
+		for (int i = 0; i < connections.size(); i++){
+			if (connections.get(i).getReceivers().equals(convertToPersonArray(names)) && connections.get(i).getLocation().equals(location)){
+				return i;
+			}
+		}
+		return -1;
+	}
+	public Connection getConnectionObject(String names, String location, String date) throws IOException{
+		int index = searchConnection(names,location,date);
+		return connections.get(index);
+	}
 	/**
 	 * Accepts all parameters required for a Connection object, then creates a new Connection 
 	 * and adds it to the ArrayList of connections
@@ -100,7 +112,7 @@ public class DataStorage {
 	 * @return      String, all Person objects in the system
 	 */
 	public String displayPeople() {
-		String result = "Current people in the system:\n";
+		String result = "\n\nCurrent people in the system:\n";
 		for (Person p: people){
 			result += p.toString();
 		}
@@ -137,6 +149,7 @@ public class DataStorage {
 	public Person getPersonObject(String name){
 		return people.get(searchPerson(name));
 	}
+//	public Connection getConnectionObject()
 	/**
 	 * Accepts a string of Person object names and returns an ArrayList of type Person
 	 * filled with the Person object corresponding to each name.
@@ -148,7 +161,7 @@ public class DataStorage {
 	 */
 	public ArrayList<Person> convertToPersonArray(String people) throws IOException {
 		ArrayList<Person> temp = new ArrayList<>();
-		List<String> thePeople = Arrays.asList(people.split(","));
+		List<String> thePeople = Arrays.asList(people.split(", "));
 		for (String person : thePeople) {
 			temp.add(getPersonObject(person));
 		}
@@ -167,16 +180,27 @@ public class DataStorage {
 	public void loadConnections(String fileName) throws IOException {
 		CSVReader reader = new CSVReader(new FileReader(fileName));
 		List<String[]> myRows = reader.readAll();
-		for (String[] row : myRows) {
-			Person sender = getPersonObject(row[0]);
-			ArrayList<Person> receivers = convertToPersonArray(row[1]);
-			String date = row[2];
-			String source = row[3];
-			String location = row[4];
-			String citation = row[5];
-			String notes = row[6];
-			connections.add(new Connection(sender, receivers, date, source, location, citation, notes));
-		}
+			for (String[] row : myRows) {
+				if (row.length==7){
+					Person sender = getPersonObject(row[0]);
+					ArrayList<Person> receivers = convertToPersonArray(row[1]);
+					String date = row[2];
+					String source = row[3];
+					String location = row[4];
+					String citation = row[5];
+					String notes = row[6];
+					connections.add(new Connection(sender, receivers, date, source, location, citation, notes));
+				}
+				else {
+					ArrayList<Person> receivers = convertToPersonArray(row[0]);
+					String date = row[1];
+					String source = row[2];
+					String location = row[3];
+					String citation = row[4];
+					String notes = row[5];
+					connections.add(new Connection(receivers, date, source, location, citation, notes));
+				}
+			}
 	}
 	/**
 	 * Saves the current ArrayList of Connection objects into a specified text file.

@@ -48,7 +48,7 @@ public class Person {
 				+ ", Bio: " + bio;
 	}
 	public String[] toCSVRowArray() {
-		return new String[] { name, occupation ,culture, gender, bio};
+		return new String[] { name, culture ,occupation, gender, bio};
 	}
 
 	public String getOccupation() {
