@@ -7,24 +7,30 @@ import com.opencsv.CSVReader;
 public class TestProgress {
 	public static void main(String[] args) throws IOException{
 		DataStorage test = new DataStorage();
-		test.addPerson("kevin", "american", "worker", "M", "asdgads");
-		test.addPerson("keenan", "american", "workeraa", "M", "agsag");
-		test.addPerson("Kyle", "american", "asgasdg", "M", "agsdgsdgds");
-		ArrayList<Person> p = test.convertToPersonArray("kevin,keenan");
-		System.out.println(p);
-		
-		//THIS TESTS FOR EDITING/REMOVING/SAVING/LOADING PEOPLE
-		test.addPerson("tyler", "american", "sgadgda", "M", "agagdsgds");
-		test.addPerson("Avash", "american", "sgadgda", "M", "agagdsgds");
-		System.out.print(test.displayPeople());
-		test.addConnection(test.getPersonObject("kevin"), test.convertToPersonArray("keenan,kyle,kevin"),
-							"10/2/2016", "Letter", "Rock Island", "Me", "No notes");
-		test.addConnection(test.getPersonObject("kyle"), test.convertToPersonArray("keenan"),
-				"10/2/2016", "Letter", "Rock Island", "Me", "No notes");
-		test.addConnection(test.convertToPersonArray("keenan,kyle,kevin"),
-				"10/2/2016", "Letter", "Rock Island", "Me", "No notes");
-		System.out.println(test.displayConnections());
-		System.out.println(test.getConnectionsForPerson("kevin"));
+		test.loadPeople("people");
+		test.loadConnections("connections");
+		System.out.print(test.displayConnections());
+//		test.loadConnections("connections");
+//		System.out.print(test.displayConnections());
+//		test.addPerson("kevin", "american", "worker", "M", "asdgads");
+//		test.addPerson("keenan", "american", "workeraa", "M", "agsag");
+//		test.addPerson("Kyle", "american", "asgasdg", "M", "agsdgsdgds");
+//		ArrayList<Person> p = test.convertToPersonArray("kevin,keenan");
+//		
+//		test.addPerson("tyler", "american", "sgadgda", "M", "agagdsgds");
+//		test.addPerson("Avash", "american", "sgadgda", "M", "agagdsgds");
+//		System.out.print(test.displayPeople());
+//		test.addConnection(test.getPersonObject("kevin"), test.convertToPersonArray("keenan,kyle,kevin"),
+//							"10/2/2016", "Letter", "Rock Island", "Me", "No notes");
+//		test.addConnection(test.getPersonObject("kyle"), test.convertToPersonArray("keenan"),
+//				"10/2/2016", "Letter", "Rock Island", "Me", "No notes");
+//		test.addConnection(test.convertToPersonArray("keenan,kyle,kevin"),
+//				"10/2/2016", "Letter", "Rock Island", "Me", "No notes");
+//		test.addConnection(test.getPersonObject("kyle"), test.convertToPersonArray("kevin,keenan"),"2/2/2", "Email", "Olin204", "Not needed", "None");
+//		
+//		System.out.println(test.getConnectionsForPerson("kevin"));
+//		test.saveConnections("connections");
+//		test.savePeople("people");
 		
 		
 		

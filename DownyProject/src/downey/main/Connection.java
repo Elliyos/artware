@@ -62,7 +62,10 @@ public class Connection{
 		return false;
 	}
 	public String[] toCSVRowArray() {
-		return new String[] { sender.getName(), getReceiverNames() , date, source,location,citation, notes };
+		if (sender != null){
+			return new String[] { sender.getName(), getReceiverNames() , date, source,location,citation, notes };
+		}
+		return new String[] {getReceiverNames() , date, source,location,citation, notes };
 	}
 //	/**
 //	 * Returns true if the the connection is the same as the parameter.
@@ -91,13 +94,14 @@ public class Connection{
 //	 * @return String
 //	 */
 	public String toString(){
+		String temp = "\n";
 		if (sender != null){
-			return "\n" + sender.getName() + ": Receivers: " + getReceiverNames() + ", Date: " + date + ", Interaction Type: " + source
+			return temp += "Sender: " + sender.getName() + ": Receivers: " + getReceiverNames() + ", Date: " + date + ", Interaction Type: " + source
 				+ ", Location: " + location + ", Citation: " + citation + ", Notes: " + notes;
 		}
 		else {
-			return "\nReceivers: " + getReceiverNames() + ", Date: " + date + ", Interaction Type: " + source
-				+ ",Location: " + location + ", Citation: " + citation + ",Notes: " + notes +  "\n";
+			return temp += "Receivers: " + getReceiverNames() + ", Date: " + date + ", Interaction Type: " + source
+				+ ", Location: " + location + ", Citation: " + citation + ", Notes: " + notes;
 		}
 	}
 	
@@ -127,7 +131,64 @@ public class Connection{
 		return result + "\n";
 		
 	}
+	public void editConnection(ArrayList<Person> people, String date, String type,
+			          String location, String citation, String notes){
+		setReceivers(people);
+		setDate(date);
+		setSource(type);
+		setLocation(location);
+		setCitation(citation);
+		setNotes(notes);
+	}
+	public void editConnection(Person sender, ArrayList<Person> people, String date, String type,
+	          String location, String citation, String notes){
+		setReceivers(people);
+		setDate(date);
+		setSource(type);
+		setLocation(location);
+		setCitation(citation);
+		setNotes(notes);
+		setSender(sender);
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public String getNotes() {
+		return notes;
+	}
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+	public String getCitation() {
+		return citation;
+	}
+	public void setCitation(String citation) {
+		this.citation = citation;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
+	}
+	public void setSender(Person sender) {
+		this.sender = sender;
+	}
+	public void setReceivers(ArrayList<Person> receivers) {
+		this.receivers = receivers;
+	}
+		
+	}
 
 
 
-}
+
