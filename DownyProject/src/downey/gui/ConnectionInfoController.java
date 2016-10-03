@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 public class ConnectionInfoController {
 	private MainApp mainApp;
-	private DataStorage DS = new DataStorage();
+	private DataStorage DS = DataStorage.getMainDataStorage();
 	private ArrayList<Person> peopleList = DS.getPeopleArray();
 	
 	@FXML

@@ -6,7 +6,7 @@ import java.util.*;
 import com.opencsv.CSVReader;
 public class TestProgress {
 	public static void main(String[] args) throws IOException{
-		DataStorage test = new DataStorage();
+		DataStorage test = DataStorage.getMainDataStorage();
 		test.loadPeople("people");
 		test.loadConnections("connections");
 		System.out.print(test.displayConnections());

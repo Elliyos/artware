@@ -11,10 +11,15 @@ import com.opencsv.CSVWriter;
 public class DataStorage {
 	private ArrayList<Person> people;
 	private ArrayList<Connection> connections;
+	private static DataStorage mainDataStorage = new DataStorage();
 
-	public DataStorage() {
+	private DataStorage() {
 		people = new ArrayList<Person>();
 		connections = new ArrayList<Connection>();
+	}
+	
+	public static DataStorage getMainDataStorage() {
+		return mainDataStorage;
 	}
 	/**
 	 * This method creates a new Person object, given the required parameters, and

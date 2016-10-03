@@ -23,7 +23,7 @@ public class ViewConnectionsController {
 
 
 	private MainApp mainApp;
-	private DataStorage DS = new DataStorage();
+	private DataStorage DS = DataStorage.getMainDataStorage();
 	//private ArrayList<Connection> connectionList = DS.getConnectionArray();
 	private String selectedName;
 	private Person selectedPerson;

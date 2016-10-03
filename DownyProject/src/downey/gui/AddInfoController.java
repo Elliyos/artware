@@ -56,7 +56,7 @@ public class AddInfoController {
 
 		if (event.getSource() == add) {
 
-			DataStorage DS = new DataStorage();
+			DataStorage DS = DataStorage.getMainDataStorage();
 			String name = nameInput.getText();
 			String culture = cultureInput.getText();
 			String occupation = occupationInput.getText();

@@ -20,7 +20,7 @@ public class PersonInfoController extends FindPersonController{
 	private MainApp mainApp;
 	//private Person selectedPerson = super.getSelectedPerson();
 	private String selectedName = super.getSelectedName();
-	private DataStorage DS = new DataStorage();
+	private DataStorage DS = DataStorage.getMainDataStorage();
 	private ArrayList<Person> peopleList = DS.getPeopleArray();
 	
 	@FXML

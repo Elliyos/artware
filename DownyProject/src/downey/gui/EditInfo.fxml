@@ -50,7 +50,7 @@
          </font>
       </Text>
       <TextArea fx:id="bioArea" layoutX="14.0" layoutY="265.0" prefHeight="101.0" prefWidth="570.0" />
-      <Button fx:id="submit" disable="true" layoutX="532.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Submit" />
+      <Button fx:id="submit" disable="false" layoutX="532.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Submit" />
       <Button fx:id="goBack" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Go Back" />
    </children>
 </AnchorPane>

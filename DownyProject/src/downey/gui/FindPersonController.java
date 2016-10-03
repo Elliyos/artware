@@ -20,7 +20,7 @@ import javafx.scene.control.ListView;
 public class FindPersonController {
 
 	private MainApp mainApp;
-	private DataStorage DS = new DataStorage();
+	private DataStorage DS = DataStorage.getMainDataStorage();
 	private ArrayList<Person> peopleList = DS.getPeopleArray();
 	private String selectedName;
 	private Person selectedPerson;

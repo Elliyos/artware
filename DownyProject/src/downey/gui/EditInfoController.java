@@ -40,7 +40,7 @@ public class EditInfoController {
 	@FXML
 	private Button goBack;
 	
-	private DataStorage DS = new DataStorage();
+	private DataStorage DS = DataStorage.getMainDataStorage();
 	private MainApp mainApp;
 	private ArrayList<Person> peopleList = DS.getPeopleArray();
 	private Person currentPerson;

@@ -63,7 +63,7 @@
          </font>
       </Text>
       <TextArea fx:id="notes" layoutX="13.0" layoutY="284.0" prefHeight="97.0" prefWidth="570.0" />
-      <Button fx:id="submit" disable="true" layoutX="540.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Submit" />
+      <Button fx:id="submit" disable="false" layoutX="540.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Submit" />
       <Button fx:id="goBack" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Go Back" />
    </children>
 </AnchorPane>

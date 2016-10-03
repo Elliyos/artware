@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 
 public class AddConnectionController {
 	
-	private DataStorage DS = new DataStorage();
+	private DataStorage DS = DataStorage.getMainDataStorage();
 	private ArrayList<Person> peopleList = DS.getPeopleArray();
 	private ArrayList<Person> recipientsList;
 	private MainApp mainApp;
