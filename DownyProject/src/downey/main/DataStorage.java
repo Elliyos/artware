@@ -158,6 +158,8 @@ public class DataStorage {
 	/**
 	 * Loads a text file containing information for connections and converts that information
 	 * into Connection objects, which are then stored into the connections ArrayList.
+	 * 
+	 * We don't need to pass in a file name. Should discuss.
 	 *
 	 * @param  fileName, the name of the file that stores the connection information
 	 * @return      void
@@ -221,5 +223,9 @@ public class DataStorage {
 			String bio = row[4];
 			people.add(new Person(name, occupation, culture, gender, bio));
 		}
+	}
+	
+	public ArrayList<Person> getPeopleArray(){
+		return people;
 	}
 }

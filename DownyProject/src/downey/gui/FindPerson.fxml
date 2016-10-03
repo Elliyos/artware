@@ -17,7 +17,7 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="570.0">
                <children>
-                  <ListView prefHeight="250.0" prefWidth="570.0" />
+                  <ListView fx:id="list" prefHeight="250.0" prefWidth="570.0" />
                </children></AnchorPane>
         </content>
       </ScrollPane>

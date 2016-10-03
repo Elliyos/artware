@@ -1,8 +1,9 @@
 package downey.gui;
 
 import downey.main.DataStorage;
-import java.io.IOException;
+import downey.main.Person;
 
+import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -62,8 +63,12 @@ public class AddInfoController {
 			String occupation = occupationInput.getText();
 			String gender = genderInput.getValue();
 			String bio = bioInput.getText();
+			String save;
+			Person person;
 
 			DS.addPerson(name, culture, occupation, gender, bio);
+			DS.loadPeople("people");
+			DS.savePeople("people");
 
 			// get reference to the button's stage
 			stage = (Stage) add.getScene().getWindow();
