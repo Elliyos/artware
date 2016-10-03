@@ -73,7 +73,7 @@ public class AddInfoController {
 			// get reference to the button's stage
 			stage = (Stage) add.getScene().getWindow();
 			// load up OTHER FXML document
-			root = FXMLLoader.load(getClass().getResource("AddPersonThanks.fxml"));
+			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		} else {
 			stage = (Stage) goBack.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("ProfileOptions.fxml"));

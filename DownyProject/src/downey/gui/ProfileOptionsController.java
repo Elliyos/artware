@@ -26,34 +26,16 @@ public class ProfileOptionsController {
 	private Button editButton;
 	@FXML
 	private Button goBack;
-	@FXML
-	private ListView<String> list;
+
 	
-	private DataStorage DS;
-	private ArrayList<Person> peopleList;
 	private MainApp mainApp;
-	private String names;
 	
 	public ProfileOptionsController(){
 	}
 	
 	@FXML
 	private void initialize(){
-    	/*peopleList = DS.getPeopleArray();
-    	names = nameList(peopleList);
-    	ObservableList<String> people =FXCollections.observableArrayList (names);
-    	list.setOrientation(Orientation.VERTICAL);
-    	list.setItems(people);*/
 	}
-	
-    public String nameList(ArrayList<Person> peopleList){
-    	String names = "";
-    	for (int i = 0; i <= peopleList.size()-1; i++){
-    		Person currentPerson = peopleList.get(i);
-    		names += "\"" + currentPerson.getName() + "\", ";
-    	}
-    	return names;
-    }
 	
 	 @FXML
 	    private void handleButtonAction(ActionEvent event) throws IOException{

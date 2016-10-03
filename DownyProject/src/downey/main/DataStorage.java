@@ -250,6 +250,12 @@ public class DataStorage {
 	}
 	
 	public ArrayList<Person> getPeopleArray(){
+		try {
+			loadPeople("people");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return people;
 	}
 }
