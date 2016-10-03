@@ -28,7 +28,6 @@ public class AddInfoController {
 	private TextField cultureInput;
 	@FXML
 	private TextField occupationInput;
-	@SuppressWarnings("rawtypes")
 	@FXML
 	private ChoiceBox<String> genderInput;
 	@FXML

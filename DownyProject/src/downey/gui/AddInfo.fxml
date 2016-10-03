@@ -45,7 +45,7 @@
       </Text>
       <TextArea fx:id="bioInput" layoutX="14.0" layoutY="235.0" prefHeight="123.0" prefWidth="570.0" />
       <TextField fx:id="cultureInput" layoutX="368.0" layoutY="115.0" prefHeight="25.0" prefWidth="223.0" />
-      <Button fx:id="add" layoutX="546.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Add" />
+      <Button fx:id="add" disable="true" layoutX="546.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Add" />
       <Button fx:id="goBack" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Go Back" />
    </children>
 </AnchorPane>

@@ -39,5 +39,6 @@
             <Font size="25.0" />
          </font>
       </Button>
+      <Text fontSmoothingType="LCD" layoutX="212.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alpha Ver 0.1 (TEST BUILD ONLY)" />
    </children>
 </AnchorPane>

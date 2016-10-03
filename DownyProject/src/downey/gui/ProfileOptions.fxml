@@ -12,17 +12,12 @@
             <Font size="40.0" />
          </font>
       </Text>
-      <Button fx:id="addButton" layoutX="130.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="100.0" text="Add">
+      <Button fx:id="addButton" layoutX="166.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="100.0" text="Add">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="viewButton" layoutX="250.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="100.0" text="View">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Button>
-      <Button fx:id="editButton" layoutX="370.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="100.0" text="Edit">
+      <Button fx:id="viewButton" layoutX="300.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="162.0" text="View / Edit">
          <font>
             <Font size="25.0" />
          </font>

@@ -23,8 +23,6 @@ public class ProfileOptionsController {
 	@FXML
 	private Button viewButton;
 	@FXML
-	private Button editButton;
-	@FXML
 	private Button goBack;
 
 	
@@ -49,9 +47,6 @@ public class ProfileOptionsController {
 	         } else if (event.getSource() == viewButton){
 	        	 stage=(Stage) viewButton.getScene().getWindow();
 	        	 root = FXMLLoader.load(getClass().getResource("FindPerson.fxml"));
-	         } else if (event.getSource() == editButton) {
-	        	 stage=(Stage) editButton.getScene().getWindow();
-	        	 root = FXMLLoader.load(getClass().getResource("EditFindPerson.fxml"));
 	         } else {
 	        	 stage=(Stage) goBack.getScene().getWindow();
 	        	 root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));

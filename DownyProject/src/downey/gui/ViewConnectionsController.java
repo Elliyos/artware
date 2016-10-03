@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import downey.main.*;
+import downey.main.Connection;
+import downey.main.DataStorage;
+import downey.main.Person;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
@@ -13,46 +15,40 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 
-public class FindPersonController {
+public class ViewConnectionsController {
+
 
 	private MainApp mainApp;
 	private DataStorage DS = new DataStorage();
-	private ArrayList<Person> peopleList = DS.getPeopleArray();
+	//private ArrayList<Connection> connectionList = DS.getConnectionArray();
 	private String selectedName;
 	private Person selectedPerson;
 
 	@FXML
-	private ObservableSet<String> observableSet = FXCollections.observableSet();
+	private ObservableSet<String> observableSet = FXCollections.observableSet("Kyle to Stonedahl and Lyli");
+	//private ObservableSet<Connection> observableSet = FXCollections.observableSet();
 	@FXML
-	ObservableList<String> people = FXCollections.observableArrayList();
+	ObservableList<String> connection = FXCollections.observableArrayList();
+	//ObservableList<Connection> connection = FXCollections.observableArrayList();
 	@FXML
-	ListView<String> list = new ListView<String>(people);
+	ListView<String> list = new ListView<String>();
+	//ListView<Connection> list = new ListView<Connection>();
 	@FXML
 	private Button goBack;
 	@FXML
 	private Button viewButton;
 
-	public FindPersonController() {
+	public ViewConnectionsController() {
 	}
 
 	@FXML
 	private void initialize() throws IOException {
-		//list.setItems(FXCollections.observableArrayList(nameList(peopleList))); THIS IS REAL, DON'T DELETE
-		list.setItems(FXCollections.observableArrayList(peopleList.get(0).getName()));
-	}
-
-	public ObservableSet<String> nameList(ArrayList<Person> peopleList) {
-		String name = "";
-		for (int i = 0; i <= peopleList.size() - 1; i++) {
-			selectedPerson = peopleList.get(i);
-			name = selectedPerson.getName();
-			observableSet.addAll(Arrays.asList(name));
-		}
-		return observableSet;
+		//list.setItems(FXCollections.observableArrayList(observableSet));// REAL, WORK WITH THIS
+		list.setItems(FXCollections.observableArrayList(observableSet));
 	}
 
 	@FXML
@@ -61,23 +57,15 @@ public class FindPersonController {
 		Parent root;
 		if (event.getSource() == viewButton) {
 			stage = (Stage) viewButton.getScene().getWindow();
-			root = FXMLLoader.load(getClass().getResource("PersonInfo.fxml"));
+			root = FXMLLoader.load(getClass().getResource("ConnectionInfo.fxml"));
 		} else {
 			stage = (Stage) goBack.getScene().getWindow();
-			root = FXMLLoader.load(getClass().getResource("ProfileOptions.fxml"));
+			root = FXMLLoader.load(getClass().getResource("ConnectionOptions.fxml"));
 		}
 		// create a new scene with root and set the stage
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-	}
-
-	
-	 public Person getSelectedPerson(){ return this.selectedPerson; }
-	 
-
-	public String getSelectedName() {
-		return this.selectedName;
 	}
 
 	public void setMainApp(MainApp mainApp) {

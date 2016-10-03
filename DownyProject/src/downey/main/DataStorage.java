@@ -65,7 +65,7 @@ public class DataStorage {
 	 * @param  name, the name of the person to be found
 	 * @return      int, the index of the person
 	 */
-	private int searchPerson(String name){
+	public int searchPerson(String name){
 		for (int i = 0; i < people.size(); i++){
 				if (people.get(i).getName().equalsIgnoreCase(name)){
 					return i;	
@@ -73,6 +73,7 @@ public class DataStorage {
 		}
 		return -1;
 	}
+	
 	private int searchConnection(String names, String location, String date) throws IOException{
 		for (int i = 0; i < connections.size(); i++){
 			if (connections.get(i).getReceivers().equals(convertToPersonArray(names)) && connections.get(i).getLocation().equals(location)){
@@ -257,5 +258,15 @@ public class DataStorage {
 			e.printStackTrace();
 		}
 		return people;
+	}
+	
+	public ArrayList<Connection> getConnectionArray(){
+		try {
+			loadConnections("connections");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return connections;
 	}
 }

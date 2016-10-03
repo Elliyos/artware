@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -7,9 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.ProfileOptionsController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.EditInfoController">
    <children>
-      <Text layoutX="79.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thanks! Just give us the right info">
+      <Text layoutX="95.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sure! Just give us the right info">
          <font>
             <Font size="30.0" />
          </font>
@@ -24,20 +25,20 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField layoutX="14.0" layoutY="145.0" prefHeight="25.0" prefWidth="220.0" />
+      <TextField fx:id="nameArea" layoutX="14.0" layoutY="145.0" prefHeight="25.0" prefWidth="220.0" />
       <Text layoutX="14.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField layoutX="14.0" layoutY="205.0" prefHeight="25.0" prefWidth="220.0" />
+      <TextField fx:id="occupationArea" layoutX="14.0" layoutY="205.0" prefHeight="25.0" prefWidth="220.0" />
       <Text layoutX="366.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culture">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField layoutX="366.0" layoutY="145.0" prefHeight="25.0" prefWidth="220.0" />
-      <ChoiceBox layoutX="366.0" layoutY="205.0" prefHeight="25.0" prefWidth="220.0" />
+      <TextField fx:id="cultureArea" layoutX="366.0" layoutY="145.0" prefHeight="25.0" prefWidth="220.0" />
+      <ChoiceBox fx:id="genderInput" layoutX="366.0" layoutY="205.0" prefHeight="25.0" prefWidth="220.0" />
       <Text layoutX="366.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender">
          <font>
             <Font size="20.0" />
@@ -48,6 +49,8 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <TextArea layoutX="14.0" layoutY="265.0" prefHeight="125.0" prefWidth="570.0" />
+      <TextArea fx:id="bioArea" layoutX="14.0" layoutY="265.0" prefHeight="101.0" prefWidth="570.0" />
+      <Button fx:id="submit" disable="true" layoutX="532.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Submit" />
+      <Button fx:id="goBack" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Go Back" />
    </children>
 </AnchorPane>
