@@ -50,13 +50,13 @@ public class ConnectionInfoController {
 	 */
 	@FXML
     private void initialize() throws IOException {
-		sender.setText("Kyle");
-    	recipients.setText("Stonedahl, Lyli");
-    	dateLabel.setText("11/17/2015");
-    	typeLabel.setText("House Visit");
-    	locationLabel.setText("Silvis, IL, USA");
-    	citationLabel.setText("Encyclopedia Vol. 1 Ed 3");
-    	notesLabel.setText("\"You're a wizard, Kyle,\" Stonedahl said.");
+//		sender.setText("Kyle");
+//    	recipients.setText("Stonedahl, Lyli");
+//    	dateLabel.setText("11/17/2015");
+//    	typeLabel.setText("House Visit");
+//    	locationLabel.setText("Silvis, IL, USA");
+//    	citationLabel.setText("Encyclopedia Vol. 1 Ed 3");
+//    	notesLabel.setText("\"You're a wizard, Kyle,\" Stonedahl said.");
     }
     
     @FXML

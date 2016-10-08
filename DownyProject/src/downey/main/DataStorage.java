@@ -294,4 +294,14 @@ public class DataStorage {
 //		}
 		return connections;
 	}
+	
+	// might be needed if want to display only names in the drop-down list
+//	public ArrayList<String> getPeopleNames() {
+//		ArrayList<String> peopleNames = new ArrayList<>();
+//		for (Person person: people) {
+//			peopleNames.add(person.getName());
+//		}
+//		return peopleNames;
+//		
+//	}
 }

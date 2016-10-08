@@ -49,8 +49,8 @@ public class EditConnectionController {
 
 	@FXML
 	private void initialize() { //THIS ALL NEEDS CHANGED
-		sender.setItems(FXCollections.observableArrayList(peopleList.get(1)));
-		recipients.setItems(FXCollections.observableArrayList(peopleList.get(0)));
+		sender.setItems(FXCollections.observableArrayList(peopleList));
+		recipients.setItems(FXCollections.observableArrayList(peopleList));
 	}
 
 	@FXML

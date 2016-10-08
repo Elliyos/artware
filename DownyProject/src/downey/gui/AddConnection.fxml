@@ -57,7 +57,7 @@
          </font>
       </Text>
       <TextField fx:id="citationInput" layoutX="371.0" layoutY="224.0" prefHeight="25.0" prefWidth="214.0" />
-      <Text fontSmoothingType="LCD" layoutX="13.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Citation">
+      <Text fontSmoothingType="LCD" layoutX="13.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes">
          <font>
             <Font size="20.0" />
          </font>

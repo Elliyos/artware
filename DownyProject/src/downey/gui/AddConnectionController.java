@@ -48,8 +48,8 @@ public class AddConnectionController {
 
 	@FXML
 	private void initialize() { //THIS ALL NEEDS CHANGED
-		sender.setItems(FXCollections.observableArrayList(peopleList.get(0)));
-		recipients.setItems(FXCollections.observableArrayList(peopleList.get(1)));
+		sender.setItems(FXCollections.observableArrayList(peopleList));
+		recipients.setItems(FXCollections.observableArrayList(peopleList));
 	}
 
 	@FXML
@@ -57,6 +57,7 @@ public class AddConnectionController {
 		Stage stage;
 		Parent root;
 		if (event.getSource() == this.submit) {
+
 			//recipientsList.add(peopleList.get(1)); //CHANGE THIS
 			DS.addConnection(sender.getValue(), peopleList, dateInput.getText(), typeInput.getText(), locationInput.getText(), citationInput.getText(), notes.getText());
 			DS.saveConnections("connections");
