@@ -19,7 +19,6 @@ public class PersonInfoController extends FindPersonController{
 	
 	private MainApp mainApp;
 	//private Person selectedPerson = super.getSelectedPerson();
-	private String selectedName = super.getSelectedName();
 	private DataStorage DS = DataStorage.getMainDataStorage();
 	private ArrayList<Person> peopleList = DS.getPeopleArray();
 	
@@ -53,7 +52,7 @@ public class PersonInfoController extends FindPersonController{
 	@FXML
     private void initialize() throws IOException {
     	//int index = DS.searchPerson(selectedName);
-    	Person chosenPerson = peopleList.get(0);
+    	Person chosenPerson = DS.getPersonObject(DS.getSelectedName());
     	nameLabel.setText(chosenPerson.getName());
     	occupationLabel.setText(chosenPerson.getOccupation());
     	cultureLabel.setText(chosenPerson.getCulture());

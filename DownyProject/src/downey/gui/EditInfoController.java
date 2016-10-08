@@ -50,8 +50,7 @@ public class EditInfoController {
 	
 	@FXML
 	private void initialize() throws IOException{
-		currentPerson = peopleList.get(0);
-		nameArea.setPromptText(currentPerson.getName());
+		currentPerson = DS.getPersonObject(DS.getSelectedName());
 		occupationArea.setPromptText(currentPerson.getOccupation());
 		cultureArea.setPromptText(currentPerson.getCulture());
 		bioArea.setPromptText(currentPerson.getBio());

@@ -1,6 +1,6 @@
 package downey.gui;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -22,7 +22,7 @@ public class FindPersonController {
 	private MainApp mainApp;
 	private DataStorage DS = DataStorage.getMainDataStorage();
 	private ArrayList<Person> peopleList = DS.getPeopleArray();
-	private String selectedName;
+	public String selectedName;
 	private Person selectedPerson;
 
 	@FXML
@@ -41,8 +41,8 @@ public class FindPersonController {
 
 	@FXML
 	private void initialize() throws IOException {
-		//list.setItems(FXCollections.observableArrayList(nameList(peopleList))); THIS IS REAL, DON'T DELETE
-		list.setItems(FXCollections.observableArrayList(peopleList.get(0).getName()));
+		list.setItems(FXCollections.observableArrayList(nameList(peopleList)));
+//		list.setItems(FXCollections.observableArrayList(peopleList.get(0).getName()));
 	}
 
 	public ObservableSet<String> nameList(ArrayList<Person> peopleList) {
@@ -59,6 +59,8 @@ public class FindPersonController {
 	private void handleButtonAction(ActionEvent event) throws IOException {
 		Stage stage;
 		Parent root;
+		selectedName = list.getSelectionModel().getSelectedItem();
+		DS.storeSelectedName(selectedName);
 		if (event.getSource() == viewButton) {
 			stage = (Stage) viewButton.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("PersonInfo.fxml"));
@@ -77,7 +79,7 @@ public class FindPersonController {
 	 
 
 	public String getSelectedName() {
-		return this.selectedName;
+		return selectedName;
 	}
 
 	public void setMainApp(MainApp mainApp) {

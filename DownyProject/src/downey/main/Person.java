@@ -90,12 +90,16 @@ public class Person {
 	public void setBio(String bio) {
 		this.bio = bio;
 	}
-	public void editPerson(String name, String culture, String occupation, String gender, String bio){
+	public boolean editPerson(String name, String culture, String occupation, String gender, String bio){
+		if (name == null || culture == null || occupation == null || gender == null || bio == null){
+			return false;
+		}
 		setName(name);
 		setCulture(culture);
 		setOccupation(occupation);
 		setGender(gender);
 		setBio(bio);
+		return true;
 		
 		
 	}

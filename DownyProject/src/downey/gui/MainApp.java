@@ -1,5 +1,5 @@
 /**
- * Progress: WIP
+ * Progress: WIP 
  */
 
 package downey.gui;
@@ -20,7 +20,8 @@ public class MainApp extends Application {
     private BorderPane rootLayout;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
+//    	DataStorage.getMainDataStorage().loadConnections("connections");
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("ArtWARE");
 
@@ -50,8 +51,9 @@ public class MainApp extends Application {
 
     /**
      * Shows the person overview inside the root layout.
+     * @throws IOException 
      */
-    public void showMainMenu() {
+    public void showMainMenu() throws IOException {
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
@@ -73,7 +75,8 @@ public class MainApp extends Application {
         return primaryStage;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+    	DataStorage.getMainDataStorage().loadPeople("people");
         launch(args);
     }
 }

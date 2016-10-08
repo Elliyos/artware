@@ -11,6 +11,7 @@ import com.opencsv.CSVWriter;
 public class DataStorage {
 	private ArrayList<Person> people;
 	private ArrayList<Connection> connections;
+	private String selectedName;
 	private static DataStorage mainDataStorage = new DataStorage();
 
 	private DataStorage() {
@@ -32,9 +33,22 @@ public class DataStorage {
 	 * @param bio
 	 * @return      void
 	 */
-	public void addPerson(String name, String culture, String occupation, String gender, String bio) {
-		Person temp = new Person(name, culture, occupation, gender, bio);
-		people.add(temp);
+	public boolean addPerson(String name, String culture, String occupation, String gender, String bio) {
+		if (!containsPerson(name)){
+			Person temp = new Person(name, culture, occupation, gender, bio);
+			people.add(temp);
+			return true;
+		}
+		return false;
+	}
+	public boolean containsPerson(String name){
+		for (Person p : people){
+			if (p.getName().equalsIgnoreCase(name)){
+				return true;
+			}
+		}
+		return false;
+		
 	}
 	/**
 	 * This method returns all connections that a Person object is involved in. 
@@ -135,6 +149,12 @@ public class DataStorage {
 			result += c.toString();
 		}
 		return result;
+	}
+	public void storeSelectedName(String s){
+		selectedName = s;
+	}
+	public String getSelectedName(){
+		return selectedName;
 	}
 	
 	/**
@@ -256,22 +276,22 @@ public class DataStorage {
 	}
 	
 	public ArrayList<Person> getPeopleArray(){
-		try {
-			loadPeople("people");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			loadPeople("people");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return people;
 	}
 	
 	public ArrayList<Connection> getConnectionArray(){
-		try {
-			loadConnections("connections");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			loadConnections("connections");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return connections;
 	}
 }

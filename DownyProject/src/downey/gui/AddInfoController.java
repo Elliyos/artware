@@ -66,7 +66,6 @@ public class AddInfoController {
 			Person person;
 
 			DS.addPerson(name, culture, occupation, gender, bio);
-			DS.loadPeople("people");
 			DS.savePeople("people");
 
 			// get reference to the button's stage
