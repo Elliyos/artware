@@ -10,13 +10,17 @@ public class Person {
 	private String bio;
 
 	public Person(String name, String culture, String occupation, String gender, String bio) {
-		this.occupation = occupation;
+		setDataFields(name, culture, occupation, gender, bio);
+	}
+
+	// since we reuse this code in editPerson method and don't set data fields individually
+	private void setDataFields(String name, String culture, String occupation, String gender, String bio) {
 		this.name = name;
 		this.culture = culture;
+		this.occupation = occupation;
 		this.gender = gender;
 		this.bio = bio;
 	}
-
 	/**
 	 * Compares two Person objects and return true if they are the same, false
 	 * otherwise
@@ -76,11 +80,7 @@ public class Person {
 		if (name == null || culture == null || occupation == null || gender == null || bio == null){
 			return false;
 		}
-		this.name = name;
-		this.culture = culture;
-		this.occupation = occupation;
-		this.gender = gender;
-		this.bio = bio;
+		setDataFields(name, culture, occupation, gender, bio);
 		return true;
 		
 		
