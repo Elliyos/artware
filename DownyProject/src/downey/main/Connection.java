@@ -11,15 +11,15 @@ public class Connection{
 	private String notes;
 	private String citation;
 	private String location;
-	private String source;
+	private String communicationType;
 	private Person sender;
 	private ArrayList<Person> receivers = new ArrayList<Person>();
 	
 	/**
-	 * 
+	 * Constructor method for a many-to-many connection
 	 * 
 	 * @param date
-	 * @param source
+	 * @param communicationType
 	 * @param location
 	 * @param citation
 	 * @param notes
@@ -33,11 +33,22 @@ public class Connection{
 			this.notes = notes;
 			this.citation = citation;
 			this.location = location;
-			this.source = type;
+			this.communicationType = type;
 			this.sender= null;
 			receivers = people;
 			 
 	}
+	/**
+	 * Constructor method for a one-to-many connection
+	 * 
+	 * @param sender
+	 * @param people
+	 * @param date
+	 * @param type
+	 * @param location
+	 * @param citation
+	 * @param notes
+	 */
 	public Connection(Person sender, ArrayList<Person> people, String date, String type,
 			          String location, String citation, String notes){
 		this(people,date,type,location,citation,notes);
@@ -63,48 +74,49 @@ public class Connection{
 	}
 	public String[] toCSVRowArray() {
 		if (sender != null){
-			return new String[] { sender.getName(), getReceiverNames() , date, source,location,citation, notes };
+			return new String[] { sender.getName(), getReceiverNames() , date, communicationType,location,citation, notes };
 		}
-		return new String[] {getReceiverNames() , date, source,location,citation, notes };
+		return new String[] {getReceiverNames() , date, communicationType,location,citation, notes };
 	}
-//	/**
-//	 * Returns true if the the connection is the same as the parameter.
-//	 * 
-//	 * @param Object
-//	 * @return Boolean
-//	 */
-//	public boolean equals(Object obj) {
-//		if (obj == this) {
-//			return true;
-//		}
-//		if (obj == null) {
-//			return false;
-//		}
-//		if (this.getClass() == obj.getClass()) {
-//			Connection other = (Connection) obj;
-//			return (date.equals(other.date) && contacts.equals(other.contacts)
-//					&& interactionType.equals(other.interactionType));
-//		}
-//		return false;
-//	}
-//	/**
-//	 * Returns a Connection object as a String
-//	 * 
-//	 * @param 
-//	 * @return String
-//	 */
+	/**
+	 * Returns true if the the connection is the same as the parameter.
+	 * 
+	 * @param Object
+	 * @return Boolean
+	 */
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() == obj.getClass()) {
+			Connection other = (Connection) obj;
+			return (date.equals(other.date) && receivers.equals(other.receivers)
+					&& communicationType.equals(other.communicationType));
+		}
+		return false;
+	}
+	/**
+	 * Returns a Connection object as a String
+	 * 
+	 * @param 
+	 * @return String
+	 */
 	public String toString(){
-		String temp = "\n";
+		String connectionString = "Receivers: " + getReceiverNames() + ", Date: " + date + ", Interaction Type: " + communicationType
+				+ ", Location: " + location + ", Citation: " + citation + ", Notes: " + notes;
 		if (sender != null){
-			return temp += "Sender: " + sender.getName() + ": Receivers: " + getReceiverNames() + ", Date: " + date + ", Interaction Type: " + source
-				+ ", Location: " + location + ", Citation: " + citation + ", Notes: " + notes;
+			return "\nSender: " + sender.getName() + ": " + connectionString;
 		}
-		else {
-			return temp += "Receivers: " + getReceiverNames() + ", Date: " + date + ", Interaction Type: " + source
-				+ ", Location: " + location + ", Citation: " + citation + ", Notes: " + notes;
-		}
+
+		return "\n" + connectionString;
 	}
-	
+	/**
+	 * this method returns the names of all of the receivers for this connection, not the sender.
+	 * @return
+	 */
 	public String getReceiverNames(){
 		if (receivers.isEmpty()){
 			return "No contacts";
@@ -116,7 +128,12 @@ public class Connection{
 		temp += receivers.get(receivers.size()-1).getName();
 		return temp;
 	}
-	public String getPeopleInvolvedWith(String name){
+	/**
+	 * This method returns the names of all people who are involved in a conncetion with this person
+	 * @param name, person with the connections
+	 * @return the people involved, string
+	 */
+	public String getConnectedPeople(String name){
 		String result;
 		if (sender!= null && !sender.getName().equalsIgnoreCase(name)){
 			result = sender.getName();
@@ -142,12 +159,7 @@ public class Connection{
 	}
 	public void editConnection(Person sender, ArrayList<Person> people, String date, String type,
 	          String location, String citation, String notes){
-		setReceivers(people);
-		setDate(date);
-		setSource(type);
-		setLocation(location);
-		setCitation(citation);
-		setNotes(notes);
+		editConnection(people,date,type,location,citation,notes);
 		setSender(sender);
 	}
 	public String getDate() {
@@ -175,10 +187,10 @@ public class Connection{
 		this.location = location;
 	}
 	public String getSource() {
-		return source;
+		return communicationType;
 	}
 	public void setSource(String source) {
-		this.source = source;
+		this.communicationType = source;
 	}
 	public void setSender(Person sender) {
 		this.sender = sender;

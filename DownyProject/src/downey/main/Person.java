@@ -72,30 +72,10 @@ public class Person {
 		return bio;
 	}
 
-//	public void setName(String name) {
-//	this.name = name;
-//}
-//	public void setCulture(String culture) {
-//	this.culture = culture;
-//}
-//	public void setOccupation(String occupation) {
-//	this.occupation = occupation;
-//}
-//	public void setGender(String gender) {
-//	this.gender = gender;
-//}
-//	public void setBio(String bio) {
-//		this.bio = bio;
-//	}
 	public boolean editPerson(String name, String culture, String occupation, String gender, String bio){
 		if (name == null || culture == null || occupation == null || gender == null || bio == null){
 			return false;
 		}
-//		setName(name);
-//		setCulture(culture);
-//		setOccupation(occupation);
-//		setGender(gender);
-//		setBio(bio);
 		this.name = name;
 		this.culture = culture;
 		this.occupation = occupation;
