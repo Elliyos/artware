@@ -10,9 +10,9 @@ public class Person {
 	private String bio;
 
 	public Person(String name, String culture, String occupation, String gender, String bio) {
-		this.occupation = occupation;
 		this.name = name;
 		this.culture = culture;
+		this.occupation = occupation;
 		this.gender = gender;
 		this.bio = bio;
 	}
@@ -55,55 +55,53 @@ public class Person {
 		return occupation;
 	}
 
+	public void setOccupation(String occupation) {
+		this.occupation = occupation;
+	}
+	
 	public String getName() {
 		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getCulture() {
 		return culture;
 	}
 
+	public void setCulture(String culture) {
+		this.culture = culture;
+	}
 
 	public String getGender() {
 		return gender;
 	}
-
+	
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	
 	public String getBio() {
 		return bio;
 	}
-
-//	public void setName(String name) {
-//	this.name = name;
-//}
-//	public void setCulture(String culture) {
-//	this.culture = culture;
-//}
-//	public void setOccupation(String occupation) {
-//	this.occupation = occupation;
-//}
-//	public void setGender(String gender) {
-//	this.gender = gender;
-//}
-//	public void setBio(String bio) {
-//		this.bio = bio;
-//	}
+	
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+	
+	
 	public boolean editPerson(String name, String culture, String occupation, String gender, String bio){
 		if (name == null || culture == null || occupation == null || gender == null || bio == null){
 			return false;
 		}
-//		setName(name);
-//		setCulture(culture);
-//		setOccupation(occupation);
-//		setGender(gender);
-//		setBio(bio);
-		this.name = name;
-		this.culture = culture;
-		this.occupation = occupation;
-		this.gender = gender;
-		this.bio = bio;
+		setName(name);
+		setCulture(culture);
+		setOccupation(occupation);
+		setGender(gender);
+		setBio(bio);
 		return true;
-		
-		
 	}
 
 }

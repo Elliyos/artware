@@ -92,7 +92,14 @@ public class DataStorage {
 		}
 		return -1;
 	}
-	
+	/**
+	 * Private auxiliary method used to find the index of a Connection object in the ArrayList
+	 * of connections. This way the user can enter names, location, and a date and this class will perform
+	 * modifications given only String objects
+	 *
+	 * @param  name, the name of the person to be found
+	 * @return      int, the index of the person
+	 */
 	private int searchConnection(String names, String location, String date) throws IOException{
 		for (int i = 0; i < connections.size(); i++){
 			if (connections.get(i).getReceivers().equals(convertToPersonArray(names)) && connections.get(i).getLocation().equals(location)){
@@ -186,12 +193,12 @@ public class DataStorage {
 	 * @return      ArrayList<Person>
 	 */
 	public ArrayList<Person> convertToPersonArray(String people) throws IOException {
-		ArrayList<Person> temp = new ArrayList<>();
-		List<String> thePeople = Arrays.asList(people.split(", "));
-		for (String person : thePeople) {
-			temp.add(getPersonObject(person));
+		ArrayList<Person> personArray = new ArrayList<>();
+		List<String> peopleList = Arrays.asList(people.split(", "));
+		for (String person : peopleList) {
+			personArray.add(getPersonObject(person));
 		}
-		return temp;
+		return personArray;
 
 	}
 	/**
@@ -217,7 +224,7 @@ public class DataStorage {
 					String notes = row[6];
 					connections.add(new Connection(sender, receivers, date, source, location, citation, notes));
 				}
-				else {
+				else { //row.length = 6
 					ArrayList<Person> receivers = convertToPersonArray(row[0]);
 					String date = row[1];
 					String source = row[2];
@@ -276,22 +283,10 @@ public class DataStorage {
 	}
 	
 	public ArrayList<Person> getPeopleArray(){
-//		try {
-//			loadPeople("people");
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		return people;
 	}
 	
 	public ArrayList<Connection> getConnectionArray(){
-//		try {
-//			loadConnections("connections");
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		return connections;
 	}
 	
