@@ -3,6 +3,8 @@ package downey.gui;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JList;
+
 import downey.main.DataStorage;
 import downey.main.Person;
 import javafx.collections.FXCollections;
@@ -32,7 +34,7 @@ public class EditConnectionController {
 	@FXML
 	private ComboBox<Person> sender;
 	@FXML
-	private ComboBox<Person> recipients;
+	private JComboBox<Person> recipients;
 	@FXML
 	private TextField dateInput;
 	@FXML
@@ -46,6 +48,16 @@ public class EditConnectionController {
 
 	public EditConnectionController() {
 	}
+	public String[] getInfo(){
+		String[] temp = new String[7];
+		temp[0] = sender.getSelectionModel().getSelectedItem().getName();
+		temp[1] = recipients.getSelectionModel().getSelectedItem().getName();
+		temp[2] = dateInput.getText();
+		temp[3] = typeInput.getText();
+		temp[4] = locationInput.getText();
+		temp[5] = citationInput.getText();
+		temp[6] = notes.getText();
+	}
 
 	@FXML
 	private void initialize() { //THIS ALL NEEDS CHANGED
@@ -58,6 +70,9 @@ public class EditConnectionController {
 		Stage stage;
 		Parent root;
 		if (event.getSource() == this.submit) {
+			String[] stuff = getInfo();
+			DS.addConnection(DS.getPersonObject(stuff[0]), DS.convertToPersonArray(stuff[1]) ,stuff[2],stuff[3],stuff[4],stuff[5],stuff[6]);
+			DS.saveConnections("connections");
 			//recipientsList.add(peopleList.get(1)); //CHANGE THIS
 			//PUT EDIT CONNECTION CODE HERE
 			//DS.saveConnections("connections");

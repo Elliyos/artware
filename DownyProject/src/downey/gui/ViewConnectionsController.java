@@ -27,6 +27,7 @@ public class ViewConnectionsController {
 	//private ArrayList<Connection> connectionList = DS.getConnectionArray();
 	private String selectedName;
 	private Person selectedPerson;
+	private String selectedPeople;
 
 	@FXML
 	private ObservableSet<String> observableSet = FXCollections.observableSet("Kyle to Stonedahl and Lyli");
@@ -44,11 +45,21 @@ public class ViewConnectionsController {
 
 	public ViewConnectionsController() {
 	}
+	public ObservableSet<String> nameList(ArrayList<Connection> peopleList) {
+		String name = "";
+		for (int i = 0; i <= peopleList.size() - 1; i++) {
+			selectedPerson = peopleList.get(i).getSender();
+			selectedPeople = peopleList.get(i).getReceiverNames();
+			name = selectedPerson.getName();
+			observableSet.addAll(Arrays.asList(name + " " + selectedPeople));
+		}
+		return observableSet;
+	}
 
 	@FXML
 	private void initialize() throws IOException {
 		//list.setItems(FXCollections.observableArrayList(observableSet));// REAL, WORK WITH THIS
-		list.setItems(FXCollections.observableArrayList(observableSet));
+		list.setItems(FXCollections.observableArrayList(nameList(DS.getConnectionArray())));
 	}
 
 	@FXML
