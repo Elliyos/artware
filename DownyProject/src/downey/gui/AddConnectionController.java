@@ -3,6 +3,7 @@ package downey.gui;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 import downey.main.*;
 import javafx.collections.FXCollections;
@@ -15,7 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
@@ -26,7 +27,6 @@ public class AddConnectionController {
 
 	private DataStorage DS = DataStorage.getMainDataStorage();
 	private ArrayList<Person> peopleList = DS.getPeopleArray();
-	private ArrayList<Person> recipientsList;
 	private MainApp mainApp;
 
 	@FXML
@@ -36,7 +36,7 @@ public class AddConnectionController {
 	@FXML
 	private ChoiceBox<String> initiator;
 	@FXML
-	private TextField dateInput;
+	private DatePicker dateInput; 
 	@FXML
 	private TextField typeInput;
 	@FXML
@@ -53,8 +53,7 @@ public class AddConnectionController {
 	ListView<String> recipients = new ListView<String>(people);
 
 	private Person selectedPerson;
-	private ArrayList<Person> selectedRecipients;
-
+	private ArrayList<Person> selectedRecipients = new ArrayList<>();
 	public AddConnectionController() {
 
 	}
@@ -85,13 +84,13 @@ public class AddConnectionController {
 			Person initiatorPerson = DS.getPersonObject(initiator.getValue());
 			
 			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
-				//String tempName = selectedRecipientsTemp.get(i);
-				DS.storeSelectedName(selectedRecipientsTemp.get(i));
-				Person tempPerson = DS.getPersonObject(DS.getSelectedName());
-				selectedRecipients.add(tempPerson);
+				String tempName = selectedRecipientsTemp.get(i);
+//				DS.storeSelectedName(selectedRecipientsTemp.get(i));
+//				Person tempPerson = DS.getPersonObject(DS.getSelectedName());
+				selectedRecipients.add(DS.getPersonObject(tempName));
 			}
 			
-			DS.addConnection(initiatorPerson, selectedRecipients, dateInput.getText(), typeInput.getText(),
+			DS.addConnection(initiatorPerson, selectedRecipients, dateInput.getValue().toString(), typeInput.getText(),
 					locationInput.getText(), citationInput.getText(), notes.getText());
 			DS.saveConnections("connections");
 			stage = (Stage) this.submit.getScene().getWindow();
