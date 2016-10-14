@@ -44,7 +44,6 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="typeInput" layoutX="276.0" layoutY="164.0" prefHeight="25.0" prefWidth="214.0" />
       <Text fontSmoothingType="LCD" layoutX="13.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
          <font>
             <Font size="20.0" />
@@ -75,5 +74,6 @@
         </content>
       </ScrollPane>
       <DatePicker fx:id="dateInput" layoutX="14.0" layoutY="166.0" prefWidth="214.0" />
+      <ChoiceBox fx:id="typeInput" layoutX="276.0" layoutY="166.0" prefHeight="22.0" prefWidth="214.0" />
    </children>
 </AnchorPane>

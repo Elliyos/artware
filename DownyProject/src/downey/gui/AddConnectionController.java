@@ -38,7 +38,7 @@ public class AddConnectionController {
 	@FXML
 	private DatePicker dateInput; 
 	@FXML
-	private TextField typeInput;
+	private ChoiceBox<String> typeInput;
 	@FXML
 	private TextField locationInput;
 	@FXML
@@ -63,6 +63,7 @@ public class AddConnectionController {
 		recipients.setItems(FXCollections.observableArrayList(nameList(peopleList)));
 		recipients.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		initiator.setItems(FXCollections.observableArrayList(nameList(peopleList)));
+		typeInput.setItems(FXCollections.observableArrayList("Letter", "Email", "Meeting", "Party"));
 	}
 
 	public ObservableSet<String> nameList(ArrayList<Person> peopleList) {
@@ -89,9 +90,10 @@ public class AddConnectionController {
 //				Person tempPerson = DS.getPersonObject(DS.getSelectedName());
 				selectedRecipients.add(DS.getPersonObject(tempName));
 			}
-			
-			DS.addConnection(initiatorPerson, selectedRecipients, dateInput.getValue().toString(), typeInput.getText(),
-					locationInput.getText(), citationInput.getText(), notes.getText());
+			String location = locationInput.getText();
+			if (location.equals("")) location = "Unknown";
+			DS.addConnection(initiatorPerson, selectedRecipients, dateInput.getValue().toString(), typeInput.getValue(),
+					location, citationInput.getText(), notes.getText());
 			DS.saveConnections("connections");
 			stage = (Stage) this.submit.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
