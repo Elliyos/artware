@@ -25,9 +25,9 @@ public class AddInfoController {
 	@FXML
 	private TextField nameInput;
 	@FXML
-	private TextField cultureInput;
+	private ChoiceBox<String> cultureInput;
 	@FXML
-	private TextField occupationInput;
+	private ChoiceBox<String> occupationInput;
 	@FXML
 	private ChoiceBox<String> genderInput;
 	@FXML
@@ -47,6 +47,8 @@ public class AddInfoController {
 	@FXML
 	private void initialize() {
 		genderInput.setItems(FXCollections.observableArrayList("Male", "Female", "Other"));
+		cultureInput.setItems(FXCollections.observableArrayList("American", "Italian", "French"));
+		occupationInput.setItems(FXCollections.observableArrayList("Sculptor", "Scholar", "Painter"));
 	}
 
 	@FXML
@@ -58,8 +60,8 @@ public class AddInfoController {
 
 			DataStorage DS = DataStorage.getMainDataStorage();
 			String name = nameInput.getText();
-			String culture = cultureInput.getText();
-			String occupation = occupationInput.getText();
+			String culture = cultureInput.getValue();
+			String occupation = occupationInput.getValue();
 			String gender = genderInput.getValue();
 			String bio = bioInput.getText();
 			String save;
@@ -67,6 +69,7 @@ public class AddInfoController {
 
 			DS.addPerson(name, culture, occupation, gender, bio);
 			DS.savePeople("people");
+			DS.saveConnections("connections");
 
 			// get reference to the button's stage
 			stage = (Stage) add.getScene().getWindow();

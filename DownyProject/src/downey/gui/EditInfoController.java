@@ -23,10 +23,10 @@ public class EditInfoController {
 	private TextField nameArea;
 	
 	@FXML
-	private TextField occupationArea;
+	private ChoiceBox<String> occupationArea;
 	
 	@FXML
-	private TextField cultureArea;
+	private ChoiceBox<String> cultureArea;
 	
 	@FXML
 	private TextArea bioArea;
@@ -51,9 +51,13 @@ public class EditInfoController {
 	@FXML
 	private void initialize() throws IOException{
 		currentPerson = DS.getPersonObject(DS.getSelectedName());
-		occupationArea.setPromptText(currentPerson.getOccupation());
-		cultureArea.setPromptText(currentPerson.getCulture());
-		bioArea.setPromptText(currentPerson.getBio());
+		nameArea.setText(currentPerson.getName());
+		occupationArea.setValue(currentPerson.getOccupation());
+		cultureArea.setValue(currentPerson.getCulture());
+		bioArea.setText(currentPerson.getBio());
+		genderInput.setValue(currentPerson.getGender());
+		occupationArea.setItems(FXCollections.observableArrayList("Sculptor", "Scholar", "Painter"));
+		cultureArea.setItems(FXCollections.observableArrayList("American", "Italian", "French"));
 		genderInput.setItems(FXCollections.observableArrayList("Male", "Female", "Other"));
 	}
 	
@@ -62,8 +66,9 @@ public class EditInfoController {
         Stage stage; 
         Parent root;
         if (event.getSource() == submit){       
-           currentPerson.editPerson(nameArea.getText(), cultureArea.getText(), occupationArea.getText(), genderInput.getValue(), bioArea.getText());
+           currentPerson.editPerson(nameArea.getText(), cultureArea.getValue(), occupationArea.getValue(), genderInput.getValue(), bioArea.getText());
            DS.savePeople("people");
+           DS.saveConnections("connections");
         	stage=(Stage) submit.getScene().getWindow();
            root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
          } else {

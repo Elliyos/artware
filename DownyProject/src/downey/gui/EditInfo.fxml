@@ -31,13 +31,11 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="occupationArea" layoutX="14.0" layoutY="205.0" prefHeight="25.0" prefWidth="220.0" />
       <Text layoutX="366.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culture">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="cultureArea" layoutX="366.0" layoutY="145.0" prefHeight="25.0" prefWidth="220.0" />
       <ChoiceBox fx:id="genderInput" layoutX="366.0" layoutY="205.0" prefHeight="25.0" prefWidth="220.0" />
       <Text layoutX="366.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender">
          <font>
@@ -52,5 +50,7 @@
       <TextArea fx:id="bioArea" layoutX="14.0" layoutY="265.0" prefHeight="101.0" prefWidth="570.0" />
       <Button fx:id="submit" disable="false" layoutX="532.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Submit" />
       <Button fx:id="goBack" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Go Back" />
+      <ChoiceBox fx:id="cultureArea" layoutX="366.0" layoutY="147.0" prefHeight="22.0" prefWidth="220.0" />
+      <ChoiceBox fx:id="occupationArea" layoutX="14.0" layoutY="207.0" prefHeight="22.0" prefWidth="220.0" />
    </children>
 </AnchorPane>
