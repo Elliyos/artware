@@ -2,68 +2,77 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.AddConnectionController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.AddConnectionController">
    <children>
-      <Text layoutX="216.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Let's do this!">
+      <Text layoutX="323.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Let's do this!">
          <font>
             <Font size="30.0" />
          </font>
       </Text>
-      <Text layoutX="193.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What's the info?">
+      <Text layoutX="299.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What's the info?">
          <font>
             <Font size="30.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="13.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sender">
+      <Text fontSmoothingType="LCD" layoutX="217.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Initiator">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="sender" layoutX="13.0" layoutY="105.0" prefHeight="25.0" prefWidth="214.0" />
-      <Text fontSmoothingType="LCD" layoutX="371.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipients">
+      <ChoiceBox fx:id="initiator" layoutX="144.0" layoutY="104.0" prefHeight="25.0" prefWidth="214.0" />
+      <Text fontSmoothingType="LCD" layoutX="504.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipients">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <ComboBox fx:id="recipients" layoutX="371.0" layoutY="105.0" prefHeight="25.0" prefWidth="214.0" />
       <Text fontSmoothingType="LCD" layoutX="13.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
       <TextField fx:id="dateInput" layoutX="13.0" layoutY="164.0" prefHeight="25.0" prefWidth="214.0" promptText="dd/mm/yyyy" />
-      <Text fontSmoothingType="LCD" layoutX="371.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
+      <Text fontSmoothingType="LCD" layoutX="276.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="typeInput" layoutX="371.0" layoutY="164.0" prefHeight="25.0" prefWidth="214.0" />
+      <TextField fx:id="typeInput" layoutX="276.0" layoutY="164.0" prefHeight="25.0" prefWidth="214.0" />
       <Text fontSmoothingType="LCD" layoutX="13.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
       <TextField fx:id="locationInput" layoutX="13.0" layoutY="224.0" prefHeight="25.0" prefWidth="214.0" promptText="Rock Island, IL, USA" />
-      <Text fontSmoothingType="LCD" layoutX="368.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Citation">
+      <Text fontSmoothingType="LCD" layoutX="276.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Citation">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="citationInput" layoutX="371.0" layoutY="224.0" prefHeight="25.0" prefWidth="214.0" />
+      <TextField fx:id="citationInput" layoutX="276.0" layoutY="224.0" prefHeight="25.0" prefWidth="214.0" />
       <Text fontSmoothingType="LCD" layoutX="13.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <TextArea fx:id="notes" layoutX="13.0" layoutY="284.0" prefHeight="97.0" prefWidth="570.0" />
-      <Button fx:id="submit" disable="false" layoutX="540.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Submit" />
+      <TextArea fx:id="notes" layoutX="13.0" layoutY="284.0" prefHeight="205.0" prefWidth="479.0" />
+      <Button fx:id="submit" disable="false" layoutX="732.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Submit" />
       <Button fx:id="goBack" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Go Back" />
+      <ScrollPane layoutX="504.0" layoutY="104.0" prefHeight="385.0" prefWidth="285.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="283.0">
+               <children>
+                  <ListView fx:id="recipients" prefHeight="383.0" prefWidth="283.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

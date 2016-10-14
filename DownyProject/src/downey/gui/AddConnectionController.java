@@ -2,9 +2,12 @@ package downey.gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import downey.main.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,25 +16,25 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AddConnectionController {
-	
+
 	private DataStorage DS = DataStorage.getMainDataStorage();
 	private ArrayList<Person> peopleList = DS.getPeopleArray();
 	private ArrayList<Person> recipientsList;
 	private MainApp mainApp;
-	
+
 	@FXML
 	private Button submit;
 	@FXML
 	private Button goBack;
 	@FXML
-	private ChoiceBox<Person> sender;
-	@FXML
-	private ComboBox<Person> recipients;
+	private ChoiceBox<String> initiator;
 	@FXML
 	private TextField dateInput;
 	@FXML
@@ -42,14 +45,35 @@ public class AddConnectionController {
 	private TextField citationInput;
 	@FXML
 	private TextArea notes;
+	@FXML
+	private ObservableSet<String> observableSet = FXCollections.observableSet();
+	@FXML
+	ObservableList<String> people = FXCollections.observableArrayList();
+	@FXML
+	ListView<String> recipients = new ListView<String>(people);
+
+	private Person selectedPerson;
+	private ArrayList<Person> selectedRecipients;
 
 	public AddConnectionController() {
+
 	}
 
 	@FXML
-	private void initialize() { //THIS ALL NEEDS CHANGED
-		sender.setItems(FXCollections.observableArrayList(peopleList));
-		recipients.setItems(FXCollections.observableArrayList(peopleList));
+	private void initialize() {
+		recipients.setItems(FXCollections.observableArrayList(nameList(peopleList)));
+		recipients.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		initiator.setItems(FXCollections.observableArrayList(nameList(peopleList)));
+	}
+
+	public ObservableSet<String> nameList(ArrayList<Person> peopleList) {
+		String name = "";
+		for (int i = 0; i <= peopleList.size() - 1; i++) {
+			selectedPerson = peopleList.get(i);
+			name = selectedPerson.getName();
+			observableSet.addAll(Arrays.asList(name));
+		}
+		return observableSet;
 	}
 
 	@FXML
@@ -57,9 +81,18 @@ public class AddConnectionController {
 		Stage stage;
 		Parent root;
 		if (event.getSource() == this.submit) {
-
-			//recipientsList.add(peopleList.get(1)); //CHANGE THIS
-			DS.addConnection(sender.getValue(), peopleList, dateInput.getText(), typeInput.getText(), locationInput.getText(), citationInput.getText(), notes.getText());
+			ObservableList<String> selectedRecipientsTemp = recipients.getSelectionModel().getSelectedItems();
+			Person initiatorPerson = DS.getPersonObject(initiator.getValue());
+			
+			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
+				//String tempName = selectedRecipientsTemp.get(i);
+				DS.storeSelectedName(selectedRecipientsTemp.get(i));
+				Person tempPerson = DS.getPersonObject(DS.getSelectedName());
+				selectedRecipients.add(tempPerson);
+			}
+			
+			DS.addConnection(initiatorPerson, selectedRecipients, dateInput.getText(), typeInput.getText(),
+					locationInput.getText(), citationInput.getText(), notes.getText());
 			DS.saveConnections("connections");
 			stage = (Stage) this.submit.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
@@ -72,8 +105,6 @@ public class AddConnectionController {
 		stage.setScene(scene);
 		stage.show();
 	}
-	
-	
 
 	@FXML
 	public void setMainApp(MainApp mainApp) {

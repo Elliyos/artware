@@ -3,6 +3,7 @@ package downey.gui;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
 import javax.swing.JList;
 
 import downey.main.DataStorage;
@@ -48,21 +49,23 @@ public class EditConnectionController {
 
 	public EditConnectionController() {
 	}
+	
 	public String[] getInfo(){
 		String[] temp = new String[7];
 		temp[0] = sender.getSelectionModel().getSelectedItem().getName();
-		temp[1] = recipients.getSelectionModel().getSelectedItem().getName();
+		//temp[1] = recipients.getSelectionModel().getSelectedItem().getName();
 		temp[2] = dateInput.getText();
 		temp[3] = typeInput.getText();
 		temp[4] = locationInput.getText();
 		temp[5] = citationInput.getText();
 		temp[6] = notes.getText();
+		return temp;
 	}
 
 	@FXML
 	private void initialize() { //THIS ALL NEEDS CHANGED
 		sender.setItems(FXCollections.observableArrayList(peopleList));
-		recipients.setItems(FXCollections.observableArrayList(peopleList));
+		//recipients.setItems(FXCollections.observableArrayList(peopleList));
 	}
 
 	@FXML
