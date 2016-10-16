@@ -12,6 +12,8 @@ public class DataStorage {
 	private ArrayList<Person> people;
 	private ArrayList<Connection> connections;
 	private String selectedName;
+	private String selectedNames;
+	private Connection selectedConnection;
 	private static DataStorage mainDataStorage = new DataStorage();
 
 	private DataStorage() {
@@ -163,7 +165,18 @@ public class DataStorage {
 	public String getSelectedName(){
 		return selectedName;
 	}
-	
+	public void storeSelectedNames(String s){
+		selectedNames = s;
+	}
+	public String getSelectedNames(){
+		return selectedNames;
+	}
+	public void storeSelectedConnection(Connection c){
+		selectedConnection = c;
+	}
+	public Connection getSelectedConnection(){
+		return selectedConnection;
+	}
 	/**
 	 * This method accepts a String name as a parameter and displays information
 	 * about that person object.

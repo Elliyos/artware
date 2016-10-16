@@ -24,13 +24,13 @@ public class ViewConnectionsController {
 
 	private MainApp mainApp;
 	private DataStorage DS = DataStorage.getMainDataStorage();
-	//private ArrayList<Connection> connectionList = DS.getConnectionArray();
+	private ArrayList<Connection> connectionList = DS.getConnectionArray();
 	private String selectedName;
 	private Person selectedPerson;
 	private String selectedPeople;
 
 	@FXML
-	private ObservableSet<String> observableSet = FXCollections.observableSet("Kyle to Stonedahl and Lyli");
+	private ObservableSet<String> observableSet = FXCollections.observableSet();
 	//private ObservableSet<Connection> observableSet = FXCollections.observableSet();
 	@FXML
 	ObservableList<String> connection = FXCollections.observableArrayList();
@@ -51,7 +51,7 @@ public class ViewConnectionsController {
 			selectedPerson = peopleList.get(i).getSender();
 			selectedPeople = peopleList.get(i).getReceiverNames();
 			name = selectedPerson.getName();
-			observableSet.addAll(Arrays.asList(name + " " + selectedPeople));
+			observableSet.addAll(Arrays.asList(name + ": " + selectedPeople));
 		}
 		return observableSet;
 	}
@@ -61,12 +61,20 @@ public class ViewConnectionsController {
 		//list.setItems(FXCollections.observableArrayList(observableSet));// REAL, WORK WITH THIS
 		list.setItems(FXCollections.observableArrayList(nameList(DS.getConnectionArray())));
 	}
+	public void storeData(){
+		String[] names = list.getSelectionModel().getSelectedItem().split(":");
+		DS.storeSelectedName(names[0]);
+		DS.storeSelectedNames(names[1]);
+		System.out.println(list.getSelectionModel().getSelectedIndex());
+		DS.storeSelectedConnection(connectionList.get(list.getSelectionModel().getSelectedIndex()));
+	}
 
 	@FXML
 	private void handleButtonAction(ActionEvent event) throws IOException {
 		Stage stage;
 		Parent root;
 		if (event.getSource() == viewButton) {
+			storeData();
 			stage = (Stage) viewButton.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("ConnectionInfo.fxml"));
 		} else {
