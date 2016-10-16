@@ -35,7 +35,7 @@ public class EditConnectionController {
 	@FXML
 	private ComboBox<Person> sender;
 	@FXML
-	private JComboBox<Person> recipients;
+	private ComboBox<Person> recipients;
 	@FXML
 	private TextField dateInput;
 	@FXML
@@ -51,21 +51,21 @@ public class EditConnectionController {
 	}
 	
 	public String[] getInfo(){
-		String[] temp = new String[7];
-		temp[0] = sender.getSelectionModel().getSelectedItem().getName();
-		//temp[1] = recipients.getSelectionModel().getSelectedItem().getName();
-		temp[2] = dateInput.getText();
-		temp[3] = typeInput.getText();
-		temp[4] = locationInput.getText();
-		temp[5] = citationInput.getText();
-		temp[6] = notes.getText();
-		return temp;
+		String[] infoArray = new String[7];
+		infoArray[0] = sender.getSelectionModel().getSelectedItem().getName();
+		infoArray[1] = recipients.getSelectionModel().getSelectedItem().getName();
+		infoArray[2] = dateInput.getText();
+		infoArray[3] = typeInput.getText();
+		infoArray[4] = locationInput.getText();
+		infoArray[5] = citationInput.getText();
+		infoArray[6] = notes.getText();
+		return infoArray;
 	}
 
 	@FXML
 	private void initialize() { //THIS ALL NEEDS CHANGED
 		sender.setItems(FXCollections.observableArrayList(peopleList));
-		//recipients.setItems(FXCollections.observableArrayList(peopleList));
+		recipients.setItems(FXCollections.observableArrayList(peopleList));
 	}
 
 	@FXML
@@ -73,12 +73,9 @@ public class EditConnectionController {
 		Stage stage;
 		Parent root;
 		if (event.getSource() == this.submit) {
-			String[] stuff = getInfo();
-			DS.addConnection(DS.getPersonObject(stuff[0]), DS.convertToPersonArray(stuff[1]) ,stuff[2],stuff[3],stuff[4],stuff[5],stuff[6]);
+			String[] info = getInfo();
+			DS.getSelectedConnection().editConnection(DS.getPersonObject(info[0]), DS.convertToPersonArray(info[1]) ,info[2],info[3],info[4],info[5],info[6]);
 			DS.saveConnections("connections");
-			//recipientsList.add(peopleList.get(1)); //CHANGE THIS
-			//PUT EDIT CONNECTION CODE HERE
-			//DS.saveConnections("connections");
 			stage = (Stage) this.submit.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		} else {

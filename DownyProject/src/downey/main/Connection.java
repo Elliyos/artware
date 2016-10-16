@@ -7,6 +7,7 @@ import java.util.*;
  *
  */
 public class Connection{
+	private Person groupConnection = new Person("Group Connection", "", "", "", "");
 	private String date;
 	private String notes;
 	private String citation;
@@ -59,7 +60,7 @@ public class Connection{
 		if (sender != null){
 			return sender;
 		}
-		return receivers.get(0);
+		return groupConnection;
 	}
 	public ArrayList<Person> getReceivers(){
 		return receivers;

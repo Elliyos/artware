@@ -45,10 +45,11 @@ public class ViewConnectionsController {
 
 	public ViewConnectionsController() {
 	}
+	// dont change this method
 	public ObservableSet<String> nameList(ArrayList<Connection> peopleList) {
 		String name = "";
 		for (int i = 0; i <= peopleList.size() - 1; i++) {
-			selectedPerson = peopleList.get(i).getSender();
+			selectedPerson = peopleList.get(i).getSender(); 
 			selectedPeople = peopleList.get(i).getReceiverNames();
 			name = selectedPerson.getName();
 			observableSet.addAll(Arrays.asList(name + ": " + selectedPeople));

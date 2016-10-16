@@ -10,6 +10,7 @@ import com.opencsv.CSVWriter;
 
 public class DataStorage {
 	private ArrayList<Person> people;
+	private Person groupConnection = new Person("Group Connection", "", "", "", "");
 	private ArrayList<Connection> connections;
 	private String selectedName;
 	private String selectedNames;
@@ -68,15 +69,6 @@ public class DataStorage {
 			}
 		}
 		return result;
-	}
-	/**
-	 * Removes a Person object from the ArrayList people
-	 *
-	 * @param  name, the person to be removed
-	 * @return      void
-	 */
-	public void removePerson(String name){
-		people.remove(searchPerson(name));
 	}
 	/**
 	 * Private auxiliary method used to find the index of a Person object in the ArrayList
@@ -177,25 +169,9 @@ public class DataStorage {
 	public Connection getSelectedConnection(){
 		return selectedConnection;
 	}
-	/**
-	 * This method accepts a String name as a parameter and displays information
-	 * about that person object.
-	 *
-	 * @param  name, the name of the person whos information is to be displayed
-	 * @return      void
-	 */
-	public String displayPerson(String name) {
-		for (Person p : people) {
-			if (p.getName().equalsIgnoreCase(name)) {
-				return p.toString();
-			}
-		}
-		return "Person not found";
-	}
 	public Person getPersonObject(String name){
 		return people.get(searchPerson(name));
 	}
-//	public Connection getConnectionObject()
 	/**
 	 * Accepts a string of Person object names and returns an ArrayList of type Person
 	 * filled with the Person object corresponding to each name.

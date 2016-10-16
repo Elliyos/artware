@@ -51,7 +51,6 @@ public class PersonInfoController extends FindPersonController{
 	 */
 	@FXML
     private void initialize() throws IOException {
-    	//int index = DS.searchPerson(selectedName);
     	Person chosenPerson = DS.getPersonObject(DS.getSelectedName());
     	nameLabel.setText(chosenPerson.getName());
     	occupationLabel.setText(chosenPerson.getOccupation());

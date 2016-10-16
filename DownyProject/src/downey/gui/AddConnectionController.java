@@ -82,8 +82,11 @@ public class AddConnectionController {
 		Parent root;
 		if (event.getSource() == this.submit) {
 			ObservableList<String> selectedRecipientsTemp = recipients.getSelectionModel().getSelectedItems();
-			Person initiatorPerson = DS.getPersonObject(initiator.getValue());
-			
+			String initiatorPerson = initiator.getValue();
+			Person sender = null;
+			if (initiatorPerson != null){
+				sender = DS.getPersonObject(initiatorPerson);
+			}
 			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
 				String tempName = selectedRecipientsTemp.get(i);
 //				DS.storeSelectedName(selectedRecipientsTemp.get(i));
@@ -92,7 +95,7 @@ public class AddConnectionController {
 			}
 			String location = locationInput.getText();
 			if (location.equals("")) location = "Unknown";
-			DS.addConnection(initiatorPerson, selectedRecipients, dateInput.getValue().toString(), typeInput.getValue(),
+			DS.addConnection(sender, selectedRecipients, dateInput.getValue().toString(), typeInput.getValue(),
 					location, citationInput.getText(), notes.getText());
 			DS.saveConnections("connections");
 			stage = (Stage) this.submit.getScene().getWindow();
