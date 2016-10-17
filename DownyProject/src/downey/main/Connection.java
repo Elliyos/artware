@@ -149,19 +149,27 @@ public class Connection{
 		return result + "\n";
 		
 	}
-	public void editConnection(ArrayList<Person> people, String date, String type,
+	public boolean editConnection(ArrayList<Person> people, String date, String type,
 			          String location, String citation, String notes){
+		if(people == null || date == null || type == null || location ==null || citation == null || notes== null){
+			return false;
+		}
 		setReceivers(people);
 		setDate(date);
 		setSource(type);
 		setLocation(location);
 		setCitation(citation);
 		setNotes(notes);
+		return true;
 	}
-	public void editConnection(Person sender, ArrayList<Person> people, String date, String type,
+	public boolean editConnection(Person sender, ArrayList<Person> people, String date, String type,
 	          String location, String citation, String notes){
+		if(sender == null || people == null || date == null || type == null || location ==null || citation == null || notes== null){
+			return false;
+		}
 		editConnection(people,date,type,location,citation,notes);
 		setSender(sender);
+		return true;
 	}
 	public String getDate() {
 		return date;
