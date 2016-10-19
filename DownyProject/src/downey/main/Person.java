@@ -93,9 +93,6 @@ public class Person {
 	
 	
 	public boolean editPerson(String name, String culture, String occupation, String gender, String bio){
-		if (name == null || culture == null || occupation == null || gender == null || bio == null){
-			return false;
-		}
 		setName(name);
 		setCulture(culture);
 		setOccupation(occupation);

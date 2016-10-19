@@ -127,30 +127,6 @@ public class DataStorage {
 			String citation, String notes){
 		connections.add(new Connection(people,date,type,location,citation,notes));
 	}
-	/**
-	 * Returns a String containing all of the people stored in the system
-	 *
-	 * @return      String, all Person objects in the system
-	 */
-	public String displayPeople() {
-		String result = "\n\nCurrent people in the system:\n";
-		for (Person p: people){
-			result += p.toString();
-		}
-		return result + "\n\n";
-	}
-	/**
-	 * Display all connections in the system
-	 *
-	 * @return      String, the list of current connections
-	 */
-	public String displayConnections() {
-		String result = "Current connections in the system:\n";
-		for (Connection c: connections){
-			result += c.toString();
-		}
-		return result;
-	}
 	public void storeSelectedName(String s){
 		selectedName = s;
 	}
