@@ -199,8 +199,8 @@ public class DataStorage {
 	 * @param  fileName, the name of the file that stores the connection information
 	 * @return      void
 	 */
-	public void loadConnections(String fileName) throws IOException {
-		CSVReader reader = new CSVReader(new FileReader(fileName));
+	public void loadConnections() throws IOException {
+		CSVReader reader = new CSVReader(new FileReader("connections"));
 		List<String[]> myRows = reader.readAll();
 			for (String[] row : myRows) {
 				if (row.length==7){
@@ -230,8 +230,8 @@ public class DataStorage {
 	 * @param  fileName, the name of the file to store the connections
 	 * @return      void
 	 */
-	public void saveConnections(String fileName) throws IOException {
-		CSVWriter writer = new CSVWriter(new FileWriter(fileName));
+	public void saveConnections() throws IOException {
+		CSVWriter writer = new CSVWriter(new FileWriter("connections"));
 		for (Connection c : connections) {
 			writer.writeNext(c.toCSVRowArray());
 		}
@@ -243,8 +243,8 @@ public class DataStorage {
 	 * @param  fileName, the name of the file to store the saved people.
 	 * @return      void
 	 */
-	public void savePeople(String fileName) throws IOException {
-		CSVWriter writer = new CSVWriter(new FileWriter(fileName));
+	public void savePeople() throws IOException {
+		CSVWriter writer = new CSVWriter(new FileWriter("people"));
 		for (Person p : people) {
 			writer.writeNext(p.toCSVRowArray());
 		}
@@ -258,8 +258,8 @@ public class DataStorage {
 	 * @param  fileName, the name of the file that stores information for Person objects
 	 * @return      void
 	 */
-	public void loadPeople(String fileName) throws IOException {
-		CSVReader reader = new CSVReader(new FileReader(fileName));
+	public void loadPeople() throws IOException {
+		CSVReader reader = new CSVReader(new FileReader("people"));
 		List<String[]> myRows = reader.readAll();
 		for (String[] row : myRows) {
 			String name = row[0];

@@ -75,7 +75,7 @@ public class EditConnectionController {
 		if (event.getSource() == this.submit) {
 			String[] info = getInfo();
 			DS.getSelectedConnection().editConnection(DS.getPersonObject(info[0]), DS.convertToPersonArray(info[1]) ,info[2],info[3],info[4],info[5],info[6]);
-			DS.saveConnections("connections");
+			DS.saveConnections();
 			stage = (Stage) this.submit.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		} else {

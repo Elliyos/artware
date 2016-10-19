@@ -68,8 +68,8 @@ public class AddInfoController {
 			Person person;
 
 			DS.addPerson(name, culture, occupation, gender, bio);
-			DS.savePeople("people");
-			DS.saveConnections("connections");
+			DS.savePeople();
+			DS.saveConnections();
 
 			// get reference to the button's stage
 			stage = (Stage) add.getScene().getWindow();

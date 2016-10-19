@@ -7,9 +7,9 @@ import com.opencsv.CSVReader;
 public class TestProgress {
 	public static void main(String[] args) throws IOException{
 		DataStorage test = DataStorage.getMainDataStorage();
-		test.loadPeople("people");
+		test.loadPeople();
 		test.addConnection(test.getPeopleArray(), "10/05/2016", "Meeting", "Olin 204", "CSC285", "Scrum meeting");
-		test.saveConnections("connections");
+		test.saveConnections();
 	
 	}
 
