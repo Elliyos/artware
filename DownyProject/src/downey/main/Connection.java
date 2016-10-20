@@ -162,6 +162,7 @@ public class Connection{
 		setNotes(notes);
 		return true;
 	}
+	
 	public boolean editConnection(Person sender, ArrayList<Person> people, String date, String type,
 	          String location, String citation, String notes){
 		if(sender == null || people == null || date == null || type == null || location ==null || citation == null || notes== null){

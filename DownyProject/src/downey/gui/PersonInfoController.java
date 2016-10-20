@@ -37,6 +37,8 @@ public class PersonInfoController extends FindPersonController{
 	@FXML
 	private Label bioLabel;
 	
+	
+	
 
 	public PersonInfoController() {
 

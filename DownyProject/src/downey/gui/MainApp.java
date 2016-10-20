@@ -76,8 +76,8 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) throws IOException {
-    	DataStorage.getMainDataStorage().loadPeople("people");
-    	DataStorage.getMainDataStorage().loadConnections("connections");
+    	DataStorage.getMainDataStorage().loadPeople();
+    	DataStorage.getMainDataStorage().loadConnections();
         launch(args);
     }
 }

@@ -67,8 +67,8 @@ public class EditInfoController {
         Parent root;
         if (event.getSource() == submit){       
            currentPerson.editPerson(nameArea.getText(), cultureArea.getValue(), occupationArea.getValue(), genderInput.getValue(), bioArea.getText());
-           DS.savePeople("people");
-           DS.saveConnections("connections");
+           DS.savePeople();
+           DS.saveConnections();
         	stage=(Stage) submit.getScene().getWindow();
            root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
          } else {
