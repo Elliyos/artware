@@ -14,25 +14,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class AddConnectionController {
 
 	private DataStorage DS = DataStorage.getMainDataStorage();
-	private ArrayList<Person> peopleList = DS.getPeopleArray();
 	private MainApp mainApp;
 
 	@FXML
-	private Button submit;
-	@FXML
-	private Button goBack;
+	private Button submit, goBack, add, search;
 	@FXML
 	private ChoiceBox<String> initiator;
 	@FXML
@@ -40,9 +31,7 @@ public class AddConnectionController {
 	@FXML
 	private ChoiceBox<String> typeInput;
 	@FXML
-	private TextField locationInput;
-	@FXML
-	private TextField citationInput;
+	private TextField locationInput, citationInput, searchInput;
 	@FXML
 	private TextArea notes;
 	@FXML
@@ -50,7 +39,9 @@ public class AddConnectionController {
 	@FXML
 	ObservableList<String> people = FXCollections.observableArrayList();
 	@FXML
-	ListView<String> recipients = new ListView<String>(people);
+	ListView<String> recipientList = new ListView<String>(people);
+	@FXML
+	ListView<String> selectedRecipientList = new ListView<>();
 
 	private Person selectedPerson;
 	private ArrayList<Person> selectedRecipients = new ArrayList<>();
@@ -60,18 +51,32 @@ public class AddConnectionController {
 
 	@FXML
 	private void initialize() {
-		recipients.setItems(FXCollections.observableArrayList(nameList(peopleList)));
-		recipients.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		initiator.setItems(FXCollections.observableArrayList(nameList(peopleList)));
+		recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
+		recipientList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		search.setOnAction((event) -> {
+			String searchText = searchInput.getText();
+			observableSet.clear();
+			Person temp = DS.getPersonObject(searchText);
+			observableSet.add(temp.getName());
+			recipientList.setItems(FXCollections.observableArrayList(observableSet));
+		});
+		add.setOnAction((event) -> {
+			observableSet.clear();
+			ObservableList<String> selectedRecipientsTemp = recipientList.getSelectionModel().getSelectedItems();
+			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
+				selectedRecipients.add(DS.getPersonObject(selectedRecipientsTemp.get(i)));
+			}
+			selectedRecipientList.setItems(FXCollections.observableArrayList(nameList(selectedRecipients)));
+		});
+		initiator.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
 		typeInput.setItems(FXCollections.observableArrayList("Letter", "Email", "Meeting", "Party"));
+		
 	}
 
 	public ObservableSet<String> nameList(ArrayList<Person> peopleList) {
-		String name = "";
 		for (int i = 0; i <= peopleList.size() - 1; i++) {
 			selectedPerson = peopleList.get(i);
-			name = selectedPerson.getName();
-			observableSet.addAll(Arrays.asList(name));
+			observableSet.addAll(Arrays.asList(selectedPerson.getName()));
 		}
 		return observableSet;
 	}
@@ -80,18 +85,13 @@ public class AddConnectionController {
 	private void handleButtonAction(ActionEvent event) throws IOException {
 		Stage stage;
 		Parent root;
+		
+
 		if (event.getSource() == this.submit) {
-			ObservableList<String> selectedRecipientsTemp = recipients.getSelectionModel().getSelectedItems();
 			String initiatorPerson = initiator.getValue();
 			Person sender = null;
 			if (initiatorPerson != null){
 				sender = DS.getPersonObject(initiatorPerson);
-			}
-			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
-				String tempName = selectedRecipientsTemp.get(i);
-//				DS.storeSelectedName(selectedRecipientsTemp.get(i));
-//				Person tempPerson = DS.getPersonObject(DS.getSelectedName());
-				selectedRecipients.add(DS.getPersonObject(tempName));
 			}
 			String location = locationInput.getText();
 			if (location.equals("")) location = "Unknown";
