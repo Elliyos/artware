@@ -11,33 +11,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class AddInfoController {
 
 	@FXML
-	private Button add;
-	@FXML
-	private Button goBack;
+	private Button add, goBack;
 	@FXML
 	private TextField nameInput;
 	@FXML
-	private ChoiceBox<String> cultureInput;
-	@FXML
-	private ChoiceBox<String> occupationInput;
-	@FXML
-	private ChoiceBox<String> genderInput;
+	private ChoiceBox<String> cultureInput, occupationInput, genderInput;
 	@FXML
 	private TextArea bioInput;
 	private MainApp mainApp;
 
-	public AddInfoController() {
-		// GOTTA FIGURE OUT HOW TO INITIALIZE THIS
-		// genderInput.setItems(FXCollections.observableArrayList("Male", "Female", "Other"));
-	}
+	public AddInfoController() {}
 
 	/**
 	 * Initializes the controller class. This method is automatically called

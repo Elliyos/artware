@@ -21,32 +21,19 @@ public class EditInfoController {
 
 	@FXML
 	private TextField nameArea;
-	
 	@FXML
-	private ChoiceBox<String> occupationArea;
-	
+	private ChoiceBox<String> occupationArea, cultureArea, genderInput;
 	@FXML
-	private ChoiceBox<String> cultureArea;
-	
+	private TextArea bioArea;	
 	@FXML
-	private TextArea bioArea;
-	
-	@FXML
-	private ChoiceBox<String> genderInput;
-	
-	@FXML
-	private Button submit;
-	
-	@FXML
-	private Button goBack;
+	private Button submit, goBack;
 	
 	private DataStorage DS = DataStorage.getMainDataStorage();
 	private MainApp mainApp;
 	private ArrayList<Person> peopleList = DS.getPeopleArray();
 	private Person currentPerson;
 	
-	public EditInfoController(){
-	}
+	public EditInfoController(){}
 	
 	@FXML
 	private void initialize() throws IOException{
@@ -85,6 +72,4 @@ public class EditInfoController {
 	    public void setMainApp(MainApp mainApp) {
 	        this.mainApp = mainApp;
 	    }
-	
-	
 }

@@ -1,13 +1,7 @@
 package downey.main;
 
-import java.util.*;
-
 public class Person {
-	private String occupation;
-	private String name;
-	private String culture;
-	private String gender;
-	private String bio;
+	private String occupation, name, culture, gender, bio;
 
 	public Person(String name, String culture, String occupation, String gender, String bio) {
 		this.name = name;
@@ -90,8 +84,7 @@ public class Person {
 	public void setBio(String bio) {
 		this.bio = bio;
 	}
-	
-	
+		
 	public boolean editPerson(String name, String culture, String occupation, String gender, String bio){
 		setName(name);
 		setCulture(culture);

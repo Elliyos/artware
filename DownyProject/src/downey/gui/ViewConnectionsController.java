@@ -66,7 +66,6 @@ public class ViewConnectionsController {
 		String[] names = list.getSelectionModel().getSelectedItem().split(":");
 		DS.storeSelectedName(names[0]);
 		DS.storeSelectedNames(names[1]);
-		System.out.println(list.getSelectionModel().getSelectedIndex());
 		DS.storeSelectedConnection(connectionList.get(list.getSelectionModel().getSelectedIndex()));
 	}
 

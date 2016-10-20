@@ -60,15 +60,16 @@ public class DataStorage {
 	 * @param  fileName, the name of the file to store the saved people.
 	 * @return      void
 	 */
-	public String getConnectionsForPerson(String name) {
-		String result = "Connections " + name + " is involved with:\n\n";
+	public ArrayList<String> getConnectionsForPerson(String name) {
+		ArrayList<String> personConnections = new ArrayList<>();
+//		String result = "Connections " + name + " is involved with:\n\n";
 		Person person = getPersonObject(name);
 		for (Connection c : connections) {
 			if (c.getSender().equals(person) || c.getReceivers().contains(person)) {
-				result += c.toString();
+				personConnections.add(c.toString());
 			}
 		}
-		return result;
+		return personConnections;
 	}
 	/**
 	 * Private auxiliary method used to find the index of a Person object in the ArrayList
@@ -254,14 +255,5 @@ public class DataStorage {
 	public ArrayList<Connection> getConnectionArray(){
 		return connections;
 	}
-	
-	// might be needed if want to display only names in the drop-down list
-//	public ArrayList<String> getPeopleNames() {
-//		ArrayList<String> peopleNames = new ArrayList<>();
-//		for (Person person: people) {
-//			peopleNames.add(person.getName());
-//		}
-//		return peopleNames;
-//		
-//	}
+
 }

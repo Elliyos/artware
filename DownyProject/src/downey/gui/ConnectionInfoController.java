@@ -1,8 +1,7 @@
 package downey.gui;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
+import downey.main.Connection;
 import downey.main.DataStorage;
 import downey.main.Person;
 import javafx.event.ActionEvent;
@@ -17,46 +16,30 @@ import javafx.stage.Stage;
 public class ConnectionInfoController {
 	private MainApp mainApp;
 	private DataStorage DS = DataStorage.getMainDataStorage();
-	private ArrayList<Person> peopleList = DS.getPeopleArray();
-	
 	@FXML
-	private Button goBack;
+	private Button goBack, editButton;
 	@FXML
-	private Button editButton;
-	@FXML
-	private Label dateLabel;
-	@FXML
-	private Label typeLabel;
-	@FXML
-	private Label locationLabel;
-	@FXML
-	private Label citationLabel;
-	@FXML
-	private Label notesLabel;
-	@FXML
-	private Label sender;
-	@FXML
-	private Label recipients;
+	private Label dateLabel, typeLabel, locationLabel, citationLabel, notesLabel, sender, recipients;
+	private Connection currentConnection;
 	
 
 	public ConnectionInfoController() {
-
     }
     
-    
-	/**
+    /**
 	 * This method is currently bugged. Information has been place inside to replicate an actual use case. Needs to be implemented in sprint 2.
 	 * @throws IOException
 	 */
 	@FXML
     private void initialize() throws IOException {
-		sender.setText(DS.getSelectedName());
-    	recipients.setText(DS.getSelectedNames());
-    	dateLabel.setText(DS.getSelectedConnection().getDate());
-    	typeLabel.setText(DS.getSelectedConnection().getSource());
-    	locationLabel.setText(DS.getSelectedConnection().getLocation());
-    	citationLabel.setText(DS.getSelectedConnection().getCitation());
-    	notesLabel.setText(DS.getSelectedConnection().getNotes());
+		currentConnection = DS.getSelectedConnection();
+		sender.setText(currentConnection.getSender().getName());
+    	recipients.setText(currentConnection.getReceiverNames());
+    	dateLabel.setText(currentConnection.getDate());
+    	typeLabel.setText(currentConnection.getInteractionType());
+    	locationLabel.setText(currentConnection.getLocation());
+    	citationLabel.setText(currentConnection.getCitation());
+    	notesLabel.setText(currentConnection.getNotes());
     }
     
     @FXML

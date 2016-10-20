@@ -45,14 +45,16 @@ public class AddConnectionController {
 
 	private Person selectedPerson;
 	private ArrayList<Person> selectedRecipients = new ArrayList<>();
-	public AddConnectionController() {
-
-	}
+	
+	public AddConnectionController() {}
 
 	@FXML
 	private void initialize() {
 		recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
 		recipientList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		initiator.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
+		typeInput.setItems(FXCollections.observableArrayList("Letter", "Email", "Meeting", "Party"));
+		
 		search.setOnAction((event) -> {
 			String searchText = searchInput.getText();
 			observableSet.clear();
@@ -60,6 +62,7 @@ public class AddConnectionController {
 			observableSet.add(temp.getName());
 			recipientList.setItems(FXCollections.observableArrayList(observableSet));
 		});
+		
 		add.setOnAction((event) -> {
 			observableSet.clear();
 			ObservableList<String> selectedRecipientsTemp = recipientList.getSelectionModel().getSelectedItems();
@@ -67,10 +70,7 @@ public class AddConnectionController {
 				selectedRecipients.add(DS.getPersonObject(selectedRecipientsTemp.get(i)));
 			}
 			selectedRecipientList.setItems(FXCollections.observableArrayList(nameList(selectedRecipients)));
-		});
-		initiator.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
-		typeInput.setItems(FXCollections.observableArrayList("Letter", "Email", "Meeting", "Party"));
-		
+		});		
 	}
 
 	public ObservableSet<String> nameList(ArrayList<Person> peopleList) {

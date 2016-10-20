@@ -2,79 +2,105 @@ package downey.gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
-import javax.swing.JComboBox;
-import javax.swing.JList;
-
-import downey.main.DataStorage;
-import downey.main.Person;
+import downey.main.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class EditConnectionController {
 
 	private DataStorage DS = DataStorage.getMainDataStorage();
-	private ArrayList<Person> peopleList = DS.getPeopleArray();
-	private ArrayList<Person> recipientsList;
 	private MainApp mainApp;
-	
+
 	@FXML
-	private Button submit;
+	private Button submit, goBack, add, search;
 	@FXML
-	private Button goBack;
+	private ChoiceBox<String> initiator;
 	@FXML
-	private ComboBox<Person> sender;
+	private DatePicker dateInput; 
 	@FXML
-	private ComboBox<Person> recipients;
+	private ChoiceBox<String> typeInput;
 	@FXML
-	private TextField dateInput;
-	@FXML
-	private TextField typeInput;
-	@FXML
-	private TextField locationInput;
-	@FXML
-	private TextField citationInput;
+	private TextField locationInput, citationInput, searchInput;
 	@FXML
 	private TextArea notes;
+	@FXML
+	private ObservableSet<String> observableSet = FXCollections.observableSet();
+	@FXML
+	ObservableList<String> people = FXCollections.observableArrayList();
+	@FXML
+	ListView<String> recipientList = new ListView<String>(people);
+	@FXML
+	ListView<String> selectedRecipientList = new ListView<>();
 
-	public EditConnectionController() {
-	}
+	private Person selectedPerson;
+	private Connection currentConnection;
+	private ArrayList<Person> selectedRecipients = new ArrayList<>();
 	
-	public String[] getInfo(){
-		String[] infoArray = new String[7];
-		infoArray[0] = sender.getSelectionModel().getSelectedItem().getName();
-		infoArray[1] = recipients.getSelectionModel().getSelectedItem().getName();
-		infoArray[2] = dateInput.getText();
-		infoArray[3] = typeInput.getText();
-		infoArray[4] = locationInput.getText();
-		infoArray[5] = citationInput.getText();
-		infoArray[6] = notes.getText();
-		return infoArray;
-	}
+	public EditConnectionController() {}
 
 	@FXML
-	private void initialize() { //THIS ALL NEEDS CHANGED
-		sender.setItems(FXCollections.observableArrayList(peopleList));
-		recipients.setItems(FXCollections.observableArrayList(peopleList));
+	private void initialize() {
+		currentConnection = DS.getSelectedConnection();
+		recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
+		recipientList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		search.setOnAction((event) -> {
+			String searchText = searchInput.getText();
+			observableSet.clear();
+			Person temp = DS.getPersonObject(searchText);
+			observableSet.add(temp.getName());
+			recipientList.setItems(FXCollections.observableArrayList(observableSet));
+		});
+		add.setOnAction((event) -> {
+			observableSet.clear();
+			ObservableList<String> selectedRecipientsTemp = recipientList.getSelectionModel().getSelectedItems();
+			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
+				selectedRecipients.add(DS.getPersonObject(selectedRecipientsTemp.get(i)));
+			}
+			selectedRecipientList.setItems(FXCollections.observableArrayList(nameList(selectedRecipients)));
+		});
+		if (currentConnection.getSender() != null) {
+			initiator.setValue(currentConnection.getSender().getName());
+		}
+		initiator.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
+		typeInput.setItems(FXCollections.observableArrayList("Letter", "Email", "Meeting", "Party"));
+		
+	}
+
+	public ObservableSet<String> nameList(ArrayList<Person> peopleList) {
+		for (int i = 0; i <= peopleList.size() - 1; i++) {
+			selectedPerson = peopleList.get(i);
+			observableSet.addAll(Arrays.asList(selectedPerson.getName()));
+		}
+		return observableSet;
 	}
 
 	@FXML
 	private void handleButtonAction(ActionEvent event) throws IOException {
 		Stage stage;
 		Parent root;
+		
+
 		if (event.getSource() == this.submit) {
-			String[] info = getInfo();
-			DS.getSelectedConnection().editConnection(DS.getPersonObject(info[0]), DS.convertToPersonArray(info[1]) ,info[2],info[3],info[4],info[5],info[6]);
+			String initiatorPerson = initiator.getValue();
+			Person sender = null;
+			if (initiatorPerson != null){
+				sender = DS.getPersonObject(initiatorPerson);
+			}
+			String location = locationInput.getText();
+			if (location.equals("")) location = "Unknown";
+			DS.addConnection(sender, selectedRecipients, dateInput.getValue().toString(), typeInput.getValue(),
+					location, citationInput.getText(), notes.getText());
 			DS.saveConnections();
 			stage = (Stage) this.submit.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
@@ -87,8 +113,6 @@ public class EditConnectionController {
 		stage.setScene(scene);
 		stage.show();
 	}
-	
-	
 
 	@FXML
 	public void setMainApp(MainApp mainApp) {

@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 
@@ -20,31 +21,16 @@ public class PersonInfoController extends FindPersonController{
 	private MainApp mainApp;
 	//private Person selectedPerson = super.getSelectedPerson();
 	private DataStorage DS = DataStorage.getMainDataStorage();
-	private ArrayList<Person> peopleList = DS.getPeopleArray();
-	
-	@FXML
-	private Button goBack;
-	@FXML
-	private Button editButton;
-	@FXML
-	private Label nameLabel;
-	@FXML
-	private Label occupationLabel;
-	@FXML
-	private Label cultureLabel;
-	@FXML
-	private Label genderLabel;
-	@FXML
-	private Label bioLabel;
-	
-	
-	
 
-	public PersonInfoController() {
-
-    }
-    
-    
+	@FXML
+	private Button goBack, editButton;
+	@FXML
+	private Label nameLabel, occupationLabel, cultureLabel, genderLabel, bioLabel;
+	@FXML
+	ListView<String> connections = new ListView<>();
+	
+	public PersonInfoController() {}
+        
 	/**
 	 * This method is currently bugged. Index isn't returning correctly;
 	 * therefore, only one person is being included to show core functionality
@@ -54,11 +40,13 @@ public class PersonInfoController extends FindPersonController{
 	@FXML
     private void initialize() throws IOException {
     	Person chosenPerson = DS.getPersonObject(DS.getSelectedName());
+    	ArrayList<String> personConnections = DS.getConnectionsForPerson(chosenPerson.getName());
     	nameLabel.setText(chosenPerson.getName());
     	occupationLabel.setText(chosenPerson.getOccupation());
     	cultureLabel.setText(chosenPerson.getCulture());
     	genderLabel.setText(chosenPerson.getGender());
     	bioLabel.setText(chosenPerson.getBio());
+    	connections.setItems(FXCollections.observableArrayList(personConnections));
     }
     
     @FXML
