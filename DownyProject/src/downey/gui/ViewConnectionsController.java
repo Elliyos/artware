@@ -61,10 +61,10 @@ public class ViewConnectionsController {
 		String[] names = list.getSelectionModel().getSelectedItem().split(":");
 		DS.storeSelectedName(names[0]);
 		DS.storeSelectedNames(names[1]);
-		System.out.println("stored name: " + names[0]);
-		System.out.println("stored names: " + names[1]);
-		System.out.println("index being stored: " + list.getSelectionModel().getSelectedIndex());
-		System.out.println("conn object stored: " + DS.getConnectionArray().get(list.getSelectionModel().getSelectedIndex()));
+//		System.out.println("stored name: " + names[0]);
+//		System.out.println("stored names: " + names[1]);
+//		System.out.println("index being stored: " + list.getSelectionModel().getSelectedIndex());
+//		System.out.println("conn object stored: " + DS.getConnectionArray().get(list.getSelectionModel().getSelectedIndex()));
 		DS.storeSelectedConnection(DS.getConnectionArray().get(list.getSelectionModel().getSelectedIndex()));
 	}
 
