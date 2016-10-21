@@ -13,7 +13,7 @@ public class DataStorage {
 	private Person groupConnection = new Person("Group Connection", "", "", "", "");
 	private ArrayList<Connection> connections;
 	private String selectedName;
-	private String selectedNames;
+	private String selectedRecipientNames;
 	private Connection selectedConnection;
 	private static DataStorage mainDataStorage = new DataStorage();
 
@@ -135,10 +135,10 @@ public class DataStorage {
 		return selectedName;
 	}
 	public void storeSelectedNames(String s){
-		selectedNames = s;
+		selectedRecipientNames = s;
 	}
 	public String getSelectedNames(){
-		return selectedNames;
+		return selectedRecipientNames;
 	}
 	public void storeSelectedConnection(Connection c){
 		selectedConnection = c;

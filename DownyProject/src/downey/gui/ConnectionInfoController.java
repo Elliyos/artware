@@ -33,6 +33,9 @@ public class ConnectionInfoController {
 	@FXML
     private void initialize() throws IOException {
 		currentConnection = DS.getSelectedConnection();
+		System.out.println("conn object loaded: " + DS.getSelectedConnection());
+		System.out.println("conn object loaded name: " + DS.getSelectedConnection().getSender().getName());
+
 		sender.setText(currentConnection.getSender().getName());
     	recipients.setText(currentConnection.getReceiverNames());
     	dateLabel.setText(currentConnection.getDate());

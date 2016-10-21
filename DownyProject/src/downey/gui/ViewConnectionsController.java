@@ -24,7 +24,6 @@ public class ViewConnectionsController {
 
 	private MainApp mainApp;
 	private DataStorage DS = DataStorage.getMainDataStorage();
-	private ArrayList<Connection> connectionList = DS.getConnectionArray();
 	private String selectedName;
 	private Person selectedPerson;
 	private String selectedPeople;
@@ -39,20 +38,16 @@ public class ViewConnectionsController {
 	ListView<String> list = new ListView<String>();
 	//ListView<Connection> list = new ListView<Connection>();
 	@FXML
-	private Button goBack;
-	@FXML
-	private Button viewButton;
+	private Button goBack, viewButton;
 
 	public ViewConnectionsController() {
 	}
 	// dont change this method
 	public ObservableSet<String> nameList(ArrayList<Connection> peopleList) {
-		String name = "";
 		for (int i = 0; i <= peopleList.size() - 1; i++) {
 			selectedPerson = peopleList.get(i).getSender(); 
 			selectedPeople = peopleList.get(i).getReceiverNames();
-			name = selectedPerson.getName();
-			observableSet.addAll(Arrays.asList(name + ": " + selectedPeople));
+			observableSet.addAll(Arrays.asList(selectedPerson.getName() + ": " + selectedPeople));
 		}
 		return observableSet;
 	}
@@ -66,7 +61,11 @@ public class ViewConnectionsController {
 		String[] names = list.getSelectionModel().getSelectedItem().split(":");
 		DS.storeSelectedName(names[0]);
 		DS.storeSelectedNames(names[1]);
-		DS.storeSelectedConnection(connectionList.get(list.getSelectionModel().getSelectedIndex()));
+		System.out.println("stored name: " + names[0]);
+		System.out.println("stored names: " + names[1]);
+		System.out.println("index being stored: " + list.getSelectionModel().getSelectedIndex());
+		System.out.println("conn object stored: " + DS.getConnectionArray().get(list.getSelectionModel().getSelectedIndex()));
+		DS.storeSelectedConnection(DS.getConnectionArray().get(list.getSelectionModel().getSelectedIndex()));
 	}
 
 	@FXML
