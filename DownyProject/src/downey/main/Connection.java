@@ -1,5 +1,6 @@
 package downey.main;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -9,7 +10,7 @@ import java.util.*;
  * many
  *
  */
-public class Connection {
+public class Connection implements Serializable {
 	private Person groupConnection = new Person("Group Connection", "", "", "", "");
 	private String notes, citation, location, interactionType;
 	private String date;

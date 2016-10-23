@@ -1,14 +1,19 @@
 package downey.main;
+import java.io.*;
+public class Person implements Serializable {
 
-public class Person {
 	private String occupation, name, culture, gender, bio;
-
+	private int ID;
 	public Person(String name, String culture, String occupation, String gender, String bio) {
 		this.name = name;
 		this.culture = culture;
 		this.occupation = occupation;
 		this.gender = gender;
 		this.bio = bio;
+		ID = DataStorage.getMainDataStorage().getNumPeople()+1;
+	}
+	public int getID(){
+		return ID;
 	}
 
 	/**

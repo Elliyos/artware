@@ -6,10 +6,14 @@ import java.util.*;
 import com.opencsv.CSVReader;
 public class TestProgress {
 	public static void main(String[] args) throws IOException{
+		Person p1 = new Person("k", "dfd", "fs", "sf", "sfs");
 		DataStorage test = DataStorage.getMainDataStorage();
 		test.loadPeople();
-		test.addConnection(test.getPeopleArray(), "10/05/2016", "Meeting", "Olin 204", "CSC285", "Scrum meeting");
-		test.saveConnections();
+		test.loadConnections();
+		System.out.print(test.getConnectionArray());
+		
+		
+		
 	
 	}
 

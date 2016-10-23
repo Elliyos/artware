@@ -33,8 +33,8 @@ public class ConnectionInfoController {
 	@FXML
     private void initialize() throws IOException {
 		currentConnection = DS.getSelectedConnection();
-		sender.setText(currentConnection.getSender().getName());
-    	recipients.setText(currentConnection.getReceiverNames());
+		sender.setText(DS.getSelectedName());
+    	recipients.setText(DS.getSelectedNames());
     	dateLabel.setText(currentConnection.getDate());
     	typeLabel.setText(currentConnection.getInteractionType());
     	locationLabel.setText(currentConnection.getLocation());

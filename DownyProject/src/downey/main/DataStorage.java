@@ -9,8 +9,9 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
 public class DataStorage {
+	private int numPeople = 0;
 	private ArrayList<Person> people;
-	private Person groupConnection = new Person("Group Connection", "", "", "", "");
+	//private Person groupConnection = new Person("Group Connection", "", "", "", "");
 	private ArrayList<Connection> connections;
 	private String selectedName;
 	private String selectedNames;
@@ -20,6 +21,14 @@ public class DataStorage {
 	private DataStorage() {
 		people = new ArrayList<Person>();
 		connections = new ArrayList<Connection>();
+	}
+	public int getNumPeople(){
+		int numPeople = 0;
+		for (int i = 0; i < people.size(); i++){
+			numPeople++;
+		}
+		return numPeople;
+		
 	}
 	
 	public static DataStorage getMainDataStorage() {
@@ -37,6 +46,7 @@ public class DataStorage {
 	 * @return      void
 	 */
 	public boolean addPerson(String name, String culture, String occupation, String gender, String bio) {
+		numPeople = getNumPeople() + 1;
 		if (!containsPerson(name)){
 			Person temp = new Person(name, culture, occupation, gender, bio);
 			people.add(temp);
@@ -176,30 +186,19 @@ public class DataStorage {
 	 * @param  fileName, the name of the file that stores the connection information
 	 * @return      void
 	 */
-	public void loadConnections() throws IOException {
-		CSVReader reader = new CSVReader(new FileReader("connections"));
-		List<String[]> myRows = reader.readAll();
-			for (String[] row : myRows) {
-				if (row.length==7){
-					Person sender = getPersonObject(row[0]);
-					ArrayList<Person> receivers = convertToPersonArray(row[1]);
-					String date = row[2];
-					String source = row[3];
-					String location = row[4];
-					String citation = row[5];
-					String notes = row[6];
-					connections.add(new Connection(sender, receivers, date, source, location, citation, notes));
-				}
-				else { //row.length = 6
-					ArrayList<Person> receivers = convertToPersonArray(row[0]);
-					String date = row[1];
-					String source = row[2];
-					String location = row[3];
-					String citation = row[4];
-					String notes = row[5];
-					connections.add(new Connection(receivers, date, source, location, citation, notes));
-				}
-			}
+	public void loadConnections() throws IOException, EOFException {
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream("stored_connections"));
+			connections = (ArrayList<Connection>) in.readObject();
+		}
+catch (EOFException ex){
+			
+		}
+		catch (Exception ex){
+			ex.printStackTrace();
+			System.exit(1);
+		}
+		
 	}
 	/**
 	 * Saves the current ArrayList of Connection objects into a specified text file.
@@ -208,11 +207,15 @@ public class DataStorage {
 	 * @return      void
 	 */
 	public void saveConnections() throws IOException {
-		CSVWriter writer = new CSVWriter(new FileWriter("connections"));
-		for (Connection c : connections) {
-			writer.writeNext(c.toCSVRowArray());
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("stored_connections"));
+			out.writeObject(connections);
 		}
-		writer.close();
+		
+			catch (Exception ex){
+				ex.printStackTrace();
+				System.exit(1);
+			}
 	}
 	/**
 	 * Saves the current ArrayList of Person objects into a specified text file.
@@ -221,11 +224,14 @@ public class DataStorage {
 	 * @return      void
 	 */
 	public void savePeople() throws IOException {
-		CSVWriter writer = new CSVWriter(new FileWriter("people"));
-		for (Person p : people) {
-			writer.writeNext(p.toCSVRowArray());
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("stored_people"));
+			out.writeObject(people);
 		}
-		writer.close();
+			catch (Exception ex){
+				ex.printStackTrace();
+				System.exit(1);
+			}
 	}
 	/**
 	 * Takes a file that stores information for a number of person objects and
@@ -235,16 +241,18 @@ public class DataStorage {
 	 * @param  fileName, the name of the file that stores information for Person objects
 	 * @return      void
 	 */
-	public void loadPeople() throws IOException {
-		CSVReader reader = new CSVReader(new FileReader("people"));
-		List<String[]> myRows = reader.readAll();
-		for (String[] row : myRows) {
-			String name = row[0];
-			String occupation = row[1];
-			String culture = row[2];
-			String gender = row[3];
-			String bio = row[4];
-			people.add(new Person(name, occupation, culture, gender, bio));
+	public void loadPeople() throws IOException, EOFException {
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream("stored_people"));
+			people = (ArrayList<Person>) in.readObject();
+		}
+		catch (EOFException ex){
+			
+		}
+		catch (Exception ex){
+			ex.printStackTrace();
+			people = new ArrayList<>();
+			System.exit(1);
 		}
 	}
 	
