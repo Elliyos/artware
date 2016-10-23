@@ -80,7 +80,7 @@
          <children>
             <ScrollPane prefHeight="277.0" prefWidth="249.0">
                <content>
-                  <ListView fx:id="connections" prefHeight="264.0" prefWidth="249.0" />
+                  <ListView fx:id="connections" prefHeight="277.0" prefWidth="246.0" />
                </content>
             </ScrollPane>
          </children>

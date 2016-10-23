@@ -54,14 +54,22 @@ public class AddConnectionController {
 		recipientList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		initiator.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
 		typeInput.setItems(FXCollections.observableArrayList("Letter", "Email", "Meeting", "Party"));
-		
+
 		search.setOnAction((event) -> {
 			String searchText = searchInput.getText();
 			observableSet.clear();
-			Person temp = DS.getPersonObject(searchText);
-			observableSet.add(temp.getName());
-			recipientList.setItems(FXCollections.observableArrayList(observableSet));
+			if (DS.searchPerson(searchText) > 0) {
+				Person temp = DS.getPersonObject(searchText);
+				observableSet.add(temp.getName());
+				recipientList.setItems(FXCollections.observableArrayList(observableSet));
+			} else if (searchText.equals("")) {
+				recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
+				recipientList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+			} else {
+				recipientList.setItems(FXCollections.observableArrayList(observableSet));
+			}
 		});
+		
 		
 		add.setOnAction((event) -> {
 			observableSet.clear();
@@ -70,6 +78,8 @@ public class AddConnectionController {
 				selectedRecipients.add(DS.getPersonObject(selectedRecipientsTemp.get(i)));
 			}
 			selectedRecipientList.setItems(FXCollections.observableArrayList(nameList(selectedRecipients)));
+			recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
+			recipientList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		});		
 	}
 
