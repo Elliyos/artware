@@ -11,7 +11,7 @@ import java.util.*;
  *
  */
 public class Connection implements Serializable {
-	private final Person GROUP_CONNECTION = new Person("Group Connection", "", "", "", "");
+	final Person GROUP_CONNECTION = new Person("Group Connection", "", "", "", "");
 	private String notes, citation, location, interactionType;
 	private String date;
 	private Person sender;

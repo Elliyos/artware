@@ -27,7 +27,7 @@ public class EditConnectionController {
 	@FXML
 	private ChoiceBox<String> initiator, typeInput;
 	@FXML
-	private DatePicker dateInput; 
+	private DatePicker dateInput;
 	@FXML
 	private TextField locationInput, citationInput, searchInput;
 	@FXML
@@ -44,8 +44,9 @@ public class EditConnectionController {
 	private Person selectedPerson;
 	private Connection currentConnection;
 	private ArrayList<Person> selectedRecipients = new ArrayList<>();
-	
-	public EditConnectionController() {}
+
+	public EditConnectionController() {
+	}
 
 	@FXML
 	private void initialize() {
@@ -72,11 +73,12 @@ public class EditConnectionController {
 		});
 		remove.setOnAction((event) -> {
 			selectedRecipients.clear();
-			ObservableList<String> selectedRecipientsTemp = selectedRecipientList.getSelectionModel().getSelectedItems();
+			ObservableList<String> selectedRecipientsTemp = selectedRecipientList.getSelectionModel()
+					.getSelectedItems();
 			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
 				selectedRecipientList.getItems().remove(i);
 			}
-			
+
 		});
 		if (currentConnection.getSender() != null) {
 			initiator.setValue(currentConnection.getSender().getName());
@@ -90,7 +92,6 @@ public class EditConnectionController {
 		LocalDate date = LocalDate.parse(currentConnection.getDate(), dtf);
 		dateInput.setValue(date);
 
-		
 	}
 
 	public ObservableSet<String> nameList(ArrayList<Person> peopleList) {
@@ -105,15 +106,20 @@ public class EditConnectionController {
 	private void handleButtonAction(ActionEvent event) throws IOException {
 		Stage stage;
 		Parent root;
-		
+
 		if (event.getSource() == this.submit) {
-			String initiatorPerson = initiator.getValue();
-			Person sender = DS.getPersonObject(initiatorPerson);
 			String location = locationInput.getText();
 			String date = dateInput.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
 			if (location.equals("")) location = "Unknown";
-			SelectedInformationTracker.getSelectedConnection().editConnection(sender, selectedRecipients, dateInput.getValue().toString(), typeInput.getValue(),
-					location, citationInput.getText(), notes.getText());
+			if (currentConnection.isGroupConnection()) {
+				currentConnection.editConnection(selectedRecipients, date, typeInput.getValue(), location,
+						citationInput.getText(), notes.getText());
+			} else {
+				String initiatorPerson = initiator.getValue();
+				Person sender = DS.getPersonObject(initiatorPerson);
+				currentConnection.editConnection(sender, selectedRecipients, date, typeInput.getValue(), location,
+						citationInput.getText(), notes.getText());
+			}
 			DS.saveConnections();
 			stage = (Stage) this.submit.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
