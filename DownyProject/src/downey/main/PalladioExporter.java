@@ -17,9 +17,11 @@ public class PalladioExporter {
 	private DataStorage DS = DataStorage.getMainDataStorage();
 
 	public void saveEdges() throws IOException {
+		String[] header = {"Source", "Target"};
 		DS.loadPeople();
 		DS.loadConnections();
 		CSVWriter writer = new CSVWriter(new FileWriter("Palladio_Export_File"));
+		writer.writeNext(header);
 		for (Connection c : DS.getConnectionArray()) {
 			ArrayList<Person> receivers = c.getReceivers();
 			if (!c.getSender().getName().equals("Group Connection")){
