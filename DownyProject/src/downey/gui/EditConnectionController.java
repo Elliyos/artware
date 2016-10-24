@@ -99,7 +99,7 @@ public class EditConnectionController {
 			}
 			String location = locationInput.getText();
 			if (location.equals("")) location = "Unknown";
-			DS.addConnection(sender, selectedRecipients, dateInput.getValue().toString(), typeInput.getValue(),
+			DS.getSelectedConnection().editConnection(sender, selectedRecipients, dateInput.getValue().toString(), typeInput.getValue(),
 					location, citationInput.getText(), notes.getText());
 			DS.saveConnections();
 			stage = (Stage) this.submit.getScene().getWindow();

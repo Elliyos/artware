@@ -1,6 +1,7 @@
 package downey.gui;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -105,7 +106,8 @@ public class AddConnectionController {
 			}
 			String location = locationInput.getText();
 			if (location.equals("")) location = "Unknown";
-			DS.addConnection(sender, selectedRecipients, dateInput.getValue().toString(), typeInput.getValue(),
+			String date = dateInput.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+			DS.addConnection(sender, selectedRecipients, date, typeInput.getValue(),
 					location, citationInput.getText(), notes.getText());
 			DS.saveConnections();
 			stage = (Stage) this.submit.getScene().getWindow();

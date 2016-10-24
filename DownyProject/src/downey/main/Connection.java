@@ -175,6 +175,9 @@ public class Connection implements Serializable {
 		setNotes(notes);
 		return true;
 	}
+	public boolean equals(Connection c){
+		return c.getDate().equals(this.getDate());
+	}
 
 	public boolean editConnection(Person sender, ArrayList<Person> people, String date, String type, String location,
 			String citation, String notes) {
