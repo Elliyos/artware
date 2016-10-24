@@ -24,47 +24,39 @@ public class ViewConnectionsController {
 
 	private MainApp mainApp;
 	private DataStorage DS = DataStorage.getMainDataStorage();
-	private String selectedName;
 	private Person selectedPerson;
 	private String selectedPeople;
 
 	@FXML
-	private ObservableSet<String> observableSet = FXCollections.observableSet();
-	//private ObservableSet<Connection> observableSet = FXCollections.observableSet();
+	private ObservableList<String> observableConnectionList = FXCollections.observableArrayList();
 	@FXML
 	ObservableList<String> connection = FXCollections.observableArrayList();
-	//ObservableList<Connection> connection = FXCollections.observableArrayList();
 	@FXML
 	ListView<String> list = new ListView<String>();
-	//ListView<Connection> list = new ListView<Connection>();
 	@FXML
 	private Button goBack, viewButton;
 
 	public ViewConnectionsController() {
 	}
-	// dont change this method
-	public ObservableSet<String> nameList(ArrayList<Connection> peopleList) {
-		for (int i = 0; i <= peopleList.size() - 1; i++) {
-			selectedPerson = peopleList.get(i).getSender(); 
-			selectedPeople = peopleList.get(i).getReceiverNames();
-			observableSet.addAll(Arrays.asList(selectedPerson.getName() + ": " + selectedPeople));
+	
+	private ObservableList<String> getConnectionList(ArrayList<Connection> connectionList) {
+		for (int i = 0; i <= connectionList.size() - 1; i++) {
+			selectedPerson = connectionList.get(i).getSender(); 
+			selectedPeople = connectionList.get(i).getReceiverNames();
+			observableConnectionList.addAll(Arrays.asList(selectedPerson.getName() + ": " + selectedPeople));
 		}
-		return observableSet;
+		return observableConnectionList;
 	}
+	
 
 	@FXML
 	private void initialize() throws IOException {
-		//list.setItems(FXCollections.observableArrayList(observableSet));// REAL, WORK WITH THIS
-		list.setItems(FXCollections.observableArrayList(nameList(DS.getConnectionArray())));
+		list.setItems(getConnectionList(DS.getConnectionArray()));
 	}
 	public void storeData(){
 		String[] names = list.getSelectionModel().getSelectedItem().split(":");
 		DS.storeSelectedName(names[0]);
 		DS.storeSelectedNames(names[1]);
-//		System.out.println("stored name: " + names[0]);
-//		System.out.println("stored names: " + names[1]);
-//		System.out.println("index being stored: " + list.getSelectionModel().getSelectedIndex());
-//		System.out.println("conn object stored: " + DS.getConnectionArray().get(list.getSelectionModel().getSelectedIndex()));
 		DS.storeSelectedConnection(DS.getConnectionArray().get(list.getSelectionModel().getSelectedIndex()));
 	}
 
