@@ -4,6 +4,7 @@ import java.io.IOException;
 import downey.main.Connection;
 import downey.main.DataStorage;
 import downey.main.Person;
+import downey.main.SelectedInformationTracker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,13 +33,12 @@ public class ConnectionInfoController {
 	 */
 	@FXML
     private void initialize() throws IOException {
-		currentConnection = DS.getSelectedConnection();
+		currentConnection = SelectedInformationTracker.getSelectedConnection();
 
-//		System.out.println("conn object loaded: " + DS.getSelectedConnection());
-//		System.out.println("conn object loaded name: " + DS.getSelectedConnection().getSender().getName());
-
-		sender.setText(currentConnection.getSender().getName());
-    	recipients.setText(currentConnection.getReceiverNames());
+		if (currentConnection.getSender() != null) {
+			sender.setText(currentConnection.getSender().getName());
+		}
+    	recipients.setText(currentConnection.getReceiverNameList().toString());
     	dateLabel.setText(currentConnection.getDate());
     	typeLabel.setText(currentConnection.getInteractionType());
     	locationLabel.setText(currentConnection.getLocation());

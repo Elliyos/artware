@@ -7,6 +7,7 @@ import java.util.Arrays;
 import downey.main.Connection;
 import downey.main.DataStorage;
 import downey.main.Person;
+import downey.main.SelectedInformationTracker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
@@ -41,9 +42,14 @@ public class ViewConnectionsController {
 	
 	private ObservableList<String> getConnectionList(ArrayList<Connection> connectionList) {
 		for (int i = 0; i <= connectionList.size() - 1; i++) {
-			selectedPerson = connectionList.get(i).getSender(); 
-			selectedPeople = connectionList.get(i).getReceiverNames();
-			observableConnectionList.addAll(Arrays.asList(selectedPerson.getName() + ": " + selectedPeople));
+			if (connectionList.get(i).getSender() != null) {
+				selectedPerson = connectionList.get(i).getSender(); 
+				selectedPeople = connectionList.get(i).getReceiverNameList().toString();
+				observableConnectionList.addAll(Arrays.asList(selectedPerson.getName() + ": " + selectedPeople));
+			} else {
+				selectedPeople = connectionList.get(i).getReceiverNameList().toString();
+				observableConnectionList.addAll(" : " + selectedPeople);
+			}
 		}
 		return observableConnectionList;
 	}
@@ -55,9 +61,9 @@ public class ViewConnectionsController {
 	}
 	public void storeData(){
 		String[] names = list.getSelectionModel().getSelectedItem().split(":");
-		DS.storeSelectedName(names[0]);
-		DS.storeSelectedNames(names[1]);
-		DS.storeSelectedConnection(DS.getConnectionArray().get(list.getSelectionModel().getSelectedIndex()));
+		SelectedInformationTracker.storeSelectedName(names[0]);
+		SelectedInformationTracker.storeSelectedNames(names[1]);
+		SelectedInformationTracker.storeSelectedConnection(DS.getConnectionArray().get(list.getSelectionModel().getSelectedIndex()));
 	}
 
 	@FXML

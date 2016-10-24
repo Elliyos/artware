@@ -1,10 +1,10 @@
 package downey.gui;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-
 import downey.main.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,13 +23,11 @@ public class EditConnectionController {
 	private MainApp mainApp;
 
 	@FXML
-	private Button submit, goBack, add, search;
+	private Button submit, goBack, add, search, remove;
 	@FXML
-	private ChoiceBox<String> initiator;
+	private ChoiceBox<String> initiator, typeInput;
 	@FXML
 	private DatePicker dateInput; 
-	@FXML
-	private ChoiceBox<String> typeInput;
 	@FXML
 	private TextField locationInput, citationInput, searchInput;
 	@FXML
@@ -51,9 +49,12 @@ public class EditConnectionController {
 
 	@FXML
 	private void initialize() {
-		currentConnection = DS.getSelectedConnection();
+		currentConnection = SelectedInformationTracker.getSelectedConnection();
 		recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
 		recipientList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		selectedRecipientList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		initiator.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
+		typeInput.setItems(FXCollections.observableArrayList("Letter", "Email", "Meeting", "Party"));
 		search.setOnAction((event) -> {
 			String searchText = searchInput.getText();
 			observableSet.clear();
@@ -69,11 +70,26 @@ public class EditConnectionController {
 			}
 			selectedRecipientList.setItems(FXCollections.observableArrayList(nameList(selectedRecipients)));
 		});
+		remove.setOnAction((event) -> {
+			selectedRecipients.clear();
+			ObservableList<String> selectedRecipientsTemp = selectedRecipientList.getSelectionModel().getSelectedItems();
+			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
+				selectedRecipientList.getItems().remove(i);
+			}
+			
+		});
 		if (currentConnection.getSender() != null) {
 			initiator.setValue(currentConnection.getSender().getName());
 		}
-		initiator.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
-		typeInput.setItems(FXCollections.observableArrayList("Letter", "Email", "Meeting", "Party"));
+		selectedRecipientList.setItems(FXCollections.observableArrayList(currentConnection.getReceiverNameList()));
+		typeInput.setValue(currentConnection.getInteractionType());
+		locationInput.setText(currentConnection.getLocation());
+		citationInput.setText(currentConnection.getCitation());
+		notes.setText(currentConnection.getNotes());
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		LocalDate date = LocalDate.parse(currentConnection.getDate(), dtf);
+		dateInput.setValue(date);
+
 		
 	}
 
@@ -90,23 +106,20 @@ public class EditConnectionController {
 		Stage stage;
 		Parent root;
 		
-
 		if (event.getSource() == this.submit) {
 			String initiatorPerson = initiator.getValue();
-			Person sender = null;
-			if (initiatorPerson != null){
-				sender = DS.getPersonObject(initiatorPerson);
-			}
+			Person sender = DS.getPersonObject(initiatorPerson);
 			String location = locationInput.getText();
+			String date = dateInput.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
 			if (location.equals("")) location = "Unknown";
-			DS.getSelectedConnection().editConnection(sender, selectedRecipients, dateInput.getValue().toString(), typeInput.getValue(),
+			SelectedInformationTracker.getSelectedConnection().editConnection(sender, selectedRecipients, dateInput.getValue().toString(), typeInput.getValue(),
 					location, citationInput.getText(), notes.getText());
 			DS.saveConnections();
 			stage = (Stage) this.submit.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		} else {
 			stage = (Stage) this.goBack.getScene().getWindow();
-			root = FXMLLoader.load(getClass().getResource("ConnectionOptions.fxml"));
+			root = FXMLLoader.load(getClass().getResource("ConnectionInfo.fxml"));
 		}
 		// create a new scene with root and set the stage
 		Scene scene = new Scene(root);

@@ -11,7 +11,7 @@ import java.util.*;
  *
  */
 public class Connection implements Serializable {
-	private Person groupConnection = new Person("Group Connection", "", "", "", "");
+	private final Person GROUP_CONNECTION = new Person("Group Connection", "", "", "", "");
 	private String notes, citation, location, interactionType;
 	private String date;
 	private Person sender;
@@ -56,11 +56,15 @@ public class Connection implements Serializable {
 		this.sender = sender;
 	}
 
+	public boolean isGroupConnection() {
+		return (getSender() == GROUP_CONNECTION);
+	}
+	
 	public Person getSender() {
 		if (sender != null) {
 			return sender;
 		}
-		return groupConnection;
+		return GROUP_CONNECTION;
 	}
 
 	public ArrayList<Person> getReceivers() {
@@ -78,10 +82,10 @@ public class Connection implements Serializable {
 
 	public String[] toCSVRowArray() {
 		if (sender != null) {
-			return new String[] { sender.getName(), getReceiverNames(), date, interactionType, location, citation,
+			return new String[] { sender.getName(), getReceiverNameList().toString(), date, interactionType, location, citation,
 					notes };
 		}
-		return new String[] { getReceiverNames(), date, interactionType, location, citation, notes };
+		return new String[] { getReceiverNameList().toString(), date, interactionType, location, citation, notes };
 	}
 
 	/**
@@ -112,7 +116,7 @@ public class Connection implements Serializable {
 	 * @return String
 	 */
 	public String toString() {
-		String connectionString = "Receivers: " + getReceiverNames() + ", Date: " + date + ", Interaction Type: "
+		String connectionString = "Receivers: " + getReceiverNameList().toString() + ", Date: " + date + ", Interaction Type: "
 				+ interactionType + ", Location: " + location + ", Citation: " + citation + ", Notes: " + notes;
 		if (sender != null) {
 			return "\nSender: " + sender.getName() + ": " + connectionString;
@@ -127,16 +131,14 @@ public class Connection implements Serializable {
 	 * 
 	 * @return
 	 */
-	public String getReceiverNames() {
-		if (receivers.isEmpty()) {
-			return "No contacts";
+
+	public ArrayList<String> getReceiverNameList() {
+		ArrayList<String> receiverNameList = new ArrayList<>();
+		for (int i = 0; i< receivers.size(); i++) {
+			String receiverName = receivers.get(i).getName();
+			receiverNameList.add(receiverName);
 		}
-		String temp = "";
-		for (int i = 0; i < receivers.size() - 1; i++) {
-			temp += receivers.get(i).getName() + ", ";
-		}
-		temp += receivers.get(receivers.size() - 1).getName();
-		return temp;
+		return receiverNameList;
 	}
 
 	/**
@@ -147,21 +149,6 @@ public class Connection implements Serializable {
 	 *            person with the connections
 	 * @return the people involved, string
 	 */
-//	public String getConnectedPeople(String name) {
-//		String result;
-//		if (sender != null && !sender.getName().equalsIgnoreCase(name)) {
-//			result = sender.getName();
-//		} else {
-//			result = receivers.get(0).getName() + "";
-//		}
-//		for (int i = 1; i < receivers.size(); i++) {
-//			if (!receivers.get(i).getName().equalsIgnoreCase(name))
-//				result += ", " + receivers.get(i).getName();
-//		}
-//		return result + "\n";
-//
-//	}
-
 	public boolean editConnection(ArrayList<Person> people, String date, String type, String location, String citation,
 			String notes) {
 		if (people == null || date == null || type == null || location == null || citation == null || notes == null) {

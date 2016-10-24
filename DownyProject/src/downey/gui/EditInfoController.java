@@ -37,14 +37,14 @@ public class EditInfoController {
 	
 	@FXML
 	private void initialize() throws IOException{
-		currentPerson = DS.getPersonObject(DS.getSelectedName());
+		currentPerson = DS.getPersonObject(SelectedInformationTracker.getSelectedName());
 		nameArea.setText(currentPerson.getName());
 		occupationArea.setValue(currentPerson.getOccupation());
 		cultureArea.setValue(currentPerson.getCulture());
 		bioArea.setText(currentPerson.getBio());
 		genderInput.setValue(currentPerson.getGender());
-		occupationArea.setItems(FXCollections.observableArrayList("Sculptor", "Scholar", "Painter"));
-		cultureArea.setItems(FXCollections.observableArrayList("American", "Italian", "French"));
+		occupationArea.setItems(FXCollections.observableArrayList("Sculptor", "Scholar", "Painter", "Writer"));
+		cultureArea.setItems(FXCollections.observableArrayList("American", "Italian", "French", "German"));
 		genderInput.setItems(FXCollections.observableArrayList("Male", "Female", "Other"));
 	}
 	

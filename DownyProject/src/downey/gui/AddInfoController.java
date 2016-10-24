@@ -35,8 +35,8 @@ public class AddInfoController {
 	@FXML
 	private void initialize() {
 		genderInput.setItems(FXCollections.observableArrayList("Male", "Female", "Other"));
-		cultureInput.setItems(FXCollections.observableArrayList("American", "Italian", "French"));
-		occupationInput.setItems(FXCollections.observableArrayList("Sculptor", "Scholar", "Painter"));
+		cultureInput.setItems(FXCollections.observableArrayList("American", "Italian", "French", "German"));
+		occupationInput.setItems(FXCollections.observableArrayList("Sculptor", "Scholar", "Painter", "Writer"));
 	}
 
 	@FXML

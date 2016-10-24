@@ -22,7 +22,6 @@ public class FindPersonController {
 	private MainApp mainApp;
 	private DataStorage DS = DataStorage.getMainDataStorage();
 	private ArrayList<Person> peopleList = DS.getPeopleArray();
-	public String selectedName;
 	private Person selectedPerson;
 
 	@FXML
@@ -59,12 +58,13 @@ public class FindPersonController {
 	private void handleButtonAction(ActionEvent event) throws IOException {
 		Stage stage;
 		Parent root;
-		selectedName = list.getSelectionModel().getSelectedItem();
-		DS.storeSelectedName(selectedName);
 		if (event.getSource() == viewButton) {
+			String selectedName = list.getSelectionModel().getSelectedItem();
+			SelectedInformationTracker.storeSelectedName(selectedName);
 			stage = (Stage) viewButton.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("PersonInfo.fxml"));
-		} else {
+			
+		} else { // go back
 			stage = (Stage) goBack.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("ProfileOptions.fxml"));
 		}
@@ -72,14 +72,6 @@ public class FindPersonController {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-	}
-
-	
-	 public Person getSelectedPerson(){ return this.selectedPerson; }
-	 
-
-	public String getSelectedName() {
-		return selectedName;
 	}
 
 	public void setMainApp(MainApp mainApp) {

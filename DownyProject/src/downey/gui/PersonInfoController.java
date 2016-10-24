@@ -39,7 +39,7 @@ public class PersonInfoController extends FindPersonController{
 	 */
 	@FXML
     private void initialize() throws IOException {
-    	Person chosenPerson = DS.getPersonObject(DS.getSelectedName());
+    	Person chosenPerson = DS.getPersonObject(SelectedInformationTracker.getSelectedName());
     	ArrayList<String> personConnections = DS.getConnectionsForPerson(chosenPerson.getName());
     	nameLabel.setText(chosenPerson.getName());
     	occupationLabel.setText(chosenPerson.getOccupation());
