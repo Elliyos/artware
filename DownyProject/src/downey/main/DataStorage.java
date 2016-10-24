@@ -194,7 +194,7 @@ public class DataStorage {
 	 * @return void
 	 */
 	public void loadConnections() throws IOException, EOFException {
-		CSVReader reader = new CSVReader(new FileReader("data/connections"));
+		CSVReader reader = new CSVReader(new FileReader("data/connections.csv"));
 		List<String[]> myRows = reader.readAll();
 		for (String[] row : myRows) {
 			if (row.length == 7) {
@@ -227,7 +227,7 @@ public class DataStorage {
 	 * @return void
 	 */
 	public void saveConnections() throws IOException {
-		CSVWriter writer = new CSVWriter(new FileWriter("data/connections"));
+		CSVWriter writer = new CSVWriter(new FileWriter("data/connections.csv"));
 		for (Connection c : connections) {
 			writer.writeNext(c.toCSVRowArray());
 		}
@@ -242,7 +242,7 @@ public class DataStorage {
 	 * @return void
 	 */
 	public void savePeople() throws IOException {
-		CSVWriter writer = new CSVWriter(new FileWriter("data/people"));
+		CSVWriter writer = new CSVWriter(new FileWriter("data/people.csv"));
 		for (Person p : people) {
 			writer.writeNext(p.toCSVRowArray());
 		}
@@ -260,7 +260,7 @@ public class DataStorage {
 	 * @return void
 	 */
 	public void loadPeople() throws IOException, EOFException {
-		CSVReader reader = new CSVReader(new FileReader("data/people"));
+		CSVReader reader = new CSVReader(new FileReader("data/people.csv"));
 		List<String[]> myRows = reader.readAll();
 		for (String[] row : myRows) {
 			String name = row[0];
