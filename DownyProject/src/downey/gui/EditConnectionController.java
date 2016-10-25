@@ -52,10 +52,11 @@ public class EditConnectionController {
 	private void initialize() {
 		currentConnection = SelectedInformationTracker.getSelectedConnection();
 		recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
-		recipientList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		selectedRecipientList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		recipientList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		selectedRecipientList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		initiator.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
 		typeInput.setItems(FXCollections.observableArrayList("Letter", "Email", "Meeting", "Party"));
+		
 		search.setOnAction((event) -> {
 			String searchText = searchInput.getText();
 			observableSet.clear();
@@ -63,23 +64,24 @@ public class EditConnectionController {
 			observableSet.add(temp.getName());
 			recipientList.setItems(FXCollections.observableArrayList(observableSet));
 		});
+		
 		add.setOnAction((event) -> {
 			observableSet.clear();
 			ObservableList<String> selectedRecipientsTemp = recipientList.getSelectionModel().getSelectedItems();
 			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
-				selectedRecipients.add(DS.getPersonObject(selectedRecipientsTemp.get(i)));
+				if (!selectedRecipientList.getItems().contains(selectedRecipientsTemp.get(i))) {
+					selectedRecipientList.getItems().add(i, selectedRecipientsTemp.get(i));
+				}
 			}
-			selectedRecipientList.setItems(FXCollections.observableArrayList(nameList(selectedRecipients)));
 		});
+		
 		remove.setOnAction((event) -> {
-			selectedRecipients.clear();
-			ObservableList<String> selectedRecipientsTemp = selectedRecipientList.getSelectionModel()
-					.getSelectedItems();
+			ObservableList<String> selectedRecipientsTemp = selectedRecipientList.getSelectionModel().getSelectedItems();
 			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
-				selectedRecipientList.getItems().remove(i);
+				selectedRecipientList.getItems().remove(selectedRecipientsTemp.get(i));
 			}
-
 		});
+		
 		if (currentConnection.getSender() != null) {
 			initiator.setValue(currentConnection.getSender().getName());
 		}
@@ -108,6 +110,10 @@ public class EditConnectionController {
 		Parent root;
 
 		if (event.getSource() == this.submit) {
+			for (int i = 0; i < selectedRecipientList.getItems().size(); i++) {
+				String name = selectedRecipientList.getItems().get(i);
+				selectedRecipients.add(DS.getPersonObject(name));
+			}
 			String location = locationInput.getText();
 			String date = dateInput.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
 			if (location.equals("")) location = "Unknown";

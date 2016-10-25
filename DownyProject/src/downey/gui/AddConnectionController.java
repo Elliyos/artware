@@ -52,8 +52,8 @@ public class AddConnectionController {
 	@FXML
 	private void initialize() {
 		recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
-		recipientList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		selectedRecipientList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		recipientList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		selectedRecipientList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		initiator.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
 		typeInput.setItems(FXCollections.observableArrayList("Letter", "Email", "Meeting", "Party"));
 
@@ -66,7 +66,7 @@ public class AddConnectionController {
 				recipientList.setItems(FXCollections.observableArrayList(observableSet));
 			} else if (searchText.equals("")) {
 				recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
-				recipientList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+				recipientList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 			} else {
 				recipientList.setItems(FXCollections.observableArrayList(observableSet));
 			}
@@ -77,21 +77,20 @@ public class AddConnectionController {
 			observableSet.clear();
 			ObservableList<String> selectedRecipientsTemp = recipientList.getSelectionModel().getSelectedItems();
 			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
-				selectedRecipients.add(DS.getPersonObject(selectedRecipientsTemp.get(i)));
+				if (!selectedRecipientList.getItems().contains(selectedRecipientsTemp.get(i))) {
+					selectedRecipientList.getItems().add(i, selectedRecipientsTemp.get(i));
+				}
 			}
-			selectedRecipientList.setItems(FXCollections.observableArrayList(nameList(selectedRecipients)));
-			recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
-			recipientList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		});
 		
 		remove.setOnAction((event) -> {
 			ObservableList<String> selectedRecipientsTemp = selectedRecipientList.getSelectionModel().getSelectedItems();
 			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
-				selectedRecipientList.getItems().remove(i);
+				selectedRecipientList.getItems().remove(selectedRecipientsTemp.get(i));
 			}
-			
 		});
 	}
+	 
 
 	public ObservableSet<String> nameList(ArrayList<Person> peopleList) {
 		for (int i = 0; i <= peopleList.size() - 1; i++) {
@@ -105,7 +104,12 @@ public class AddConnectionController {
 	private void handleButtonAction(ActionEvent event) throws IOException {
 		Stage stage;
 		Parent root;
+		
 		if (event.getSource() == this.submit) {
+			for (int i = 0; i < selectedRecipientList.getItems().size(); i++) {
+				String name = selectedRecipientList.getItems().get(i);
+				selectedRecipients.add(DS.getPersonObject(name));
+			}
 			String location = locationInput.getText();
 			if (location.equals("")) location = "Unknown";
 			String date = dateInput.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
