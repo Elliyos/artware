@@ -76,14 +76,14 @@
             <Font size="25.0" />
          </font>
       </Button>
-      <AnchorPane layoutX="340.0" layoutY="110.0" prefHeight="277.0" prefWidth="249.0">
-         <children>
-            <ScrollPane prefHeight="277.0" prefWidth="249.0">
-               <content>
+      <ScrollPane layoutX="340.0" layoutY="110.0">
+         <content>
+            <AnchorPane prefHeight="277.0" prefWidth="249.0">
+               <children>
                   <ListView fx:id="connections" prefHeight="277.0" prefWidth="246.0" />
-               </content>
-            </ScrollPane>
-         </children>
-      </AnchorPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

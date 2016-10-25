@@ -1,12 +1,8 @@
 package downey.main;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
-import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
 public class PalladioExporter {
@@ -20,7 +16,7 @@ public class PalladioExporter {
 		String[] header = {"Source", "Target"};
 		DS.loadPeople();
 		DS.loadConnections();
-		CSVWriter writer = new CSVWriter(new FileWriter("Palladio_Export_File"));
+		CSVWriter writer = new CSVWriter(new FileWriter("data/Palladio_Export_File"));
 		writer.writeNext(header);
 		for (Connection c : DS.getConnectionArray()) {
 			ArrayList<Person> receivers = c.getReceivers();

@@ -1,6 +1,5 @@
 package downey.main;
 
-import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -10,7 +9,7 @@ import java.util.*;
  * many
  *
  */
-public class Connection implements Serializable {
+public class Connection {
 	final Person GROUP_CONNECTION = new Person("Group Connection", "", "", "", "");
 	private String notes, citation, location, interactionType;
 	private String date;
@@ -116,13 +115,13 @@ public class Connection implements Serializable {
 	 * @return String
 	 */
 	public String toString() {
-		String connectionString = "Receivers: " + getReceiverNameList().toString() + ", Date: " + date + ", Interaction Type: "
+		String connectionString = getReceiverNameList().toString() + ", Date: " + date + ", Interaction Type: "
 				+ interactionType + ", Location: " + location + ", Citation: " + citation + ", Notes: " + notes;
-		if (sender != null) {
-			return "\nSender: " + sender.getName() + ": " + connectionString;
+		if (isGroupConnection()) {
+			return "Group Connection: " + connectionString;
+		} else {
+			return "\nSender: " + sender.getName() + ", Receivers: " + connectionString;
 		}
-
-		return "\n" + connectionString;
 	}
 
 	/**

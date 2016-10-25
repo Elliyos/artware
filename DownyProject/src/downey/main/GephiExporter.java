@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.opencsv.CSVWriter;
-import java.util.*;
+
 public class GephiExporter {
 	private static DataStorage DS = DataStorage.getMainDataStorage();
 	public static void main(String[] args) throws IOException{
@@ -20,7 +20,7 @@ public class GephiExporter {
 		String[] header = {"ID", "Label"};
 		DS.loadPeople();
 		ArrayList<Person> people = DS.getPeopleArray();
-		CSVWriter writer = new CSVWriter(new FileWriter("Gephi_Export_File"));
+		CSVWriter writer = new CSVWriter(new FileWriter("data/Gephi_Export_File"));
 		writer.writeNext(header);
 		for (int i = 0; i < people.size(); i++){
 			String[] numberedNode = new String[2];
@@ -34,7 +34,7 @@ public class GephiExporter {
 		String[] header = {"Source", "Target", "Edge ID", "Date", "Interaction Type", "Location", "Citation", "Notes"};
 		DS.loadPeople();
 		DS.loadConnections();
-		CSVWriter writer = new CSVWriter(new FileWriter("Gephi_Nodes_Edges"));
+		CSVWriter writer = new CSVWriter(new FileWriter("data/Gephi_Nodes_Edges"));
 		int currCount = 0;
 		writer.writeNext(header);
 		for (Connection c : DS.getConnectionArray()) {
