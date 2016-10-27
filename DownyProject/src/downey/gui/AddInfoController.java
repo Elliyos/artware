@@ -4,6 +4,8 @@ import downey.main.DataStorage;
 import downey.main.Person;
 
 import java.io.IOException;
+import java.util.Optional;
+
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +14,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 
 public class AddInfoController {
 
@@ -45,15 +49,12 @@ public class AddInfoController {
 		Parent root;
 
 		if (event.getSource() == add) {
-
 			DataStorage DS = DataStorage.getMainDataStorage();
 			String name = nameInput.getText();
 			String culture = cultureInput.getValue();
 			String occupation = occupationInput.getValue();
 			String gender = genderInput.getValue();
 			String bio = bioInput.getText();
-			String save;
-			Person person;
 
 			DS.addPerson(name, culture, occupation, gender, bio);
 			DS.savePeople();

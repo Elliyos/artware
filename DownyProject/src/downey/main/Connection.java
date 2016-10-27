@@ -118,7 +118,7 @@ public class Connection {
 		String connectionString = getReceiverNameList().toString() + ", Date: " + date + ", Interaction Type: "
 				+ interactionType + ", Location: " + location + ", Citation: " + citation + ", Notes: " + notes;
 		if (isGroupConnection()) {
-			return "Group Connection: " + connectionString;
+			return "\nGroup Connection: " + connectionString;
 		} else {
 			return "\nSender: " + sender.getName() + ", Receivers: " + connectionString;
 		}

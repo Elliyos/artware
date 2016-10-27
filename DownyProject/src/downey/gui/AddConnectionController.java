@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-
 import downey.main.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,11 +24,9 @@ public class AddConnectionController {
 	@FXML
 	private Button submit, goBack, add, search, remove;
 	@FXML
-	private ChoiceBox<String> initiator;
+	private ChoiceBox<String> initiator, typeInput;
 	@FXML
 	private DatePicker dateInput; 
-	@FXML
-	private ChoiceBox<String> typeInput;
 	@FXML
 	private TextField locationInput, citationInput, searchInput;
 	@FXML
