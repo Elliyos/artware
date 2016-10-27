@@ -3,7 +3,7 @@ import java.io.*;
 public class Person implements Serializable {
 
 	private String occupation, name, culture, gender, bio;
-	private int ID;
+	private final int ID;
 	public Person(String name, String culture, String occupation, String gender, String bio) {
 		this.name = name;
 		this.culture = culture;
@@ -23,6 +23,7 @@ public class Person implements Serializable {
 	 * @param Object
 	 * @return Boolean
 	 */
+        @Override
 	public boolean equals(Object obj) {
 		if (obj == this) {
 			return true;
@@ -42,6 +43,7 @@ public class Person implements Serializable {
 	 * @param 
 	 * @return String
 	 */
+        @Override
 	public String toString(){
 		return "\nName: " + name + ", Occupation: " + occupation + ", Culture: " + culture + ", Gender: " + gender
 				+ ", Bio: " + bio;

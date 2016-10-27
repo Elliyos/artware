@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 public class AddConnectionController {
 
-	private DataStorage DS = DataStorage.getMainDataStorage();
+	private final DataStorage DS = DataStorage.getMainDataStorage();
 	private MainApp mainApp;
 
 	@FXML
@@ -32,7 +32,7 @@ public class AddConnectionController {
 	@FXML
 	private TextArea notes;
 	@FXML
-	private ObservableSet<String> observableSet = FXCollections.observableSet();
+	private final ObservableSet<String> observableSet = FXCollections.observableSet();
 	@FXML
 	ObservableList<String> people = FXCollections.observableArrayList();
 	@FXML
@@ -41,7 +41,7 @@ public class AddConnectionController {
 	ListView<String> selectedRecipientList = new ListView<>();
 
 	private Person selectedPerson;
-	private ArrayList<Person> selectedRecipients = new ArrayList<>();
+	private final ArrayList<Person> selectedRecipients = new ArrayList<>();
 	
 	public AddConnectionController() {}
 

@@ -20,12 +20,12 @@ import javafx.scene.control.ListView;
 public class FindPersonController {
 
 	private MainApp mainApp;
-	private DataStorage DS = DataStorage.getMainDataStorage();
-	private ArrayList<Person> peopleList = DS.getPeopleArray();
+	private final DataStorage DS = DataStorage.getMainDataStorage();
+	private final ArrayList<Person> peopleList = DS.getPeopleArray();
 	private Person selectedPerson;
 
 	@FXML
-	private ObservableSet<String> observableSet = FXCollections.observableSet();
+	private final ObservableSet<String> observableSet = FXCollections.observableSet();
 	@FXML
 	ObservableList<String> people = FXCollections.observableArrayList();
 	@FXML
@@ -45,7 +45,7 @@ public class FindPersonController {
 	}
 
 	public ObservableSet<String> nameList(ArrayList<Person> peopleList) {
-		String name = "";
+		String name;
 		for (int i = 0; i <= peopleList.size() - 1; i++) {
 			selectedPerson = peopleList.get(i);
 			name = selectedPerson.getName();

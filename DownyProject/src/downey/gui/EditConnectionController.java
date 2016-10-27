@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 
 public class EditConnectionController {
 
-	private DataStorage DS = DataStorage.getMainDataStorage();
+	private final DataStorage DS = DataStorage.getMainDataStorage();
 	private MainApp mainApp;
 
 	@FXML
@@ -33,7 +33,7 @@ public class EditConnectionController {
 	@FXML
 	private TextArea notes;
 	@FXML
-	private ObservableSet<String> observableSet = FXCollections.observableSet();
+	private final ObservableSet<String> observableSet = FXCollections.observableSet();
 	@FXML
 	ObservableList<String> people = FXCollections.observableArrayList();
 	@FXML
@@ -43,7 +43,7 @@ public class EditConnectionController {
 
 	private Person selectedPerson;
 	private Connection currentConnection;
-	private ArrayList<Person> selectedRecipients = new ArrayList<>();
+	private final ArrayList<Person> selectedRecipients = new ArrayList<>();
 
 	public EditConnectionController() {
 	}

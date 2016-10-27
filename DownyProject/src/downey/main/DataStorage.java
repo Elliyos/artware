@@ -10,20 +10,17 @@ import com.opencsv.CSVWriter;
 
 public class DataStorage {
 	private int numPeople = 0;
-	private ArrayList<Person> people;
-	private ArrayList<Connection> connections;
+	private final ArrayList<Person> people;
+	private final ArrayList<Connection> connections;
 	private static DataStorage mainDataStorage = new DataStorage();
 
 	private DataStorage() {
-		people = new ArrayList<Person>();
-		connections = new ArrayList<Connection>();
+		people = new ArrayList<>();
+		connections = new ArrayList<>();
 	}
 
 	public int getNumPeople() {
-		int numPeople = 0;
-		for (int i = 0; i < people.size(); i++) {
-			numPeople++;
-		}
+                numPeople = people.stream().map((_item) -> 1).reduce(numPeople, Integer::sum);
 		return numPeople;
 
 	}
@@ -54,12 +51,7 @@ public class DataStorage {
 	}
 
 	public boolean containsPerson(String name) {
-		for (Person p : people) {
-			if (p.getName().equalsIgnoreCase(name)) {
-				return true;
-			}
-		}
-		return false;
+		return people.stream().anyMatch((p) -> (p.getName().equalsIgnoreCase(name)));
 
 	}
 
@@ -74,11 +66,9 @@ public class DataStorage {
 	public ArrayList<String> getConnectionsForPerson(String name) {
 		ArrayList<String> personConnections = new ArrayList<>();
 		Person person = getPersonObject(name);
-		for (Connection c : connections) {
-			if (c.getSender().equals(person) || c.getReceivers().contains(person)) {
-				personConnections.add(c.toString());
-			}
-		}
+                connections.stream().filter((c) -> (c.getSender().equals(person) || c.getReceivers().contains(person))).forEachOrdered((c) -> {
+                    personConnections.add(c.toString());
+            });
 		return personConnections;
 	}
 
@@ -175,9 +165,9 @@ public class DataStorage {
 		ArrayList<Person> personArray = new ArrayList<>();
 		// to convert, first we chop off the '[' and ']' at the end of the string
 		List<String> peopleList = Arrays.asList(people.substring(1,people.length()-1).split(", "));
-		for (String person : peopleList) {
-			personArray.add(getPersonObject(person));
-		}
+                peopleList.forEach((person) -> {
+                    personArray.add(getPersonObject(person));
+            });
 		return personArray;
 
 	}
@@ -227,11 +217,11 @@ public class DataStorage {
 	 * @return void
 	 */
 	public void saveConnections() throws IOException {
-		CSVWriter writer = new CSVWriter(new FileWriter("data/connections.csv"));
-		for (Connection c : connections) {
-			writer.writeNext(c.toCSVRowArray());
-		}
-		writer.close();
+            try (CSVWriter writer = new CSVWriter(new FileWriter("data/connections.csv"))) {
+                connections.forEach((c) -> {
+                    writer.writeNext(c.toCSVRowArray());
+                });
+            }
 	}
 
 	/**
@@ -242,11 +232,11 @@ public class DataStorage {
 	 * @return void
 	 */
 	public void savePeople() throws IOException {
-		CSVWriter writer = new CSVWriter(new FileWriter("data/people.csv"));
-		for (Person p : people) {
-			writer.writeNext(p.toCSVRowArray());
-		}
-		writer.close();
+            try (CSVWriter writer = new CSVWriter(new FileWriter("data/people.csv"))) {
+                people.forEach((p) -> {
+                    writer.writeNext(p.toCSVRowArray());
+                });
+            }
 	}
 
 	/**
@@ -262,14 +252,14 @@ public class DataStorage {
 	public void loadPeople() throws IOException, EOFException {
 		CSVReader reader = new CSVReader(new FileReader("data/people.csv"));
 		List<String[]> myRows = reader.readAll();
-		for (String[] row : myRows) {
-			String name = row[0];
-			String occupation = row[1];
-			String culture = row[2];
-			String gender = row[3];
-			String bio = row[4];
-			people.add(new Person(name, occupation, culture, gender, bio));
-		}
+                myRows.forEach((row) -> {
+                    String name = row[0];
+                    String occupation = row[1];
+                    String culture = row[2];
+                    String gender = row[3];
+                    String bio = row[4];
+                    people.add(new Person(name, occupation, culture, gender, bio));
+            });
 	}
 
 	public ArrayList<Person> getPeopleArray() {

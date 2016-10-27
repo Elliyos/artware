@@ -28,9 +28,9 @@ public class EditInfoController {
 	@FXML
 	private Button submit, goBack;
 	
-	private DataStorage DS = DataStorage.getMainDataStorage();
+	private final DataStorage DS = DataStorage.getMainDataStorage();
 	private MainApp mainApp;
-	private ArrayList<Person> peopleList = DS.getPeopleArray();
+	private final ArrayList<Person> peopleList = DS.getPeopleArray();
 	private Person currentPerson;
 	
 	public EditInfoController(){}

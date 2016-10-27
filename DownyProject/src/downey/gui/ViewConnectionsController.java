@@ -10,7 +10,6 @@ import downey.main.Person;
 import downey.main.SelectedInformationTracker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,12 +23,12 @@ public class ViewConnectionsController {
 
 
 	private MainApp mainApp;
-	private DataStorage DS = DataStorage.getMainDataStorage();
+	private final DataStorage DS = DataStorage.getMainDataStorage();
 	private Person selectedPerson;
 	private String selectedPeople;
 
 	@FXML
-	private ObservableList<String> observableConnectionList = FXCollections.observableArrayList();
+	private final ObservableList<String> observableConnectionList = FXCollections.observableArrayList();
 	@FXML
 	ObservableList<String> connection = FXCollections.observableArrayList();
 	@FXML

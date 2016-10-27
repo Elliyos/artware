@@ -1,10 +1,8 @@
 package downey.gui;
 
 import downey.main.DataStorage;
-import downey.main.Person;
 
 import java.io.IOException;
-import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -14,8 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar.ButtonData;
 
 public class AddInfoController {
 

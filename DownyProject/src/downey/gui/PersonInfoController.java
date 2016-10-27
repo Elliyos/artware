@@ -16,11 +16,11 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 
-public class PersonInfoController extends FindPersonController{
+public class PersonInfoController{
 	
 	private MainApp mainApp;
 	//private Person selectedPerson = super.getSelectedPerson();
-	private DataStorage DS = DataStorage.getMainDataStorage();
+	private final DataStorage DS = DataStorage.getMainDataStorage();
 
 	@FXML
 	private Button goBack, editButton;
@@ -67,7 +67,7 @@ public class PersonInfoController extends FindPersonController{
        }
     
 
-	    public void setMainApp(MainApp mainApp) {
-	        this.mainApp = mainApp;
-	    }
+    public void setMainApp(MainApp mainApp) {
+	this.mainApp = mainApp;
+    }
 }

@@ -3,7 +3,6 @@ package downey.gui;
 import java.io.IOException;
 import downey.main.Connection;
 import downey.main.DataStorage;
-import downey.main.Person;
 import downey.main.SelectedInformationTracker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +15,7 @@ import javafx.stage.Stage;
 
 public class ConnectionInfoController {
 	private MainApp mainApp;
-	private DataStorage DS = DataStorage.getMainDataStorage();
+	private final DataStorage DS = DataStorage.getMainDataStorage();
 	@FXML
 	private Button goBack, editButton;
 	@FXML

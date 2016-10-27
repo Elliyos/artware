@@ -14,7 +14,7 @@ public class Connection {
 	private String notes, citation, location, interactionType;
 	private String date;
 	private Person sender;
-	private ArrayList<Person> receivers = new ArrayList<Person>();
+	private ArrayList<Person> receivers = new ArrayList<>();
 
 	/**
 	 * Constructor method for a many-to-many connection
@@ -71,12 +71,7 @@ public class Connection {
 	}
 
 	public boolean contains(Person person) {
-		for (Person p : receivers) {
-			if (p.equals(person)) {
-				return true;
-			}
-		}
-		return false;
+		return receivers.stream().anyMatch((p) -> (p.equals(person)));
 	}
 
 	public String[] toCSVRowArray() {
@@ -93,6 +88,7 @@ public class Connection {
 	 * @param Object
 	 * @return Boolean
 	 */
+        @Override
 	public boolean equals(Object obj) {
 		if (obj == this) {
 			return true;
@@ -114,6 +110,7 @@ public class Connection {
 	 * @param
 	 * @return String
 	 */
+        @Override
 	public String toString() {
 		String connectionString = getReceiverNameList().toString() + ", Date: " + date + ", Interaction Type: "
 				+ interactionType + ", Location: " + location + ", Citation: " + citation + ", Notes: " + notes;
