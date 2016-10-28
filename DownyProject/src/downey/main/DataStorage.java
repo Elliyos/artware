@@ -9,7 +9,6 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
 public class DataStorage {
-	private int numPeople = 0;
 	private final ArrayList<Person> people;
 	private final ArrayList<Connection> connections;
 	private static DataStorage mainDataStorage = new DataStorage();
@@ -20,9 +19,7 @@ public class DataStorage {
 	}
 
 	public int getNumPeople() {
-                numPeople = people.stream().map((_item) -> 1).reduce(numPeople, Integer::sum);
-		return numPeople;
-
+		return people.size();
 	}
 
 	public static DataStorage getMainDataStorage() {
@@ -41,7 +38,6 @@ public class DataStorage {
 	 * @return void
 	 */
 	public boolean addPerson(String name, String culture, String occupation, String gender, String bio) {
-		numPeople = getNumPeople() + 1;
 		if (!containsPerson(name)) {
 			Person temp = new Person(name, culture, occupation, gender, bio);
 			people.add(temp);
@@ -52,7 +48,6 @@ public class DataStorage {
 
 	public boolean containsPerson(String name) {
 		return people.stream().anyMatch((p) -> (p.getName().equalsIgnoreCase(name)));
-
 	}
 
 	/**
@@ -66,9 +61,10 @@ public class DataStorage {
 	public ArrayList<String> getConnectionsForPerson(String name) {
 		ArrayList<String> personConnections = new ArrayList<>();
 		Person person = getPersonObject(name);
-                connections.stream().filter((c) -> (c.getSender().equals(person) || c.getReceivers().contains(person))).forEachOrdered((c) -> {
-                    personConnections.add(c.toString());
-            });
+		connections.stream().filter((c) -> (c.getSender().equals(person) || c.getReceivers().contains(person)))
+				.forEachOrdered((c) -> {
+					personConnections.add(c.toString());
+				});
 		return personConnections;
 	}
 
@@ -163,11 +159,12 @@ public class DataStorage {
 	 */
 	public ArrayList<Person> convertToPersonArray(String people) throws IOException {
 		ArrayList<Person> personArray = new ArrayList<>();
-		// to convert, first we chop off the '[' and ']' at the end of the string
-		List<String> peopleList = Arrays.asList(people.substring(1,people.length()-1).split(", "));
-                peopleList.forEach((person) -> {
-                    personArray.add(getPersonObject(person));
-            });
+		// to convert, first we chop off the '[' and ']' at the end of the
+		// string
+		List<String> peopleList = Arrays.asList(people.substring(1, people.length() - 1).split(", "));
+		peopleList.forEach((person) -> {
+			personArray.add(getPersonObject(person));
+		});
 		return personArray;
 
 	}
@@ -217,11 +214,11 @@ public class DataStorage {
 	 * @return void
 	 */
 	public void saveConnections() throws IOException {
-            try (CSVWriter writer = new CSVWriter(new FileWriter("data/connections.csv"))) {
-                connections.forEach((c) -> {
-                    writer.writeNext(c.toCSVRowArray());
-                });
-            }
+		try (CSVWriter writer = new CSVWriter(new FileWriter("data/connections.csv"))) {
+			connections.forEach((c) -> {
+				writer.writeNext(c.toCSVRowArray());
+			});
+		}
 	}
 
 	/**
@@ -232,11 +229,11 @@ public class DataStorage {
 	 * @return void
 	 */
 	public void savePeople() throws IOException {
-            try (CSVWriter writer = new CSVWriter(new FileWriter("data/people.csv"))) {
-                people.forEach((p) -> {
-                    writer.writeNext(p.toCSVRowArray());
-                });
-            }
+		try (CSVWriter writer = new CSVWriter(new FileWriter("data/people.csv"))) {
+			people.forEach((p) -> {
+				writer.writeNext(p.toCSVRowArray());
+			});
+		}
 	}
 
 	/**
@@ -252,14 +249,14 @@ public class DataStorage {
 	public void loadPeople() throws IOException, EOFException {
 		CSVReader reader = new CSVReader(new FileReader("data/people.csv"));
 		List<String[]> myRows = reader.readAll();
-                myRows.forEach((row) -> {
-                    String name = row[0];
-                    String occupation = row[1];
-                    String culture = row[2];
-                    String gender = row[3];
-                    String bio = row[4];
-                    people.add(new Person(name, occupation, culture, gender, bio));
-            });
+		myRows.forEach((row) -> {
+			String name = row[0];
+			String occupation = row[1];
+			String culture = row[2];
+			String gender = row[3];
+			String bio = row[4];
+			people.add(new Person(name, occupation, culture, gender, bio));
+		});
 	}
 
 	public ArrayList<Person> getPeopleArray() {

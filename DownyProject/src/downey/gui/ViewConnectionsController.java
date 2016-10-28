@@ -15,8 +15,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class ViewConnectionsController {
@@ -58,29 +60,34 @@ public class ViewConnectionsController {
 	private void initialize() throws IOException {
 		list.setItems(getConnectionList(DS.getConnectionArray()));
 	}
-	public void storeData(){
-		String[] names = list.getSelectionModel().getSelectedItem().split(":");
-		SelectedInformationTracker.storeSelectedName(names[0]);
-		SelectedInformationTracker.storeSelectedNames(names[1]);
-		SelectedInformationTracker.storeSelectedConnection(DS.getConnectionArray().get(list.getSelectionModel().getSelectedIndex()));
-	}
 
 	@FXML
-	private void handleButtonAction(ActionEvent event) throws IOException {
-		Stage stage;
-		Parent root;
-		if (event.getSource() == viewButton) {
-			storeData();
-			stage = (Stage) viewButton.getScene().getWindow();
-			root = FXMLLoader.load(getClass().getResource("ConnectionInfo.fxml"));
-		} else {
-			stage = (Stage) goBack.getScene().getWindow();
-			root = FXMLLoader.load(getClass().getResource("ConnectionOptions.fxml"));
-		}
-		// create a new scene with root and set the stage
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
+	private void backAction(ActionEvent event) throws IOException {
+		Stage stage = (Stage) goBack.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("ConnectionOptions.fxml"));
+		stage.setScene(new Scene(root));
 		stage.show();
+	}
+	
+	@FXML
+	private void viewAction(ActionEvent event) throws IOException {
+		String selectedConnection = list.getSelectionModel().getSelectedItem();
+		if (selectedConnection == null) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Select Connection");
+			alert.setHeaderText(null);
+			alert.setContentText("Select a Connection to view!");
+			alert.showAndWait();
+		} else {
+			String[] names = selectedConnection.split(":");
+			SelectedInformationTracker.storeSelectedName(names[0]);
+			SelectedInformationTracker.storeSelectedNames(names[1]);
+			SelectedInformationTracker.storeSelectedConnection(DS.getConnectionArray().get(list.getSelectionModel().getSelectedIndex()));
+			Stage stage = (Stage) viewButton.getScene().getWindow();
+			Parent root = FXMLLoader.load(getClass().getResource("ConnectionInfo.fxml"));
+			stage.setScene(new Scene(root));
+			stage.show();
+		}
 	}
 
 	public void setMainApp(MainApp mainApp) {

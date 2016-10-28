@@ -22,7 +22,7 @@
                </children></AnchorPane>
         </content>
       </ScrollPane>
-      <Button fx:id="viewButton" layoutX="551.0" layoutY="371.0" mnemonicParsing="false" onAction="#handleButtonAction" text="View" />
-      <Button fx:id="goBack" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Go Back" />
+      <Button fx:id="viewButton" layoutX="551.0" layoutY="371.0" mnemonicParsing="false" onAction="#viewAction" text="View" />
+      <Button fx:id="goBack" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#backAction" text="Go Back" />
    </children>
 </AnchorPane>

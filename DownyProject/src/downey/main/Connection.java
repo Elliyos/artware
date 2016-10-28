@@ -139,7 +139,7 @@ public class Connection {
 
 	/**
 	 * This method returns the names of all people who are involved in a
-	 * conncetion with this person
+	 * connection with this person
 	 * 
 	 * @param name,
 	 *            person with the connections
@@ -158,6 +158,7 @@ public class Connection {
 		setNotes(notes);
 		return true;
 	}
+	
 	public boolean equals(Connection c){
 		return c.getDate().equals(this.getDate());
 	}
@@ -220,5 +221,4 @@ public class Connection {
 	public void setReceivers(ArrayList<Person> receivers) {
 		this.receivers = receivers;
 	}
-
 }

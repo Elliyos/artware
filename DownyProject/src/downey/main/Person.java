@@ -1,6 +1,6 @@
 package downey.main;
-import java.io.*;
-public class Person implements Serializable {
+
+public class Person {
 
 	private String occupation, name, culture, gender, bio;
 	private final int ID;
