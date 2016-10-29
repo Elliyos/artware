@@ -6,14 +6,11 @@ import java.util.ArrayList;
 
 import com.opencsv.CSVWriter;
 
-public class GephiExporter {
+public final class GephiExporter {
 	private static final DataStorage DS = DataStorage.getMainDataStorage();
-	public static void main(String[] args) throws IOException{
-		GephiExporter g = new GephiExporter();
-		g.saveNodes();
-		g.mapNodesToEdges();
-		
-		
+	public void export() throws IOException{
+		saveNodes();
+		mapNodesToEdges();
 	}
 
 	public void saveNodes() throws IOException {

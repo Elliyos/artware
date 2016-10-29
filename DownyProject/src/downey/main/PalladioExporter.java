@@ -6,12 +6,10 @@ import java.util.ArrayList;
 import com.opencsv.CSVWriter;
 
 public class PalladioExporter {
-	public static void main(String[] args) throws IOException{
-		PalladioExporter p = new PalladioExporter();
-		p.saveEdges();
-	}
 	private final DataStorage DS = DataStorage.getMainDataStorage();
-
+	public void export() throws IOException{
+		saveEdges();
+	}
 	public void saveEdges() throws IOException {
 		String[] header = {"Source", "Target"};
 		DS.loadPeople();
