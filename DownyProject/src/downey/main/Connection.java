@@ -150,6 +150,7 @@ public class Connection {
 		if (people == null || date == null || type == null || location == null || citation == null || notes == null) {
 			return false;
 		}
+		if (location.equals("")) location = "Unknown";
 		setReceivers(people);
 		setDate(date);
 		setInteractionType(type);

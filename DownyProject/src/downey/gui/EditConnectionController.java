@@ -116,7 +116,6 @@ public class EditConnectionController {
 			}
 			String location = locationInput.getText();
 			String date = dateInput.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-			if (location.equals("")) location = "Unknown";
 			if (currentConnection.isGroupConnection()) {
 				currentConnection.editConnection(selectedRecipients, date, typeInput.getValue(), location,
 						citationInput.getText(), notes.getText());

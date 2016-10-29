@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class editPersonTest {
+public class EditPersonTest {
 
 	@Test
 	public void testEditPersonChangeName() {
