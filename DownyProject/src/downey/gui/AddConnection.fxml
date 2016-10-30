@@ -16,18 +16,18 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.AddConnectionController">
    <children>
-      <Text layoutX="290.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Connection" underline="true">
+      <Text fontSmoothingType="LCD" layoutX="303.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Connection">
          <font>
-            <Font name="Open Sans" size="30.0" />
+            <Font name="Open Sans Italic" size="30.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="22.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Initiator">
+      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Initiator">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
       <ChoiceBox fx:id="initiator" layoutX="22.0" layoutY="151.0" prefHeight="25.0" prefWidth="214.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
-      <Text fontSmoothingType="LCD" layoutX="599.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipients">
+      <Text fontSmoothingType="LCD" layoutX="507.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipients">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
@@ -37,7 +37,7 @@
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="265.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
+      <Text fontSmoothingType="LCD" layoutX="260.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
@@ -51,7 +51,7 @@
          <font>
             <Font name="Open Sans" size="12.0" />
          </font></TextField>
-      <Text fontSmoothingType="LCD" layoutX="265.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Citation">
+      <Text fontSmoothingType="LCD" layoutX="260.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Citation">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
@@ -69,11 +69,11 @@
          <font>
             <Font name="Open Sans" size="12.0" />
          </font></TextArea>
-      <Button fx:id="submit" disable="false" layoutX="353.0" layoutY="436.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="124.0" text="Submit">
+      <Button fx:id="submit" disable="false" layoutX="353.0" layoutY="431.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="124.0" text="Submit">
          <font>
             <Font name="Open Sans" size="26.0" />
          </font></Button>
-      <Button fx:id="goBack" layoutX="14.0" layoutY="76.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="27.0" prefWidth="73.0" text="Go Back">
+      <Button fx:id="goBack" layoutX="8.0" layoutY="76.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="27.0" prefWidth="73.0" text="Go Back">
          <font>
             <Font name="Open Sans" size="12.0" />
          </font></Button>
