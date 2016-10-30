@@ -16,70 +16,70 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.AddConnectionController">
    <children>
-      <Text layoutX="289.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What's the info?">
+      <Text layoutX="290.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Connection" underline="true">
          <font>
             <Font name="Open Sans" size="30.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="203.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Initiator">
+      <Text fontSmoothingType="LCD" layoutX="22.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Initiator">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="initiator" layoutX="130.0" layoutY="170.0" prefHeight="25.0" prefWidth="214.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
-      <Text fontSmoothingType="LCD" layoutX="595.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipients">
+      <ChoiceBox fx:id="initiator" layoutX="22.0" layoutY="151.0" prefHeight="25.0" prefWidth="214.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <Text fontSmoothingType="LCD" layoutX="599.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipients">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
+      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="265.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
+      <Text fontSmoothingType="LCD" layoutX="265.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
+      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="locationInput" layoutX="14.0" layoutY="284.0" prefHeight="25.0" prefWidth="214.0" promptText="Rock Island, IL, USA">
+      <TextField fx:id="locationInput" layoutX="23.0" layoutY="266.0" prefHeight="25.0" prefWidth="214.0" promptText="Rock Island, IL, USA">
          <font>
             <Font name="Open Sans" size="12.0" />
          </font></TextField>
-      <Text fontSmoothingType="LCD" layoutX="265.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Citation">
+      <Text fontSmoothingType="LCD" layoutX="265.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Citation">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="citationInput" layoutX="265.0" layoutY="284.0" prefHeight="25.0" prefWidth="214.0">
+      <TextField fx:id="citationInput" layoutX="265.0" layoutY="267.0" prefHeight="25.0" prefWidth="214.0">
          <font>
             <Font name="Open Sans" size="12.0" />
          </font></TextField>
-      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes">
+      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <TextArea fx:id="notes" layoutX="15.0" layoutY="336.0" prefHeight="125.0" prefWidth="465.0">
+      <TextArea fx:id="notes" layoutX="23.0" layoutY="322.0" prefHeight="100.0" prefWidth="459.0">
          <font>
             <Font name="Open Sans" size="12.0" />
          </font></TextArea>
-      <Button fx:id="submit" disable="false" layoutX="736.0" layoutY="467.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Submit">
+      <Button fx:id="submit" disable="false" layoutX="353.0" layoutY="436.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="124.0" text="Submit">
+         <font>
+            <Font name="Open Sans" size="26.0" />
+         </font></Button>
+      <Button fx:id="goBack" layoutX="14.0" layoutY="76.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="27.0" prefWidth="73.0" text="Go Back">
          <font>
             <Font name="Open Sans" size="12.0" />
          </font></Button>
-      <Button fx:id="goBack" layoutX="10.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Go Back">
-         <font>
-            <Font name="Open Sans" size="12.0" />
-         </font></Button>
-      <DatePicker fx:id="dateInput" layoutX="14.0" layoutY="224.0" prefWidth="214.0" promptText="mm/dd/yyyy" style="-fx-font-family: &quot;Open Sans&quot;;" />
-      <ChoiceBox fx:id="typeInput" layoutX="265.0" layoutY="224.0" prefHeight="22.0" prefWidth="214.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
-      <Rectangle height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.1" width="800.0">
+      <DatePicker fx:id="dateInput" layoutX="22.0" layoutY="206.0" prefWidth="214.0" promptText="mm/dd/yyyy" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <ChoiceBox fx:id="typeInput" layoutX="265.0" layoutY="206.0" prefHeight="22.0" prefWidth="214.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <Rectangle height="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.1" width="800.0">
          <fill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -89,7 +89,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="340.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ArtWARE">
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="338.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ArtWARE">
          <font>
             <Font name="Open Sans" size="30.0" />
          </font>
@@ -97,9 +97,9 @@
             <DropShadow />
          </effect>
       </Text>
-      <AnchorPane layoutX="507.0" layoutY="169.0" prefHeight="291.0" prefWidth="279.0">
+      <AnchorPane layoutX="507.0" layoutY="156.0" prefHeight="291.0" prefWidth="279.0">
          <children>
-            <ListView fx:id="recipientList" prefHeight="125.0" prefWidth="279.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
+            <ListView fx:id="recipientList" layoutY="-5.0" prefHeight="125.0" prefWidth="279.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
             <ListView fx:id="selectedRecipientList" layoutY="166.0" prefHeight="100.0" prefWidth="279.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
             <Button fx:id="add" layoutX="227.0" layoutY="133.0" mnemonicParsing="false" text="Add">
                <font>

@@ -2,8 +2,6 @@ package downey.gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import downey.main.Connection;
 import downey.main.DataStorage;
 import downey.main.Person;
@@ -46,7 +44,7 @@ public class ViewConnectionsController {
 			if (connectionList.get(i).getSender() != null) {
 				selectedPerson = connectionList.get(i).getSender(); 
 				selectedPeople = connectionList.get(i).getReceiverNameList().toString();
-				observableConnectionList.addAll(Arrays.asList(selectedPerson.getName() + ": " + selectedPeople));
+				observableConnectionList.addAll(selectedPerson.getName() + ": " + selectedPeople);
 			} else {
 				selectedPeople = connectionList.get(i).getReceiverNameList().toString();
 				observableConnectionList.addAll(" : " + selectedPeople);

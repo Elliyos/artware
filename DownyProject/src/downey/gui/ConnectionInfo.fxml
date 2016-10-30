@@ -15,12 +15,12 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.ConnectionInfoController">
    <children>
-      <Label fx:id="sender" layoutX="14.0" layoutY="140.0" text="Sender">
+      <Label fx:id="sender" layoutX="14.0" layoutY="130.0" text="Sender">
          <font>
             <Font name="Open Sans" size="25.0" />
          </font>
       </Label>
-      <Text fontSmoothingType="LCD" layoutX="41.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To">
+      <Text fontSmoothingType="LCD" layoutX="41.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
@@ -30,61 +30,61 @@
             <Font name="Open Sans" size="25.0" />
          </font>
       </Label>
-      <Line endX="25.0" layoutX="112.0" layoutY="220.0" startX="-100.0" />
-      <Text fontSmoothingType="LCD" layoutX="12.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
+      <Line endX="25.0" layoutX="112.0" layoutY="226.0" startX="-100.0" />
+      <Text fontSmoothingType="LCD" layoutX="18.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
          <font>
             <Font name="Open Sans" size="25.0" />
          </font>
       </Text>
-      <Label fx:id="dateLabel" layoutX="18.0" layoutY="267.0" text="Label">
+      <Label fx:id="dateLabel" layoutX="24.0" layoutY="284.0" text="Label">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Label>
-      <Text fontSmoothingType="LCD" layoutX="267.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
+      <Text fontSmoothingType="LCD" layoutX="273.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
          <font>
             <Font name="Open Sans" size="25.0" />
          </font>
       </Text>
-      <Label fx:id="typeLabel" layoutX="276.0" layoutY="267.0" text="Label">
+      <Label fx:id="typeLabel" layoutX="282.0" layoutY="284.0" text="Label">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Label>
-      <Text fontSmoothingType="LCD" layoutX="267.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
+      <Text fontSmoothingType="LCD" layoutX="273.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
          <font>
             <Font name="Open Sans" size="25.0" />
          </font>
       </Text>
-      <Label fx:id="locationLabel" layoutX="276.0" layoutY="407.0" text="Label">
+      <Label fx:id="locationLabel" layoutX="282.0" layoutY="353.0" text="Label">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Label>
-      <Text fontSmoothingType="LCD" layoutX="9.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Citation">
+      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Citation">
          <font>
             <Font name="Open Sans" size="25.0" />
          </font>
       </Text>
-      <Label fx:id="citationLabel" layoutX="18.0" layoutY="407.0" text="Label">
+      <Label fx:id="citationLabel" layoutX="24.0" layoutY="353.0" text="Label">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Label>
-      <Text fontSmoothingType="LCD" layoutX="495.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes">
+      <Text fontSmoothingType="LCD" layoutX="472.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes">
          <font>
             <Font name="Open Sans" size="25.0" />
          </font>
       </Text>
-      <Button fx:id="goBack" layoutX="8.0" layoutY="106.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Go Back">
+      <Button fx:id="goBack" layoutX="8.0" layoutY="78.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="27.0" prefWidth="69.0" text="Go Back">
          <font>
             <Font name="Open Sans" size="12.0" />
          </font></Button>
-      <Button fx:id="editButton" layoutX="723.0" layoutY="467.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="66.0" text="Edit">
+      <Button fx:id="editButton" layoutX="329.0" layoutY="431.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="41.0" prefWidth="99.0" text="Edit">
          <font>
-            <Font name="Open Sans" size="12.0" />
+            <Font name="Open Sans" size="26.0" />
          </font></Button>
-      <Rectangle height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.1" width="800.0">
+      <Rectangle height="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.1" width="800.0">
          <fill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -94,7 +94,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="340.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ArtWARE">
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="340.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ArtWARE">
          <font>
             <Font name="Open Sans" size="30.0" />
          </font>
@@ -102,11 +102,11 @@
             <DropShadow />
          </effect>
       </Text>
-      <ScrollPane layoutX="495.0" layoutY="267.0" prefHeight="170.0" prefWidth="294.0">
+      <ScrollPane layoutX="471.0" layoutY="250.0" prefHeight="170.0" prefWidth="299.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="168.0" prefWidth="292.0">
                <children>
-                  <TextArea fx:id="notesArea" editable="false" prefHeight="170.0" prefWidth="294.0" wrapText="true">
+                  <TextArea fx:id="notesArea" editable="false" layoutY="-1.0" prefHeight="170.0" prefWidth="299.0" wrapText="true">
                      <font>
                         <Font name="Open Sans" size="12.0" />
                      </font>
@@ -115,5 +115,10 @@
             </AnchorPane>
         </content>
       </ScrollPane>
+      <Text layoutX="288.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connection Info" underline="true">
+         <font>
+            <Font name="Open Sans" size="30.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

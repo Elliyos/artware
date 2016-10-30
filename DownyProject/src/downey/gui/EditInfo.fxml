@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.EditInfoController">
    <children>
-      <Rectangle height="100.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.1" width="803.0">
+      <Rectangle height="70.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.1" width="800.0">
          <fill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -24,7 +24,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Text fontSmoothingType="LCD" layoutX="210.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sure. Give us the right info">
+      <Text fontSmoothingType="LCD" layoutX="333.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Person" underline="true">
          <font>
             <Font name="Open Sans" size="30.0" />
          </font>
@@ -70,18 +70,13 @@
          </font></Button>
       <ChoiceBox fx:id="cultureInput" layoutX="503.0" layoutY="218.0" prefHeight="22.0" prefWidth="223.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
       <ChoiceBox fx:id="occupationInput" layoutX="62.0" layoutY="280.0" prefHeight="22.0" prefWidth="223.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
-      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="340.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ArtWARE">
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="340.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ArtWARE">
          <font>
             <Font name="Open Sans" size="30.0" />
          </font>
          <effect>
             <DropShadow />
          </effect>
-      </Text>
-      <Text fontSmoothingType="LCD" layoutX="177.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="and we'll get that squared away.">
-         <font>
-            <Font name="Open Sans" size="30.0" />
-         </font>
       </Text>
    </children>
 </AnchorPane>

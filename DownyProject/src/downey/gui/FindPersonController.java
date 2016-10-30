@@ -14,10 +14,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 
 public class FindPersonController {
 
@@ -33,7 +31,13 @@ public class FindPersonController {
 	@FXML
 	ListView<String> list = new ListView<String>(people);
 	@FXML
-	private Button goBack, viewButton;
+	ListView<String> filterList = new ListView<String>();
+	@FXML
+	private Button goBack, viewButton, searchButton;
+	@FXML
+	private ChoiceBox<String> filter;
+	@FXML
+	private TextField target;
 
 	public FindPersonController() {
 	}
@@ -41,6 +45,7 @@ public class FindPersonController {
 	@FXML
 	private void initialize() throws IOException {
 		list.setItems(FXCollections.observableArrayList(nameList(peopleList)));
+		filter.setItems(FXCollections.observableArrayList("Name", "Occupation", "Culture", "Gender"));
 	}
 
 	public ObservableSet<String> nameList(ArrayList<Person> peopleList) {
@@ -51,6 +56,11 @@ public class FindPersonController {
 			observableSet.addAll(Arrays.asList(name));
 		}
 		return observableSet;
+	}
+	
+	@FXML
+	private void filterAction(ActionEvent event) {
+		
 	}
 
 	@FXML
