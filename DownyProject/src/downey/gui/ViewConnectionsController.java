@@ -64,7 +64,7 @@ public class ViewConnectionsController {
 	@FXML
 	private void backAction(ActionEvent event) throws IOException {
 		Stage stage = (Stage) goBack.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("ConnectionOptions.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		stage.setScene(new Scene(root));
 		stage.show();
 	}

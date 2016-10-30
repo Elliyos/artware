@@ -45,29 +45,34 @@ public class AddInfoController {
 		Parent root;
 
 		if (event.getSource() == add) {
-			DataStorage DS = DataStorage.getMainDataStorage();
-			String name = nameInput.getText();
-			String culture = cultureInput.getValue();
-			String occupation = occupationInput.getValue();
-			String gender = genderInput.getValue();
-			String bio = bioInput.getText();
-
-			DS.addPerson(name, culture, occupation, gender, bio);
-			DS.savePeople();
-			DS.saveConnections();
-
-			// get reference to the button's stage
+			add();
 			stage = (Stage) add.getScene().getWindow();
-			// load up OTHER FXML document
-			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+			root = FXMLLoader.load(getClass().getResource("FindPerson.fxml"));
 		} else {
 			stage = (Stage) goBack.getScene().getWindow();
-			root = FXMLLoader.load(getClass().getResource("ProfileOptions.fxml"));
+			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		}
 		// create a new scene with root and set the stage
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+	}
+	
+	/**
+	 * Stores everything the user entered and creates a person.
+	 * @throws IOException
+	 */
+	public void add() throws IOException{
+		DataStorage DS = DataStorage.getMainDataStorage();
+		String name = nameInput.getText();
+		String culture = cultureInput.getValue();
+		String occupation = occupationInput.getValue();
+		String gender = genderInput.getValue();
+		String bio = bioInput.getText();
+
+		DS.addPerson(name, culture, occupation, gender, bio);
+		DS.savePeople();
+		DS.saveConnections();
 	}
 
 	/**

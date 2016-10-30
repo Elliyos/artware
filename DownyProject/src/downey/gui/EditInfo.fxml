@@ -4,53 +4,84 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.EditInfoController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.EditInfoController">
    <children>
-      <Text layoutX="95.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sure! Just give us the right info">
+      <Rectangle height="100.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.1" width="803.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#283048" />
+                  <Stop color="#859398" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Text fontSmoothingType="LCD" layoutX="210.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sure. Give us the right info">
          <font>
-            <Font size="30.0" />
+            <Font name="Open Sans" size="30.0" />
          </font>
       </Text>
-      <Text layoutX="36.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="and we'll get that squared away for you.">
+      <Text fontSmoothingType="LCD" layoutX="62.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
          <font>
-            <Font size="30.0" />
+            <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+      <Text fontSmoothingType="LCD" layoutX="62.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation:">
          <font>
-            <Font size="20.0" />
+            <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="nameArea" layoutX="14.0" layoutY="145.0" prefHeight="25.0" prefWidth="220.0" />
-      <Text layoutX="14.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation">
+      <TextField fx:id="nameInput" layoutX="62.0" layoutY="218.0" prefHeight="25.0" prefWidth="223.0">
          <font>
-            <Font size="20.0" />
+            <Font name="Open Sans" size="12.0" />
+         </font></TextField>
+      <Text fontSmoothingType="LCD" layoutX="503.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culture:">
+         <font>
+            <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="366.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culture">
+      <Text fontSmoothingType="LCD" layoutX="502.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:">
          <font>
-            <Font size="20.0" />
+            <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="genderInput" layoutX="366.0" layoutY="205.0" prefHeight="25.0" prefWidth="220.0" />
-      <Text layoutX="366.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender">
+      <ChoiceBox fx:id="genderInput" layoutX="503.0" layoutY="280.0" prefHeight="25.0" prefWidth="223.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <Text fontSmoothingType="LCD" layoutX="62.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bio:">
          <font>
-            <Font size="20.0" />
+            <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bio">
+      <TextArea fx:id="bioInput" layoutX="62.0" layoutY="338.0" prefHeight="123.0" prefWidth="666.0" />
+      <Button fx:id="submit" disable="false" layoutX="731.0" layoutY="465.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="27.0" prefWidth="61.0" text="Submit">
          <font>
-            <Font size="20.0" />
+            <Font name="Open Sans" size="12.0" />
+         </font></Button>
+      <Button fx:id="goBack" layoutX="14.0" layoutY="108.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Go Back">
+         <font>
+            <Font name="Open Sans" size="12.0" />
+         </font></Button>
+      <ChoiceBox fx:id="cultureInput" layoutX="503.0" layoutY="218.0" prefHeight="22.0" prefWidth="223.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <ChoiceBox fx:id="occupationInput" layoutX="62.0" layoutY="280.0" prefHeight="22.0" prefWidth="223.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="340.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ArtWARE">
+         <font>
+            <Font name="Open Sans" size="30.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="177.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="and we'll get that squared away.">
+         <font>
+            <Font name="Open Sans" size="30.0" />
          </font>
       </Text>
-      <TextArea fx:id="bioArea" layoutX="14.0" layoutY="265.0" prefHeight="101.0" prefWidth="570.0" />
-      <Button fx:id="submit" disable="false" layoutX="532.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Submit" />
-      <Button fx:id="goBack" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Go Back" />
-      <ChoiceBox fx:id="cultureArea" layoutX="366.0" layoutY="147.0" prefHeight="22.0" prefWidth="220.0" />
-      <ChoiceBox fx:id="occupationArea" layoutX="14.0" layoutY="207.0" prefHeight="22.0" prefWidth="220.0" />
    </children>
 </AnchorPane>

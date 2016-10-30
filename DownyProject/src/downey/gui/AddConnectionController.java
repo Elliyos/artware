@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import org.controlsfx.control.textfield.CustomTextField;
+import org.controlsfx.control.textfield.TextFields;
+
 import downey.main.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -102,29 +106,12 @@ public class AddConnectionController {
 		Parent root;
 		
 		if (event.getSource() == this.submit) {
-			for (int i = 0; i < selectedRecipientList.getItems().size(); i++) {
-				String name = selectedRecipientList.getItems().get(i);
-				selectedRecipients.add(DS.getPersonObject(name));
-			}
-			String location = locationInput.getText();
-			if (location.equals("")) location = "Unknown";
-			String date = dateInput.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-			String initiatorName = initiator.getValue();
-			if (initiatorName != null){
-				Person sender = DS.getPersonObject(initiatorName);
-				DS.addConnection(sender, selectedRecipients, date, typeInput.getValue(),
-						location, citationInput.getText(), notes.getText());
-
-			} else {
-				DS.addGroupConnection(selectedRecipients, date, typeInput.getValue(),
-						location, citationInput.getText(), notes.getText());
-			}
-			DS.saveConnections();
+			createConnection();
 			stage = (Stage) this.submit.getScene().getWindow();
-			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+			root = FXMLLoader.load(getClass().getResource("ViewConnections.fxml"));
 		} else {
 			stage = (Stage) this.goBack.getScene().getWindow();
-			root = FXMLLoader.load(getClass().getResource("ConnectionOptions.fxml"));
+			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		}
 		// create a new scene with root and set the stage
 		Scene scene = new Scene(root);
@@ -132,6 +119,27 @@ public class AddConnectionController {
 		stage.show();
 	}
 
+	public void createConnection() throws IOException{
+		for (int i = 0; i < selectedRecipientList.getItems().size(); i++) {
+			String name = selectedRecipientList.getItems().get(i);
+			selectedRecipients.add(DS.getPersonObject(name));
+		}
+		String location = locationInput.getText();
+		if (location.equals("")) location = "Unknown";
+		String date = dateInput.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+		String initiatorName = initiator.getValue();
+		if (initiatorName != null){
+			Person sender = DS.getPersonObject(initiatorName);
+			DS.addConnection(sender, selectedRecipients, date, typeInput.getValue(),
+					location, citationInput.getText(), notes.getText());
+
+		} else {
+			DS.addGroupConnection(selectedRecipients, date, typeInput.getValue(),
+					location, citationInput.getText(), notes.getText());
+		}
+		DS.saveConnections();
+	}
+	
 	@FXML
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;

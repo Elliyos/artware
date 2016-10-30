@@ -4,86 +4,110 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.PersonInfoController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.PersonInfoController">
    <children>
-      <Line endX="470.0" layoutX="115.0" layoutY="67.0" startX="-100.0" />
-      <Text fontSmoothingType="LCD" layoutX="14.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation">
+      <Text fontSmoothingType="LCD" layoutX="79.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation">
          <font>
-            <Font size="25.0" />
+            <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="208.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender">
+      <Text fontSmoothingType="LCD" layoutX="295.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender">
          <font>
-            <Font size="25.0" />
+            <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="14.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culture">
+      <Text fontSmoothingType="LCD" layoutX="206.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culture">
          <font>
-            <Font size="25.0" />
+            <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bio">
+      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bio">
          <font>
-            <Font size="25.0" />
+            <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="340.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connections">
+      <Text fontSmoothingType="LCD" layoutX="474.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connections">
          <font>
-            <Font size="25.0" />
+            <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Label id="genderLabel" fx:id="genderLabel" layoutX="208.0" layoutY="105.0" text="Label">
+      <Label id="genderLabel" fx:id="genderLabel" layoutX="295.0" layoutY="190.0" text="Label" textAlignment="CENTER">
          <font>
-            <Font size="20.0" />
+            <Font name="Open Sans" size="16.0" />
          </font>
       </Label>
-      <Label id="occupationLabel" fx:id="occupationLabel" layoutX="15.0" layoutY="105.0" text="Label">
+      <Label id="occupationLabel" fx:id="occupationLabel" layoutX="79.0" layoutY="189.0" text="Label" textAlignment="CENTER">
          <font>
-            <Font size="20.0" />
+            <Font name="Open Sans" size="16.0" />
          </font>
       </Label>
-      <Label id="cultureLabel" fx:id="cultureLabel" layoutX="15.0" layoutY="185.0" text="Label">
+      <Label id="cultureLabel" fx:id="cultureLabel" layoutX="206.0" layoutY="250.0" text="Label" textAlignment="CENTER">
          <font>
-            <Font size="20.0" />
+            <Font name="Open Sans" size="16.0" />
          </font>
       </Label>
-      <Label id="nameLabel" fx:id="nameLabel" layoutX="14.0" layoutY="14.0" text="name">
+      <Label id="nameLabel" fx:id="nameLabel" layoutX="360.0" layoutY="108.0" text="name" textAlignment="CENTER">
          <font>
-            <Font size="40.0" />
+            <Font name="Open Sans" size="30.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="13.0" layoutY="266.0" prefHeight="122.0" prefWidth="315.0">
+      <ScrollPane layoutX="15.0" layoutY="334.0" prefHeight="130.0" prefWidth="450.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="120.0" prefWidth="313.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="128.0" prefWidth="448.0">
                <children>
-                  <Label id="bioLabel" fx:id="bioLabel" alignment="TOP_LEFT" layoutY="-1.0" prefHeight="120.0" prefWidth="313.0" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TextArea fx:id="bioArea" editable="false" layoutX="-2.0" layoutY="-3.0" prefHeight="130.0" prefWidth="450.0">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="Open Sans" size="16.0" />
                      </font>
-                  </Label>
+                  </TextArea>
                </children>
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Button fx:id="goBack" layoutX="525.0" layoutY="31.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Go Back" />
-      <Button fx:id="editButton" layoutX="209.0" layoutY="164.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="58.0" prefWidth="81.0" text="Edit">
+      <Button fx:id="goBack" layoutX="14.0" layoutY="108.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Go Back">
          <font>
-            <Font size="25.0" />
+            <Font name="Open Sans" size="12.0" />
+         </font></Button>
+      <Button fx:id="editButton" layoutX="729.0" layoutY="467.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="60.0" text="Edit">
+         <font>
+            <Font name="Open Sans" size="12.0" />
          </font>
       </Button>
-      <ScrollPane layoutX="340.0" layoutY="110.0">
+      <ScrollPane layoutX="474.0" layoutY="185.0" prefHeight="279.0" prefWidth="315.0">
          <content>
-            <AnchorPane prefHeight="277.0" prefWidth="249.0">
+            <AnchorPane prefHeight="277.0" prefWidth="313.0">
                <children>
-                  <ListView fx:id="connections" prefHeight="277.0" prefWidth="246.0" />
+                  <ListView fx:id="connections" prefHeight="277.0" prefWidth="315.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
                </children>
             </AnchorPane>
          </content>
       </ScrollPane>
+      <Rectangle height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.1" width="800.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#283048" />
+                  <Stop color="#859398" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="340.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ArtWARE">
+         <font>
+            <Font name="Open Sans" size="30.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
    </children>
 </AnchorPane>

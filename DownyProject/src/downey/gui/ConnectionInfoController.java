@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 public class ConnectionInfoController {
@@ -20,6 +21,8 @@ public class ConnectionInfoController {
 	private Button goBack, editButton;
 	@FXML
 	private Label dateLabel, typeLabel, locationLabel, citationLabel, notesLabel, sender, recipients;
+	@FXML
+	private TextArea notesArea;
 	private Connection currentConnection;
 	
 
@@ -42,7 +45,8 @@ public class ConnectionInfoController {
     	typeLabel.setText(currentConnection.getInteractionType());
     	locationLabel.setText(currentConnection.getLocation());
     	citationLabel.setText(currentConnection.getCitation());
-    	notesLabel.setText(currentConnection.getNotes());
+    	notesArea.setText(currentConnection.getNotes());
+    	//notesLabel.setText(currentConnection.getNotes());
     }
     
     @FXML

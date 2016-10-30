@@ -74,7 +74,7 @@ public class FindPersonController {
 	@FXML
 	private void backAction(ActionEvent event) throws IOException {
 		Stage stage = (Stage) goBack.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("ProfileOptions.fxml"));	
+		Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));	
 		stage.setScene(new Scene(root));
 		stage.show();
 	}

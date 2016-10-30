@@ -20,11 +20,11 @@ import javafx.scene.control.ChoiceBox;
 public class EditInfoController {
 
 	@FXML
-	private TextField nameArea;
+	private TextField nameInput;
 	@FXML
-	private ChoiceBox<String> occupationArea, cultureArea, genderInput;
+	private ChoiceBox<String> occupationInput, cultureInput, genderInput;
 	@FXML
-	private TextArea bioArea;	
+	private TextArea bioInput;	
 	@FXML
 	private Button submit, goBack;
 	
@@ -38,13 +38,13 @@ public class EditInfoController {
 	@FXML
 	private void initialize() throws IOException{
 		currentPerson = DS.getPersonObject(SelectedInformationTracker.getSelectedName());
-		nameArea.setText(currentPerson.getName());
-		occupationArea.setValue(currentPerson.getOccupation());
-		cultureArea.setValue(currentPerson.getCulture());
-		bioArea.setText(currentPerson.getBio());
+		nameInput.setText(currentPerson.getName());
+		occupationInput.setValue(currentPerson.getOccupation());
+		cultureInput.setValue(currentPerson.getCulture());
+		bioInput.setText(currentPerson.getBio());
 		genderInput.setValue(currentPerson.getGender());
-		occupationArea.setItems(FXCollections.observableArrayList("Sculptor", "Scholar", "Painter", "Writer"));
-		cultureArea.setItems(FXCollections.observableArrayList("American", "Italian", "French", "German"));
+		occupationInput.setItems(FXCollections.observableArrayList("Sculptor", "Scholar", "Painter", "Writer"));
+		cultureInput.setItems(FXCollections.observableArrayList("American", "Italian", "French", "German"));
 		genderInput.setItems(FXCollections.observableArrayList("Male", "Female", "Other"));
 	}
 	
@@ -53,7 +53,7 @@ public class EditInfoController {
         Stage stage; 
         Parent root;
         if (event.getSource() == submit){       
-           currentPerson.editPerson(nameArea.getText(), cultureArea.getValue(), occupationArea.getValue(), genderInput.getValue(), bioArea.getText());
+           currentPerson.editPerson(nameInput.getText(), cultureInput.getValue(), occupationInput.getValue(), genderInput.getValue(), bioInput.getText());
            DS.savePeople();
            DS.saveConnections();
         	stage=(Stage) submit.getScene().getWindow();

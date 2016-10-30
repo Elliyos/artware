@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 
@@ -25,7 +26,9 @@ public class PersonInfoController{
 	@FXML
 	private Button goBack, editButton;
 	@FXML
-	private Label nameLabel, occupationLabel, cultureLabel, genderLabel, bioLabel;
+	private Label nameLabel, occupationLabel, cultureLabel, genderLabel;
+	@FXML
+	private TextArea bioArea;
 	@FXML
 	ListView<String> connections = new ListView<>();
 	
@@ -45,7 +48,7 @@ public class PersonInfoController{
     	occupationLabel.setText(chosenPerson.getOccupation());
     	cultureLabel.setText(chosenPerson.getCulture());
     	genderLabel.setText(chosenPerson.getGender());
-    	bioLabel.setText(chosenPerson.getBio());
+    	bioArea.setText(chosenPerson.getBio());
     	connections.setItems(FXCollections.observableArrayList(personConnections));
     }
     
