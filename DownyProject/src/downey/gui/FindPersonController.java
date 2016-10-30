@@ -1,6 +1,6 @@
 package downey.gui;
 
-import java.io.IOException; 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -48,19 +48,30 @@ public class FindPersonController {
 		filter.setItems(FXCollections.observableArrayList("Name", "Occupation", "Culture", "Gender"));
 	}
 
+	private void addToSet(int index) {
+		selectedPerson = peopleList.get(index);
+		String name = selectedPerson.getName();
+		observableSet.addAll(Arrays.asList(name));
+	}
+
 	public ObservableSet<String> nameList(ArrayList<Person> peopleList) {
-		String name;
-		for (int i = 0; i <= peopleList.size() - 1; i++) {
-			selectedPerson = peopleList.get(i);
-			name = selectedPerson.getName();
-			observableSet.addAll(Arrays.asList(name));
-		}
+		for (int i = 0; i <= peopleList.size() - 1; i++)
+			addToSet(i);
 		return observableSet;
 	}
-	
+
+	public ObservableSet<String> filteredNameList(ArrayList<Person> peopleList, PersonQuery query) {
+		for (int i = 0; i <= peopleList.size() - 1; i++) 
+			if (query.accepts(peopleList.get(i)))
+				addToSet(i);
+		return observableSet;
+	}
+
 	@FXML
 	private void filterAction(ActionEvent event) {
-		
+		PersonQuery containsFilter = new PersonContainsQuery(target, filter.getSelectionModel().getSelectedItem());
+		list.setItems(FXCollections.observableArrayList(filteredNameList(peopleList, containsFilter)));
+
 	}
 
 	@FXML
@@ -80,15 +91,15 @@ public class FindPersonController {
 			stage.show();
 		}
 	}
-	
+
 	@FXML
 	private void backAction(ActionEvent event) throws IOException {
 		Stage stage = (Stage) goBack.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));	
+		Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		stage.setScene(new Scene(root));
 		stage.show();
 	}
-	
+
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
