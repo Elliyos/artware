@@ -74,7 +74,6 @@ public class FindPersonController {
 			filteredSet.clear();
 			PersonQuery containsFilter = new PersonContainsQuery(target.getText(), filter.getValue());
 			list.setItems(FXCollections.observableArrayList(filteredNameList(containsFilter)));
-			System.out.println(list.getItems().toString());
 		});
 	}
 	

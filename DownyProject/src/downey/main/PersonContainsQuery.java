@@ -5,22 +5,22 @@ public class PersonContainsQuery implements PersonQuery {
 	private String fieldName;
 
 	public PersonContainsQuery(String target, String fieldName) {
-		this.target = target;
-		this.fieldName = fieldName;
+		this.target = target.toLowerCase();
+		this.fieldName = fieldName.toLowerCase();
 	}
 	@Override
 	public boolean accepts(Person p) {
 		switch (fieldName) {
-			case "Occupation":
-				return p.getOccupation().contains(target);
-			case "Name":
-				return p.getName().toLowerCase().contains(target.toLowerCase());
-			case "Culture":
-				return p.getCulture().contains(target);
-			case "Gender":
-				return p.getGender().contains(target);
-			case "Bio":
-				return p.getBio().contains(target);
+			case "occupation":
+				return p.getOccupation().toLowerCase().contains(target);
+			case "name":
+				return p.getName().toLowerCase().contains(target);
+			case "culture":
+				return p.getCulture().toLowerCase().contains(target);
+			case "gender":
+				return p.getGender().toLowerCase().contains(target);
+			case "bio":
+				return p.getBio().toLowerCase().contains(target);
 			default:
 				return false;
 		}
