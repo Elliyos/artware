@@ -16,9 +16,9 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.EditConnectionController">
    <children>
-      <Text layoutX="290.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Connection" underline="true">
+      <Text fontSmoothingType="LCD" layoutX="297.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Connection">
          <font>
-            <Font name="Open Sans" size="30.0" />
+            <Font name="Open Sans Italic" size="30.0" />
          </font>
       </Text>
       <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Initiator">

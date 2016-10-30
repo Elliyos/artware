@@ -15,12 +15,12 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.FindPersonController">
    <children>
-      <Text fontSmoothingType="LCD" layoutX="308.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View People">
+      <Text fontSmoothingType="LCD" layoutX="323.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View People">
          <font>
-            <Font name="Open Sans" size="30.0" />
+            <Font name="Open Sans Italic" size="30.0" />
          </font>
       </Text>
-      <ScrollPane hbarPolicy="NEVER" layoutX="31.0" layoutY="191.0" prefHeight="263.0" prefWidth="740.0">
+      <ScrollPane hbarPolicy="NEVER" layoutX="31.0" layoutY="171.0" prefHeight="263.0" prefWidth="740.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="261.0" prefWidth="737.0">
                <children>
@@ -28,9 +28,9 @@
                </children></AnchorPane>
         </content>
       </ScrollPane>
-      <Button fx:id="viewButton" layoutX="744.0" layoutY="461.0" mnemonicParsing="false" onAction="#viewAction" text="View">
+      <Button fx:id="viewButton" layoutX="354.0" layoutY="442.0" mnemonicParsing="false" onAction="#viewAction" prefHeight="52.0" prefWidth="96.0" text="View">
          <font>
-            <Font name="Open Sans" size="12.0" />
+            <Font name="Open Sans" size="24.0" />
          </font></Button>
       <Button fx:id="goBack" layoutX="14.0" layoutY="78.0" mnemonicParsing="false" onAction="#backAction" prefHeight="25.0" prefWidth="62.0" text="Go Back">
          <font>
@@ -54,8 +54,15 @@
             <DropShadow />
          </effect>
       </Text>
-      <TextField fx:id="target" layoutX="346.0" layoutY="150.0" />
-      <Button fx:id="searchButton" layoutX="494.0" layoutY="148.0" mnemonicParsing="false" onAction="#filterAction" prefHeight="25.0" prefWidth="62.0" text="Search" />
-      <ChoiceBox fx:id="filter" layoutX="182.0" layoutY="150.0" prefWidth="150.0" />
+      <TextField fx:id="target" layoutX="346.0" layoutY="138.0" prefHeight="25.0" prefWidth="150.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <Button fx:id="searchButton" layoutX="509.0" layoutY="138.0" mnemonicParsing="false" onAction="#filterAction" prefHeight="25.0" prefWidth="62.0" text="Search">
+         <font>
+            <Font name="Open Sans" size="12.0" />
+         </font></Button>
+      <ChoiceBox fx:id="filter" layoutX="181.0" layoutY="138.0" prefWidth="150.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <Button fx:id="clear" layoutX="582.0" layoutY="138.0" mnemonicParsing="false" onAction="#clearList" text="Clear">
+         <font>
+            <Font name="Open Sans" size="12.0" />
+         </font></Button>
    </children>
 </AnchorPane>

@@ -33,7 +33,7 @@ public class FindPersonController {
 	@FXML
 	ListView<String> filterList = new ListView<String>();
 	@FXML
-	private Button goBack, viewButton, searchButton;
+	private Button goBack, viewButton, searchButton, clear;
 	@FXML
 	private ChoiceBox<String> filter;
 	@FXML
@@ -73,8 +73,15 @@ public class FindPersonController {
 		searchButton.setOnAction((e) -> {
 			filteredSet.clear();
 			PersonQuery containsFilter = new PersonContainsQuery(target.getText(), filter.getValue());
-			filterList.setItems(FXCollections.observableArrayList(filteredNameList(containsFilter)));
-			System.out.println(filterList.getItems().toString());
+			list.setItems(FXCollections.observableArrayList(filteredNameList(containsFilter)));
+			System.out.println(list.getItems().toString());
+		});
+	}
+	
+	@FXML
+	private void clearList(ActionEvent event){
+		clear.setOnAction(e -> {
+			list.setItems(FXCollections.observableArrayList(nameList()));
 		});
 	}
 

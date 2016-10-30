@@ -15,17 +15,17 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.PersonInfoController">
    <children>
-      <Text fontSmoothingType="LCD" layoutX="79.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation">
+      <Text fontSmoothingType="LCD" layoutX="14.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="295.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender">
+      <Text fontSmoothingType="LCD" layoutX="14.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="206.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culture">
+      <Text fontSmoothingType="LCD" layoutX="14.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culture">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
@@ -40,17 +40,17 @@
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Label id="genderLabel" fx:id="genderLabel" layoutX="295.0" layoutY="190.0" text="Label" textAlignment="CENTER">
+      <Label id="genderLabel" fx:id="genderLabel" layoutX="165.0" layoutY="231.0" text="Label" textAlignment="CENTER">
          <font>
             <Font name="Open Sans" size="16.0" />
          </font>
       </Label>
-      <Label id="occupationLabel" fx:id="occupationLabel" layoutX="79.0" layoutY="189.0" text="Label" textAlignment="CENTER">
+      <Label id="occupationLabel" fx:id="occupationLabel" layoutX="165.0" layoutY="148.0" text="Label" textAlignment="CENTER">
          <font>
             <Font name="Open Sans" size="16.0" />
          </font>
       </Label>
-      <Label id="cultureLabel" fx:id="cultureLabel" layoutX="206.0" layoutY="250.0" text="Label" textAlignment="CENTER">
+      <Label id="cultureLabel" fx:id="cultureLabel" layoutX="165.0" layoutY="190.0" text="Label" textAlignment="CENTER">
          <font>
             <Font name="Open Sans" size="16.0" />
          </font>
