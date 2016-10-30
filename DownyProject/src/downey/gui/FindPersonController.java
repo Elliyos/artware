@@ -27,9 +27,9 @@ public class FindPersonController {
 	@FXML
 	private final ObservableSet<String> observableSet = FXCollections.observableSet();
 	@FXML
-	ObservableList<String> people = FXCollections.observableArrayList();
+	private ObservableSet<String> filteredSet = FXCollections.observableSet();
 	@FXML
-	ListView<String> list = new ListView<String>(people);
+	ListView<String> list = new ListView<String>();
 	@FXML
 	ListView<String> filterList = new ListView<String>();
 	@FXML
@@ -44,34 +44,38 @@ public class FindPersonController {
 
 	@FXML
 	private void initialize() throws IOException {
-		list.setItems(FXCollections.observableArrayList(nameList(peopleList)));
+		list.setItems(FXCollections.observableArrayList(nameList()));
 		filter.setItems(FXCollections.observableArrayList("Name", "Occupation", "Culture", "Gender"));
 	}
 
-	private void addToSet(int index) {
-		selectedPerson = peopleList.get(index);
-		String name = selectedPerson.getName();
-		observableSet.addAll(Arrays.asList(name));
-	}
-
-	public ObservableSet<String> nameList(ArrayList<Person> peopleList) {
-		for (int i = 0; i <= peopleList.size() - 1; i++)
-			addToSet(i);
+	public ObservableSet<String> nameList() {
+		for (int i = 0; i <= peopleList.size() - 1; i++) {
+			selectedPerson = peopleList.get(i);
+			String name = selectedPerson.getName();
+			observableSet.addAll(Arrays.asList(name));
+		}
 		return observableSet;
 	}
 
-	public ObservableSet<String> filteredNameList(ArrayList<Person> peopleList, PersonQuery query) {
-		for (int i = 0; i <= peopleList.size() - 1; i++) 
-			if (query.accepts(peopleList.get(i)))
-				addToSet(i);
-		return observableSet;
+	public ObservableSet<String> filteredNameList(PersonQuery query) {
+		for (int i = 0; i <= peopleList.size() - 1; i++) { 
+			if (query.accepts(peopleList.get(i))) {
+				selectedPerson = peopleList.get(i);
+				String name = selectedPerson.getName();
+				filteredSet.addAll(Arrays.asList(name));
+			}
+		}
+		return filteredSet;
 	}
 
 	@FXML
 	private void filterAction(ActionEvent event) {
-		PersonQuery containsFilter = new PersonContainsQuery(target, filter.getSelectionModel().getSelectedItem());
-		list.setItems(FXCollections.observableArrayList(filteredNameList(peopleList, containsFilter)));
-
+		searchButton.setOnAction((e) -> {
+			filteredSet.clear();
+			PersonQuery containsFilter = new PersonContainsQuery(target.getText(), filter.getValue());
+			filterList.setItems(FXCollections.observableArrayList(filteredNameList(containsFilter)));
+			System.out.println(filterList.getItems().toString());
+		});
 	}
 
 	@FXML
