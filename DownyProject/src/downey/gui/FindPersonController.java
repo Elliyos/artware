@@ -24,9 +24,7 @@ public class FindPersonController {
 	private final ArrayList<Person> peopleList = DS.getPeopleArray();
 	private Person selectedPerson;
 
-	@FXML
 	private final ObservableSet<String> observableSet = FXCollections.observableSet();
-	@FXML
 	private ObservableSet<String> filteredSet = FXCollections.observableSet();
 	@FXML
 	ListView<String> list = new ListView<String>();

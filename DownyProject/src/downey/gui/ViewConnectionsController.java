@@ -37,9 +37,7 @@ public class ViewConnectionsController {
 	ListView<String> list = new ListView<String>();
 	@FXML
 	private Button goBack, viewButton, searchButton, clear;
-	@FXML
 	private ArrayList<Connection> connectionList = DS.getConnectionArray();
-	@FXML
 	private ObservableSet<String> filteredSet = FXCollections.observableSet();
 	@FXML
 	private TextField target;

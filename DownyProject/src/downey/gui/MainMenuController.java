@@ -21,7 +21,6 @@ public class MainMenuController {
 	 */
 
 	public MainMenuController() {
-	
 	}
 
 	/**
@@ -31,7 +30,6 @@ public class MainMenuController {
 
 	@FXML
 	private void initialize() {
-
 	}
 	
 	@FXML

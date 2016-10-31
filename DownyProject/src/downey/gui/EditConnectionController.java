@@ -22,7 +22,8 @@ public class EditConnectionController {
 	private final DataStorage DS = DataStorage.getMainDataStorage();
 	private final ControlledVocab vocab = ControlledVocab.getControlledVocab(); 
 	private MainApp mainApp;
-
+	public ArrayList<Person> peopleList = DS.getPeopleArray();
+	
 	@FXML
 	private Button submit, home, add, search, remove, clear, toViewConnections, toConnectionInfo;
 	@FXML
@@ -33,12 +34,11 @@ public class EditConnectionController {
 	private TextField locationInput, citationInput, searchInput;
 	@FXML
 	private TextArea notes;
-	@FXML
+
 	private final ObservableSet<String> observableSet = FXCollections.observableSet();
+	private ObservableSet<String> filteredSet = FXCollections.observableSet();
 	@FXML
-	ObservableList<String> people = FXCollections.observableArrayList();
-	@FXML
-	ListView<String> recipientList = new ListView<String>(people);
+	ListView<String> recipientList = new ListView<String>();
 	@FXML
 	ListView<String> selectedRecipientList = new ListView<>();
 
@@ -52,14 +52,15 @@ public class EditConnectionController {
 	@FXML
 	private void initialize() {
 		currentConnection = SelectedInformationTracker.getSelectedConnection();
-		recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
+		recipientList.setItems(FXCollections.observableArrayList(nameList()));
 		recipientList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		selectedRecipientList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		initiator.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
+		initiator.setItems(FXCollections.observableArrayList(nameList()));
 		typeInput.setItems(vocab.getInteractionTypeOptions());
 		addRecipients();
 		removeRecipients();
 		searchRecipients();
+		clearRecipients();
 
 		if (currentConnection.getSender() != null) {
 			initiator.setValue(currentConnection.getSender().getName());
@@ -75,12 +76,23 @@ public class EditConnectionController {
 
 	}
 
-	public ObservableSet<String> nameList(ArrayList<Person> peopleList) {
+	public ObservableSet<String> nameList() {
 		for (int i = 0; i <= peopleList.size() - 1; i++) {
 			selectedPerson = peopleList.get(i);
 			observableSet.addAll(Arrays.asList(selectedPerson.getName()));
 		}
 		return observableSet;
+	}
+	
+	public ObservableSet<String> filteredNameList(PersonQuery query) {
+		for (int i = 0; i <= peopleList.size() - 1; i++) { 
+			if (query.accepts(peopleList.get(i))) {
+				selectedPerson = peopleList.get(i);
+				String name = selectedPerson.getName();
+				filteredSet.addAll(Arrays.asList(name));
+			}
+		}
+		return filteredSet;
 	}
 	
 	public void removeRecipients() {
@@ -94,7 +106,7 @@ public class EditConnectionController {
 	
 	public void clearRecipients() {
 		clear.setOnAction(
-				e -> recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray()))));
+				e -> recipientList.setItems(FXCollections.observableArrayList(nameList())));
 	}
 	
 	public void addRecipients() {
