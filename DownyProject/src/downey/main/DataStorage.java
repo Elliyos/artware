@@ -180,7 +180,7 @@ public class DataStorage {
 	 *            the name of the file that stores the connection information
 	 * @return void
 	 */
-	public void loadConnections() throws IOException, EOFException {
+	public void loadConnections() throws IOException {
 		CSVReader reader = new CSVReader(new FileReader("data/connections.csv"));
 		List<String[]> myRows = reader.readAll();
 		for (String[] row : myRows) {
@@ -203,6 +203,7 @@ public class DataStorage {
 				connections.add(new Connection(receivers, date, source, location, citation, notes));
 			}
 		}
+		reader.close();
 	}
 
 	/**
@@ -257,6 +258,7 @@ public class DataStorage {
 			String bio = row[4];
 			people.add(new Person(name, occupation, culture, gender, bio));
 		});
+		reader.close();
 	}
 
 	public ArrayList<Person> getPeopleArray() {

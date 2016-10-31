@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 public class EditConnectionController {
 
 	private final DataStorage DS = DataStorage.getMainDataStorage();
+	private final ControlledVocab vocab = ControlledVocab.getControlledVocab(); 
 	private MainApp mainApp;
 
 	@FXML
@@ -55,38 +56,10 @@ public class EditConnectionController {
 		recipientList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		selectedRecipientList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		initiator.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
-		typeInput.setItems(FXCollections.observableArrayList("Letter", "Email", "Meeting", "Party"));
-		
-		search.setOnAction((event) -> {
-			String searchText = searchInput.getText();
-			PersonQuery filter = new PersonContainsQuery(searchText, "Name");
-			observableSet.clear();
-			ArrayList<Person> array = DS.getPeopleArray();
-			for (int i = 0; i < array.size(); i++){
-				Person temp = array.get(i);
-				if (filter.accepts(temp)){
-					observableSet.add(temp.getName());
-				}
-			}
-			recipientList.setItems(FXCollections.observableArrayList(observableSet));
-		});
-		
-		add.setOnAction((event) -> {
-			observableSet.clear();
-			ObservableList<String> selectedRecipientsTemp = recipientList.getSelectionModel().getSelectedItems();
-			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
-				if (!selectedRecipientList.getItems().contains(selectedRecipientsTemp.get(i))) {
-					selectedRecipientList.getItems().add(i, selectedRecipientsTemp.get(i));
-				}
-			}
-		});
-		
-		remove.setOnAction((event) -> {
-			ObservableList<String> selectedRecipientsTemp = selectedRecipientList.getSelectionModel().getSelectedItems();
-			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
-				selectedRecipientList.getItems().remove(selectedRecipientsTemp.get(i));
-			}
-		});
+		typeInput.setItems(vocab.getInteractionTypeOptions());
+		addRecipients();
+		removeRecipients();
+		searchRecipients();
 		
 		if (currentConnection.getSender() != null) {
 			initiator.setValue(currentConnection.getSender().getName());
@@ -110,8 +83,45 @@ public class EditConnectionController {
 		return observableSet;
 	}
 	
+	public void removeRecipients() {
+		remove.setOnAction((event) -> {
+			ObservableList<String> selectedRecipientsTemp = selectedRecipientList.getSelectionModel().getSelectedItems();
+			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
+				selectedRecipientList.getItems().remove(selectedRecipientsTemp.get(i));
+			}
+		});
+	}
+	
 	public void clearRecipients() {
 		clear.setOnAction(e -> recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray()))));
+	}
+	
+	public void addRecipients() {
+		add.setOnAction((event) -> {
+			observableSet.clear();
+			ObservableList<String> selectedRecipientsTemp = recipientList.getSelectionModel().getSelectedItems();
+			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
+				if (!selectedRecipientList.getItems().contains(selectedRecipientsTemp.get(i))) {
+					selectedRecipientList.getItems().add(i, selectedRecipientsTemp.get(i));
+				}
+			}
+		});
+	}
+	
+	public void searchRecipients() {
+		search.setOnAction((event) -> {
+			String searchText = searchInput.getText();
+			PersonQuery filter = new PersonContainsQuery(searchText, "Name");
+			observableSet.clear();
+			ArrayList<Person> array = DS.getPeopleArray();
+			for (int i = 0; i < array.size(); i++){
+				Person temp = array.get(i);
+				if (filter.accepts(temp)){
+					observableSet.add(temp.getName());
+				}
+			}
+			recipientList.setItems(FXCollections.observableArrayList(observableSet));
+		});
 	}
 
 	@FXML

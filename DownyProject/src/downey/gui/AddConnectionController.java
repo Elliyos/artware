@@ -5,9 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.controlsfx.control.textfield.CustomTextField;
-import org.controlsfx.control.textfield.TextFields;
-
 import downey.main.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +20,7 @@ import javafx.stage.Stage;
 public class AddConnectionController {
 
 	private final DataStorage DS = DataStorage.getMainDataStorage();
+	private final ControlledVocab vocab = ControlledVocab.getControlledVocab(); 
 	private MainApp mainApp;
 
 	@FXML
@@ -55,40 +53,10 @@ public class AddConnectionController {
 		recipientList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		selectedRecipientList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		initiator.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
-		typeInput.setItems(FXCollections.observableArrayList("Letter", "Email", "Meeting", "Party"));
-
-		search.setOnAction((event) -> {
-			String searchText = searchInput.getText();
-			observableSet.clear();
-			if (DS.searchPerson(searchText) > 0) {
-				Person temp = DS.getPersonObject(searchText);
-				observableSet.add(temp.getName());
-				recipientList.setItems(FXCollections.observableArrayList(observableSet));
-			} else if (searchText.equals("")) {
-				recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
-				recipientList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-			} else {
-				recipientList.setItems(FXCollections.observableArrayList(observableSet));
-			}
-		});
-		
-		
-		add.setOnAction((event) -> {
-			observableSet.clear();
-			ObservableList<String> selectedRecipientsTemp = recipientList.getSelectionModel().getSelectedItems();
-			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
-				if (!selectedRecipientList.getItems().contains(selectedRecipientsTemp.get(i))) {
-					selectedRecipientList.getItems().add(i, selectedRecipientsTemp.get(i));
-				}
-			}
-		});
-		
-		remove.setOnAction((event) -> {
-			ObservableList<String> selectedRecipientsTemp = selectedRecipientList.getSelectionModel().getSelectedItems();
-			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
-				selectedRecipientList.getItems().remove(selectedRecipientsTemp.get(i));
-			}
-		});
+		typeInput.setItems(vocab.getInteractionTypeOptions());
+		addRecipients();
+		removeRecipients();
+		searchRecipients();
 	}
 	 
 
@@ -117,6 +85,44 @@ public class AddConnectionController {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+	}
+	
+	public void addRecipients() {
+		add.setOnAction((event) -> {
+			observableSet.clear();
+			ObservableList<String> selectedRecipientsTemp = recipientList.getSelectionModel().getSelectedItems();
+			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
+				if (!selectedRecipientList.getItems().contains(selectedRecipientsTemp.get(i))) {
+					selectedRecipientList.getItems().add(i, selectedRecipientsTemp.get(i));
+				}
+			}
+		});
+	}
+	
+	public void searchRecipients() {
+		search.setOnAction((event) -> {
+			String searchText = searchInput.getText();
+			observableSet.clear();
+			if (DS.searchPerson(searchText) > 0) {
+				Person temp = DS.getPersonObject(searchText);
+				observableSet.add(temp.getName());
+				recipientList.setItems(FXCollections.observableArrayList(observableSet));
+			} else if (searchText.equals("")) {
+				recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
+				recipientList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+			} else {
+				recipientList.setItems(FXCollections.observableArrayList(observableSet));
+			}
+		});
+	}
+	
+	public void removeRecipients() {
+		remove.setOnAction((event) -> {
+			ObservableList<String> selectedRecipientsTemp = selectedRecipientList.getSelectionModel().getSelectedItems();
+			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
+				selectedRecipientList.getItems().remove(selectedRecipientsTemp.get(i));
+			}
+		});
 	}
 	
 	public void clearRecipients() {

@@ -47,6 +47,7 @@ public class MainApp extends Application {
     public static void main(String[] args) throws IOException {
     	DataStorage.getMainDataStorage().loadPeople();
     	DataStorage.getMainDataStorage().loadConnections();
+    	ControlledVocab.getControlledVocab().loadControlledVocab();
         launch(args);
     }
 }

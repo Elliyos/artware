@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 
 public class AddInfoController {
 
+	private final ControlledVocab vocab = ControlledVocab.getControlledVocab(); 
 	@FXML
 	private Button add, goBack;
 	@FXML
@@ -35,8 +36,8 @@ public class AddInfoController {
 	@FXML
 	private void initialize() {
 		genderInput.setItems(FXCollections.observableArrayList("Male", "Female", "Other"));
-		cultureInput.setItems(FXCollections.observableArrayList("American", "Italian", "French", "German"));
-		occupationInput.setItems(FXCollections.observableArrayList("Sculptor", "Scholar", "Painter", "Writer"));
+		cultureInput.setItems(vocab.getCultureOptions());
+		occupationInput.setItems(vocab.getOccupationOptions());
 	}
 
 	@FXML

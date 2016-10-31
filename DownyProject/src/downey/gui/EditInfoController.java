@@ -19,6 +19,7 @@ import javafx.scene.control.ChoiceBox;
 
 public class EditInfoController {
 
+	private final ControlledVocab vocab = ControlledVocab.getControlledVocab(); 
 	@FXML
 	private TextField nameInput;
 	@FXML
@@ -43,8 +44,8 @@ public class EditInfoController {
 		cultureInput.setValue(currentPerson.getCulture());
 		bioInput.setText(currentPerson.getBio());
 		genderInput.setValue(currentPerson.getGender());
-		occupationInput.setItems(FXCollections.observableArrayList("Sculptor", "Scholar", "Painter", "Writer"));
-		cultureInput.setItems(FXCollections.observableArrayList("American", "Italian", "French", "German"));
+		occupationInput.setItems(vocab.getOccupationOptions());
+		cultureInput.setItems(vocab.getCultureOptions());
 		genderInput.setItems(FXCollections.observableArrayList("Male", "Female", "Other"));
 	}
 	
