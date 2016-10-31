@@ -22,7 +22,7 @@ public class ConnectionContainsQuery implements ConnectionQuery{
 						return true;
 			case "date":
 				return c.getDate().contains(target);
-			case "type":
+			case "interaction type":
 				return c.getInteractionType().toLowerCase().contains(target);
 			case "location":
 				return c.getLocation().toLowerCase().contains(target);
