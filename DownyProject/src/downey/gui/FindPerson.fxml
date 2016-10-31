@@ -55,12 +55,12 @@
          </effect>
       </Text>
       <TextField fx:id="target" layoutX="346.0" layoutY="138.0" prefHeight="25.0" prefWidth="150.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
-      <Button fx:id="searchButton" layoutX="509.0" layoutY="138.0" mnemonicParsing="false" onAction="#filterAction" prefHeight="25.0" prefWidth="62.0" text="Search">
+      <Button fx:id="searchButton" layoutX="509.0" layoutY="138.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Search">
          <font>
             <Font name="Open Sans" size="12.0" />
          </font></Button>
       <ChoiceBox fx:id="filter" layoutX="181.0" layoutY="138.0" prefWidth="150.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
-      <Button fx:id="clear" layoutX="582.0" layoutY="138.0" mnemonicParsing="false" onAction="#clearList" text="Clear">
+      <Button fx:id="clear" layoutX="582.0" layoutY="138.0" mnemonicParsing="false" text="Clear">
          <font>
             <Font name="Open Sans" size="12.0" />
          </font></Button>
