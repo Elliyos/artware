@@ -74,7 +74,7 @@ public class ViewConnectionsController {
 		for (int i = 0; i <= connectionList.size() - 1; i++) { 
 			if (query.accepts(connectionList.get(i))) {
 				Connection selectedConnection = connectionList.get(i);
-				filteredSet.addAll(Arrays.asList(selectedConnection.toString()));
+				filteredSet.addAll(Arrays.asList(selectedConnection.getSender().getName() + " : " + selectedConnection.getReceiverNameList()));
 			}
 		}
 		return filteredSet;

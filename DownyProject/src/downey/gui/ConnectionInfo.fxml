@@ -20,7 +20,7 @@
             <Font name="Open Sans" size="25.0" />
          </font>
       </Label>
-      <Text fontSmoothingType="LCD" layoutX="41.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To">
+      <Text layoutX="41.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
@@ -76,10 +76,6 @@
             <Font name="Open Sans" size="25.0" />
          </font>
       </Text>
-      <Button fx:id="goBack" layoutX="8.0" layoutY="78.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="27.0" prefWidth="69.0" text="Go Back">
-         <font>
-            <Font name="Open Sans" size="12.0" />
-         </font></Button>
       <Button fx:id="editButton" layoutX="352.0" layoutY="431.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="41.0" prefWidth="99.0" text="Edit">
          <font>
             <Font name="Open Sans" size="26.0" />
@@ -120,5 +116,16 @@
             <Font name="Open Sans Italic" size="30.0" />
          </font>
       </Text>
+      <Button fx:id="home" layoutX="7.0" layoutY="78.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: TRANSPARENT;" text="Home" underline="true">
+         <font>
+            <Font name="Open Sans" size="12.0" />
+         </font>
+      </Button>
+      <Line layoutX="64.0" layoutY="82.0" startY="15.0" />
+      <Button fx:id="toViewConnections" layoutX="70.0" layoutY="78.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: TRANSPARENT;" text="View Connections" underline="true">
+         <font>
+            <Font name="Open Sans" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

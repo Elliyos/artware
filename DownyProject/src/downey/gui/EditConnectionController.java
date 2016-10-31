@@ -24,7 +24,7 @@ public class EditConnectionController {
 	private MainApp mainApp;
 
 	@FXML
-	private Button submit, goBack, add, search, remove, clear;
+	private Button submit, home, add, search, remove, clear, toViewConnections, toConnectionInfo;
 	@FXML
 	private ChoiceBox<String> initiator, typeInput;
 	@FXML
@@ -60,7 +60,7 @@ public class EditConnectionController {
 		addRecipients();
 		removeRecipients();
 		searchRecipients();
-		
+
 		if (currentConnection.getSender() != null) {
 			initiator.setValue(currentConnection.getSender().getName());
 		}
@@ -93,7 +93,8 @@ public class EditConnectionController {
 	}
 	
 	public void clearRecipients() {
-		clear.setOnAction(e -> recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray()))));
+		clear.setOnAction(
+				e -> recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray()))));
 	}
 	
 	public void addRecipients() {
@@ -148,8 +149,14 @@ public class EditConnectionController {
 			DS.saveConnections();
 			stage = (Stage) this.submit.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+		} else if (event.getSource() == home) {
+			stage = (Stage) this.home.getScene().getWindow();
+			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+		} else if (event.getSource() == toViewConnections) {
+			stage = (Stage) this.toViewConnections.getScene().getWindow();
+			root = FXMLLoader.load(getClass().getResource("ViewConnections.fxml"));
 		} else {
-			stage = (Stage) this.goBack.getScene().getWindow();
+			stage = (Stage) this.toConnectionInfo.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("ConnectionInfo.fxml"));
 		}
 		// create a new scene with root and set the stage

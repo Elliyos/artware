@@ -17,6 +17,8 @@ public class AddInfoController {
 
 	private final ControlledVocab vocab = ControlledVocab.getControlledVocab(); 
 	@FXML
+	private TreeItem<String> home = new TreeItem<String>("Home");
+	@FXML
 	private Button add, goBack;
 	@FXML
 	private TextField nameInput;
@@ -24,7 +26,6 @@ public class AddInfoController {
 	private ChoiceBox<String> cultureInput, occupationInput, genderInput;
 	@FXML
 	private TextArea bioInput;
-	private MainApp mainApp;
 
 	public AddInfoController() {}
 
@@ -32,7 +33,6 @@ public class AddInfoController {
 	 * Initializes the controller class. This method is automatically called
 	 * after the fxml file has been loaded.
 	 */
-
 	@FXML
 	private void initialize() {
 		genderInput.setItems(FXCollections.observableArrayList("Male", "Female", "Other"));
@@ -66,9 +66,9 @@ public class AddInfoController {
 	public void add() throws IOException{
 		DataStorage DS = DataStorage.getMainDataStorage();
 		String name = nameInput.getText();
-		String culture = cultureInput.getValue();
-		String occupation = occupationInput.getValue();
-		String gender = genderInput.getValue();
+		String culture = (String) cultureInput.getValue();
+		String occupation = (String) occupationInput.getValue();
+		String gender = (String) genderInput.getValue();
 		String bio = bioInput.getText();
 
 		DS.addPerson(name, culture, occupation, gender, bio);
@@ -76,13 +76,4 @@ public class AddInfoController {
 		DS.saveConnections();
 	}
 
-	/**
-	 * Is called by the main application to give a reference back to itself.
-	 * 
-	 * @param mainApp
-	 */
-	@FXML
-	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
-	}
 }
