@@ -23,13 +23,13 @@ public class ConnectionContainsQuery implements ConnectionQuery{
 			case "date":
 				return c.getDate().contains(target);
 			case "type":
-				return c.getInteractionType().contains(target);
+				return c.getInteractionType().toLowerCase().contains(target);
 			case "location":
-				return c.getLocation().contains(target);
+				return c.getLocation().toLowerCase().contains(target);
 			case "citation":
-				return c.getCitation().contains(target);
+				return c.getCitation().toLowerCase().contains(target);
 			case "notes":
-				return c.getNotes().contains(target);
+				return c.getNotes().toLowerCase().contains(target);
 			default:
 				return false;
 		}
