@@ -46,6 +46,7 @@ public class FindPersonController {
 	private void initialize() throws IOException {
 		list.setItems(FXCollections.observableArrayList(nameList()));
 		filter.setItems(FXCollections.observableArrayList("Name", "Occupation", "Culture", "Gender"));
+		filter.setValue("Name");
 	}
 
 	public ObservableSet<String> nameList() {
