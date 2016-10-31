@@ -10,6 +10,7 @@ public class ConnectionContainsQuery implements ConnectionQuery{
 		this.target = target.toLowerCase();
 		this.fieldName = fieldName.toLowerCase();
 	}
+	
 	@Override
 	public boolean accepts(Connection c) {
 		switch (fieldName) {
