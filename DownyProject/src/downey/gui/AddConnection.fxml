@@ -101,12 +101,12 @@
          <children>
             <ListView fx:id="recipientList" layoutY="-5.0" prefHeight="125.0" prefWidth="279.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
             <ListView fx:id="selectedRecipientList" layoutY="166.0" prefHeight="100.0" prefWidth="279.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
-            <Button fx:id="add" layoutX="227.0" layoutY="133.0" mnemonicParsing="false" text="Add">
+            <Button fx:id="add" layoutX="227.0" layoutY="130.0" mnemonicParsing="false" text="Add">
                <font>
                   <Font name="Open Sans" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="search" layoutX="167.0" layoutY="133.0" mnemonicParsing="false" text="Search">
+            <Button fx:id="search" layoutX="167.0" layoutY="130.0" mnemonicParsing="false" text="Search">
                <font>
                   <Font name="Open Sans" size="12.0" />
                </font>
@@ -116,8 +116,13 @@
                   <Font name="Open Sans" size="12.0" />
                </font>
             </Button>
-            <TextField fx:id="searchInput" layoutX="12.0" layoutY="134.0" promptText="Search" />
+            <TextField fx:id="searchInput" layoutX="12.0" layoutY="131.0" promptText="Search" />
          </children>
       </AnchorPane>
+      <Button fx:id="clear" layoutX="741.0" layoutY="123.0" mnemonicParsing="false" onAction="#clearRecipients" text="Clear">
+         <font>
+            <Font name="Open Sans" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
