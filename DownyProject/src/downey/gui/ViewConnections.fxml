@@ -57,12 +57,12 @@
       </Text>
       <TextField fx:id="target" layoutX="335.0" layoutY="142.0" prefHeight="25.0" prefWidth="157.0" />
       <ChoiceBox fx:id="filter" layoutX="174.0" layoutY="142.0" prefWidth="150.0" />
-      <Button fx:id="searchButton" layoutX="500.0" layoutY="142.0" mnemonicParsing="false" onAction="#filterAction" text="Search">
+      <Button fx:id="searchButton" layoutX="500.0" layoutY="142.0" mnemonicParsing="false" text="Search">
          <font>
             <Font name="Open Sans" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="clear" layoutX="560.0" layoutY="142.0" mnemonicParsing="false" onAction="#clearList" text="Clear">
+      <Button fx:id="clear" layoutX="560.0" layoutY="142.0" mnemonicParsing="false" text="Clear">
          <font>
             <Font name="Open Sans" size="12.0" />
          </font>

@@ -47,6 +47,8 @@ public class FindPersonController {
 		list.setItems(FXCollections.observableArrayList(nameList()));
 		filter.setItems(FXCollections.observableArrayList("Name", "Occupation", "Culture", "Gender"));
 		filter.setValue("Name");
+		filterAction();
+		clearList();
 	}
 
 	public ObservableSet<String> nameList() {
@@ -69,8 +71,7 @@ public class FindPersonController {
 		return filteredSet;
 	}
 
-	@FXML
-	private void filterAction(ActionEvent event) {
+	private void filterAction() {
 		searchButton.setOnAction((e) -> {
 			filteredSet.clear();
 			PersonQuery containsFilter = new PersonContainsQuery(target.getText(), filter.getValue());
@@ -78,8 +79,7 @@ public class FindPersonController {
 		});
 	}
 	
-	@FXML
-	private void clearList(ActionEvent event){
+	private void clearList(){
 		clear.setOnAction(e -> {
 			list.setItems(FXCollections.observableArrayList(nameList()));
 		});
