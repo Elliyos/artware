@@ -27,7 +27,7 @@
          </font>
       </Text>
       <ChoiceBox fx:id="initiator" layoutX="15.0" layoutY="152.0" prefHeight="25.0" prefWidth="214.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
-      <Text fontSmoothingType="LCD" layoutX="587.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipients">
+      <Text fontSmoothingType="LCD" layoutX="495.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipients">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
@@ -121,5 +121,10 @@
             <TextField fx:id="searchInput" layoutX="12.0" layoutY="134.0" promptText="Search" />
          </children>
       </AnchorPane>
+      <Button fx:id="clear" layoutX="728.0" layoutY="119.0" mnemonicParsing="false" onAction="#clearRecipients" text="Clear">
+         <font>
+            <Font name="Open Sans" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

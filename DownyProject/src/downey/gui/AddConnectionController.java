@@ -26,7 +26,7 @@ public class AddConnectionController {
 	private MainApp mainApp;
 
 	@FXML
-	private Button submit, goBack, add, search, remove;
+	private Button submit, goBack, add, search, remove, clear;
 	@FXML
 	private ChoiceBox<String> initiator, typeInput;
 	@FXML
@@ -117,6 +117,10 @@ public class AddConnectionController {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+	}
+	
+	public void clearRecipients() {
+		clear.setOnAction(e -> recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray()))));
 	}
 
 	public void createConnection() throws IOException{

@@ -23,7 +23,7 @@ public class EditConnectionController {
 	private MainApp mainApp;
 
 	@FXML
-	private Button submit, goBack, add, search, remove;
+	private Button submit, goBack, add, search, remove, clear;
 	@FXML
 	private ChoiceBox<String> initiator, typeInput;
 	@FXML
@@ -102,6 +102,10 @@ public class EditConnectionController {
 			observableSet.addAll(Arrays.asList(selectedPerson.getName()));
 		}
 		return observableSet;
+	}
+	
+	public void clearRecipients() {
+		clear.setOnAction(e -> recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray()))));
 	}
 
 	@FXML
