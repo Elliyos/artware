@@ -59,9 +59,15 @@ public class EditConnectionController {
 		
 		search.setOnAction((event) -> {
 			String searchText = searchInput.getText();
+			PersonQuery filter = new PersonContainsQuery(searchText, "Name");
 			observableSet.clear();
-			Person temp = DS.getPersonObject(searchText);
-			observableSet.add(temp.getName());
+			ArrayList<Person> array = DS.getPeopleArray();
+			for (int i = 0; i < array.size(); i++){
+				Person temp = array.get(i);
+				if (filter.accepts(temp)){
+					observableSet.add(temp.getName());
+				}
+			}
 			recipientList.setItems(FXCollections.observableArrayList(observableSet));
 		});
 		
