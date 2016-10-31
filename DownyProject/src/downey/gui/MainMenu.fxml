@@ -11,22 +11,22 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.MainMenuController">
    <children>
-      <Text fontSmoothingType="LCD" layoutX="225.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="People">
+      <Text fontSmoothingType="LCD" layoutX="224.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="People">
          <font>
             <Font name="Open Sans" size="30.0" />
          </font>
       </Text>
-      <Button fx:id="peopleAdd" layoutX="180.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="185.0" text="Add">
+      <Button fx:id="peopleAdd" layoutX="179.0" layoutY="160.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="185.0" text="Add">
          <font>
             <Font name="Open Sans" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="connectionsAdd" layoutX="452.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="185.0" text="Add">
+      <Button fx:id="connectionsAdd" layoutX="451.0" layoutY="160.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="185.0" text="Add">
          <font>
             <Font name="Open Sans" size="24.0" />
          </font>
       </Button>
-      <Rectangle height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.1" width="800.0">
+      <Rectangle height="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.1" width="800.0">
          <fill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -36,7 +36,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="340.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ArtWARE">
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="340.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ArtWARE">
          <font>
             <Font name="Open Sans" size="30.0" />
          </font>
@@ -44,32 +44,32 @@
             <DropShadow />
          </effect>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="457.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connections">
+      <Text fontSmoothingType="LCD" layoutX="456.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connections">
          <font>
             <Font name="Open Sans" size="30.0" />
          </font>
       </Text>
-      <Button fx:id="peopleView" layoutX="180.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="185.0" text="View / Edit">
+      <Button fx:id="peopleView" layoutX="179.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="185.0" text="View / Edit">
          <font>
             <Font name="Open Sans" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="connectionsView" layoutX="452.0" layoutY="251.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="185.0" text="View / Edit">
+      <Button fx:id="connectionsView" layoutX="451.0" layoutY="237.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="185.0" text="View / Edit">
          <font>
             <Font name="Open Sans" size="24.0" />
          </font>
       </Button>
-      <Text fontSmoothingType="LCD" layoutX="365.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Export">
+      <Text fontSmoothingType="LCD" layoutX="364.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Export">
          <font>
             <Font name="Open Sans" size="30.0" />
          </font>
       </Text>
-      <Button fx:id="exportGephi" layoutX="215.0" layoutY="388.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="185.0" text="Gephi">
+      <Button fx:id="exportGephi" layoutX="214.0" layoutY="374.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="185.0" text="Gephi">
          <font>
             <Font name="Open Sans" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="exportPalladio" layoutX="420.0" layoutY="388.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="185.0" text="Palladio">
+      <Button fx:id="exportPalladio" layoutX="419.0" layoutY="374.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="185.0" text="Palladio">
          <font>
             <Font name="Open Sans" size="24.0" />
          </font>

@@ -1,6 +1,7 @@
 package downey.gui;
 
 import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,7 @@ public class MainMenuController {
 	 */
 
 	public MainMenuController() {
+	
 	}
 
 	/**
@@ -29,9 +31,9 @@ public class MainMenuController {
 
 	@FXML
 	private void initialize() {
-		
-	}
 
+	}
+	
 	@FXML
 	private void handleButtonAction(ActionEvent event) throws IOException {
 		Stage stage;

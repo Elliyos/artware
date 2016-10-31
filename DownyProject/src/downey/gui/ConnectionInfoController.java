@@ -20,57 +20,60 @@ import javafx.stage.Stage;
 public class ConnectionInfoController {
 	private MainApp mainApp;
 	private final DataStorage DS = DataStorage.getMainDataStorage();
-	
+
 	@FXML
-	private Button goBack, editButton;
+	private Button home, editButton, toViewConnections;
 	@FXML
 	private Label dateLabel, typeLabel, locationLabel, citationLabel, notesLabel, sender, recipients;
 	@FXML
 	private TextArea notesArea;
 	private Connection currentConnection;
-	
 
 	public ConnectionInfoController() {
-    }
-    
-    /**
-	 * This method is currently bugged. Information has been place inside to replicate an actual use case. Needs to be implemented in sprint 2.
+	}
+
+	/**
+	 * This method is currently bugged. Information has been place inside to
+	 * replicate an actual use case. Needs to be implemented in sprint 2.
+	 * 
 	 * @throws IOException
 	 */
 	@FXML
-    private void initialize() throws IOException {
+	private void initialize() throws IOException {
 		currentConnection = SelectedInformationTracker.getSelectedConnection();
 
 		if (currentConnection.getSender() != null) {
 			sender.setText(currentConnection.getSender().getName());
 		}
-    	recipients.setText(currentConnection.getReceiverNameList().toString());
-    	dateLabel.setText(currentConnection.getDate());
-    	typeLabel.setText(currentConnection.getInteractionType());
-    	locationLabel.setText(currentConnection.getLocation());
-    	citationLabel.setText(currentConnection.getCitation());
-    	notesArea.setText(currentConnection.getNotes());
-    }
-    
-    @FXML
-    private void handleButtonAction(ActionEvent event) throws IOException{
-        Stage stage; 
-        Parent root;
-        if (event.getSource() == goBack){       
-           stage=(Stage) goBack.getScene().getWindow();
-           root = FXMLLoader.load(getClass().getResource("ViewConnections.fxml"));
-         } else {
-        	 stage=(Stage) editButton.getScene().getWindow();
-        	 root = FXMLLoader.load(getClass().getResource("EditConnection.fxml"));
-         }
-        //create a new scene with root and set the stage
-         Scene scene = new Scene(root);
-         stage.setScene(scene);
-         stage.show();
-       }
-    
+		recipients.setText(currentConnection.getReceiverNameList().toString());
+		dateLabel.setText(currentConnection.getDate());
+		typeLabel.setText(currentConnection.getInteractionType());
+		locationLabel.setText(currentConnection.getLocation());
+		citationLabel.setText(currentConnection.getCitation());
+		notesArea.setText(currentConnection.getNotes());
+	}
 
-	    public void setMainApp(MainApp mainApp) {
-	        this.mainApp = mainApp;
-	    }
+	@FXML
+	private void handleButtonAction(ActionEvent event) throws IOException {
+		Stage stage;
+		Parent root;
+		if (event.getSource() == home) {
+			stage = (Stage) home.getScene().getWindow();
+			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+		} else if (event.getSource() == editButton) {
+			stage = (Stage) editButton.getScene().getWindow();
+			root = FXMLLoader.load(getClass().getResource("EditConnection.fxml"));
+		} else {
+			stage = (Stage) toViewConnections.getScene().getWindow();
+			root = FXMLLoader.load(getClass().getResource("ViewConnections.fxml"));
+		}
+		// create a new scene with root and set the stage
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+
+	public void setMainApp(MainApp mainApp) {
+		this.mainApp = mainApp;
+	}
 }

@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -74,11 +75,6 @@
             <Font name="Open Sans" size="26.0" />
          </font>
       </Button>
-      <Button fx:id="goBack" layoutX="11.0" layoutY="78.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="27.0" prefWidth="72.0" text="Go Back">
-         <font>
-            <Font name="Open Sans" size="12.0" />
-         </font>
-      </Button>
       <DatePicker fx:id="dateInput" layoutX="15.0" layoutY="215.0" prefWidth="214.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
       <ChoiceBox fx:id="typeInput" layoutX="266.0" layoutY="212.0" prefHeight="22.0" prefWidth="214.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
       <Rectangle height="70.0" layoutX="-9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.1" width="810.0">
@@ -122,6 +118,23 @@
          </children>
       </AnchorPane>
       <Button fx:id="clear" layoutX="728.0" layoutY="119.0" mnemonicParsing="false" onAction="#clearRecipients" text="Clear">
+         <font>
+            <Font name="Open Sans" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="home" layoutX="3.0" layoutY="74.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: TRANSPARENT;" text="Home" underline="true">
+         <font>
+            <Font name="Open Sans" size="12.0" />
+         </font>
+      </Button>
+      <Line layoutX="60.0" layoutY="78.0" startY="15.0" />
+      <Button fx:id="toViewConnections" layoutX="66.0" layoutY="74.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: TRANSPARENT;" text="View Connections" underline="true">
+         <font>
+            <Font name="Open Sans" size="12.0" />
+         </font>
+      </Button>
+      <Line layoutX="188.0" layoutY="78.0" startY="15.0" />
+      <Button fx:id="toConnectionInfo" layoutX="190.0" layoutY="74.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: TRANSPARENT;" text="Connection Info" underline="true">
          <font>
             <Font name="Open Sans" size="12.0" />
          </font>

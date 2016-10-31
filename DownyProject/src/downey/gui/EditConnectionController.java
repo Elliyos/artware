@@ -23,7 +23,7 @@ public class EditConnectionController {
 	private MainApp mainApp;
 
 	@FXML
-	private Button submit, goBack, add, search, remove, clear;
+	private Button submit, home, add, search, remove, clear, toViewConnections, toConnectionInfo;
 	@FXML
 	private ChoiceBox<String> initiator, typeInput;
 	@FXML
@@ -56,7 +56,7 @@ public class EditConnectionController {
 		selectedRecipientList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		initiator.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray())));
 		typeInput.setItems(FXCollections.observableArrayList("Letter", "Email", "Meeting", "Party"));
-		
+
 		search.setOnAction((event) -> {
 			String searchText = searchInput.getText();
 			observableSet.clear();
@@ -64,7 +64,7 @@ public class EditConnectionController {
 			observableSet.add(temp.getName());
 			recipientList.setItems(FXCollections.observableArrayList(observableSet));
 		});
-		
+
 		add.setOnAction((event) -> {
 			observableSet.clear();
 			ObservableList<String> selectedRecipientsTemp = recipientList.getSelectionModel().getSelectedItems();
@@ -74,14 +74,15 @@ public class EditConnectionController {
 				}
 			}
 		});
-		
+
 		remove.setOnAction((event) -> {
-			ObservableList<String> selectedRecipientsTemp = selectedRecipientList.getSelectionModel().getSelectedItems();
+			ObservableList<String> selectedRecipientsTemp = selectedRecipientList.getSelectionModel()
+					.getSelectedItems();
 			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
 				selectedRecipientList.getItems().remove(selectedRecipientsTemp.get(i));
 			}
 		});
-		
+
 		if (currentConnection.getSender() != null) {
 			initiator.setValue(currentConnection.getSender().getName());
 		}
@@ -103,9 +104,10 @@ public class EditConnectionController {
 		}
 		return observableSet;
 	}
-	
+
 	public void clearRecipients() {
-		clear.setOnAction(e -> recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray()))));
+		clear.setOnAction(
+				e -> recipientList.setItems(FXCollections.observableArrayList(nameList(DS.getPeopleArray()))));
 	}
 
 	@FXML
@@ -132,8 +134,14 @@ public class EditConnectionController {
 			DS.saveConnections();
 			stage = (Stage) this.submit.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+		} else if (event.getSource() == home) {
+			stage = (Stage) this.home.getScene().getWindow();
+			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+		} else if (event.getSource() == toViewConnections) {
+			stage = (Stage) this.toViewConnections.getScene().getWindow();
+			root = FXMLLoader.load(getClass().getResource("ViewConnections.fxml"));
 		} else {
-			stage = (Stage) this.goBack.getScene().getWindow();
+			stage = (Stage) this.toConnectionInfo.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("ConnectionInfo.fxml"));
 		}
 		// create a new scene with root and set the stage
