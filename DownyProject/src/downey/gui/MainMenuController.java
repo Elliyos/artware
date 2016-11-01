@@ -1,5 +1,6 @@
 package downey.gui;
 
+import java.io.File;
 import java.io.IOException;
 
 import downey.main.DataStorage;
@@ -11,11 +12,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 
 public class MainMenuController {
-
+	
 	@FXML
 	private Button peopleAdd, peopleView, connectionsAdd, connectionsView, exportGephi, exportPalladio;
 
@@ -37,27 +40,36 @@ public class MainMenuController {
 		exportGephi.setOnAction((event)-> { exportToGephi(); });
 		exportPalladio.setOnAction((event) -> { exportToPalladio(); });
 	}
-	public void exportToGephi() {
-		Exporter gephiEx = new GephiExporter(DataStorage.getMainDataStorage().getConnectionArray(),
-				DataStorage.getMainDataStorage().getPeopleArray());
-		try {
-			gephiEx.export("projects", "GUITEST");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public File getChosenFile(){
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Choose a file name PREFIX for exporting:");
+        File file = fileChooser.showSaveDialog(null);
+        return file;
 	}
-	public void exportToPalladio() {
-		exportPalladio.setOnAction((event)-> {
-			Exporter palladioX= new PalladioExporter(DataStorage.getMainDataStorage().getConnectionArray());
+	public void exportToGephi() {
+		File file = getChosenFile();
+		if (file != null) {
+			Exporter gephiEx = new GephiExporter(DataStorage.getMainDataStorage().getConnectionArray(),
+					DataStorage.getMainDataStorage().getPeopleArray());
 			try {
-				palladioX.export("projects", "PALLADIOTESTER");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				gephiEx.export(file.getPath());
+			} catch (IOException e) {
+				//TODO: alert the user if error happens
 				e.printStackTrace();
 			}
-			
-		});
+		}
+	}
+	public void exportToPalladio() {	
+		File file = getChosenFile();
+		if (file != null) {
+			Exporter palladioEx = new PalladioExporter(DataStorage.getMainDataStorage().getConnectionArray());
+			try {
+				palladioEx.export(file.getPath());
+			} catch (IOException e) {
+				//TODO: alert the user if error happens
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	@FXML

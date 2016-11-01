@@ -11,8 +11,8 @@ public class PalladioExporter implements Exporter {
 	public PalladioExporter(ArrayList<Connection> connections){
 		this.connections=connections;
 	}
-	public void export(String folder, String stem) throws IOException{
-		saveEdges(folder + "/" + stem + "_Palladio_Export.csv");
+	public void export(String stem) throws IOException{
+		saveEdges(stem + "_Palladio_Export.csv");
 	}
 	public void saveEdges(String edgeFileName) throws IOException {
 

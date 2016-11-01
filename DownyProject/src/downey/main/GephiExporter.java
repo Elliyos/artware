@@ -15,9 +15,9 @@ public final class GephiExporter implements Exporter {
 		this.people = people;
 	}
 	private static final DataStorage DS = DataStorage.getMainDataStorage();
-	public void export(String folderName, String stem) throws IOException{
-		saveNodes(folderName + "/" + stem + "_Gephi_Export_Nodes.csv");
-		mapNodesToEdges(folderName + "/" + stem + "_Gephi_Export_Edges.csv");
+	public void export(String stem) throws IOException{
+		saveNodes(stem + "_Gephi_Export_Nodes.csv");
+		mapNodesToEdges(stem + "_Gephi_Export_Edges.csv");
 	}
 
 	public void saveNodes(String fileName) throws IOException {
