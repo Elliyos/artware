@@ -30,7 +30,6 @@ public class EditInfoController {
 
 	private final DataStorage DS = DataStorage.getMainDataStorage();
 	private MainApp mainApp;
-	private final ArrayList<Person> peopleList = DS.getPeopleArray();
 	private Person currentPerson;
 
 	public EditInfoController() {

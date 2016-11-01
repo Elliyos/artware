@@ -63,7 +63,7 @@
          <font>
             <Font name="Open Sans" size="12.0" />
          </font></TextArea>
-      <Button fx:id="add" disable="false" layoutX="361.0" layoutY="431.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="48.0" prefWidth="98.0" text="Add">
+      <Button fx:id="add" disable="false" layoutX="349.0" layoutY="431.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="124.0" text="Submit">
          <font>
             <Font name="Open Sans" size="26.0" />
          </font></Button>
@@ -81,5 +81,11 @@
             <DropShadow />
          </effect>
       </Text>
+      <Text layoutX="357.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Field Choices">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Button fx:id="editChoices" layoutX="378.0" layoutY="190.0" mnemonicParsing="false" onAction="#choicesAction" prefHeight="22.0" prefWidth="56.0" text="Edit" />
    </children>
 </AnchorPane>
