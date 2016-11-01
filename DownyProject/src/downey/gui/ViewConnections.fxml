@@ -67,5 +67,6 @@
             <Font name="Open Sans" size="12.0" />
          </font>
       </Button>
+      <Button fx:id="exportFilteredData" layoutX="14.0" layoutY="142.0" mnemonicParsing="false" text="Export Filtered Gephi" />
    </children>
 </AnchorPane>

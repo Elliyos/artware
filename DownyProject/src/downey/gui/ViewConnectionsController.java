@@ -1,5 +1,6 @@
 package downey.gui;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +20,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class ViewConnectionsController {
@@ -36,11 +38,13 @@ public class ViewConnectionsController {
 	@FXML
 	ListView<String> list = new ListView<String>();
 	@FXML
-	private Button goBack, viewButton, searchButton, clear;
+	private Button goBack, viewButton, searchButton, clear, exportFilteredData;
 	private ArrayList<Connection> connectionList = DS.getConnectionArray();
 	private ObservableList<String> filteredList = FXCollections.observableArrayList();
 	@FXML
 	private TextField target;
+	private ArrayList<Connection> filteredConnections;
+	private ArrayList<Person> filteredPeople;
 
 	public ViewConnectionsController() {
 	}
@@ -51,6 +55,7 @@ public class ViewConnectionsController {
 		filter.setItems(FXCollections.observableArrayList("Sender", "Receivers", "Date", "Location", "Citation", "Interaction Type", "Notes"));
 		filter.setValue("Sender");
 		filterAction();
+		exportFilteredData.setOnAction((event)-> { exportToGephi(); });
 		clearList();
 	}
 		
@@ -67,11 +72,32 @@ public class ViewConnectionsController {
 		}
 		return observableConnectionList;
 	}
+	public File getChosenFile(){
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Choose a file name PREFIX for exporting:");
+        File file = fileChooser.showSaveDialog(null);
+        return file;
+	}
+	public void exportToGephi() {
+		File file = getChosenFile();
+		filteredPeople = DS.getFilteredPeople(filteredConnections);
+		if (file != null) {
+			Exporter gephiEx = new GephiExporter(filteredConnections, filteredPeople);
+			try {
+			gephiEx.export(file.getPath());
+			} catch (IOException e) {
+				//TODO: alert the user if error happens
+				e.printStackTrace();
+			}
+	}
+}
 	
 	public ObservableList<String> filteredNameList(ConnectionQuery query) {
+		filteredConnections = new ArrayList<Connection>();
 		for (int i = 0; i <= connectionList.size() - 1; i++) { 
 			if (query.accepts(connectionList.get(i))) {
 				Connection selectedConnection = connectionList.get(i);
+				filteredConnections.add(connectionList.get(i));
 				filteredList.addAll(Arrays.asList(selectedConnection.getSender().getName() + " : " + selectedConnection.getReceiverNameList()));
 			}
 		}

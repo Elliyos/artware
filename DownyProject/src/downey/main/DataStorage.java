@@ -25,6 +25,17 @@ public class DataStorage {
 	public static DataStorage getMainDataStorage() {
 		return mainDataStorage;
 	}
+	public ArrayList<Person> getFilteredPeople(ArrayList<Connection> connections){
+		Set<Person> temp = new HashSet<>();
+		for (Connection c : connections){
+			temp.add(c.getSender());
+			temp.addAll(c.getReceivers());
+		}
+		ArrayList<Person> filteredPeople = new ArrayList<>();
+		filteredPeople.addAll(temp);
+		return filteredPeople;
+		
+	}
 
 	/**
 	 * This method creates a new Person object, given the required parameters,
