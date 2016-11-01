@@ -2,6 +2,10 @@ package downey.gui;
 
 import java.io.IOException;
 
+import downey.main.DataStorage;
+import downey.main.Exporter;
+import downey.main.GephiExporter;
+import downey.main.PalladioExporter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +34,30 @@ public class MainMenuController {
 
 	@FXML
 	private void initialize() {
+		exportGephi.setOnAction((event)-> { exportToGephi(); });
+		exportPalladio.setOnAction((event) -> { exportToPalladio(); });
+	}
+	public void exportToGephi() {
+		Exporter gephiEx = new GephiExporter(DataStorage.getMainDataStorage().getConnectionArray(),
+				DataStorage.getMainDataStorage().getPeopleArray());
+		try {
+			gephiEx.export("projects", "GUITEST");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void exportToPalladio() {
+		exportPalladio.setOnAction((event)-> {
+			Exporter palladioX= new PalladioExporter(DataStorage.getMainDataStorage().getConnectionArray());
+			try {
+				palladioX.export("projects", "PALLADIOTESTER");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		});
 	}
 	
 	@FXML

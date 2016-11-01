@@ -7,23 +7,19 @@ import java.util.ArrayList;
 import com.opencsv.CSVWriter;
 
 public class PalladioExporter implements Exporter {
-	public static void main(String[] args) throws EOFException, IOException{
-		DataStorage DS = DataStorage.getMainDataStorage();
-		DS.loadPeople();
-		DS.loadConnections();
-		Exporter palladioExporter = new PalladioExporter();
-		palladioExporter.export("data", "Paris");
+	private ArrayList<Connection> connections;
+	public PalladioExporter(ArrayList<Connection> connections){
+		this.connections=connections;
 	}
 	public void export(String folder, String stem) throws IOException{
 		saveEdges(folder + "/" + stem + "_Palladio_Export.csv");
 	}
 	public void saveEdges(String edgeFileName) throws IOException {
-		DataStorage DS = DataStorage.getMainDataStorage();
 
 		String[] header = {"Source", "Target"};
             try (CSVWriter writer = new CSVWriter(new FileWriter(edgeFileName))) {
                 writer.writeNext(header);
-                DS.getConnectionArray().forEach((c) -> {
+                connections.forEach((c) -> {
                     ArrayList<Person> receivers = c.getReceivers();
                     if (!c.getSender().getName().equals("Group Connection")){
                         for (int i = 0; i < receivers.size(); i++){

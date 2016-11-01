@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import com.opencsv.CSVWriter;
 
 public final class GephiExporter implements Exporter {
-	public static void main(String[] args) throws IOException{
-		DataStorage DS = DataStorage.getMainDataStorage();
-		DS.loadPeople();
-		DS.loadConnections();
-		Exporter gephiExporter = new GephiExporter();
-		gephiExporter.export("data", "Paris");
+	private ArrayList<Connection> connections;
+	private ArrayList<Person> people;
+
+	public GephiExporter(ArrayList<Connection> connections, ArrayList<Person> people){
+		this.connections=connections;
+		this.people = people;
 	}
 	private static final DataStorage DS = DataStorage.getMainDataStorage();
 	public void export(String folderName, String stem) throws IOException{
@@ -22,7 +22,6 @@ public final class GephiExporter implements Exporter {
 
 	public void saveNodes(String fileName) throws IOException {
 		String[] header = {"ID", "Label"};
-		ArrayList<Person> people = DS.getPeopleArray();
             try (CSVWriter writer = new CSVWriter(new FileWriter(fileName))) {
                 writer.writeNext(header);
                 for (int i = 0; i < people.size(); i++){
@@ -38,7 +37,7 @@ public final class GephiExporter implements Exporter {
             try (CSVWriter writer = new CSVWriter(new FileWriter(fileName))) {
                 int currCount = 0;
                 writer.writeNext(header);
-                for (Connection c : DS.getConnectionArray()) {
+                for (Connection c : connections) {
                     currCount++;
                     ArrayList<Person> receivers = c.getReceivers();
                     if (!c.getSender().getName().equals("Group Connection")){
