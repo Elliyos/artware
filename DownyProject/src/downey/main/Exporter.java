@@ -1,6 +1,8 @@
 package downey.main;
 
+import java.io.IOException;
+
 public interface Exporter {
-	public void export();
+	public void export() throws IOException;
 
 }

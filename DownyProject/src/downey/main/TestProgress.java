@@ -14,7 +14,11 @@ public class TestProgress {
 //		DataStorage test = DataStorage.getMainDataStorage();
 //		test.loadPeople();
 //		test.loadConnections();
-
+		Exporter palladio = new PalladioExporter();
+		palladio.export();
+		Exporter gephi = new GephiExporter();
+		gephi.export();
+		
 	}
 
 }

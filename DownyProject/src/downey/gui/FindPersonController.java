@@ -30,7 +30,7 @@ public class FindPersonController {
 	@FXML
 	ListView<String> filterList = new ListView<String>();
 	@FXML
-	private Button goBack, viewButton, searchButton, clear;
+	private Button goBack, viewButton, searchButton, clear, export;
 	@FXML
 	private ChoiceBox<String> filter;
 	@FXML
@@ -83,7 +83,7 @@ public class FindPersonController {
 	}
 
 	@FXML
-	private void viewAction(ActionEvent event) throws IOException {
+	private void viewAction() throws IOException {
 		String selectedName = list.getSelectionModel().getSelectedItem();
 		if (selectedName == null) {
 			Alert alert = new Alert(AlertType.INFORMATION);
@@ -101,12 +101,18 @@ public class FindPersonController {
 	}
 
 	@FXML
-	private void backAction(ActionEvent event) throws IOException {
+	private void backAction() throws IOException {
 		Stage stage = (Stage) goBack.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		stage.setScene(new Scene(root));
 		stage.show();
 	}
+	
+//	private void exportAction() {
+//		export.setOnAction((event) -> {
+//			
+//		});
+//	}
 
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;

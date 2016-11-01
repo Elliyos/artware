@@ -91,5 +91,11 @@
             <Font name="Open Sans" size="12.0" />
          </font>
       </Button>
+      <Text layoutX="357.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Field Choices" wrappingWidth="112.07029819488525">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Button fx:id="editChoices" layoutX="378.0" layoutY="190.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="56.0" text="Edit" />
    </children>
 </AnchorPane>

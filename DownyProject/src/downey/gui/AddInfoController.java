@@ -67,6 +67,15 @@ public class AddInfoController {
 		stage.show();
 	}
 
+	private Optional<String> choiceDialog(List<String> choices) {
+		ChoiceDialog<String> dialog = new ChoiceDialog<>(choices.get(0), choices);
+		dialog.setTitle("Edit Field");
+		dialog.setHeaderText(null);
+		dialog.setContentText("Choose your option");
+		Optional<String> result = dialog.showAndWait();
+		return result;
+	}
+	
 	@FXML
 	private void choicesAction() {
 		List<String> choices = Arrays.asList("Occupation", "Culture");
@@ -81,11 +90,7 @@ public class AddInfoController {
 			editChoices.getButtonTypes().setAll(addButton, removeButton, cancelButton);
 			Optional<ButtonType> result = editChoices.showAndWait();
 			if (result.get() == addButton) {
-				ChoiceDialog<String> addDialog = new ChoiceDialog<>(choices.get(0), choices);
-				addDialog.setTitle("Add Field Choice");
-				addDialog.setHeaderText(null);
-				addDialog.setContentText("Choose field to add choice to: ");
-				Optional<String> chosenField = addDialog.showAndWait();
+				Optional<String> chosenField = choiceDialog(choices);
 				TextInputDialog input = new TextInputDialog();
 				input.setTitle("Text Input Dialog");
 				input.setHeaderText(null);
@@ -99,27 +104,15 @@ public class AddInfoController {
 					}
 				}
 			} else if (result.get() == removeButton) {
-				ChoiceDialog<String> removeDialog = new ChoiceDialog<>(choices.get(0), choices);
-				removeDialog.setTitle("Remove Field Choice");
-				removeDialog.setHeaderText(null);
-				removeDialog.setContentText("Choose field to remove choice from: ");
-				Optional<String> chosenField = removeDialog.showAndWait();
+				Optional<String> chosenField = choiceDialog(choices);
 				if (chosenField.isPresent())
 					if (chosenField.get().equals(choices.get(0))) {
 						List<String> fieldList = vocab.getOccupationOptions();
-						ChoiceDialog<String> dialog = new ChoiceDialog<>(fieldList.get(0), fieldList);
-						dialog.setTitle("Remove Choice");
-						dialog.setHeaderText(null);
-						dialog.setContentText("Choose to remove: ");
-						Optional<String> removedChoice = dialog.showAndWait();
+						Optional<String> removedChoice = choiceDialog(fieldList);
 						vocab.removeOccupationOption(removedChoice.get());
 					} else {
 						List<String> fieldList = vocab.getCultureOptions();
-						ChoiceDialog<String> dialog = new ChoiceDialog<>(fieldList.get(0), fieldList);
-						dialog.setTitle("Remove Choice");
-						dialog.setHeaderText(null);
-						dialog.setContentText("Choose to remove: ");
-						Optional<String> removedChoice = dialog.showAndWait();
+						Optional<String> removedChoice = choiceDialog(fieldList);
 						vocab.removeCultureOption(removedChoice.get());
 					}
 			} else {

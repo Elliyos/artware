@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import com.opencsv.CSVWriter;
 
-public class PalladioExporter {
+public class PalladioExporter implements Exporter {
 	private final DataStorage DS = DataStorage.getMainDataStorage();
 	public void export() throws IOException{
 		saveEdges();
@@ -14,7 +14,7 @@ public class PalladioExporter {
 		String[] header = {"Source", "Target"};
 		DS.loadPeople();
 		DS.loadConnections();
-            try (CSVWriter writer = new CSVWriter(new FileWriter("data/Palladio_Export_File"))) {
+            try (CSVWriter writer = new CSVWriter(new FileWriter("data/Palladio_Export_File.csv"))) {
                 writer.writeNext(header);
                 DS.getConnectionArray().forEach((c) -> {
                     ArrayList<Person> receivers = c.getReceivers();
