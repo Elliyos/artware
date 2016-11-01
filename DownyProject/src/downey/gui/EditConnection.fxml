@@ -48,10 +48,6 @@
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="locationInput" layoutX="14.0" layoutY="270.0" prefHeight="25.0" prefWidth="214.0" promptText="Rock Island, IL, USA">
-         <font>
-            <Font name="Open Sans" size="12.0" />
-         </font></TextField>
       <Text fontSmoothingType="LCD" layoutX="265.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Citation">
          <font>
             <Font name="Open Sans" size="20.0" />
@@ -139,5 +135,7 @@
             <Font name="Open Sans" size="12.0" />
          </font>
       </Button>
+      <ChoiceBox fx:id="locationInput" layoutX="17.0" layoutY="272.0" prefHeight="22.0" prefWidth="214.0" />
+      <Button fx:id="editChoices" layoutX="340.0" layoutY="154.0" mnemonicParsing="false" text="Edit Choices" />
    </children>
 </AnchorPane>

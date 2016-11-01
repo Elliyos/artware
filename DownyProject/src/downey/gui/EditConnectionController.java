@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 import downey.main.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +18,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.stage.Stage;
 
 public class EditConnectionController {
@@ -25,13 +30,13 @@ public class EditConnectionController {
 	public ArrayList<Person> peopleList = DS.getPeopleArray();
 	
 	@FXML
-	private Button submit, home, add, search, remove, clear, toViewConnections, toConnectionInfo;
+	private Button submit, home, add, search, remove, clear, toViewConnections, toConnectionInfo, editChoices;
 	@FXML
-	private ChoiceBox<String> initiator, typeInput;
+	private ChoiceBox<String> initiator, typeInput, locationInput;
 	@FXML
 	private DatePicker dateInput;
 	@FXML
-	private TextField locationInput, citationInput, searchInput;
+	private TextField citationInput, searchInput;
 	@FXML
 	private TextArea notes;
 
@@ -57,6 +62,7 @@ public class EditConnectionController {
 		selectedRecipientList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		initiator.setItems(FXCollections.observableArrayList(nameList()));
 		typeInput.setItems(vocab.getInteractionTypeOptions());
+		locationInput.setItems(vocab.getLocationOptions());
 		addRecipients();
 		removeRecipients();
 		searchRecipients();
@@ -67,7 +73,7 @@ public class EditConnectionController {
 		}
 		selectedRecipientList.setItems(FXCollections.observableArrayList(currentConnection.getReceiverNameList()));
 		typeInput.setValue(currentConnection.getInteractionType());
-		locationInput.setText(currentConnection.getLocation());
+		locationInput.setValue(currentConnection.getLocation());
 		citationInput.setText(currentConnection.getCitation());
 		notes.setText(currentConnection.getNotes());
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
@@ -136,6 +142,68 @@ public class EditConnectionController {
 			recipientList.setItems(FXCollections.observableArrayList(observableSet));
 		});
 	}
+	
+	private Optional<String> choiceDialog(List<String> choices, String title) {
+		ChoiceDialog<String> dialog = new ChoiceDialog<>(choices.get(0), choices);
+		dialog.setTitle(title);
+		dialog.setHeaderText(null);
+		dialog.setContentText("Choose your option");
+		Optional<String> result = dialog.showAndWait();
+		return result;
+	}
+	
+	@FXML
+	private void choicesAction() {
+		List<String> choices = Arrays.asList("Interaction Type", "Location");
+		editChoices.setOnAction((event) -> {
+			Alert editChoices = new Alert(AlertType.CONFIRMATION);
+			editChoices.setTitle("Edit Choices for Data Fields");
+			editChoices.setHeaderText(null);
+			editChoices.setContentText("Choose your option");
+			ButtonType addButton = new ButtonType("Add");
+			ButtonType removeButton = new ButtonType("Remove");
+			ButtonType cancelButton = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+			editChoices.getButtonTypes().setAll(addButton, removeButton, cancelButton);
+			Optional<ButtonType> result = editChoices.showAndWait();
+			if (result.get() == addButton) {
+				Optional<String> chosenField = choiceDialog(choices, "Add");
+				TextInputDialog input = new TextInputDialog();
+				input.setTitle("Choice Input");
+				input.setHeaderText(null);
+				input.setContentText("Enter new choice:");
+				Optional<String> addedChoice = input.showAndWait();
+				if (addedChoice.isPresent() && !addedChoice.get().equals("")) {
+					if (chosenField.get().equals(choices.get(0))) {
+						vocab.addInteractionTypeOption(addedChoice.get());
+					} else {
+						vocab.addLocationOption(addedChoice.get());
+					}
+				}
+			} else if (result.get() == removeButton) {
+				Optional<String> chosenField = choiceDialog(choices, "Remove");
+				if (chosenField.isPresent()) {
+					if (chosenField.get().equals(choices.get(0))) {
+						List<String> fieldList = vocab.getInteractionTypeOptions();
+						Optional<String> removedChoice = choiceDialog(fieldList, "Remove Interaction Type");
+						if (removedChoice.isPresent()) 
+							vocab.removeInteractionTypeOption(removedChoice.get());
+					} else {
+						List<String> fieldList = vocab.getLocationOptions();
+						Optional<String> removedChoice = choiceDialog(fieldList, "Remove Location");
+						if (removedChoice.isPresent()) 
+							vocab.removeLocationOption(removedChoice.get());
+					}
+				}
+			} else {
+			}
+			try {
+				vocab.saveControlledVocab();
+				vocab.loadControlledVocab();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		});
+	}
 
 	@FXML
 	private void handleButtonAction(ActionEvent event) throws IOException {
@@ -147,7 +215,7 @@ public class EditConnectionController {
 				String name = selectedRecipientList.getItems().get(i);
 				selectedRecipients.add(DS.getPersonObject(name));
 			}
-			String location = locationInput.getText();
+			String location = locationInput.getValue();
 			String date = dateInput.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
 			if (currentConnection.isGroupConnection()) {
 				currentConnection.editConnection(selectedRecipients, date, typeInput.getValue(), location,

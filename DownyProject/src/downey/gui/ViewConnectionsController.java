@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import downey.main.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,13 +32,13 @@ public class ViewConnectionsController {
 	@FXML
 	private ChoiceBox<String> filter;
 	@FXML
-	private final ObservableSet<String> observableConnectionList = FXCollections.observableSet();
+	private ObservableList<String> observableConnectionList = FXCollections.observableArrayList();
 	@FXML
 	ListView<String> list = new ListView<String>();
 	@FXML
 	private Button goBack, viewButton, searchButton, clear;
 	private ArrayList<Connection> connectionList = DS.getConnectionArray();
-	private ObservableSet<String> filteredSet = FXCollections.observableSet();
+	private ObservableList<String> filteredList = FXCollections.observableArrayList();
 	@FXML
 	private TextField target;
 
@@ -46,14 +47,14 @@ public class ViewConnectionsController {
 	
 	@FXML
 	private void initialize() throws IOException {
-		list.setItems(FXCollections.observableArrayList(getConnectionList()));
+		list.setItems(getConnectionList());
 		filter.setItems(FXCollections.observableArrayList("Sender", "Receivers", "Date", "Location", "Citation", "Interaction Type", "Notes"));
 		filter.setValue("Sender");
 		filterAction();
 		clearList();
 	}
 		
-	private ObservableSet<String> getConnectionList() {
+	private ObservableList<String> getConnectionList() {
 		for (int i = 0; i <= connectionList.size() - 1; i++) {
 			if (connectionList.get(i).getSender() != null) {
 				selectedPerson = connectionList.get(i).getSender(); 
@@ -67,27 +68,28 @@ public class ViewConnectionsController {
 		return observableConnectionList;
 	}
 	
-	public ObservableSet<String> filteredNameList(ConnectionQuery query) {
+	public ObservableList<String> filteredNameList(ConnectionQuery query) {
 		for (int i = 0; i <= connectionList.size() - 1; i++) { 
 			if (query.accepts(connectionList.get(i))) {
 				Connection selectedConnection = connectionList.get(i);
-				filteredSet.addAll(Arrays.asList(selectedConnection.getSender().getName() + " : " + selectedConnection.getReceiverNameList()));
+				filteredList.addAll(Arrays.asList(selectedConnection.getSender().getName() + " : " + selectedConnection.getReceiverNameList()));
 			}
 		}
-		return filteredSet;
+		return filteredList;
 	}
 	
 	private void filterAction() {
 		searchButton.setOnAction((e) -> {
-			filteredSet.clear();
+			filteredList.clear();
 			ConnectionQuery containsFilter = new ConnectionContainsQuery(target.getText(), filter.getValue());
-			list.setItems(FXCollections.observableArrayList(filteredNameList(containsFilter)));
+			list.setItems(filteredNameList(containsFilter));
 		});
 	}
 	
 	private void clearList(){
 		clear.setOnAction(e -> {
-			list.setItems(FXCollections.observableArrayList(getConnectionList()));
+			observableConnectionList.clear();
+			list.setItems(getConnectionList());
 		});
 	}
 
@@ -102,6 +104,7 @@ public class ViewConnectionsController {
 	@FXML
 	private void viewAction(ActionEvent event) throws IOException {
 		String selectedConnection = list.getSelectionModel().getSelectedItem();
+		System.out.println();
 		if (selectedConnection == null) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Select Connection");
@@ -123,5 +126,4 @@ public class ViewConnectionsController {
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
-
 }

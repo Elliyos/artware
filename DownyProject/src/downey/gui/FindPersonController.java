@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -23,7 +24,7 @@ public class FindPersonController {
 	private final ArrayList<Person> peopleList = DS.getPeopleArray();
 	private Person selectedPerson;
 
-	private final ObservableSet<String> observableSet = FXCollections.observableSet();
+	private final ObservableSet<String> observablePeopleSet = FXCollections.observableSet();
 	private ObservableSet<String> filteredSet = FXCollections.observableSet();
 	@FXML
 	ListView<String> list = new ListView<String>();
@@ -41,20 +42,20 @@ public class FindPersonController {
 
 	@FXML
 	private void initialize() throws IOException {
-		list.setItems(FXCollections.observableArrayList(nameList()));
+		list.setItems(FXCollections.observableArrayList(getNameList()));
 		filter.setItems(FXCollections.observableArrayList("Name", "Occupation", "Culture", "Gender"));
 		filter.setValue("Name");
 		filterAction();
 		clearList();
 	}
 
-	public ObservableSet<String> nameList() {
+	public ObservableSet<String> getNameList() {
 		for (int i = 0; i <= peopleList.size() - 1; i++) {
 			selectedPerson = peopleList.get(i);
 			String name = selectedPerson.getName();
-			observableSet.addAll(Arrays.asList(name));
+			observablePeopleSet.addAll(Arrays.asList(name));
 		}
-		return observableSet;
+		return observablePeopleSet;
 	}
 
 	public ObservableSet<String> filteredNameList(PersonQuery query) {
@@ -78,7 +79,7 @@ public class FindPersonController {
 	
 	private void clearList(){
 		clear.setOnAction(e -> {
-			list.setItems(FXCollections.observableArrayList(nameList()));
+			list.setItems(FXCollections.observableArrayList(getNameList()));
 		});
 	}
 
@@ -110,6 +111,8 @@ public class FindPersonController {
 	
 //	private void exportAction() {
 //		export.setOnAction((event) -> {
+//			FileChooser fileChooser = new FileChooser();
+//			fileChooser.setTitle("Open Resource File");
 //			
 //		});
 //	}
