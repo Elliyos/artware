@@ -1,20 +1,27 @@
 package downey.main;
 
+import java.io.EOFException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import com.opencsv.CSVWriter;
 
 public class PalladioExporter implements Exporter {
-	private final DataStorage DS = DataStorage.getMainDataStorage();
-	public void export() throws IOException{
-		saveEdges();
-	}
-	public void saveEdges() throws IOException {
-		String[] header = {"Source", "Target"};
+	public static void main(String[] args) throws EOFException, IOException{
+		DataStorage DS = DataStorage.getMainDataStorage();
 		DS.loadPeople();
 		DS.loadConnections();
-            try (CSVWriter writer = new CSVWriter(new FileWriter("data/Palladio_Export_File.csv"))) {
+		Exporter palladioExporter = new PalladioExporter();
+		palladioExporter.export("data", "Paris");
+	}
+	public void export(String folder, String stem) throws IOException{
+		saveEdges(folder + "/" + stem + "_Palladio_Export.csv");
+	}
+	public void saveEdges(String edgeFileName) throws IOException {
+		DataStorage DS = DataStorage.getMainDataStorage();
+
+		String[] header = {"Source", "Target"};
+            try (CSVWriter writer = new CSVWriter(new FileWriter(edgeFileName))) {
                 writer.writeNext(header);
                 DS.getConnectionArray().forEach((c) -> {
                     ArrayList<Person> receivers = c.getReceivers();

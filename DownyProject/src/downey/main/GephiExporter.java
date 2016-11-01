@@ -7,17 +7,23 @@ import java.util.ArrayList;
 import com.opencsv.CSVWriter;
 
 public final class GephiExporter implements Exporter {
+	public static void main(String[] args) throws IOException{
+		DataStorage DS = DataStorage.getMainDataStorage();
+		DS.loadPeople();
+		DS.loadConnections();
+		Exporter gephiExporter = new GephiExporter();
+		gephiExporter.export("data", "Paris");
+	}
 	private static final DataStorage DS = DataStorage.getMainDataStorage();
-	public void export() throws IOException{
-		saveNodes();
-		mapNodesToEdges();
+	public void export(String folderName, String stem) throws IOException{
+		saveNodes(folderName + "/" + stem + "_Gephi_Export_Nodes.csv");
+		mapNodesToEdges(folderName + "/" + stem + "_Gephi_Export_Edges.csv");
 	}
 
-	public void saveNodes() throws IOException {
+	public void saveNodes(String fileName) throws IOException {
 		String[] header = {"ID", "Label"};
-		DS.loadPeople();
 		ArrayList<Person> people = DS.getPeopleArray();
-            try (CSVWriter writer = new CSVWriter(new FileWriter("data/Gephi_Export_File.csv"))) {
+            try (CSVWriter writer = new CSVWriter(new FileWriter(fileName))) {
                 writer.writeNext(header);
                 for (int i = 0; i < people.size(); i++){
                     String[] numberedNode = new String[2];
@@ -27,11 +33,9 @@ public final class GephiExporter implements Exporter {
                 }
             }
 	}
-	public void mapNodesToEdges() throws IOException{
+	public void mapNodesToEdges(String fileName) throws IOException{
 		String[] header = {"Source", "Target", "Edge ID", "Date", "Interaction Type", "Location", "Citation", "Notes"};
-		DS.loadPeople();
-		DS.loadConnections();
-            try (CSVWriter writer = new CSVWriter(new FileWriter("data/Gephi_Nodes_Edges.csv"))) {
+            try (CSVWriter writer = new CSVWriter(new FileWriter(fileName))) {
                 int currCount = 0;
                 writer.writeNext(header);
                 for (Connection c : DS.getConnectionArray()) {
