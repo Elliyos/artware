@@ -23,14 +23,15 @@ public class PalladioExporter implements Exporter {
                     ArrayList<Person> receivers = c.getReceivers();
                     if (!c.getSender().getName().equals("Group Connection")){
                         for (int i = 0; i < receivers.size(); i++){
-                            String[] temp = {c.getSender().getName(), receivers.get(i).getName()};
+                        	
+                            String[] temp = {c.getSender().getNickname(), receivers.get(i).getNickname()};
                             writer.writeNext(temp);
                         }
                     }
                     else {
                         for (int i = 0; i < receivers.size()-1; i++){
                             for (int j = i+1; j < receivers.size(); j++){
-                                String[] temp = {c.getReceivers().get(i).getName(), c.getReceivers().get(j).getName()};
+                                String[] temp = {c.getReceivers().get(i).getNickname(), c.getReceivers().get(j).getNickname()};
                                 writer.writeNext(temp);
                             }
                         }

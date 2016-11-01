@@ -27,7 +27,7 @@ public final class GephiExporter implements Exporter {
                 for (int i = 0; i < people.size(); i++){
                     String[] numberedNode = new String[2];
                     numberedNode[0] = Integer.toString(i+1);
-                    numberedNode[1] = people.get(i).getName();
+                    numberedNode[1] = people.get(i).getNickname();
                     writer.writeNext(numberedNode);
                 }
             }

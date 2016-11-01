@@ -44,7 +44,6 @@ public class ViewConnectionsController {
 	@FXML
 	private TextField target;
 	private ArrayList<Connection> filteredConnections;
-	private ArrayList<Person> filteredPeople;
 
 	public ViewConnectionsController() {
 	}
@@ -80,9 +79,9 @@ public class ViewConnectionsController {
 	}
 	public void exportToGephi() {
 		File file = getChosenFile();
-		filteredPeople = DS.getFilteredPeople(filteredConnections);
+		
 		if (file != null) {
-			Exporter gephiEx = new GephiExporter(filteredConnections, filteredPeople);
+			Exporter gephiEx = new GephiExporter(filteredConnections, DS.getPeopleArray());
 			try {
 			gephiEx.export(file.getPath());
 			} catch (IOException e) {
