@@ -15,6 +15,8 @@ public class PersonContainsQuery implements PersonQuery {
 				return p.getOccupation().toLowerCase().contains(target);
 			case "name":
 				return p.getName().toLowerCase().contains(target);
+			case "nickname":
+				return p.getNickname().toLowerCase().contains(target);
 			case "culture":
 				return p.getCulture().toLowerCase().contains(target);
 			case "gender":

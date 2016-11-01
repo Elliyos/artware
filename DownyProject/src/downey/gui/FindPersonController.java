@@ -7,12 +7,10 @@ import java.util.Arrays;
 import downey.main.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -43,7 +41,7 @@ public class FindPersonController {
 	@FXML
 	private void initialize() throws IOException {
 		list.setItems(FXCollections.observableArrayList(getNameList()));
-		filter.setItems(FXCollections.observableArrayList("Name", "Occupation", "Culture", "Gender"));
+		filter.setItems(FXCollections.observableArrayList("Name", "Nickname", "Occupation", "Culture", "Gender"));
 		filter.setValue("Name");
 		filterAction();
 		clearList();

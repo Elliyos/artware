@@ -37,9 +37,9 @@ public class DataStorage {
 	 * @param bio
 	 * @return void
 	 */
-	public boolean addPerson(String name, String culture, String occupation, String gender, String bio) {
+	public boolean addPerson(String name, String nickname, String culture, String occupation, String gender, String bio) {
 		if (!containsPerson(name)) {
-			Person temp = new Person(name, culture, occupation, gender, bio);
+			Person temp = new Person(name, nickname, culture, occupation, gender, bio);
 			people.add(temp);
 			return true;
 		}
@@ -119,9 +119,9 @@ public class DataStorage {
 	 *            person establishing connection (null for group connections)
 	 * @param people,
 	 *            the people receiving a connection from the sender, or
-	 *            eachother if sender is null
+	 *            each other if sender is null
 	 * @param date,
-	 *            the date upon which the connection occured
+	 *            the date upon which the connection occurred
 	 * @param type,
 	 *            the form of communication
 	 * @param location,
@@ -216,8 +216,8 @@ public class DataStorage {
 	 */
 	public void saveConnections() throws IOException {
 		try (CSVWriter writer = new CSVWriter(new FileWriter("data/connections.csv"))) {
-			connections.forEach((c) -> {
-				writer.writeNext(c.toCSVRowArray());
+			connections.forEach((connection) -> {
+				writer.writeNext(connection.toCSVRowArray());
 			});
 		}
 	}
@@ -231,8 +231,8 @@ public class DataStorage {
 	 */
 	public void savePeople() throws IOException {
 		try (CSVWriter writer = new CSVWriter(new FileWriter("data/people.csv"))) {
-			people.forEach((p) -> {
-				writer.writeNext(p.toCSVRowArray());
+			people.forEach((person) -> {
+				writer.writeNext(person.toCSVRowArray());
 			});
 		}
 	}
@@ -252,11 +252,12 @@ public class DataStorage {
 		List<String[]> myRows = reader.readAll();
 		myRows.forEach((row) -> {
 			String name = row[0];
-			String occupation = row[1];
-			String culture = row[2];
-			String gender = row[3];
-			String bio = row[4];
-			people.add(new Person(name, occupation, culture, gender, bio));
+			String nickname = row[1];
+			String occupation = row[2];
+			String culture = row[3];
+			String gender = row[4];
+			String bio = row[5];
+			people.add(new Person(name, nickname, occupation, culture, gender, bio));
 		});
 		reader.close();
 	}

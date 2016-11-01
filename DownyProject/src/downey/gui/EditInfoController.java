@@ -29,7 +29,7 @@ public class EditInfoController {
 
 	private final ControlledVocab vocab = ControlledVocab.getControlledVocab(); 
 	@FXML
-	private TextField nameInput;
+	private TextField nameInput, nicknameInput;
 	@FXML
 	private ChoiceBox<String> occupationInput, cultureInput, genderInput;
 	@FXML
@@ -48,13 +48,14 @@ public class EditInfoController {
 	private void initialize() throws IOException {
 		currentPerson = DS.getPersonObject(SelectedInformationTracker.getSelectedName());
 		nameInput.setText(currentPerson.getName());
+		nicknameInput.setText(currentPerson.getNickname());
 		occupationInput.setValue(currentPerson.getOccupation());
 		cultureInput.setValue(currentPerson.getCulture());
 		bioInput.setText(currentPerson.getBio());
 		genderInput.setValue(currentPerson.getGender());
 		occupationInput.setItems(vocab.getOccupationOptions());
 		cultureInput.setItems(vocab.getCultureOptions());
-		genderInput.setItems(FXCollections.observableArrayList("Male", "Female", "Other"));
+		genderInput.setItems(vocab.getGenderOptions());
 		choicesAction();
 	}
 
@@ -63,7 +64,7 @@ public class EditInfoController {
 		Stage stage;
 		Parent root;
 		if (event.getSource() == submit) {
-			currentPerson.editPerson(nameInput.getText(), cultureInput.getValue(), occupationInput.getValue(),
+			currentPerson.editPerson(nameInput.getText(), nicknameInput.getText(), cultureInput.getValue(), occupationInput.getValue(),
 					genderInput.getValue(), bioInput.getText());
 			DS.savePeople();
 			DS.saveConnections();
@@ -96,7 +97,7 @@ public class EditInfoController {
 	
 	@FXML
 	private void choicesAction() {
-		List<String> choices = Arrays.asList("Occupation", "Culture");
+		List<String> choices = Arrays.asList("Occupation", "Culture", "Gender");
 		editChoices.setOnAction((event) -> {
 			Alert editChoices = new Alert(AlertType.CONFIRMATION);
 			editChoices.setTitle("Edit Choices for Data Fields");
@@ -115,25 +116,32 @@ public class EditInfoController {
 				input.setContentText("Enter new choice:");
 				Optional<String> addedChoice = input.showAndWait();
 				if (addedChoice.isPresent() && !addedChoice.get().equals("")) {
-					if (chosenField.get().equals(choices.get(0))) {
+					if (chosenField.get().equals("Occupation")) {
 						vocab.addOccupationOption(addedChoice.get());
-					} else {
+					} else if (chosenField.get().equals("Culture")) {
 						vocab.addCultureOption(addedChoice.get());
+					} else {
+						vocab.addGenderOption(addedChoice.get());
 					}
 				}
 			} else if (result.get() == removeButton) {
 				Optional<String> chosenField = choiceDialog(choices, "Remove");
 				if (chosenField.isPresent()) {
-					if (chosenField.get().equals(choices.get(0))) {
+					if (chosenField.get().equals("Occupation")) {
 						List<String> fieldList = vocab.getOccupationOptions();
 						Optional<String> removedChoice = choiceDialog(fieldList, "Remove Occupation");
 						if (removedChoice.isPresent()) 
-							vocab.removeOccupationOption(removedChoice.get());
-					} else {
+								vocab.removeOccupationOption(removedChoice.get());
+					} else if (chosenField.get().equals("Culture")) {
 						List<String> fieldList = vocab.getCultureOptions();
 						Optional<String> removedChoice = choiceDialog(fieldList, "Remove Culture");
-						if (removedChoice.isPresent()) 
+						if (removedChoice.isPresent())
 							vocab.removeCultureOption(removedChoice.get());
+					} else {
+						List<String> fieldList = vocab.getGenderOptions();
+						Optional<String> removedChoice = choiceDialog(fieldList, "Remove Gender");
+						if (removedChoice.isPresent())
+							vocab.removeGenderOption(removedChoice.get());
 					}
 				}
 			} else {

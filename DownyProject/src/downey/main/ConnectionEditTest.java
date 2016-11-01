@@ -7,20 +7,20 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 public class ConnectionEditTest {
-	private Person testPerson1 = new Person("Paul","10/29/2016", "Letter", "Olin", "No Notes");
-	private Person testPerson2 = new Person("Steve","10/29/2016", "Letter", "Olin", "No Notes");
-	private Person testPerson3 = new Person("Jimmy","10/29/2016", "Letter", "Olin", "No Notes");
-	private Person testPerson4 = new Person("Lasean","10/29/2016", "Letter", "Olin", "No Notes");
+	private Person testPerson1 = new Person("Paulina", "PJ", "Italian", "Student", "Female", "Test 1");
+	private Person testPerson2 = new Person("Steven Gerrard", "Stevie G", "British", "Soccer Player", "Male", "LFC hero");
+	private Person testPerson3 = new Person("Jimmy", "Jim", "American", "Actor", "Male", "No Notes");
+	private Person testPerson4 = new Person("Rihanna", "RiRi", "Jamaican", "Singer", "Female", "No Notes");
 	@Test
 	public void testEditSender() {
 		ArrayList<Person> testPeople = new ArrayList<>();
-		testPeople.add(testPerson1);
+		testPeople.add(testPerson4);
 		testPeople.add(testPerson2);
 		Connection testConnection = new Connection(testPerson3, testPeople, "10/25/2016","Meeting"
 				,"Paris", "aaaa", "No Notes");
 		testConnection.editConnection(testPerson1,testPeople, "10/25/2016","Meeting"
 				,"Paris", "aaaa", "No Notes");
-		assertEquals("Paul", testConnection.getSender().getName());
+		assertEquals("Paulina", testConnection.getSender().getName());
 	}
 	@Test
 	public void testEditGroupConnectionOnePerson(){

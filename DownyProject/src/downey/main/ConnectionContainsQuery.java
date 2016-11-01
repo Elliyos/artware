@@ -1,7 +1,5 @@
 package downey.main;
 
-import java.util.ArrayList;
-
 public class ConnectionContainsQuery implements ConnectionQuery{
 	private String target;
 	private String fieldName;

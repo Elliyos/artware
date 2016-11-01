@@ -1,4 +1,4 @@
-package downey.gui;
+package downey.main;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -12,13 +12,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class ControlledVocab {
-	private ObservableList<String> occupationOptions = FXCollections.observableArrayList("Sculptor", "Scholar",
-			"Writer", "Painter", "Actor");
-	private ObservableList<String> cultureOptions = FXCollections.observableArrayList("American", "Italian", "German",
-			"French", "Spanish");
-	private ObservableList<String> interactionTypeOptions = FXCollections.observableArrayList("Letter", "Meeting",
-			"Email", "Party", "Voice Call");
-	private ObservableList<String> locationOptions = FXCollections.observableArrayList();
+	private ObservableList<String> genderOptions = FXCollections.observableArrayList("Unknown");
+	private ObservableList<String> occupationOptions = FXCollections.observableArrayList("Unknown");
+	private ObservableList<String> cultureOptions = FXCollections.observableArrayList("Unknown");
+	private ObservableList<String> interactionTypeOptions = FXCollections.observableArrayList("Unknown");
+	private ObservableList<String> locationOptions = FXCollections.observableArrayList("Unknown");
 	private static ControlledVocab mainControlledVocab = new ControlledVocab();
 
 	private ControlledVocab() {
@@ -26,6 +24,10 @@ public class ControlledVocab {
 
 	public static ControlledVocab getControlledVocab() {
 		return mainControlledVocab;
+	}
+	
+	public ObservableList<String> getGenderOptions() {
+		return genderOptions;
 	}
 
 	public ObservableList<String> getOccupationOptions() {
@@ -42,6 +44,11 @@ public class ControlledVocab {
 
 	public ObservableList<String> getLocationOptions() {
 		return locationOptions;
+	}
+	
+	public void addGenderOption(String gender) {
+		if (!isDuplicate(gender, genderOptions))
+			genderOptions.add(gender);
 	}
 
 	public void addOccupationOption(String occupation) {
@@ -62,6 +69,10 @@ public class ControlledVocab {
 	public void addLocationOption(String location) {
 		if (!isDuplicate(location, locationOptions))
 			locationOptions.add(location);
+	}
+	
+	public void removeGenderOption(String gender) {
+		genderOptions.remove(gender);
 	}
 
 	public void removeOccupationOption(String occupation) {
@@ -99,6 +110,7 @@ public class ControlledVocab {
 
 	public void saveControlledVocab() throws IOException {
 		try (CSVWriter writer = new CSVWriter(new FileWriter("data/controlledVocab.csv"))) {
+			writer.writeNext(toCSVRowArray(genderOptions));
 			writer.writeNext(toCSVRowArray(cultureOptions));
 			writer.writeNext(toCSVRowArray(occupationOptions));
 			writer.writeNext(toCSVRowArray(interactionTypeOptions));
@@ -110,25 +122,31 @@ public class ControlledVocab {
 		CSVReader reader = new CSVReader(new FileReader("data/controlledVocab.csv"));
 		List<String[]> vocabArrayList = reader.readAll();
 
-		String[] cultureArray = vocabArrayList.get(0);
+		String[] genderArray = vocabArrayList.get(0);
+		for (String gender : genderArray) {
+			addGenderOption(gender);
+		}
+		
+		String[] cultureArray = vocabArrayList.get(1);
 		for (String culture : cultureArray) {
 			addCultureOption(culture);
 		}
 
-		String[] occupationArray = vocabArrayList.get(1);
+		String[] occupationArray = vocabArrayList.get(2);
 		for (String occupation : occupationArray) {
 			addOccupationOption(occupation);
 		}
 
-		String[] interactionTypeArray = vocabArrayList.get(2);
+		String[] interactionTypeArray = vocabArrayList.get(3);
 		for (String type : interactionTypeArray) {
 			addInteractionTypeOption(type);
 		}
 
-		String[] locationArray = vocabArrayList.get(3);
+		String[] locationArray = vocabArrayList.get(4);
 		for (String location : locationArray) {
 			addLocationOption(location);
 		}
 		reader.close();
 	}
+
 }

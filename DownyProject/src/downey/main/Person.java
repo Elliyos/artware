@@ -2,10 +2,11 @@ package downey.main;
 
 public class Person {
 
-	private String occupation, name, culture, gender, bio;
+	private String occupation, name, culture, gender, bio, nickname;
 	private final int ID;
-	public Person(String name, String culture, String occupation, String gender, String bio) {
+	public Person(String name, String nickname, String culture, String occupation, String gender, String bio) {
 		this.name = name;
+		this.nickname = nickname;
 		this.culture = culture;
 		this.occupation = occupation;
 		this.gender = gender;
@@ -49,7 +50,7 @@ public class Person {
 				+ ", Bio: " + bio;
 	}
 	public String[] toCSVRowArray() {
-		return new String[] { name, culture ,occupation, gender, bio};
+		return new String[] { name, nickname, culture ,occupation, gender, bio};
 	}
 
 	public String getOccupation() {
@@ -66,6 +67,14 @@ public class Person {
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getNickname() {
+		return nickname;
+	}
+	
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getCulture() {
@@ -92,8 +101,9 @@ public class Person {
 		this.bio = bio;
 	}
 		
-	public boolean editPerson(String name, String culture, String occupation, String gender, String bio){
+	public boolean editPerson(String name, String nickname, String culture, String occupation, String gender, String bio){
 		setName(name);
+		setNickname(nickname);
 		setCulture(culture);
 		setOccupation(occupation);
 		setGender(gender);

@@ -67,6 +67,7 @@ public class EditConnectionController {
 		removeRecipients();
 		searchRecipients();
 		clearRecipients();
+		choicesAction();
 
 		if (currentConnection.getSender() != null) {
 			initiator.setValue(currentConnection.getSender().getName());

@@ -25,7 +25,7 @@ public class PersonInfoController {
 	@FXML
 	private Button home, editButton, toViewPeople;
 	@FXML
-	private Label nameLabel, occupationLabel, cultureLabel, genderLabel;
+	private Label nameLabel, nicknameLabel, occupationLabel, cultureLabel, genderLabel;
 	@FXML
 	private TextArea bioArea;
 	@FXML
@@ -46,6 +46,7 @@ public class PersonInfoController {
 		Person chosenPerson = DS.getPersonObject(SelectedInformationTracker.getSelectedName());
 		ArrayList<String> personConnections = DS.getConnectionsForPerson(chosenPerson.getName());
 		nameLabel.setText(chosenPerson.getName());
+		nicknameLabel.setText(chosenPerson.getNickname());
 		occupationLabel.setText(chosenPerson.getOccupation());
 		cultureLabel.setText(chosenPerson.getCulture());
 		genderLabel.setText(chosenPerson.getGender());

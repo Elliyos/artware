@@ -25,43 +25,43 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Text fontSmoothingType="LCD" layoutX="333.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Person">
+      <Text fontSmoothingType="LCD" layoutX="328.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Person">
          <font>
-            <Font name="Open Sans Italic" size="30.0" />
+            <Font name="Open Sans Bold" size="30.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="67.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
-         <font>
-            <Font name="Open Sans" size="20.0" />
-         </font>
-      </Text>
-      <Text fontSmoothingType="LCD" layoutX="67.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation:">
+      <Text fontSmoothingType="LCD" layoutX="68.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="nameInput" layoutX="67.0" layoutY="186.0" prefHeight="25.0" prefWidth="223.0">
+      <Text fontSmoothingType="LCD" layoutX="508.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation:">
+         <font>
+            <Font name="Open Sans" size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="nameInput" layoutX="65.0" layoutY="190.0" prefHeight="25.0" prefWidth="223.0">
          <font>
             <Font name="Open Sans" size="12.0" />
          </font></TextField>
-      <Text fontSmoothingType="LCD" layoutX="508.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culture:">
+      <Text fontSmoothingType="LCD" layoutX="508.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culture:">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="507.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:">
+      <Text fontSmoothingType="LCD" layoutX="507.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="genderInput" layoutX="508.0" layoutY="248.0" prefHeight="25.0" prefWidth="223.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
-      <Text fontSmoothingType="LCD" layoutX="67.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bio:">
+      <ChoiceBox fx:id="genderInput" layoutX="509.0" layoutY="338.0" prefHeight="25.0" prefWidth="223.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <Text fontSmoothingType="LCD" layoutX="71.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bio:">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <TextArea fx:id="bioInput" layoutX="67.0" layoutY="306.0" prefHeight="123.0" prefWidth="666.0" />
-      <Button fx:id="submit" disable="false" layoutX="351.0" layoutY="438.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="41.0" prefWidth="124.0" text="Submit">
+      <TextArea fx:id="bioInput" layoutX="63.0" layoutY="343.0" prefHeight="123.0" prefWidth="409.0" />
+      <Button fx:id="submit" disable="false" layoutX="576.0" layoutY="416.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="41.0" prefWidth="124.0" text="Submit">
          <font>
             <Font name="Open Sans" size="26.0" />
          </font></Button>
@@ -69,8 +69,8 @@
          <font>
             <Font name="Open Sans" size="12.0" />
          </font></Button>
-      <ChoiceBox fx:id="cultureInput" layoutX="508.0" layoutY="186.0" prefHeight="22.0" prefWidth="223.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
-      <ChoiceBox fx:id="occupationInput" layoutX="67.0" layoutY="248.0" prefHeight="22.0" prefWidth="223.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <ChoiceBox fx:id="cultureInput" layoutX="509.0" layoutY="263.0" prefHeight="22.0" prefWidth="223.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <ChoiceBox fx:id="occupationInput" layoutX="509.0" layoutY="197.0" prefHeight="22.0" prefWidth="223.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
       <Text fill="WHITE" fontSmoothingType="LCD" layoutX="340.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ArtWARE">
          <font>
             <Font name="Open Sans" size="30.0" />
@@ -91,11 +91,21 @@
             <Font name="Open Sans" size="12.0" />
          </font>
       </Button>
-      <Text layoutX="357.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Field Choices" wrappingWidth="112.07029819488525">
+      <Text layoutX="508.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Field Choices" wrappingWidth="112.07029819488525">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Button fx:id="editChoices" layoutX="378.0" layoutY="190.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="56.0" text="Edit" />
+      <Button fx:id="editChoices" layoutX="638.0" layoutY="127.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="56.0" text="Edit" />
+      <Text fontSmoothingType="LCD" layoutX="69.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname:">
+         <font>
+            <Font name="Open Sans" size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="nicknameInput" layoutX="66.0" layoutY="256.0" prefHeight="27.0" prefWidth="223.0">
+         <font>
+            <Font name="Open Sans" size="12.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

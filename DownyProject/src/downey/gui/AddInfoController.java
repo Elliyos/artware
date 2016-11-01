@@ -1,9 +1,9 @@
 package downey.gui;
 
+import downey.main.ControlledVocab;
 import downey.main.DataStorage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +27,7 @@ public class AddInfoController {
 	@FXML
 	private Button submit, goBack, editChoices, removeChoices;
 	@FXML
-	private TextField nameInput;
+	private TextField nameInput, nicknameInput;
 	@FXML
 	private ChoiceBox<String> cultureInput, occupationInput, genderInput;
 	@FXML
@@ -42,7 +42,7 @@ public class AddInfoController {
 	 */
 	@FXML
 	private void initialize() {
-		genderInput.setItems(FXCollections.observableArrayList("Male", "Female", "Other"));
+		genderInput.setItems(vocab.getGenderOptions());
 		cultureInput.setItems(vocab.getCultureOptions());
 		occupationInput.setItems(vocab.getOccupationOptions());
 		choicesAction();
@@ -52,7 +52,6 @@ public class AddInfoController {
 	private void handleButtonAction(ActionEvent event) throws IOException {
 		Stage stage;
 		Parent root;
-
 		if (event.getSource() == submit) {
 			add();
 			stage = (Stage) submit.getScene().getWindow();
@@ -75,10 +74,10 @@ public class AddInfoController {
 		Optional<String> result = dialog.showAndWait();
 		return result;
 	}
-	
+
 	@FXML
 	private void choicesAction() {
-		List<String> choices = Arrays.asList("Occupation", "Culture");
+		List<String> choices = Arrays.asList("Occupation", "Culture", "Gender");
 		editChoices.setOnAction((event) -> {
 			Alert editChoices = new Alert(AlertType.CONFIRMATION);
 			editChoices.setTitle("Edit Choices for Data Fields");
@@ -97,25 +96,32 @@ public class AddInfoController {
 				input.setContentText("Enter new choice:");
 				Optional<String> addedChoice = input.showAndWait();
 				if (addedChoice.isPresent() && !addedChoice.get().equals("")) {
-					if (chosenField.get().equals(choices.get(0))) {
+					if (chosenField.get().equals("Occupation")) {
 						vocab.addOccupationOption(addedChoice.get());
-					} else {
+					} else if (chosenField.get().equals("Culture")) {
 						vocab.addCultureOption(addedChoice.get());
+					} else {
+						vocab.addGenderOption(addedChoice.get());
 					}
 				}
 			} else if (result.get() == removeButton) {
 				Optional<String> chosenField = choiceDialog(choices, "Remove");
 				if (chosenField.isPresent()) {
-					if (chosenField.get().equals(choices.get(0))) {
+					if (chosenField.get().equals("Occupation")) {
 						List<String> fieldList = vocab.getOccupationOptions();
 						Optional<String> removedChoice = choiceDialog(fieldList, "Remove Occupation");
-						if (removedChoice.isPresent()) 
-								vocab.removeOccupationOption(removedChoice.get());
-					} else {
+						if (removedChoice.isPresent())
+							vocab.removeOccupationOption(removedChoice.get());
+					} else if (chosenField.get().equals("Culture")) {
 						List<String> fieldList = vocab.getCultureOptions();
 						Optional<String> removedChoice = choiceDialog(fieldList, "Remove Culture");
 						if (removedChoice.isPresent())
 							vocab.removeCultureOption(removedChoice.get());
+					} else {
+						List<String> fieldList = vocab.getGenderOptions();
+						Optional<String> removedChoice = choiceDialog(fieldList, "Remove Gender");
+						if (removedChoice.isPresent())
+							vocab.removeGenderOption(removedChoice.get());
 					}
 				}
 			} else {
@@ -137,12 +143,13 @@ public class AddInfoController {
 	public void add() throws IOException {
 		DataStorage DS = DataStorage.getMainDataStorage();
 		String name = nameInput.getText();
+		String nickname = nicknameInput.getText();
 		String culture = (String) cultureInput.getValue();
 		String occupation = (String) occupationInput.getValue();
 		String gender = (String) genderInput.getValue();
 		String bio = bioInput.getText();
 
-		DS.addPerson(name, culture, occupation, gender, bio);
+		DS.addPerson(name, nickname, culture, occupation, gender, bio);
 		DS.savePeople();
 		DS.saveConnections();
 	}

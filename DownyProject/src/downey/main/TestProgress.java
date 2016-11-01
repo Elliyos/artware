@@ -11,13 +11,13 @@ import java.util.*;
 import com.opencsv.CSVReader;
 public class TestProgress {
 	public static void main(String[] args) throws IOException{
-//		DataStorage test = DataStorage.getMainDataStorage();
+		DataStorage test = DataStorage.getMainDataStorage();
 //		test.loadPeople();
 //		test.loadConnections();
-		Exporter palladio = new PalladioExporter();
-		palladio.export();
-		Exporter gephi = new GephiExporter();
-		gephi.export();
+//		Exporter palladio = new PalladioExporter();
+//		palladio.export();
+//		Exporter gephi = new GephiExporter();
+//		gephi.export();
 		
 	}
 
