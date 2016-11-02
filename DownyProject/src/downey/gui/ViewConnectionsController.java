@@ -38,7 +38,7 @@ public class ViewConnectionsController {
 	@FXML
 	ListView<String> list = new ListView<String>();
 	@FXML
-	private Button goBack, viewButton, searchButton, clear, exportFilteredData;
+	private Button goBack, viewButton, searchButton, clear, exportFilteredData,exportPalladio;
 	private ArrayList<Connection> connectionList = DS.getConnectionArray();
 	private ObservableList<String> filteredList = FXCollections.observableArrayList();
 	@FXML
@@ -55,6 +55,7 @@ public class ViewConnectionsController {
 		filter.setValue("Sender");
 		filterAction();
 		exportFilteredData.setOnAction((event)-> { exportToGephi(); });
+		exportPalladio.setOnAction((event)-> { exportToPalladio(); });
 		clearList();
 	}
 		
@@ -89,7 +90,20 @@ public class ViewConnectionsController {
 				e.printStackTrace();
 			}
 	}
-}
+	}
+	public void exportToPalladio(){
+		File file = getChosenFile();
+		
+		if (file != null) {
+			Exporter palladioEx = new PalladioExporter(filteredConnections);
+			try {
+			palladioEx.export(file.getPath());
+			} catch (IOException e) {
+				//TODO: alert the user if error happens
+				e.printStackTrace();
+			}
+	}
+	}
 	
 	public ObservableList<String> filteredNameList(ConnectionQuery query) {
 		filteredConnections = new ArrayList<Connection>();

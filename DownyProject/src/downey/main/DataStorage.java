@@ -36,6 +36,18 @@ public class DataStorage {
 		return filteredPeople;
 		
 	}
+	public ArrayList<Connection> getFilteredConnections(ArrayList<Person> people){
+		Set<Connection> filteredConnections = new HashSet<>();
+		for (Connection c : connections){
+			for (Person p : people){
+				if (c.contains(p)) 
+					filteredConnections.add(c);
+			}
+		}
+		ArrayList<Connection> filteredList = new ArrayList<>();
+		filteredList.addAll(filteredConnections);
+		return filteredList;
+	}
 
 	/**
 	 * This method creates a new Person object, given the required parameters,

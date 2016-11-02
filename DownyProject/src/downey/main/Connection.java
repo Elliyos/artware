@@ -71,7 +71,7 @@ public class Connection {
 	}
 
 	public boolean contains(Person person) {
-		return receivers.stream().anyMatch((p) -> (p.equals(person)));
+		return receivers.stream().anyMatch((p) -> (p.getName().equals(person.getName()))) || sender.getName().equals(person.getName());
 	}
 
 	public String[] toCSVRowArray() {

@@ -1,5 +1,6 @@
 package downey.gui;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -29,11 +31,12 @@ public class FindPersonController {
 	@FXML
 	ListView<String> filterList = new ListView<String>();
 	@FXML
-	private Button goBack, viewButton, searchButton, clear, export;
+	private Button goBack, viewButton, searchButton, clear, gephiExportButton, palladioExportButton;
 	@FXML
 	private ChoiceBox<String> filter;
 	@FXML
 	private TextField target;
+	private ArrayList<Person> filteredPeople = new ArrayList<>();
 
 	public FindPersonController() {
 	}
@@ -44,6 +47,8 @@ public class FindPersonController {
 		filter.setItems(FXCollections.observableArrayList("Name", "Nickname", "Occupation", "Culture", "Gender"));
 		filter.setValue("Name");
 		filterAction();
+		gephiExportButton.setOnAction((event)-> { exportToGephi(); });
+		palladioExportButton.setOnAction((event)-> { exportToPalladio(); });
 		clearList();
 	}
 
@@ -60,6 +65,7 @@ public class FindPersonController {
 		for (int i = 0; i <= peopleList.size() - 1; i++) { 
 			if (query.accepts(peopleList.get(i))) {
 				selectedPerson = peopleList.get(i);
+				filteredPeople.add(peopleList.get(i));
 				String name = selectedPerson.getName();
 				filteredSet.addAll(Arrays.asList(name));
 			}
@@ -73,6 +79,37 @@ public class FindPersonController {
 			PersonQuery containsFilter = new PersonContainsQuery(target.getText(), filter.getValue());
 			list.setItems(FXCollections.observableArrayList(filteredNameList(containsFilter)));
 		});
+	}public File getChosenFile(){
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Choose a file name PREFIX for exporting:");
+        File file = fileChooser.showSaveDialog(null);
+        return file;
+	}
+	public void exportToGephi() {
+		File file = getChosenFile();
+		
+		if (file != null) {
+			Exporter gephiEx = new GephiExporter(DS.getFilteredConnections(filteredPeople), filteredPeople);
+			try {
+			gephiEx.export(file.getPath());
+			} catch (IOException e) {
+				//TODO: alert the user if error happens
+				e.printStackTrace();
+			}
+	}
+	}
+	public void exportToPalladio(){
+		File file = getChosenFile();
+		
+		if (file != null) {
+			Exporter palladioEx = new PalladioExporter(DS.getFilteredConnections(filteredPeople));
+			try {
+			palladioEx.export(file.getPath());
+			} catch (IOException e) {
+				//TODO: alert the user if error happens
+				e.printStackTrace();
+			}
+	}
 	}
 	
 	private void clearList(){
