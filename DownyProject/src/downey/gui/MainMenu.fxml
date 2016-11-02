@@ -81,14 +81,10 @@
             <Font name="Open Sans" size="10.0" />
          </font>
       </Text>
-      <Button fx:id="about" layoutX="5.0" layoutY="471.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="29.0">
-         <effect>
-            <ImageInput>
-               <source>
-                  <Image url="file:/C:/git/DownyRepo/DownyProject/data/about.png" />
-               </source>
-            </ImageInput>
-         </effect>
+      <Button fx:id="about" layoutX="5.0" layoutY="471.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="60.0" text="About">
+         <font>
+            <Font name="Open Sans" size="10.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>
