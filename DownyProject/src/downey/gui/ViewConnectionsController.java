@@ -8,7 +8,6 @@ import java.util.Arrays;
 import downey.main.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,11 +24,11 @@ import javafx.stage.Stage;
 
 public class ViewConnectionsController {
 
-
 	private MainApp mainApp;
 	private final DataStorage DS = DataStorage.getMainDataStorage();
 	private Person selectedPerson;
 	private String selectedPeople;
+	private boolean filterCheck = false;
 
 	@FXML
 	private ChoiceBox<String> filter;
@@ -38,7 +37,7 @@ public class ViewConnectionsController {
 	@FXML
 	ListView<String> list = new ListView<String>();
 	@FXML
-	private Button goBack, viewButton, searchButton, clear, exportFilteredData,exportPalladio;
+	private Button goBack, viewButton, searchButton, clear, exportFilteredData, exportPalladio;
 	private ArrayList<Connection> connectionList = DS.getConnectionArray();
 	private ObservableList<String> filteredList = FXCollections.observableArrayList();
 	@FXML
@@ -47,22 +46,27 @@ public class ViewConnectionsController {
 
 	public ViewConnectionsController() {
 	}
-	
+
 	@FXML
 	private void initialize() throws IOException {
 		list.setItems(getConnectionList());
-		filter.setItems(FXCollections.observableArrayList("Sender", "Receivers", "Date", "Location", "Citation", "Interaction Type", "Notes"));
+		filter.setItems(FXCollections.observableArrayList("Sender", "Receivers", "Date", "Location", "Citation",
+				"Interaction Type", "Notes"));
 		filter.setValue("Sender");
 		filterAction();
-		exportFilteredData.setOnAction((event)-> { exportToGephi(); });
-		exportPalladio.setOnAction((event)-> { exportToPalladio(); });
+		exportFilteredData.setOnAction((event) -> {
+			exportToGephi();
+		});
+		exportPalladio.setOnAction((event) -> {
+			exportToPalladio();
+		});
 		clearList();
 	}
-		
+
 	private ObservableList<String> getConnectionList() {
 		for (int i = 0; i <= connectionList.size() - 1; i++) {
 			if (connectionList.get(i).getSender() != null) {
-				selectedPerson = connectionList.get(i).getSender(); 
+				selectedPerson = connectionList.get(i).getSender();
 				selectedPeople = connectionList.get(i).getReceiverNameList().toString();
 				observableConnectionList.addAll(Arrays.asList(selectedPerson.getName() + ": " + selectedPeople));
 			} else {
@@ -72,63 +76,69 @@ public class ViewConnectionsController {
 		}
 		return observableConnectionList;
 	}
-	public File getChosenFile(){
+
+	public File getChosenFile() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Choose a file name PREFIX for exporting:");
-        File file = fileChooser.showSaveDialog(null);
-        return file;
+		File file = fileChooser.showSaveDialog(null);
+		return file;
 	}
+
 	public void exportToGephi() {
 		File file = getChosenFile();
-		
+
 		if (file != null) {
 			Exporter gephiEx = new GephiExporter(filteredConnections, DS.getPeopleArray());
 			try {
-			gephiEx.export(file.getPath());
+				gephiEx.export(file.getPath());
 			} catch (IOException e) {
-				//TODO: alert the user if error happens
+				// TODO: alert the user if error happens
 				e.printStackTrace();
 			}
+		}
 	}
-	}
-	public void exportToPalladio(){
+
+	public void exportToPalladio() {
 		File file = getChosenFile();
-		
+
 		if (file != null) {
 			Exporter palladioEx = new PalladioExporter(filteredConnections);
 			try {
-			palladioEx.export(file.getPath());
+				palladioEx.export(file.getPath());
 			} catch (IOException e) {
-				//TODO: alert the user if error happens
+				// TODO: alert the user if error happens
 				e.printStackTrace();
 			}
+		}
 	}
-	}
-	
+
 	public ObservableList<String> filteredNameList(ConnectionQuery query) {
 		filteredConnections = new ArrayList<Connection>();
-		for (int i = 0; i <= connectionList.size() - 1; i++) { 
+		for (int i = 0; i <= connectionList.size() - 1; i++) {
 			if (query.accepts(connectionList.get(i))) {
 				Connection selectedConnection = connectionList.get(i);
 				filteredConnections.add(connectionList.get(i));
-				filteredList.addAll(Arrays.asList(selectedConnection.getSender().getName() + " : " + selectedConnection.getReceiverNameList()));
+				filteredList.addAll(Arrays.asList(
+						selectedConnection.getSender().getName() + " : " + selectedConnection.getReceiverNameList()));
 			}
 		}
 		return filteredList;
 	}
-	
+
 	private void filterAction() {
 		searchButton.setOnAction((e) -> {
 			filteredList.clear();
 			ConnectionQuery containsFilter = new ConnectionContainsQuery(target.getText(), filter.getValue());
 			list.setItems(filteredNameList(containsFilter));
+			filterCheck = true;
 		});
 	}
-	
-	private void clearList(){
+
+	private void clearList() {
 		clear.setOnAction(e -> {
 			observableConnectionList.clear();
 			list.setItems(getConnectionList());
+			filterCheck = false;
 		});
 	}
 
@@ -139,11 +149,10 @@ public class ViewConnectionsController {
 		stage.setScene(new Scene(root));
 		stage.show();
 	}
-	
+
 	@FXML
 	private void viewAction(ActionEvent event) throws IOException {
 		String selectedConnection = list.getSelectionModel().getSelectedItem();
-		System.out.println();
 		if (selectedConnection == null) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Select Connection");
@@ -154,7 +163,11 @@ public class ViewConnectionsController {
 			String[] names = selectedConnection.split(":");
 			SelectedInformationTracker.storeSelectedName(names[0]);
 			SelectedInformationTracker.storeSelectedNames(names[1]);
-			SelectedInformationTracker.storeSelectedConnection(DS.getConnectionArray().get(list.getSelectionModel().getSelectedIndex()));
+			if (!filterCheck) {
+				SelectedInformationTracker.storeSelectedConnection(DS.getConnectionArray().get(list.getSelectionModel().getSelectedIndex()));
+			} else {
+				SelectedInformationTracker.storeSelectedConnection(filteredConnections.get(list.getSelectionModel().getSelectedIndex()));
+			}
 			Stage stage = (Stage) viewButton.getScene().getWindow();
 			Parent root = FXMLLoader.load(getClass().getResource("ConnectionInfo.fxml"));
 			stage.setScene(new Scene(root));
