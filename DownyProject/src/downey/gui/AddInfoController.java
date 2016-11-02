@@ -4,6 +4,7 @@ import downey.main.ControlledVocab;
 import downey.main.DataStorage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +26,7 @@ public class AddInfoController {
 	@FXML
 	private TreeItem<String> home = new TreeItem<String>("Home");
 	@FXML
-	private Button submit, goBack, editChoices, removeChoices;
+	private Button submit, goBack, editChoices, removeChoices, occupationVocabAdd, occupationVocabRemove, cultureVocabAdd, cultureVocabRemove, genderVocabAdd, genderVocabRemove;
 	@FXML
 	private TextField nameInput, nicknameInput;
 	@FXML
@@ -45,7 +46,6 @@ public class AddInfoController {
 		genderInput.setItems(vocab.getGenderOptions());
 		cultureInput.setItems(vocab.getCultureOptions());
 		occupationInput.setItems(vocab.getOccupationOptions());
-		choicesAction();
 	}
 
 	@FXML
@@ -65,71 +65,142 @@ public class AddInfoController {
 		stage.setScene(scene);
 		stage.show();
 	}
-
-	private Optional<String> choiceDialog(List<String> choices, String title) {
-		ChoiceDialog<String> dialog = new ChoiceDialog<>(choices.get(0), choices);
-		dialog.setTitle(title);
-		dialog.setHeaderText(null);
-		dialog.setContentText("Choose your option");
-		Optional<String> result = dialog.showAndWait();
-		return result;
-	}
-
+	
 	@FXML
-	private void choicesAction() {
-		List<String> choices = Arrays.asList("Occupation", "Culture", "Gender");
-		editChoices.setOnAction((event) -> {
-			Alert editChoices = new Alert(AlertType.CONFIRMATION);
-			editChoices.setTitle("Edit Choices for Data Fields");
-			editChoices.setHeaderText(null);
-			editChoices.setContentText("Choose your option");
-			ButtonType addButton = new ButtonType("Add");
-			ButtonType removeButton = new ButtonType("Remove");
-			ButtonType cancelButton = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-			editChoices.getButtonTypes().setAll(addButton, removeButton, cancelButton);
-			Optional<ButtonType> result = editChoices.showAndWait();
-			if (result.get() == addButton) {
-				Optional<String> chosenField = choiceDialog(choices, "Add");
-				TextInputDialog input = new TextInputDialog();
-				input.setTitle("Choice Input");
-				input.setHeaderText(null);
-				input.setContentText("Enter new choice:");
-				Optional<String> addedChoice = input.showAndWait();
-				if (addedChoice.isPresent() && !addedChoice.get().equals("")) {
-					if (chosenField.get().equals("Occupation")) {
-						vocab.addOccupationOption(addedChoice.get());
-					} else if (chosenField.get().equals("Culture")) {
-						vocab.addCultureOption(addedChoice.get());
-					} else {
-						vocab.addGenderOption(addedChoice.get());
-					}
-				}
-			} else if (result.get() == removeButton) {
-				Optional<String> chosenField = choiceDialog(choices, "Remove");
-				if (chosenField.isPresent()) {
-					if (chosenField.get().equals("Occupation")) {
-						List<String> fieldList = vocab.getOccupationOptions();
-						Optional<String> removedChoice = choiceDialog(fieldList, "Remove Occupation");
-						if (removedChoice.isPresent())
-							vocab.removeOccupationOption(removedChoice.get());
-					} else if (chosenField.get().equals("Culture")) {
-						List<String> fieldList = vocab.getCultureOptions();
-						Optional<String> removedChoice = choiceDialog(fieldList, "Remove Culture");
-						if (removedChoice.isPresent())
-							vocab.removeCultureOption(removedChoice.get());
-					} else {
-						List<String> fieldList = vocab.getGenderOptions();
-						Optional<String> removedChoice = choiceDialog(fieldList, "Remove Gender");
-						if (removedChoice.isPresent())
-							vocab.removeGenderOption(removedChoice.get());
-					}
-				}
-			} else {
+	private void occupationVocabAdd() {
+		occupationVocabAdd.setOnAction(e -> {
+			TextInputDialog input = new TextInputDialog();
+			input.setTitle("Add Occupation");
+			input.setHeaderText(null);
+			input.setContentText("Enter a new occupation:");
+			Optional<String> addedChoice = input.showAndWait();
+			if (addedChoice.isPresent() && !addedChoice.get().equals("")) {
+				vocab.addOccupationOption(addedChoice.get());
 			}
 			try {
 				vocab.saveControlledVocab();
 				vocab.loadControlledVocab();
-			} catch (Exception e1) {
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+	}
+	
+	@FXML
+	private void occupationVocabRemove() {
+		occupationVocabRemove.setOnAction(e -> {
+			List<String> choices = vocab.getOccupationOptions();
+
+			ChoiceDialog<String> dialog = new ChoiceDialog<>("", choices);
+			dialog.setTitle("Remove an Occupation");
+			dialog.setHeaderText(null);
+			dialog.setContentText("Choose an occupation to remove:");
+
+			// Traditional way to get the response value.
+			Optional<String> result = dialog.showAndWait();
+			if (result.isPresent()){
+			    vocab.removeOccupationOption(result.get());
+			}
+			
+			try {
+				vocab.saveControlledVocab();
+				vocab.loadControlledVocab();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+	}
+	
+	@FXML
+	private void cultureVocabAdd() {
+		cultureVocabAdd.setOnAction(e -> {
+			TextInputDialog input = new TextInputDialog();
+			input.setTitle("Add Culture");
+			input.setHeaderText(null);
+			input.setContentText("Enter a new culture:");
+			Optional<String> addedChoice = input.showAndWait();
+			if (addedChoice.isPresent() && !addedChoice.get().equals("")) {
+				vocab.addCultureOption(addedChoice.get());
+			}
+			try {
+				vocab.saveControlledVocab();
+				vocab.loadControlledVocab();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+	}
+	
+	@FXML
+	private void cultureVocabRemove() {
+		cultureVocabRemove.setOnAction(e -> {
+			List<String> choices = vocab.getCultureOptions();
+
+			ChoiceDialog<String> dialog = new ChoiceDialog<>("", choices);
+			dialog.setTitle("Remove a Culture");
+			dialog.setHeaderText(null);
+			dialog.setContentText("Choose a culture to remove:");
+
+			// Traditional way to get the response value.
+			Optional<String> result = dialog.showAndWait();
+			if (result.isPresent()){
+			    vocab.removeCultureOption(result.get());
+			}
+			
+			try {
+				vocab.saveControlledVocab();
+				vocab.loadControlledVocab();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+	}
+	
+	@FXML
+	private void genderVocabAdd() {
+		genderVocabAdd.setOnAction(e -> {
+			TextInputDialog input = new TextInputDialog();
+			input.setTitle("Add Gender");
+			input.setHeaderText(null);
+			input.setContentText("Enter a new gender:");
+			Optional<String> addedChoice = input.showAndWait();
+			if (addedChoice.isPresent() && !addedChoice.get().equals("")) {
+				vocab.addGenderOption(addedChoice.get());
+			}
+			try {
+				vocab.saveControlledVocab();
+				vocab.loadControlledVocab();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+	}
+	
+	@FXML
+	private void genderVocabRemove() {
+		genderVocabRemove.setOnAction(e -> {
+			List<String> choices = vocab.getGenderOptions();
+
+			ChoiceDialog<String> dialog = new ChoiceDialog<>("", choices);
+			dialog.setTitle("Remove a Gender");
+			dialog.setHeaderText(null);
+			dialog.setContentText("Choose a gender to remove:");
+
+			Optional<String> result = dialog.showAndWait();
+			if (result.isPresent()){
+			    vocab.removeGenderOption(result.get());
+			}
+			
+			try {
+				vocab.saveControlledVocab();
+				vocab.loadControlledVocab();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});

@@ -21,33 +21,33 @@
             <Font name="Open Sans Italic" size="30.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Initiator">
+      <Text fontSmoothingType="LCD" layoutX="21.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Initiator">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="initiator" layoutX="22.0" layoutY="151.0" prefHeight="25.0" prefWidth="214.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <ChoiceBox fx:id="initiator" layoutX="22.0" layoutY="151.0" prefHeight="25.0" prefWidth="231.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
       <Text fontSmoothingType="LCD" layoutX="507.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipients">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
+      <Text fontSmoothingType="LCD" layoutX="20.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="260.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
+      <Text fontSmoothingType="LCD" layoutX="267.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
+      <Text fontSmoothingType="LCD" layoutX="24.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <Text fontSmoothingType="LCD" layoutX="260.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Citation">
+      <Text fontSmoothingType="LCD" layoutX="267.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Citation">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
@@ -56,7 +56,7 @@
          <font>
             <Font name="Open Sans" size="12.0" />
          </font></TextField>
-      <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes">
+      <Text fontSmoothingType="LCD" layoutX="23.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
@@ -73,8 +73,8 @@
          <font>
             <Font name="Open Sans" size="12.0" />
          </font></Button>
-      <DatePicker fx:id="dateInput" layoutX="22.0" layoutY="206.0" prefWidth="214.0" promptText="mm/dd/yyyy" style="-fx-font-family: &quot;Open Sans&quot;;" />
-      <ChoiceBox fx:id="typeInput" layoutX="265.0" layoutY="206.0" prefHeight="22.0" prefWidth="214.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <DatePicker fx:id="dateInput" layoutX="22.0" layoutY="206.0" prefHeight="25.0" prefWidth="231.0" promptText="mm/dd/yyyy" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <ChoiceBox fx:id="typeInput" layoutX="265.0" layoutY="206.0" prefHeight="25.0" prefWidth="150.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
       <Rectangle height="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.1" width="800.0">
          <fill>
             <LinearGradient endX="1.0" endY="1.0">
@@ -120,7 +120,10 @@
             <Font name="Open Sans" size="12.0" />
          </font>
       </Button>
-      <ChoiceBox fx:id="locationInput" layoutX="22.0" layoutY="267.0" prefHeight="22.0" prefWidth="214.0" />
-      <Button fx:id="editChoices" layoutX="353.0" layoutY="153.0" mnemonicParsing="false" text="Edit Choices" />
+      <ChoiceBox fx:id="locationInput" layoutX="22.0" layoutY="267.0" prefHeight="25.0" prefWidth="165.0" />
+      <Button fx:id="locationVocabAdd" layoutX="195.0" layoutY="267.0" mnemonicParsing="false" onAction="#locationVocabAdd" prefHeight="25.0" prefWidth="25.0" text="+" />
+      <Button fx:id="locationVocabRemove" layoutX="228.0" layoutY="267.0" mnemonicParsing="false" onAction="#locationVocabRemove" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button fx:id="typeVocabAdd" layoutX="421.0" layoutY="206.0" mnemonicParsing="false" onAction="#typeVocabAdd" prefHeight="25.0" prefWidth="25.0" text="+" />
+      <Button fx:id="typeVocabRemove" layoutX="452.0" layoutY="206.0" mnemonicParsing="false" onAction="#typeVocabRemove" prefHeight="25.0" prefWidth="25.0" text="-" />
    </children>
 </AnchorPane>

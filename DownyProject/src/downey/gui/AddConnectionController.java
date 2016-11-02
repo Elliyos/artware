@@ -29,7 +29,7 @@ public class AddConnectionController {
 	public ArrayList<Person> peopleList = DS.getPeopleArray();
 
 	@FXML
-	private Button submit, goBack, add, search, remove, clear, editChoices;
+	private Button submit, goBack, add, search, remove, clear, editChoices, locationVocabAdd, locationVocabRemove, typeVocabAdd, typeVocabRemove;
 	@FXML
 	private ChoiceBox<String> initiator, typeInput, locationInput;
 	@FXML
@@ -63,7 +63,6 @@ public class AddConnectionController {
 		removeRecipients();
 		searchRecipients();
 		clearRecipients();
-		choicesAction();
 	}
 
 	public ObservableSet<String> getNameList() {
@@ -136,68 +135,6 @@ public class AddConnectionController {
 	public void clearRecipients() {
 		clear.setOnAction(e -> recipientList.setItems(FXCollections.observableArrayList(getNameList())));
 	}
-	
-	private Optional<String> choiceDialog(List<String> choices, String title) {
-		ChoiceDialog<String> dialog = new ChoiceDialog<>(choices.get(0), choices);
-		dialog.setTitle(title);
-		dialog.setHeaderText(null);
-		dialog.setContentText("Choose your option");
-		Optional<String> result = dialog.showAndWait();
-		return result;
-	}
-	
-	@FXML
-	private void choicesAction() {
-		List<String> choices = Arrays.asList("Interaction Type", "Location");
-		editChoices.setOnAction((event) -> {
-			Alert editChoices = new Alert(AlertType.CONFIRMATION);
-			editChoices.setTitle("Edit Choices for Data Fields");
-			editChoices.setHeaderText(null);
-			editChoices.setContentText("Choose your option");
-			ButtonType addButton = new ButtonType("Add");
-			ButtonType removeButton = new ButtonType("Remove");
-			ButtonType cancelButton = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-			editChoices.getButtonTypes().setAll(addButton, removeButton, cancelButton);
-			Optional<ButtonType> result = editChoices.showAndWait();
-			if (result.get() == addButton) {
-				Optional<String> chosenField = choiceDialog(choices, "Add");
-				TextInputDialog input = new TextInputDialog();
-				input.setTitle("Choice Input");
-				input.setHeaderText(null);
-				input.setContentText("Enter new choice:");
-				Optional<String> addedChoice = input.showAndWait();
-				if (addedChoice.isPresent() && !addedChoice.get().equals("")) {
-					if (chosenField.get().equals(choices.get(0))) {
-						vocab.addInteractionTypeOption(addedChoice.get());
-					} else {
-						vocab.addLocationOption(addedChoice.get());
-					}
-				}
-			} else if (result.get() == removeButton) {
-				Optional<String> chosenField = choiceDialog(choices, "Remove");
-				if (chosenField.isPresent()) {
-					if (chosenField.get().equals(choices.get(0))) {
-						List<String> fieldList = vocab.getInteractionTypeOptions();
-						Optional<String> removedChoice = choiceDialog(fieldList, "Remove Interaction Type");
-						if (removedChoice.isPresent()) 
-							vocab.removeInteractionTypeOption(removedChoice.get());
-					} else {
-						List<String> fieldList = vocab.getLocationOptions();
-						Optional<String> removedChoice = choiceDialog(fieldList, "Remove Location");
-						if (removedChoice.isPresent()) 
-							vocab.removeLocationOption(removedChoice.get());
-					}
-				}
-			} else {
-			}
-			try {
-				vocab.saveControlledVocab();
-				vocab.loadControlledVocab();
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		});
-	}
 
 	public void createConnection() throws IOException{
 		for (int i = 0; i < selectedRecipientList.getItems().size(); i++) {
@@ -221,7 +158,96 @@ public class AddConnectionController {
 	}
 	
 	@FXML
-	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
+	private void locationVocabAdd() {
+		locationVocabAdd.setOnAction(e -> {
+			TextInputDialog input = new TextInputDialog();
+			input.setTitle("Add Location");
+			input.setHeaderText(null);
+			input.setContentText("Enter a new location:");
+			Optional<String> addedChoice = input.showAndWait();
+			if (addedChoice.isPresent() && !addedChoice.get().equals("")) {
+				vocab.addLocationOption(addedChoice.get());
+			}
+			try {
+				vocab.saveControlledVocab();
+				vocab.loadControlledVocab();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+	}
+	
+	@FXML
+	private void locationVocabRemove() {
+		locationVocabRemove.setOnAction(e -> {
+			List<String> choices = vocab.getLocationOptions();
+
+			ChoiceDialog<String> dialog = new ChoiceDialog<>("", choices);
+			dialog.setTitle("Remove a Location");
+			dialog.setHeaderText(null);
+			dialog.setContentText("Choose a location to remove:");
+
+			// Traditional way to get the response value.
+			Optional<String> result = dialog.showAndWait();
+			if (result.isPresent()){
+			    vocab.removeLocationOption(result.get());
+			}
+			
+			try {
+				vocab.saveControlledVocab();
+				vocab.loadControlledVocab();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+	}
+	
+	@FXML
+	private void typeVocabAdd() {
+		typeVocabAdd.setOnAction(e -> {
+			TextInputDialog input = new TextInputDialog();
+			input.setTitle("Add Interaction Type");
+			input.setHeaderText(null);
+			input.setContentText("Enter a new interaction type:");
+			Optional<String> addedChoice = input.showAndWait();
+			if (addedChoice.isPresent() && !addedChoice.get().equals("")) {
+				vocab.addInteractionTypeOption(addedChoice.get());
+			}
+			try {
+				vocab.saveControlledVocab();
+				vocab.loadControlledVocab();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+	}
+	
+	@FXML
+	private void typeVocabRemove() {
+		typeVocabRemove.setOnAction(e -> {
+			List<String> choices = vocab.getInteractionTypeOptions();
+
+			ChoiceDialog<String> dialog = new ChoiceDialog<>("", choices);
+			dialog.setTitle("Remove an Interaction Type");
+			dialog.setHeaderText(null);
+			dialog.setContentText("Choose an interaction type to remove:");
+
+			// Traditional way to get the response value.
+			Optional<String> result = dialog.showAndWait();
+			if (result.isPresent()){
+			    vocab.removeInteractionTypeOption(result.get());
+			}
+			
+			try {
+				vocab.saveControlledVocab();
+				vocab.loadControlledVocab();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 	}
 }

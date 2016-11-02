@@ -71,6 +71,7 @@ public class ViewConnectionsController {
 		}
 		return observableConnectionList;
 	}
+	
 	public File getChosenFile(){
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Choose a file name PREFIX for exporting:");
