@@ -24,11 +24,13 @@ import javafx.stage.Stage;
 
 public class ViewConnectionsController {
 
-	private MainApp mainApp;
 	private final DataStorage DS = DataStorage.getMainDataStorage();
 	private Person selectedPerson;
 	private String selectedPeople;
 	private boolean filterCheck = false;
+	private ArrayList<Connection> filteredConnections;
+	private ArrayList<Connection> connectionList = DS.getConnectionArray();
+	private ObservableList<String> filteredList = FXCollections.observableArrayList();
 
 	@FXML
 	private ChoiceBox<String> filter;
@@ -38,11 +40,9 @@ public class ViewConnectionsController {
 	ListView<String> list = new ListView<String>();
 	@FXML
 	private Button goBack, viewButton, searchButton, clear, exportFilteredData, exportPalladio;
-	private ArrayList<Connection> connectionList = DS.getConnectionArray();
-	private ObservableList<String> filteredList = FXCollections.observableArrayList();
 	@FXML
 	private TextField target;
-	private ArrayList<Connection> filteredConnections;
+
 
 	public ViewConnectionsController() {
 	}
@@ -63,6 +63,10 @@ public class ViewConnectionsController {
 		clearList();
 	}
 
+	/**
+	 * Returns an observable list of existing, archived list of connections.
+	 * @return
+	 */
 	private ObservableList<String> getConnectionList() {
 		for (int i = 0; i <= connectionList.size() - 1; i++) {
 			if (connectionList.get(i).getSender() != null) {
@@ -77,6 +81,10 @@ public class ViewConnectionsController {
 		return observableConnectionList;
 	}
 
+	/**
+	 * Chooses a file name to export the archived information.
+	 * @return
+	 */
 	public File getChosenFile() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Choose a file name PREFIX for exporting:");
@@ -84,6 +92,9 @@ public class ViewConnectionsController {
 		return file;
 	}
 
+	/**
+	 * Handles exporting to Gephi.
+	 */
 	public void exportToGephi() {
 		File file = getChosenFile();
 
@@ -98,6 +109,9 @@ public class ViewConnectionsController {
 		}
 	}
 
+	/**
+	 * Handles exporting to Palladio.
+	 */
 	public void exportToPalladio() {
 		File file = getChosenFile();
 
@@ -112,6 +126,11 @@ public class ViewConnectionsController {
 		}
 	}
 
+	/**
+	 * Returns a filtered list of names based on a search input by the user.
+	 * @param query
+	 * @return
+	 */
 	public ObservableList<String> filteredNameList(ConnectionQuery query) {
 		filteredConnections = new ArrayList<Connection>();
 		for (int i = 0; i <= connectionList.size() - 1; i++) {
@@ -125,6 +144,9 @@ public class ViewConnectionsController {
 		return filteredList;
 	}
 
+	/**
+	 * Creates a filtered list based on the search input given by the user. Maps to the search button.
+	 */
 	private void filterAction() {
 		searchButton.setOnAction((e) -> {
 			filteredList.clear();
@@ -134,6 +156,9 @@ public class ViewConnectionsController {
 		});
 	}
 
+	/**
+	 * Clears the list of any searches / filters.
+	 */
 	private void clearList() {
 		clear.setOnAction(e -> {
 			observableConnectionList.clear();
@@ -173,9 +198,5 @@ public class ViewConnectionsController {
 			stage.setScene(new Scene(root));
 			stage.show();
 		}
-	}
-
-	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
 	}
 }

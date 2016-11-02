@@ -19,13 +19,15 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-//    	DataStorage.getMainDataStorage().loadConnections("connections");
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("ArtWARE");
 
         initialize();
     }
 
+    public Stage getPrimaryStage() {
+    	return primaryStage;
+    }
     /**
      * Initializes the root layout.
      */

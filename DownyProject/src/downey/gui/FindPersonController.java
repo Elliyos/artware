@@ -23,9 +23,10 @@ public class FindPersonController {
 	private final DataStorage DS = DataStorage.getMainDataStorage();
 	private final ArrayList<Person> peopleList = DS.getPeopleArray();
 	private Person selectedPerson;
-
 	private final ObservableSet<String> observablePeopleSet = FXCollections.observableSet();
 	private ObservableSet<String> filteredSet = FXCollections.observableSet();
+	private ArrayList<Person> filteredPeople = new ArrayList<>();
+	
 	@FXML
 	ListView<String> list = new ListView<String>();
 	@FXML
@@ -36,7 +37,6 @@ public class FindPersonController {
 	private ChoiceBox<String> filter;
 	@FXML
 	private TextField target;
-	private ArrayList<Person> filteredPeople = new ArrayList<>();
 
 	public FindPersonController() {
 	}
@@ -52,6 +52,10 @@ public class FindPersonController {
 		clearList();
 	}
 
+	/**
+	 * Creates a list of names of all archived people.
+	 * @return
+	 */
 	public ObservableSet<String> getNameList() {
 		for (int i = 0; i <= peopleList.size() - 1; i++) {
 			selectedPerson = peopleList.get(i);
@@ -61,6 +65,11 @@ public class FindPersonController {
 		return observablePeopleSet;
 	}
 
+	/**
+	 * Takes a search input and filters the name list based on it.
+	 * @param query
+	 * @return
+	 */
 	public ObservableSet<String> filteredNameList(PersonQuery query) {
 		for (int i = 0; i <= peopleList.size() - 1; i++) { 
 			if (query.accepts(peopleList.get(i))) {
@@ -73,18 +82,31 @@ public class FindPersonController {
 		return filteredSet;
 	}
 
+	/**
+	 * Populates the list of people with a filtered list, created through search.
+	 */
 	private void filterAction() {
 		searchButton.setOnAction((e) -> {
 			filteredSet.clear();
 			PersonQuery containsFilter = new PersonContainsQuery(target.getText(), filter.getValue());
 			list.setItems(FXCollections.observableArrayList(filteredNameList(containsFilter)));
 		});
-	}public File getChosenFile(){
+	}
+	
+	/**
+	 * Chooses a file name to export the archived information.
+	 * @return
+	 */
+	public File getChosenFile(){
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Choose a file name PREFIX for exporting:");
         File file = fileChooser.showSaveDialog(null);
         return file;
 	}
+	
+	/**
+	 * Handles exporting archived information to Gephi.
+	 */
 	public void exportToGephi() {
 		File file = getChosenFile();
 		
@@ -98,6 +120,10 @@ public class FindPersonController {
 			}
 	}
 	}
+	
+	/**
+	 * Handles exporting to Palladio.
+	 */
 	public void exportToPalladio(){
 		File file = getChosenFile();
 		
@@ -112,12 +138,19 @@ public class FindPersonController {
 	}
 	}
 	
+	/**
+	 * Clears list of items and populates with the original list of names.
+	 */
 	private void clearList(){
 		clear.setOnAction(e -> {
 			list.setItems(FXCollections.observableArrayList(getNameList()));
 		});
 	}
 
+	/**
+	 * Handles the action of viewing a person and switching to their info scene.
+	 * @throws IOException
+	 */
 	@FXML
 	private void viewAction() throws IOException {
 		String selectedName = list.getSelectionModel().getSelectedItem();
@@ -136,6 +169,10 @@ public class FindPersonController {
 		}
 	}
 
+	/**
+	 * Handles user going back to the previous page.
+	 * @throws IOException
+	 */
 	@FXML
 	private void backAction() throws IOException {
 		Stage stage = (Stage) goBack.getScene().getWindow();
@@ -151,9 +188,4 @@ public class FindPersonController {
 //			
 //		});
 //	}
-
-	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
-	}
-
 }

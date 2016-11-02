@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.AboutController">
+   <children>
+      <Rectangle height="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.1" width="800.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#283048" />
+                  <Stop color="#859398" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="340.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ArtWARE">
+         <font>
+            <Font name="Open Sans" size="30.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="27.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ArtWARE is art history data management software, designed around the organization of artists and their social interactions. It accepts, stores, and properly formats this information into files usable by the Palladio and Gephi data graphing platforms." textAlignment="CENTER" wrappingWidth="750.0">
+         <font>
+            <Font name="Open Sans" size="20.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="299.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Development Team">
+         <font>
+            <Font name="Open Sans Italic" size="24.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="176.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Project Supervisor">
+         <font>
+            <Font name="Open Sans" size="18.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="135.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="JavaFX / Java 8 Specialist">
+         <font>
+            <Font name="Open Sans" size="18.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="199.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Co-Lead Coders">
+         <font>
+            <Font name="Open Sans" size="18.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="33.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scrum Master / Team Management">
+         <font>
+            <Font name="Open Sans" size="18.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="160.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Refactoring / Testing">
+         <font>
+            <Font name="Open Sans" size="18.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="324.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Special Thanks">
+         <font>
+            <Font name="Open Sans Italic" size="24.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="236.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dr. Forrest Stonedahl, for his guidance">
+         <font>
+            <Font name="Open Sans" size="18.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="215.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dr. Claire Kovacs, for her trust and feedback">
+         <font>
+            <Font name="Open Sans" size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="home" layoutX="2.0" layoutY="70.0" mnemonicParsing="false" onAction="#toHome" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: TRANSPARENT;" text="Home" underline="true">
+         <font>
+            <Font name="Open Sans" size="12.0" />
+         </font>
+      </Button>
+      <Text fontSmoothingType="LCD" layoutX="463.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forrest Stonedahl">
+         <font>
+            <Font name="Open Sans" size="18.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="463.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kyle McCaw">
+         <font>
+            <Font name="Open Sans" size="18.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="463.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kevin Barbian">
+         <font>
+            <Font name="Open Sans" size="18.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="463.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Avash Shrestha">
+         <font>
+            <Font name="Open Sans" size="18.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="463.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tyler May">
+         <font>
+            <Font name="Open Sans" size="18.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="463.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Keenan Odenkirk">
+         <font>
+            <Font name="Open Sans" size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

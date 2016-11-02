@@ -16,11 +16,13 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class MainMenuController {
 	
 	@FXML
-	private Button peopleAdd, peopleView, connectionsAdd, connectionsView, exportGephi, exportPalladio;
+	private Button peopleAdd, peopleView, connectionsAdd, connectionsView, exportGephi, exportPalladio, about;
 
 	/**
 	 * The constructor. The constructor is called before the initialize()
@@ -36,16 +38,25 @@ public class MainMenuController {
 	 */
 
 	@FXML
-	private void initialize() {
+	public void initialize() {
 		exportGephi.setOnAction((event)-> { exportToGephi(); });
 		exportPalladio.setOnAction((event) -> { exportToPalladio(); });
 	}
+	
+	/**
+	 * Chooses a file name to export the archived information.
+	 * @return
+	 */
 	public File getChosenFile(){
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Choose a file name PREFIX for exporting:");
         File file = fileChooser.showSaveDialog(null);
         return file;
 	}
+	
+	/**
+	 * Handles exporting to Gephi.
+	 */
 	public void exportToGephi() {
 		File file = getChosenFile();
 		if (file != null) {
@@ -59,6 +70,10 @@ public class MainMenuController {
 			}
 		}
 	}
+	
+	/**
+	 * Handles exporting to Palladio.
+	 */
 	public void exportToPalladio() {	
 		File file = getChosenFile();
 		if (file != null) {
@@ -85,9 +100,12 @@ public class MainMenuController {
 		} else if (event.getSource() == this.connectionsAdd) {
 			stage = (Stage) this.connectionsAdd.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("AddConnection.fxml"));
-		} else {
+		} else if (event.getSource() == this.connectionsView){
 			stage = (Stage) this.connectionsView.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("ViewConnections.fxml"));
+		} else {
+			stage = (Stage) this.about.getScene().getWindow();
+			root = FXMLLoader.load(getClass().getResource("About.fxml"));
 		}
 		// create a new scene with root and set the stage
 		Scene scene = new Scene(root);

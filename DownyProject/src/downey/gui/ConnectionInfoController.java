@@ -14,7 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 public class ConnectionInfoController {
-	private MainApp mainApp;
+
 	@FXML
 	private Button home, editButton, toViewConnections;
 	@FXML
@@ -26,12 +26,6 @@ public class ConnectionInfoController {
 	public ConnectionInfoController() {
 	}
 
-	/**
-	 * This method is currently bugged. Information has been place inside to
-	 * replicate an actual use case. Needs to be implemented in sprint 2.
-	 * 
-	 * @throws IOException
-	 */
 	@FXML
 	private void initialize() throws IOException {
 		currentConnection = SelectedInformationTracker.getSelectedConnection();
@@ -65,9 +59,5 @@ public class ConnectionInfoController {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-	}
-
-	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
 	}
 }

@@ -20,13 +20,11 @@ import javafx.stage.Stage;
 
 public class PersonInfoController {
 
-	private MainApp mainApp;
 	private final DataStorage DS = DataStorage.getMainDataStorage();
 	private final ArrayList<Connection> connectionList = DS.getConnectionArray();
 	private Person chosenPerson = DS.getPersonObject(SelectedInformationTracker.getSelectedName());
 	private String chosenPeople;
-	private Person selectedPerson;
-	
+
 	@FXML
 	private Button home, editButton, toViewPeople;
 	@FXML
@@ -50,7 +48,6 @@ public class PersonInfoController {
 	 */
 	@FXML
 	private void initialize() throws IOException {
-		ArrayList<String> personConnections = DS.getConnectionsForPerson(chosenPerson.getName());
 		nameLabel.setText(chosenPerson.getName());
 		nicknameLabel.setText(chosenPerson.getNickname());
 		occupationLabel.setText(chosenPerson.getOccupation());
@@ -59,21 +56,24 @@ public class PersonInfoController {
 		bioArea.setText(chosenPerson.getBio());
 		connections.setItems(getConnectionList());
 	}
-	
-	
-private ObservableList<String> getConnectionList() {
-	for (int i = 0; i <= connectionList.size() - 1; i++) {
-		if (connectionList.get(i).getSender() != null) {
-			chosenPerson = connectionList.get(i).getSender(); 
-			chosenPeople = connectionList.get(i).getReceiverNameList().toString();
-			observableConnectionList.addAll(Arrays.asList(chosenPerson.getName() + ": " + chosenPeople));
-		} else {
-			chosenPeople = connectionList.get(i).getReceiverNameList().toString();
-			observableConnectionList.addAll(Arrays.asList(" : " + chosenPeople));
+
+	/**
+	 * Gets a list of existing, archived connections.
+	 * @return
+	 */
+	private ObservableList<String> getConnectionList() {
+		for (int i = 0; i <= connectionList.size() - 1; i++) {
+			if (connectionList.get(i).getSender() != null) {
+				chosenPerson = connectionList.get(i).getSender();
+				chosenPeople = connectionList.get(i).getReceiverNameList().toString();
+				observableConnectionList.addAll(Arrays.asList(chosenPerson.getName() + ": " + chosenPeople));
+			} else {
+				chosenPeople = connectionList.get(i).getReceiverNameList().toString();
+				observableConnectionList.addAll(Arrays.asList(" : " + chosenPeople));
+			}
 		}
+		return observableConnectionList;
 	}
-	return observableConnectionList;
-}
 
 	@FXML
 	private void handleButtonAction(ActionEvent event) throws IOException {
@@ -93,9 +93,5 @@ private ObservableList<String> getConnectionList() {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-	}
-
-	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
 	}
 }

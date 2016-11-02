@@ -27,7 +27,11 @@ public class AddConnectionController {
 	private final ControlledVocab vocab = ControlledVocab.getControlledVocab(); 
 	private MainApp mainApp;
 	public ArrayList<Person> peopleList = DS.getPeopleArray();
-
+	private Person selectedPerson;
+	private final ArrayList<Person> selectedRecipients = new ArrayList<>();
+	private final ObservableSet<String> observableSet = FXCollections.observableSet();
+	private ObservableSet<String> filteredSet = FXCollections.observableSet();
+	
 	@FXML
 	private Button submit, goBack, add, search, remove, clear, editChoices, locationVocabAdd, locationVocabRemove, typeVocabAdd, typeVocabRemove;
 	@FXML
@@ -38,16 +42,10 @@ public class AddConnectionController {
 	private TextField citationInput, searchInput;
 	@FXML
 	private TextArea notes;
-
-	private final ObservableSet<String> observableSet = FXCollections.observableSet();
-	private ObservableSet<String> filteredSet = FXCollections.observableSet();
 	@FXML
 	ListView<String> recipientList = new ListView<String>();
 	@FXML
 	ListView<String> selectedRecipientList = new ListView<>();
-
-	private Person selectedPerson;
-	private final ArrayList<Person> selectedRecipients = new ArrayList<>();
 	
 	public AddConnectionController() {}
 
@@ -65,6 +63,10 @@ public class AddConnectionController {
 		clearRecipients();
 	}
 
+	/**
+	 * Returns an observable set of names to be used in our list.
+	 * @return
+	 */
 	public ObservableSet<String> getNameList() {
 		for (int i = 0; i <= peopleList.size() - 1; i++) {
 			selectedPerson = peopleList.get(i);
@@ -73,6 +75,11 @@ public class AddConnectionController {
 		return observableSet;
 	}
 	
+	/**
+	 * Filters a list of names; to be used with search functionality.
+	 * @param query
+	 * @return
+	 */
 	public ObservableSet<String> filteredNameList(PersonQuery query) {
 		for (int i = 0; i <= peopleList.size() - 1; i++) { 
 			if (query.accepts(peopleList.get(i))) {
@@ -103,6 +110,9 @@ public class AddConnectionController {
 		stage.show();
 	}
 	
+	/**
+	 * Sets an action to the add button and adds recipients to the recipient list.
+	 */
 	public void addRecipients() {
 		add.setOnAction((event) -> {
 			observableSet.clear();
@@ -115,6 +125,9 @@ public class AddConnectionController {
 		});
 	}
 	
+	/**
+	 * Adds an action to the search button to populate a list with the returned recipients.
+	 */
 	public void searchRecipients() {
 		search.setOnAction((e) -> {
 			filteredSet.clear();
@@ -123,6 +136,9 @@ public class AddConnectionController {
 		});
 	}
 	
+	/**
+	 * Adds an action to the remove button to remove a selected recipient from the list of selected recipients.
+	 */
 	public void removeRecipients() {
 		remove.setOnAction((event) -> {
 			ObservableList<String> selectedRecipientsTemp = selectedRecipientList.getSelectionModel().getSelectedItems();
@@ -132,6 +148,9 @@ public class AddConnectionController {
 		});
 	}
 	
+	/**
+	 * Clears the list created by search.
+	 */
 	public void clearRecipients() {
 		clear.setOnAction(e -> recipientList.setItems(FXCollections.observableArrayList(getNameList())));
 	}
