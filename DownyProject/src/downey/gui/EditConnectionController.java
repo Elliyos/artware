@@ -18,18 +18,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class EditConnectionController {
 
 	private final DataStorage DS = DataStorage.getMainDataStorage();
-	private final ControlledVocab vocab = ControlledVocab.getControlledVocab(); 
+	private final ControlledVocab vocab = ControlledVocab.getControlledVocab();
 	public ArrayList<Person> peopleList = DS.getPeopleArray();
 	private final ObservableSet<String> observableSet = FXCollections.observableSet();
 	private ObservableSet<String> filteredSet = FXCollections.observableSet();
-	
+	private boolean isGroupConnection;
+
 	@FXML
-	private Button submit, home, add, search, remove, clear, toViewConnections, toConnectionInfo, editChoices, locationVocabAdd, locationVocabRemove, typeVocabAdd, typeVocabRemove;
+	private Button submit, home, add, search, remove, clear, toViewConnections, toConnectionInfo, editChoices,
+			locationVocabAdd, locationVocabRemove, typeVocabAdd, typeVocabRemove;
 	@FXML
 	private ChoiceBox<String> initiator, typeInput, locationInput;
 	@FXML
@@ -38,6 +41,8 @@ public class EditConnectionController {
 	private TextField citationInput, searchInput;
 	@FXML
 	private TextArea notes;
+	@FXML
+	private CheckBox groupConnection;
 	@FXML
 	ListView<String> recipientList = new ListView<String>();
 	@FXML
@@ -59,11 +64,16 @@ public class EditConnectionController {
 		initiator.setItems(FXCollections.observableArrayList(nameList()));
 		typeInput.setItems(vocab.getInteractionTypeOptions());
 		locationInput.setItems(vocab.getLocationOptions());
+		groupConnection.setSelected(currentConnection.isGroupConnection());
+		setBooleanValues();
 		addRecipients();
 		removeRecipients();
 		searchRecipients();
 		clearRecipients();
-
+		locationVocabAdd();
+		locationVocabRemove();
+		typeVocabAdd();
+		typeVocabRemove();
 		if (currentConnection.getSender() != null) {
 			initiator.setValue(currentConnection.getSender().getName());
 		}
@@ -75,11 +85,25 @@ public class EditConnectionController {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 		LocalDate date = LocalDate.parse(currentConnection.getDate(), dtf);
 		dateInput.setValue(date);
-
+		groupConnection.setOnAction((event) -> {
+			setBooleanValues();
+		});
+	}
+	
+	private void setBooleanValues() {
+		if (groupConnection.isSelected()) {
+			initiator.setDisable(true);
+			initiator.setValue(null);
+			isGroupConnection = true;
+		} else {
+			initiator.setDisable(false);
+			isGroupConnection = false;
+		}
 	}
 
 	/**
 	 * Returns a list of names to be used in our list.
+	 * 
 	 * @return
 	 */
 	public ObservableSet<String> nameList() {
@@ -89,14 +113,15 @@ public class EditConnectionController {
 		}
 		return observableSet;
 	}
-	
+
 	/**
 	 * Takes a search input and filters the name list based on it.
+	 * 
 	 * @param query
 	 * @return
 	 */
 	public ObservableSet<String> filteredNameList(PersonQuery query) {
-		for (int i = 0; i <= peopleList.size() - 1; i++) { 
+		for (int i = 0; i <= peopleList.size() - 1; i++) {
 			if (query.accepts(peopleList.get(i))) {
 				selectedPerson = peopleList.get(i);
 				String name = selectedPerson.getName();
@@ -105,27 +130,27 @@ public class EditConnectionController {
 		}
 		return filteredSet;
 	}
-	
+
 	/**
 	 * Removes recipients from the list of included recipients.
 	 */
 	public void removeRecipients() {
 		remove.setOnAction((event) -> {
-			ObservableList<String> selectedRecipientsTemp = selectedRecipientList.getSelectionModel().getSelectedItems();
+			ObservableList<String> selectedRecipientsTemp = selectedRecipientList.getSelectionModel()
+					.getSelectedItems();
 			for (int i = 0; i < selectedRecipientsTemp.size(); i++) {
 				selectedRecipientList.getItems().remove(selectedRecipientsTemp.get(i));
 			}
 		});
 	}
-	
+
 	/**
 	 * Clears the search in the list of recipients.
 	 */
 	public void clearRecipients() {
-		clear.setOnAction(
-				e -> recipientList.setItems(FXCollections.observableArrayList(nameList())));
+		clear.setOnAction(e -> recipientList.setItems(FXCollections.observableArrayList(nameList())));
 	}
-	
+
 	/**
 	 * Adds recipients to the connection.
 	 */
@@ -140,9 +165,10 @@ public class EditConnectionController {
 			}
 		});
 	}
-	
+
 	/**
-	 * Takes an input from the user and populates the list of recipients with returned recipients.
+	 * Takes an input from the user and populates the list of recipients with
+	 * returned recipients.
 	 */
 	public void searchRecipients() {
 		search.setOnAction((event) -> {
@@ -150,16 +176,15 @@ public class EditConnectionController {
 			PersonQuery filter = new PersonContainsQuery(searchText, "Name");
 			observableSet.clear();
 			ArrayList<Person> array = DS.getPeopleArray();
-			for (int i = 0; i < array.size(); i++){
+			for (int i = 0; i < array.size(); i++) {
 				Person temp = array.get(i);
-				if (filter.accepts(temp)){
+				if (filter.accepts(temp)) {
 					observableSet.add(temp.getName());
 				}
 			}
 			recipientList.setItems(FXCollections.observableArrayList(observableSet));
 		});
 	}
-	
 
 	@FXML
 	private void handleButtonAction(ActionEvent event) throws IOException {
@@ -167,17 +192,7 @@ public class EditConnectionController {
 		Parent root;
 
 		if (event.getSource() == this.submit) {
-			for (int i = 0; i < selectedRecipientList.getItems().size(); i++) {
-				String name = selectedRecipientList.getItems().get(i);
-				selectedRecipients.add(DS.getPersonObject(name));
-			}
-			String location = locationInput.getValue();
-			String date = dateInput.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-			String initiatorPerson = initiator.getValue();
-			Person sender = DS.getPersonObject(initiatorPerson);
-			currentConnection.editConnection(sender, selectedRecipients, date, typeInput.getValue(), location,
-						citationInput.getText(), notes.getText());
-			DS.saveConnections();
+			editConnection();
 			stage = (Stage) this.submit.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		} else if (event.getSource() == home) {
@@ -195,6 +210,38 @@ public class EditConnectionController {
 		stage.setScene(scene);
 		stage.setResizable(false);
 		stage.show();
+	}
+
+	private void editConnection() throws IOException {
+		for (int i = 0; i < selectedRecipientList.getItems().size(); i++) {
+			String name = selectedRecipientList.getItems().get(i);
+			selectedRecipients.add(DS.getPersonObject(name));
+		}
+		String location = locationInput.getValue();
+		if (location == null)
+			location = "Unknown";
+		String date = "";
+		if (dateInput.getValue() != null)
+			date = dateInput.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+		String initiatorName = initiator.getValue();
+		if (!isGroupConnection && initiatorName != null) {
+			Person sender = DS.getPersonObject(initiatorName);
+			currentConnection.editConnection(sender, selectedRecipients, date, typeInput.getValue(), location,
+					citationInput.getText(), notes.getText());
+
+		} else if ((!isGroupConnection && initiatorName == null) || (dateInput.getValue() == null)
+				|| (selectedRecipients == null) || (typeInput.getValue() == null)) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Invalid Input");
+			alert.setHeaderText(null);
+			alert.setContentText("Could Not Add Connection");
+			alert.showAndWait();
+		} else {
+			DS.removeConnection(currentConnection);
+			DS.addGroupConnection(selectedRecipients, date, typeInput.getValue(), location, citationInput.getText(),
+					notes.getText());
+		}
+		DS.saveConnections();
 	}
 
 	@FXML
@@ -217,7 +264,7 @@ public class EditConnectionController {
 			}
 		});
 	}
-	
+
 	@FXML
 	private void locationVocabRemove() {
 		locationVocabRemove.setOnAction(e -> {
@@ -230,10 +277,10 @@ public class EditConnectionController {
 
 			// Traditional way to get the response value.
 			Optional<String> result = dialog.showAndWait();
-			if (result.isPresent()){
-			    vocab.removeLocationOption(result.get());
+			if (result.isPresent()) {
+				vocab.removeLocationOption(result.get());
 			}
-			
+
 			try {
 				vocab.saveControlledVocab();
 				vocab.loadControlledVocab();
@@ -243,7 +290,7 @@ public class EditConnectionController {
 			}
 		});
 	}
-	
+
 	@FXML
 	private void typeVocabAdd() {
 		typeVocabAdd.setOnAction(e -> {
@@ -264,7 +311,7 @@ public class EditConnectionController {
 			}
 		});
 	}
-	
+
 	@FXML
 	private void typeVocabRemove() {
 		typeVocabRemove.setOnAction(e -> {
@@ -277,10 +324,10 @@ public class EditConnectionController {
 
 			// Traditional way to get the response value.
 			Optional<String> result = dialog.showAndWait();
-			if (result.isPresent()){
-			    vocab.removeInteractionTypeOption(result.get());
+			if (result.isPresent()) {
+				vocab.removeInteractionTypeOption(result.get());
 			}
-			
+
 			try {
 				vocab.saveControlledVocab();
 				vocab.loadControlledVocab();

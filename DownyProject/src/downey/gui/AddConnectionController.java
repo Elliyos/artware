@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class AddConnectionController {
@@ -28,6 +29,7 @@ public class AddConnectionController {
 	private final ArrayList<Person> selectedRecipients = new ArrayList<>();
 	private final ObservableSet<String> observableSet = FXCollections.observableSet();
 	private ObservableSet<String> filteredSet = FXCollections.observableSet();
+	private boolean isGroupConnection = false;
 	
 	@FXML
 	private Button submit, goBack, add, search, remove, clear, editChoices, locationVocabAdd, locationVocabRemove, typeVocabAdd, typeVocabRemove;
@@ -39,6 +41,8 @@ public class AddConnectionController {
 	private TextField citationInput, searchInput;
 	@FXML
 	private TextArea notes;
+	@FXML
+	private CheckBox groupConnection; 
 	@FXML
 	ListView<String> recipientList = new ListView<String>();
 	@FXML
@@ -58,6 +62,19 @@ public class AddConnectionController {
 		removeRecipients();
 		searchRecipients();
 		clearRecipients();
+		locationVocabAdd();
+		locationVocabRemove();
+		typeVocabAdd();
+		typeVocabRemove();
+		groupConnection.setOnAction((event) -> {
+			if (groupConnection.isSelected()) {
+				initiator.setDisable(true);
+				isGroupConnection = true;
+			} else {
+				initiator.setDisable(false);
+				isGroupConnection = false;
+			}
+		});
 	}
 
 	/**
@@ -153,26 +170,36 @@ public class AddConnectionController {
 		clear.setOnAction(e -> recipientList.setItems(FXCollections.observableArrayList(getNameList())));
 	}
 
-	public void createConnection() throws IOException{
+	public void createConnection() throws IOException {
 		for (int i = 0; i < selectedRecipientList.getItems().size(); i++) {
 			String name = selectedRecipientList.getItems().get(i);
 			selectedRecipients.add(DS.getPersonObject(name));
 		}
 		String location = locationInput.getValue();
-		if (location.equals("")) location = "Unknown";
-		String date = dateInput.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+		if (location == null)
+			location = "Unknown";
+		String date = "";
+		if (dateInput.getValue() != null)
+			date = dateInput.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
 		String initiatorName = initiator.getValue();
-		if (initiatorName != null){
+		if (!isGroupConnection && initiatorName != null) {
 			Person sender = DS.getPersonObject(initiatorName);
-			DS.addConnection(sender, selectedRecipients, date, typeInput.getValue(),
-					location, citationInput.getText(), notes.getText());
-
+			DS.addConnection(sender, selectedRecipients, date, typeInput.getValue(), location, citationInput.getText(),
+					notes.getText());
+		} else if ((!isGroupConnection && initiatorName == null) || (dateInput.getValue() == null)
+				|| (selectedRecipients == null) || (typeInput.getValue() == null)) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Invalid Input");
+			alert.setHeaderText("Error");
+			alert.setContentText("Could Not Add Connection");
+			alert.showAndWait();
 		} else {
-			DS.addGroupConnection(selectedRecipients, date, typeInput.getValue(),
-					location, citationInput.getText(), notes.getText());
+			DS.addGroupConnection(selectedRecipients, date, typeInput.getValue(), location, citationInput.getText(),
+					notes.getText());
 		}
 		DS.saveConnections();
 	}
+
 	
 	@FXML
 	private void locationVocabAdd() {

@@ -197,6 +197,10 @@ public class DataStorage {
 			String notes) {
 		connections.add(new Connection(people, date, type, location, citation, notes));
 	}
+	
+	public void removeConnection(Connection connection) {
+		connections.remove(connection);
+	}
 
 	public Person getPersonObject(String name) {
 		return people.get(searchPerson(name));

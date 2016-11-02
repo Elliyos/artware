@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 
 public class AddInfoController {
 
@@ -43,22 +44,40 @@ public class AddInfoController {
 	}
 
 	@FXML
-	private void handleButtonAction(ActionEvent event) throws IOException {
-		Stage stage;
-		Parent root;
-		if (event.getSource() == submit) {
-			add();
-			stage = (Stage) submit.getScene().getWindow();
-			root = FXMLLoader.load(getClass().getResource("FindPerson.fxml"));
-		} else {
-			stage = (Stage) goBack.getScene().getWindow();
-			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-		}
+	private void backButtonAction() throws IOException {
+		Stage stage = (Stage) goBack.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		// create a new scene with root and set the stage
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
+		stage.setScene(new Scene(root));
 		stage.setResizable(false);
 		stage.show();
+	}
+	
+	@FXML
+	private void addPersonAction() throws IOException {
+		DataStorage DS = DataStorage.getMainDataStorage();
+		String name = nameInput.getText();
+		String nickname = nicknameInput.getText();
+		String culture = (String) cultureInput.getValue();
+		String occupation = (String) occupationInput.getValue();
+		String gender = (String) genderInput.getValue();
+		String bio = bioInput.getText();
+		if (!name.equals("") || !nickname.equals("") || culture != null || occupation != null) {
+			DS.addPerson(name, nickname, culture, occupation, gender, bio);
+			DS.savePeople();
+			DS.saveConnections();
+			Stage stage = (Stage) submit.getScene().getWindow();
+			Parent root = FXMLLoader.load(getClass().getResource("FindPerson.fxml"));
+			stage.setScene(new Scene(root));
+			stage.setResizable(false);
+			stage.show();
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Invalid Input");
+			alert.setHeaderText("Missing Information!");
+			alert.setContentText("Could not add person to database");
+			alert.showAndWait();
+		}
 	}
 	
 	@FXML
@@ -202,10 +221,18 @@ public class AddInfoController {
 		String occupation = (String) occupationInput.getValue();
 		String gender = (String) genderInput.getValue();
 		String bio = bioInput.getText();
+		if (!name.equals("") || !nickname.equals("") || culture != null || occupation != null) {
+			DS.addPerson(name, nickname, culture, occupation, gender, bio);
+			DS.savePeople();
+			DS.saveConnections();			
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Invalid Input");
+			alert.setHeaderText("Missing Information!");
+			alert.setContentText("Could not add person to database");
+			alert.showAndWait();
+		}
 
-		DS.addPerson(name, nickname, culture, occupation, gender, bio);
-		DS.savePeople();
-		DS.saveConnections();
 	}
 
 }
