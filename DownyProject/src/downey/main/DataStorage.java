@@ -13,6 +13,9 @@ public class DataStorage {
 	private final ArrayList<Connection> connections;
 	private static DataStorage mainDataStorage = new DataStorage();
 
+	/**
+	 * Constructor, sets people and connections to two new ArrayLists
+	 */
 	private DataStorage() {
 		people = new ArrayList<>();
 		connections = new ArrayList<>();
@@ -25,22 +28,38 @@ public class DataStorage {
 	public static DataStorage getMainDataStorage() {
 		return mainDataStorage;
 	}
-	public ArrayList<Person> getFilteredPeople(ArrayList<Connection> connections){
+
+	/**
+	 * Gives the people in the connections of a filtered list of connections
+	 * 
+	 * @param connections
+	 *            - a list of connections
+	 * @return - the new array list of people that were in the connections
+	 */
+	public ArrayList<Person> getFilteredPeople(ArrayList<Connection> connections) {
 		Set<Person> temp = new HashSet<>();
-		for (Connection c : connections){
+		for (Connection c : connections) {
 			temp.add(c.getSender());
 			temp.addAll(c.getReceivers());
 		}
 		ArrayList<Person> filteredPeople = new ArrayList<>();
 		filteredPeople.addAll(temp);
 		return filteredPeople;
-		
+
 	}
-	public ArrayList<Connection> getFilteredConnections(ArrayList<Person> people){
+
+	/**
+	 * Gives the connections from the filtered list of people
+	 * 
+	 * @param people
+	 *            - a list of person objects
+	 * @return - new array list of connections that the people were a part of
+	 */
+	public ArrayList<Connection> getFilteredConnections(ArrayList<Person> people) {
 		Set<Connection> filteredConnections = new HashSet<>();
-		for (Connection c : connections){
-			for (Person p : people){
-				if (c.contains(p)) 
+		for (Connection c : connections) {
+			for (Person p : people) {
+				if (c.contains(p))
 					filteredConnections.add(c);
 			}
 		}
@@ -60,7 +79,8 @@ public class DataStorage {
 	 * @param bio
 	 * @return void
 	 */
-	public boolean addPerson(String name, String nickname, String culture, String occupation, String gender, String bio) {
+	public boolean addPerson(String name, String nickname, String culture, String occupation, String gender,
+			String bio) {
 		if (!containsPerson(name)) {
 			Person temp = new Person(name, nickname, culture, occupation, gender, bio);
 			people.add(temp);
@@ -129,6 +149,19 @@ public class DataStorage {
 		return -1;
 	}
 
+	/**
+	 * Takes in the names, location and date of a connection and returns the
+	 * index of the connection
+	 * 
+	 * @param names
+	 *            - String representation of the names in the connection
+	 * @param location
+	 *            - String of the location of the connection
+	 * @param date
+	 *            - String of the date the connection took place
+	 * @return - the index of the connection in the array list of connections
+	 * @throws IOException
+	 */
 	public Connection getConnectionObject(String names, String location, String date) throws IOException {
 		int index = searchConnection(names, location, date);
 		return connections.get(index);
@@ -141,8 +174,8 @@ public class DataStorage {
 	 * @param sender,
 	 *            person establishing connection (null for group connections)
 	 * @param people,
-	 *            the people receiving a connection from the sender, or
-	 *            each other if sender is null
+	 *            the people receiving a connection from the sender, or each
+	 *            other if sender is null
 	 * @param date,
 	 *            the date upon which the connection occurred
 	 * @param type,
