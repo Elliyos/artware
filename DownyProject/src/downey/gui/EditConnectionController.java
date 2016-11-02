@@ -18,8 +18,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.stage.Stage;
 
 public class EditConnectionController {
@@ -195,6 +193,7 @@ public class EditConnectionController {
 		// create a new scene with root and set the stage
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
+		stage.setResizable(false);
 		stage.show();
 	}
 

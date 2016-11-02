@@ -4,12 +4,9 @@ import downey.main.ControlledVocab;
 import downey.main.DataStorage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,14 +14,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar.ButtonData;
 
 public class AddInfoController {
 
 	private final ControlledVocab vocab = ControlledVocab.getControlledVocab();
-	@FXML
-	private TreeItem<String> home = new TreeItem<String>("Home");
+
 	@FXML
 	private Button submit, goBack, editChoices, removeChoices, occupationVocabAdd, occupationVocabRemove, cultureVocabAdd, cultureVocabRemove, genderVocabAdd, genderVocabRemove;
 	@FXML
@@ -63,12 +57,12 @@ public class AddInfoController {
 		// create a new scene with root and set the stage
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
+		stage.setResizable(false);
 		stage.show();
 	}
 	
 	@FXML
 	private void occupationVocabAdd() {
-		occupationVocabAdd.setOnAction(e -> {
 			TextInputDialog input = new TextInputDialog();
 			input.setTitle("Add Occupation");
 			input.setHeaderText(null);
@@ -84,12 +78,10 @@ public class AddInfoController {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		});
 	}
 	
 	@FXML
 	private void occupationVocabRemove() {
-		occupationVocabRemove.setOnAction(e -> {
 			List<String> choices = vocab.getOccupationOptions();
 
 			ChoiceDialog<String> dialog = new ChoiceDialog<>("", choices);
@@ -110,12 +102,10 @@ public class AddInfoController {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		});
 	}
 	
 	@FXML
 	private void cultureVocabAdd() {
-		cultureVocabAdd.setOnAction(e -> {
 			TextInputDialog input = new TextInputDialog();
 			input.setTitle("Add Culture");
 			input.setHeaderText(null);
@@ -131,12 +121,10 @@ public class AddInfoController {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		});
 	}
 	
 	@FXML
 	private void cultureVocabRemove() {
-		cultureVocabRemove.setOnAction(e -> {
 			List<String> choices = vocab.getCultureOptions();
 
 			ChoiceDialog<String> dialog = new ChoiceDialog<>("", choices);
@@ -157,12 +145,10 @@ public class AddInfoController {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		});
 	}
 	
 	@FXML
 	private void genderVocabAdd() {
-		genderVocabAdd.setOnAction(e -> {
 			TextInputDialog input = new TextInputDialog();
 			input.setTitle("Add Gender");
 			input.setHeaderText(null);
@@ -178,12 +164,10 @@ public class AddInfoController {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		});
 	}
 	
 	@FXML
 	private void genderVocabRemove() {
-		genderVocabRemove.setOnAction(e -> {
 			List<String> choices = vocab.getGenderOptions();
 
 			ChoiceDialog<String> dialog = new ChoiceDialog<>("", choices);
@@ -203,7 +187,6 @@ public class AddInfoController {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		});
 	}
 
 	/**

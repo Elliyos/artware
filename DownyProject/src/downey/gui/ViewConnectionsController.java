@@ -172,6 +172,7 @@ public class ViewConnectionsController {
 		Stage stage = (Stage) goBack.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		stage.setScene(new Scene(root));
+		stage.setResizable(false);
 		stage.show();
 	}
 
@@ -196,6 +197,7 @@ public class ViewConnectionsController {
 			Stage stage = (Stage) viewButton.getScene().getWindow();
 			Parent root = FXMLLoader.load(getClass().getResource("ConnectionInfo.fxml"));
 			stage.setScene(new Scene(root));
+			stage.setResizable(false);
 			stage.show();
 		}
 	}

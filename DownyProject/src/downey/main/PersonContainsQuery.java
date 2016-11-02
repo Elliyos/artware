@@ -8,6 +8,17 @@ public class PersonContainsQuery implements PersonQuery {
 		this.target = target.toLowerCase();
 		this.fieldName = fieldName.toLowerCase();
 	}
+	
+	/**
+	 * Checks to see if the query will accept the person into its set
+	 * 
+	 * @param p,
+	 *            A Person that is used to check against the target for the
+	 *            field defined by the query
+	 * 
+	 *            Returns true to add it to the query if the target matches the
+	 */
+	
 	@Override
 	public boolean accepts(Person p) {
 		switch (fieldName) {

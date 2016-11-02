@@ -32,6 +32,7 @@ public class AboutController {
 		Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
+		stage.setResizable(false);
 		stage.show();
 	}
 }

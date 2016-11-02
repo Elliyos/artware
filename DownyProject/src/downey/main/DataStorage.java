@@ -237,7 +237,8 @@ public class DataStorage {
 	 * @return void
 	 */
 	public void loadConnections() throws IOException {
-		CSVReader reader = new CSVReader(new FileReader("data/connections.csv"));
+		CSVReader reader = new CSVReader(new InputStreamReader(
+				new FileInputStream("data/connections.csv"),"UTF-8"));
 		List<String[]> myRows = reader.readAll();
 		for (String[] row : myRows) {
 			if (row.length == 7) {
@@ -271,7 +272,7 @@ public class DataStorage {
 	 * @return void
 	 */
 	public void saveConnections() throws IOException {
-		try (CSVWriter writer = new CSVWriter(new FileWriter("data/connections.csv"))) {
+		try (CSVWriter writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream("data/connections.csv"), "UTF-8"))) {
 			connections.forEach((connection) -> {
 				writer.writeNext(connection.toCSVRowArray());
 			});
@@ -286,7 +287,7 @@ public class DataStorage {
 	 * @return void
 	 */
 	public void savePeople() throws IOException {
-		try (CSVWriter writer = new CSVWriter(new FileWriter("data/people.csv"))) {
+		try (CSVWriter writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream("data/people.csv"),"UTF-8"))) {
 			people.forEach((person) -> {
 				writer.writeNext(person.toCSVRowArray());
 			});
@@ -304,7 +305,8 @@ public class DataStorage {
 	 * @return void
 	 */
 	public void loadPeople() throws IOException, EOFException {
-		CSVReader reader = new CSVReader(new FileReader("data/people.csv"));
+		CSVReader reader = new CSVReader(new InputStreamReader(
+				new FileInputStream("data/people.csv"), "UTF-8"));
 		List<String[]> myRows = reader.readAll();
 		myRows.forEach((row) -> {
 			String name = row[0];

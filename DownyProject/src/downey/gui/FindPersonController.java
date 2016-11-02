@@ -19,7 +19,6 @@ import javafx.scene.control.Alert.AlertType;
 
 public class FindPersonController {
 
-	private MainApp mainApp;
 	private final DataStorage DS = DataStorage.getMainDataStorage();
 	private final ArrayList<Person> peopleList = DS.getPeopleArray();
 	private Person selectedPerson;
@@ -165,6 +164,7 @@ public class FindPersonController {
 			Stage stage = (Stage) viewButton.getScene().getWindow();
 			Parent root = FXMLLoader.load(getClass().getResource("PersonInfo.fxml"));
 			stage.setScene(new Scene(root));
+			stage.setResizable(false);
 			stage.show();
 		}
 	}
@@ -178,14 +178,8 @@ public class FindPersonController {
 		Stage stage = (Stage) goBack.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		stage.setScene(new Scene(root));
+		stage.setResizable(false);
 		stage.show();
 	}
-	
-//	private void exportAction() {
-//		export.setOnAction((event) -> {
-//			FileChooser fileChooser = new FileChooser();
-//			fileChooser.setTitle("Open Resource File");
-//			
-//		});
-//	}
+
 }

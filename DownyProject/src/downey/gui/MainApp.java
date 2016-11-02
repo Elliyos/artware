@@ -21,6 +21,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("ArtWARE");
+        primaryStage.setResizable(false);
 
         initialize();
     }

@@ -58,6 +58,7 @@ public class ConnectionInfoController {
 		// create a new scene with root and set the stage
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
+		stage.setResizable(false);
 		stage.show();
 	}
 }
