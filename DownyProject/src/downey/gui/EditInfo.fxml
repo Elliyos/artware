@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="downey.gui.EditInfoController">
    <children>
-      <Rectangle height="70.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.1" width="800.0">
+      <Rectangle height="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.1" width="802.0">
          <fill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -25,53 +25,12 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Text fontSmoothingType="LCD" layoutX="328.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Person">
-         <font>
-            <Font name="Open Sans Bold" size="30.0" />
-         </font>
-      </Text>
-      <Text fontSmoothingType="LCD" layoutX="68.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
-         <font>
-            <Font name="Open Sans" size="20.0" />
-         </font>
-      </Text>
-      <Text fontSmoothingType="LCD" layoutX="508.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation:">
-         <font>
-            <Font name="Open Sans" size="20.0" />
-         </font>
-      </Text>
-      <TextField fx:id="nameInput" layoutX="65.0" layoutY="190.0" prefHeight="25.0" prefWidth="223.0">
+      <Button fx:id="home" layoutY="76.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="27.0" prefWidth="53.0" style="-fx-background-color: TRANSPARENT;" text="Home" underline="true">
          <font>
             <Font name="Open Sans" size="12.0" />
-         </font></TextField>
-      <Text fontSmoothingType="LCD" layoutX="508.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culture:">
-         <font>
-            <Font name="Open Sans" size="20.0" />
          </font>
-      </Text>
-      <Text fontSmoothingType="LCD" layoutX="507.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:">
-         <font>
-            <Font name="Open Sans" size="20.0" />
-         </font>
-      </Text>
-      <ChoiceBox fx:id="genderInput" layoutX="509.0" layoutY="338.0" prefHeight="25.0" prefWidth="223.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
-      <Text fontSmoothingType="LCD" layoutX="71.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bio:">
-         <font>
-            <Font name="Open Sans" size="20.0" />
-         </font>
-      </Text>
-      <TextArea fx:id="bioInput" layoutX="63.0" layoutY="343.0" prefHeight="123.0" prefWidth="409.0" />
-      <Button fx:id="submit" disable="false" layoutX="576.0" layoutY="416.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="41.0" prefWidth="124.0" text="Submit">
-         <font>
-            <Font name="Open Sans" size="26.0" />
-         </font></Button>
-      <Button fx:id="home" layoutX="8.0" layoutY="76.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: TRANSPARENT;" text="Home" underline="true">
-         <font>
-            <Font name="Open Sans" size="12.0" />
-         </font></Button>
-      <ChoiceBox fx:id="cultureInput" layoutX="509.0" layoutY="263.0" prefHeight="22.0" prefWidth="223.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
-      <ChoiceBox fx:id="occupationInput" layoutX="509.0" layoutY="197.0" prefHeight="22.0" prefWidth="223.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
-      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="340.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ArtWARE">
+      </Button>
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="340.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ArtWARE">
          <font>
             <Font name="Open Sans" size="30.0" />
          </font>
@@ -79,33 +38,77 @@
             <DropShadow />
          </effect>
       </Text>
-      <Line layoutX="62.0" layoutY="80.0" startY="15.0" />
-      <Button fx:id="toViewPeople" layoutX="67.0" layoutY="77.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: TRANSPARENT;" text="View People" underline="true">
+      <Line layoutX="54.0" layoutY="81.0" startY="15.0" />
+      <Button fx:id="toViewPeople" layoutX="55.0" layoutY="77.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: TRANSPARENT;" text="View People" underline="true">
          <font>
             <Font name="Open Sans" size="12.0" />
          </font>
       </Button>
-      <Line layoutX="156.0" layoutY="80.0" startY="15.0" />
-      <Button fx:id="toPersonInfo" layoutX="160.0" layoutY="77.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: TRANSPARENT;" text="Person Info" underline="true">
+      <Line layoutX="141.0" layoutY="81.0" startY="15.0" />
+      <Button fx:id="toPersonInfo" layoutX="142.0" layoutY="76.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: TRANSPARENT;" text="Person Info" underline="true">
          <font>
             <Font name="Open Sans" size="12.0" />
          </font>
       </Button>
-      <Text layoutX="508.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Field Choices" wrappingWidth="112.07029819488525">
+      <Text fontSmoothingType="LCD" layoutX="325.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Person" textAlignment="CENTER">
          <font>
-            <Font size="14.0" />
+            <Font name="Open Sans Italic" size="30.0" />
          </font>
       </Text>
-      <Button fx:id="editChoices" layoutX="638.0" layoutY="127.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="56.0" text="Edit" />
-      <Text fontSmoothingType="LCD" layoutX="69.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname:">
+      <Text fontSmoothingType="LCD" layoutX="58.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
          <font>
             <Font name="Open Sans" size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="nicknameInput" layoutX="66.0" layoutY="256.0" prefHeight="27.0" prefWidth="223.0">
+      <Text fontSmoothingType="LCD" layoutX="58.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation">
+         <font>
+            <Font name="Open Sans" size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="nameInput" layoutX="58.0" layoutY="151.0" prefHeight="25.0" prefWidth="300.0">
          <font>
             <Font name="Open Sans" size="12.0" />
          </font>
       </TextField>
+      <Text fontSmoothingType="LCD" layoutX="58.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culture">
+         <font>
+            <Font name="Open Sans" size="20.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="58.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender">
+         <font>
+            <Font name="Open Sans" size="20.0" />
+         </font>
+      </Text>
+      <ChoiceBox fx:id="genderInput" layoutX="58.0" layoutY="269.0" prefHeight="25.0" prefWidth="247.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <Text fontSmoothingType="LCD" layoutX="437.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bio">
+         <font>
+            <Font name="Open Sans" size="20.0" />
+         </font>
+      </Text>
+      <TextArea fx:id="bioInput" layoutX="437.0" layoutY="147.0" prefHeight="269.0" prefWidth="308.0" wrapText="true">
+         <font>
+            <Font name="Open Sans" size="12.0" />
+         </font>
+      </TextArea>
+      <Button fx:id="submit" disable="false" layoutX="337.0" layoutY="430.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="124.0" text="Submit">
+         <font>
+            <Font name="Open Sans" size="26.0" />
+         </font>
+      </Button>
+      <ChoiceBox fx:id="cultureInput" layoutX="58.0" layoutY="388.0" prefHeight="25.0" prefWidth="247.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <ChoiceBox fx:id="occupationInput" layoutX="58.0" layoutY="330.0" prefHeight="25.0" prefWidth="247.0" style="-fx-font-family: &quot;Open Sans&quot;;" />
+      <Text fontSmoothingType="LCD" layoutX="58.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname">
+         <font>
+            <Font name="Open Sans" size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="nicknameInput" layoutX="58.0" layoutY="210.0" prefHeight="25.0" prefWidth="300.0" />
+      <Button fx:id="occupationVocabAdd" layoutX="309.0" layoutY="330.0" mnemonicParsing="false" onAction="#occupationVocabAdd" prefHeight="25.0" prefWidth="25.0" text="+" />
+      <Button fx:id="occupationVocabRemove" layoutX="338.0" layoutY="330.0" mnemonicParsing="false" onAction="#occupationVocabRemove" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button fx:id="cultureVocabAdd" layoutX="309.0" layoutY="388.0" mnemonicParsing="false" onAction="#cultureVocabAdd" text="+" />
+      <Button fx:id="cultureVocabRemove" layoutX="338.0" layoutY="388.0" mnemonicParsing="false" onAction="#cultureVocabRemove" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button fx:id="genderVocabAdd" layoutX="309.0" layoutY="269.0" mnemonicParsing="false" onAction="#genderVocabAdd" prefHeight="25.0" prefWidth="25.0" text="+" />
+      <Button fx:id="genderVocabRemove" layoutX="338.0" layoutY="269.0" mnemonicParsing="false" onAction="#genderVocabRemove" prefHeight="25.0" prefWidth="25.0" text="-" />
    </children>
 </AnchorPane>

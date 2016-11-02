@@ -58,7 +58,7 @@ public class Connection {
 	public boolean isGroupConnection() {
 		return (getSender() == GROUP_CONNECTION);
 	}
-	
+
 	public Person getSender() {
 		if (sender != null) {
 			return sender;
@@ -70,16 +70,32 @@ public class Connection {
 		return receivers;
 	}
 
+	/**
+	 * Returns true if the connection has the person in it.
+	 * 
+	 * @param person
+	 *            the Person passed in to see if it is in the connection
+	 * @return true, if the person is in the connection (sender or receiver)
+	 */
 	public boolean contains(Person person) {
 		if (sender != null)
-			return receivers.stream().anyMatch((p) -> (p.getName().equals(person.getName()))) || sender.getName().equals(person.getName());
+			return receivers.stream().anyMatch((p) -> (p.getName().equals(person.getName())))
+					|| sender.getName().equals(person.getName());
 		return receivers.stream().anyMatch((p) -> (p.getName().equals(person.getName())));
 	}
 
+	/**
+	 * Returns an array of Strings to make sending the connection information
+	 * easier to the CSV file easier. If there is no sender it returns the
+	 * information excluding the sender.
+	 * 
+	 * @return String array with different connection info in each
+	 *         spot(sender,receiver,date,interaction,location,citation,notes)
+	 */
 	public String[] toCSVRowArray() {
 		if (sender != null) {
-			return new String[] { sender.getName(), getReceiverNameList().toString(), date, interactionType, location, citation,
-					notes };
+			return new String[] { sender.getName(), getReceiverNameList().toString(), date, interactionType, location,
+					citation, notes };
 		}
 		return new String[] { getReceiverNameList().toString(), date, interactionType, location, citation, notes };
 	}
@@ -90,7 +106,7 @@ public class Connection {
 	 * @param Object
 	 * @return Boolean
 	 */
-        @Override
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == this) {
 			return true;
@@ -112,7 +128,7 @@ public class Connection {
 	 * @param
 	 * @return String
 	 */
-        @Override
+	@Override
 	public String toString() {
 		String connectionString = getReceiverNameList().toString() + ", Date: " + date + ", Interaction Type: "
 				+ interactionType + ", Location: " + location + ", Citation: " + citation + ", Notes: " + notes;
@@ -132,7 +148,7 @@ public class Connection {
 
 	public ArrayList<String> getReceiverNameList() {
 		ArrayList<String> receiverNameList = new ArrayList<>();
-		for (int i = 0; i< receivers.size(); i++) {
+		for (int i = 0; i < receivers.size(); i++) {
 			String receiverName = receivers.get(i).getName();
 			receiverNameList.add(receiverName);
 		}
@@ -152,7 +168,8 @@ public class Connection {
 		if (people == null || date == null || type == null || location == null || citation == null || notes == null) {
 			return false;
 		}
-		if (location.equals("")) location = "Unknown";
+		if (location.equals(""))
+			location = "Unknown";
 		setReceivers(people);
 		setDate(date);
 		setInteractionType(type);
@@ -162,10 +179,29 @@ public class Connection {
 		return true;
 	}
 	
-	public boolean equals(Connection c){
-		return c.getDate().equals(this.getDate());
-	}
-
+	
+	
+	/**
+	 * Used to change the contents of a connection
+	 * 
+	 * @param sender
+	 *            - the sender being put in the connection
+	 * @param people
+	 *            - the list of receivers that are part of the connection
+	 * @param date
+	 *            - the date of the connection
+	 * @param type
+	 *            - the type of the connection
+	 * @param location
+	 *            - the location of the connection
+	 * @param citation
+	 *            - the citation of where the information was found
+	 * @param notes
+	 *            - Any extra notes about the connection that is important
+	 * @return If none of the parameters are null it changes the connection and
+	 *         returns true If there is one parameter that is null it does
+	 *         nothing and returns false
+	 */
 	public boolean editConnection(Person sender, ArrayList<Person> people, String date, String type, String location,
 			String citation, String notes) {
 		if (sender == null || people == null || date == null || type == null || location == null || citation == null

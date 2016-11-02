@@ -25,7 +25,7 @@ public class ControlledVocab {
 	public static ControlledVocab getControlledVocab() {
 		return mainControlledVocab;
 	}
-	
+
 	public ObservableList<String> getGenderOptions() {
 		return genderOptions;
 	}
@@ -45,7 +45,7 @@ public class ControlledVocab {
 	public ObservableList<String> getLocationOptions() {
 		return locationOptions;
 	}
-	
+
 	public void addGenderOption(String gender) {
 		if (!isDuplicate(gender, genderOptions))
 			genderOptions.add(gender);
@@ -70,7 +70,7 @@ public class ControlledVocab {
 		if (!isDuplicate(location, locationOptions))
 			locationOptions.add(location);
 	}
-	
+
 	public void removeGenderOption(String gender) {
 		genderOptions.remove(gender);
 	}
@@ -91,6 +91,14 @@ public class ControlledVocab {
 		locationOptions.remove(location);
 	}
 
+	/**
+	 * Converts a CSV of the controlled vocabulary into a String array of the
+	 * vocabulary
+	 * 
+	 * @param csvInput
+	 *            takes in a CSV file of the controlled vocabulary
+	 * @return the String array of the controlled vocabulary
+	 */
 	public String[] toCSVRowArray(ObservableList<String> csvInput) {
 		String[] result = new String[csvInput.size()];
 		for (int i = 0; i < result.length; i++) {
@@ -99,6 +107,14 @@ public class ControlledVocab {
 		return result;
 	}
 
+	/**
+	 * Checks to see if the new vocab word is already a part of the list
+	 * 
+	 * @param target
+	 * @param vocabList
+	 * @return true if the word is a part of the list false if the word is not a
+	 *         part of the list
+	 */
 	public boolean isDuplicate(String target, ObservableList<String> vocabList) {
 		for (String vocab : vocabList) {
 			if (vocab.equalsIgnoreCase(target)) {
@@ -108,6 +124,12 @@ public class ControlledVocab {
 		return false;
 	}
 
+	/**
+	 * Saves the controlled vocabulary to a CSV file
+	 * 
+	 * @throws IOException
+	 *             if the file is not found
+	 */
 	public void saveControlledVocab() throws IOException {
 		try (CSVWriter writer = new CSVWriter(new FileWriter("data/controlledVocab.csv"))) {
 			writer.writeNext(toCSVRowArray(genderOptions));
@@ -118,6 +140,12 @@ public class ControlledVocab {
 		}
 	}
 
+	/**
+	 * Loads the controlled vocabulary from a CSV file
+	 * 
+	 * @throws IOException
+	 *             if the file is not found
+	 */
 	public void loadControlledVocab() throws IOException {
 		CSVReader reader = new CSVReader(new FileReader("data/controlledVocab.csv"));
 		List<String[]> vocabArrayList = reader.readAll();
@@ -126,7 +154,7 @@ public class ControlledVocab {
 		for (String gender : genderArray) {
 			addGenderOption(gender);
 		}
-		
+
 		String[] cultureArray = vocabArrayList.get(1);
 		for (String culture : cultureArray) {
 			addCultureOption(culture);

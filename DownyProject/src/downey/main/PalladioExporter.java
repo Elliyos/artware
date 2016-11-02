@@ -10,12 +10,22 @@ import com.opencsv.CSVWriter;
 
 public class PalladioExporter implements Exporter {
 	private ArrayList<Connection> connections;
-	public PalladioExporter(ArrayList<Connection> connections){
-		this.connections=connections;
+
+	public PalladioExporter(ArrayList<Connection> connections) {
+		this.connections = connections;
 	}
-	public void export(String stem) throws IOException{
+
+	public void export(String stem) throws IOException {
 		saveEdges(stem + "_Palladio_Export.csv");
 	}
+
+	/**
+	 * Saves the information of the connections
+	 * 
+	 * @param edgeFileName
+	 *            - the name of the file being saved
+	 * @throws IOException
+	 */
 	public void saveEdges(String edgeFileName) throws IOException {
 
 		String[] header = {"Source", "Target"};

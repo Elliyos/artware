@@ -11,17 +11,26 @@ import com.opencsv.CSVWriter;
 public final class GephiExporter implements Exporter {
 	private ArrayList<Connection> connections;
 	private ArrayList<Person> people;
-
+	private static final DataStorage DS = DataStorage.getMainDataStorage();
+	
+/**
+ * Constructor
+ * @param connections - list of connections
+ * @param people - list of person objects
+ */
 	public GephiExporter(ArrayList<Connection> connections, ArrayList<Person> people){
 		this.connections=connections;
 		this.people = people;
 	}
-	private static final DataStorage DS = DataStorage.getMainDataStorage();
 	public void export(String stem) throws IOException{
 		saveNodes(stem + "_Gephi_Export_Nodes.csv");
 		mapNodesToEdges(stem + "_Gephi_Export_Edges.csv");
 	}
-
+/**
+ * Saves the ID, and names of the people
+ * @param fileName - the name of the file being saved
+ * @throws IOException
+ */
 	public void saveNodes(String fileName) throws IOException {
 		String[] header = {"ID", "Label"};
             try (CSVWriter writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream(fileName),"UTF-8"))) {
@@ -34,6 +43,12 @@ public final class GephiExporter implements Exporter {
                 }
             }
 	}
+	
+	/**
+	 * Connects the people to the connections and information
+	 * @param fileName - the name of the file being saved
+	 * @throws IOException
+	 */
 	public void mapNodesToEdges(String fileName) throws IOException{
 		String[] header = {"Source", "Target", "Edge ID", "Date", "Interaction Type", "Location", "Citation", "Notes"};
             try (CSVWriter writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream(fileName),"UTF-8"))) {

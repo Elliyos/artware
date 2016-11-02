@@ -2,9 +2,11 @@ package downey.gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import downey.main.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,9 +21,12 @@ import javafx.stage.Stage;
 public class PersonInfoController {
 
 	private MainApp mainApp;
-	// private Person selectedPerson = super.getSelectedPerson();
 	private final DataStorage DS = DataStorage.getMainDataStorage();
-
+	private final ArrayList<Connection> connectionList = DS.getConnectionArray();
+	private Person chosenPerson = DS.getPersonObject(SelectedInformationTracker.getSelectedName());
+	private String chosenPeople;
+	private Person selectedPerson;
+	
 	@FXML
 	private Button home, editButton, toViewPeople;
 	@FXML
@@ -30,6 +35,8 @@ public class PersonInfoController {
 	private TextArea bioArea;
 	@FXML
 	ListView<String> connections = new ListView<>();
+	@FXML
+	private ObservableList<String> observableConnectionList = FXCollections.observableArrayList();
 
 	public PersonInfoController() {
 	}
@@ -43,7 +50,6 @@ public class PersonInfoController {
 	 */
 	@FXML
 	private void initialize() throws IOException {
-		Person chosenPerson = DS.getPersonObject(SelectedInformationTracker.getSelectedName());
 		ArrayList<String> personConnections = DS.getConnectionsForPerson(chosenPerson.getName());
 		nameLabel.setText(chosenPerson.getName());
 		nicknameLabel.setText(chosenPerson.getNickname());
@@ -51,8 +57,23 @@ public class PersonInfoController {
 		cultureLabel.setText(chosenPerson.getCulture());
 		genderLabel.setText(chosenPerson.getGender());
 		bioArea.setText(chosenPerson.getBio());
-		connections.setItems(FXCollections.observableArrayList(personConnections));
+		connections.setItems(getConnectionList());
 	}
+	
+	
+private ObservableList<String> getConnectionList() {
+	for (int i = 0; i <= connectionList.size() - 1; i++) {
+		if (connectionList.get(i).getSender() != null) {
+			chosenPerson = connectionList.get(i).getSender(); 
+			chosenPeople = connectionList.get(i).getReceiverNameList().toString();
+			observableConnectionList.addAll(Arrays.asList(chosenPerson.getName() + ": " + chosenPeople));
+		} else {
+			chosenPeople = connectionList.get(i).getReceiverNameList().toString();
+			observableConnectionList.addAll(Arrays.asList(" : " + chosenPeople));
+		}
+	}
+	return observableConnectionList;
+}
 
 	@FXML
 	private void handleButtonAction(ActionEvent event) throws IOException {
