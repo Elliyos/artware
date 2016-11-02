@@ -68,7 +68,6 @@ public class AddInfoController {
 	
 	@FXML
 	private void occupationVocabAdd() {
-		occupationVocabAdd.setOnAction(e -> {
 			TextInputDialog input = new TextInputDialog();
 			input.setTitle("Add Occupation");
 			input.setHeaderText(null);
@@ -84,12 +83,10 @@ public class AddInfoController {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		});
 	}
 	
 	@FXML
 	private void occupationVocabRemove() {
-		occupationVocabRemove.setOnAction(e -> {
 			List<String> choices = vocab.getOccupationOptions();
 
 			ChoiceDialog<String> dialog = new ChoiceDialog<>("", choices);
@@ -110,12 +107,10 @@ public class AddInfoController {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		});
 	}
 	
 	@FXML
 	private void cultureVocabAdd() {
-		cultureVocabAdd.setOnAction(e -> {
 			TextInputDialog input = new TextInputDialog();
 			input.setTitle("Add Culture");
 			input.setHeaderText(null);
@@ -131,12 +126,10 @@ public class AddInfoController {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		});
 	}
 	
 	@FXML
 	private void cultureVocabRemove() {
-		cultureVocabRemove.setOnAction(e -> {
 			List<String> choices = vocab.getCultureOptions();
 
 			ChoiceDialog<String> dialog = new ChoiceDialog<>("", choices);
@@ -157,12 +150,10 @@ public class AddInfoController {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		});
 	}
 	
 	@FXML
 	private void genderVocabAdd() {
-		genderVocabAdd.setOnAction(e -> {
 			TextInputDialog input = new TextInputDialog();
 			input.setTitle("Add Gender");
 			input.setHeaderText(null);
@@ -178,12 +169,10 @@ public class AddInfoController {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		});
 	}
 	
 	@FXML
 	private void genderVocabRemove() {
-		genderVocabRemove.setOnAction(e -> {
 			List<String> choices = vocab.getGenderOptions();
 
 			ChoiceDialog<String> dialog = new ChoiceDialog<>("", choices);
@@ -203,7 +192,6 @@ public class AddInfoController {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		});
 	}
 
 	/**
