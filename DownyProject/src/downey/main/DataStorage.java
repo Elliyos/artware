@@ -238,7 +238,7 @@ public class DataStorage {
 	 * @return void
 	 */
 	public void saveConnections() throws IOException {
-		try (CSVWriter writer = new CSVWriter(new FileWriter("data/connections.csv"))) {
+		try (CSVWriter writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream("data/connections.csv"), "UTF-8"))) {
 			connections.forEach((connection) -> {
 				writer.writeNext(connection.toCSVRowArray());
 			});
@@ -253,7 +253,7 @@ public class DataStorage {
 	 * @return void
 	 */
 	public void savePeople() throws IOException {
-		try (CSVWriter writer = new CSVWriter(new FileWriter("data/people.csv"))) {
+		try (CSVWriter writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream("data/people.csv"),"UTF-8"))) {
 			people.forEach((person) -> {
 				writer.writeNext(person.toCSVRowArray());
 			});

@@ -1,7 +1,9 @@
 package downey.main;
 
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 import com.opencsv.CSVWriter;
@@ -22,7 +24,7 @@ public final class GephiExporter implements Exporter {
 
 	public void saveNodes(String fileName) throws IOException {
 		String[] header = {"ID", "Label"};
-            try (CSVWriter writer = new CSVWriter(new FileWriter(fileName))) {
+            try (CSVWriter writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream(fileName),"UTF-8"))) {
                 writer.writeNext(header);
                 for (int i = 0; i < people.size(); i++){
                     String[] numberedNode = new String[2];
@@ -34,7 +36,7 @@ public final class GephiExporter implements Exporter {
 	}
 	public void mapNodesToEdges(String fileName) throws IOException{
 		String[] header = {"Source", "Target", "Edge ID", "Date", "Interaction Type", "Location", "Citation", "Notes"};
-            try (CSVWriter writer = new CSVWriter(new FileWriter(fileName))) {
+            try (CSVWriter writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream(fileName),"UTF-8"))) {
                 int currCount = 0;
                 writer.writeNext(header);
                 for (Connection c : connections) {

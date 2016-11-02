@@ -1,8 +1,10 @@
 package downey.main;
 
 import java.io.EOFException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import com.opencsv.CSVWriter;
 
@@ -17,7 +19,7 @@ public class PalladioExporter implements Exporter {
 	public void saveEdges(String edgeFileName) throws IOException {
 
 		String[] header = {"Source", "Target"};
-            try (CSVWriter writer = new CSVWriter(new FileWriter(edgeFileName))) {
+            try (CSVWriter writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream(edgeFileName),"UTF-8"))) {
                 writer.writeNext(header);
                 connections.forEach((c) -> {
                     ArrayList<Person> receivers = c.getReceivers();
