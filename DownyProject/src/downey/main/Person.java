@@ -4,6 +4,7 @@ public class Person {
 
 	private String occupation, name, culture, gender, bio, nickname;
 	private final int ID;
+
 	public Person(String name, String nickname, String culture, String occupation, String gender, String bio) {
 		this.name = name;
 		this.nickname = nickname;
@@ -11,9 +12,10 @@ public class Person {
 		this.occupation = occupation;
 		this.gender = gender;
 		this.bio = bio;
-		ID = DataStorage.getMainDataStorage().getNumPeople()+1;
+		ID = DataStorage.getMainDataStorage().getNumPeople() + 1;
 	}
-	public int getID(){
+
+	public int getID() {
 		return ID;
 	}
 
@@ -24,7 +26,7 @@ public class Person {
 	 * @param Object
 	 * @return Boolean
 	 */
-        @Override
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == this) {
 			return true;
@@ -38,19 +40,21 @@ public class Person {
 		}
 		return false;
 	}
+
 	/**
 	 * Returns the Person object as a string
 	 * 
-	 * @param 
+	 * @param
 	 * @return String
 	 */
-        @Override
-	public String toString(){
+	@Override
+	public String toString() {
 		return "\nName: " + name + ", Occupation: " + occupation + ", Culture: " + culture + ", Gender: " + gender
 				+ ", Bio: " + bio;
 	}
+
 	public String[] toCSVRowArray() {
-		return new String[] { name, nickname, culture ,occupation, gender, bio};
+		return new String[] { name, nickname, culture, occupation, gender, bio };
 	}
 
 	public String getOccupation() {
@@ -60,19 +64,19 @@ public class Person {
 	public void setOccupation(String occupation) {
 		this.occupation = occupation;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public String getNickname() {
 		return nickname;
 	}
-	
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
@@ -88,20 +92,38 @@ public class Person {
 	public String getGender() {
 		return gender;
 	}
-	
+
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
+
 	public String getBio() {
 		return bio;
 	}
-	
+
 	public void setBio(String bio) {
 		this.bio = bio;
 	}
-		
-	public boolean editPerson(String name, String nickname, String culture, String occupation, String gender, String bio){
+
+	/**
+	 * Edits the information in the person
+	 * 
+	 * @param name
+	 *            - String persons name
+	 * @param nickname
+	 *            - String persons nickname
+	 * @param culture
+	 *            - String persons culture
+	 * @param occupation
+	 *            - String persons occupation
+	 * @param gender
+	 *            - String persons Gender
+	 * @param bio
+	 *            - String other information about the person
+	 * @return
+	 */
+	public boolean editPerson(String name, String nickname, String culture, String occupation, String gender,
+			String bio) {
 		setName(name);
 		setNickname(nickname);
 		setCulture(culture);
