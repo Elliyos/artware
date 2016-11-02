@@ -88,7 +88,7 @@ public class ViewConnectionsController {
 		File file = getChosenFile();
 
 		if (file != null) {
-			Exporter gephiEx = new GephiExporter(filteredConnections, DS.getPeopleArray());
+			Exporter gephiEx = new GephiExporter(filteredConnections, DS.getFilteredPeople(filteredConnections));
 			try {
 				gephiEx.export(file.getPath());
 			} catch (IOException e) {
