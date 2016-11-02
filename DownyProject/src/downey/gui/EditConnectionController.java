@@ -156,15 +156,10 @@ public class EditConnectionController {
 			}
 			String location = locationInput.getValue();
 			String date = dateInput.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-			if (currentConnection.isGroupConnection()) {
-				currentConnection.editConnection(selectedRecipients, date, typeInput.getValue(), location,
+			String initiatorPerson = initiator.getValue();
+			Person sender = DS.getPersonObject(initiatorPerson);
+			currentConnection.editConnection(sender, selectedRecipients, date, typeInput.getValue(), location,
 						citationInput.getText(), notes.getText());
-			} else {
-				String initiatorPerson = initiator.getValue();
-				Person sender = DS.getPersonObject(initiatorPerson);
-				currentConnection.editConnection(sender, selectedRecipients, date, typeInput.getValue(), location,
-						citationInput.getText(), notes.getText());
-			}
 			DS.saveConnections();
 			stage = (Stage) this.submit.getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
